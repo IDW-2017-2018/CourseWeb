@@ -21,4 +21,3 @@ Catalogo di corsi universitari online, semplificato ma rispondente ai principali
 ### Struttura del progetto
 
 Il progetto sar&agrave; sviluppato con l'IDE [NetBeans](https://netbeans.org/), in particolare utilizzando le [Servlets](https://it.wikipedia.org/wiki/Servlet), il template engine [FreeMarker](http://freemarker.org/) e un database [MySQL](https://www.mysql.com/it/). 
-
