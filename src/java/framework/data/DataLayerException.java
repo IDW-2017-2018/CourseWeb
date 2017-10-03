@@ -13,6 +13,14 @@ public class DataLayerException extends Exception {
         super(message); 
     }
     
+    public DataLayerException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public DataLayerException(Throwable cause) {
+        super(cause);
+    }
+    
     @Override
     public String getMessage(){
         return super.getMessage(); 
