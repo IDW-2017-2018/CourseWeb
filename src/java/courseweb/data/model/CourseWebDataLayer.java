@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Flavio
  */
-public interface CourseWebDataLayer {
+public interface CourseWebDataLayer extends DataLayer {
     
     Utente createUtente();
     Corso createCorso();
