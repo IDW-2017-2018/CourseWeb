@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/CourseWeb"/>
+/* Rivedere antiResourceLocking */
+<Context antiResourceLocking="true" path="/CourseWeb">
+    <Resource
+        name="jdbc/courseweb" 
+        type="javax.sql.DataSource"
+        auth="Container"
+        driverClassName="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://localhost/courseweb"
+        username="root"
+        password=""
+        maxActive="15"
+        maxIdle="5"
+        maxWait="10000"
+    />
+</Context>
