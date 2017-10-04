@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Ott 03, 2017 alle 16:38
+-- Creato il: Ott 04, 2017 alle 16:42
 -- Versione del server: 5.7.19
 -- Versione PHP: 5.6.31
 
@@ -35,7 +35,6 @@ CREATE TABLE IF NOT EXISTS `corsi` (
   `codice` varchar(500) NOT NULL,
   `SSD` varchar(500) NOT NULL,
   `semestre` int(11) NOT NULL,
-  `docente` int(11) NOT NULL,
   `lingua` varchar(500) NOT NULL,
   PRIMARY KEY (`id`,`codice`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -51,6 +50,20 @@ CREATE TABLE IF NOT EXISTS `corsi_corsi_laurea` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `corso_laurea` varchar(500) NOT NULL,
   `corso` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `corsi_docenti`
+--
+
+DROP TABLE IF EXISTS `corsi_docenti`;
+CREATE TABLE IF NOT EXISTS `corsi_docenti` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `corso` varchar(500) NOT NULL,
+  `docente` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
