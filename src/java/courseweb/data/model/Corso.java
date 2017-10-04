@@ -17,7 +17,6 @@ public interface Corso {
     int getDocente();
     String getLingua();    
     
-    void setId(int id);
     void setNome(String nome);
     void setCodice(String codice);
     void setSSD(String ssd);
