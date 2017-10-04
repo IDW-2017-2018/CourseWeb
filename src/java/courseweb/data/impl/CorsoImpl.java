@@ -4,7 +4,11 @@
 package courseweb.data.impl;
 
 import courseweb.data.model.Corso;
+import courseweb.data.model.Utente;
+import courseweb.data.model.Corso_Laurea;
 import courseweb.data.model.CourseWebDataLayer;
+import framework.data.DataLayerException;
+import java.util.List;
 
 /*
  * @author Flavio
@@ -16,8 +20,9 @@ public class CorsoImpl implements Corso {
     private String codice;
     private String ssd;
     private int semestre;
-    private int docente;
     private String lingua;
+    private List<Utente> docenti;
+    private List<Corso_Laurea> corsi_laurea;
     private CourseWebDataLayer ownerDataLayer;
     protected boolean dirty; 
     
@@ -28,8 +33,9 @@ public class CorsoImpl implements Corso {
         this.codice = "";
         this.ssd = "";
         this.semestre = 0;
-        this.docente = 0;
         this.lingua = "";
+        this.docenti = null;
+        this.corsi_laurea = null;
         this.dirty = false; 
     }
     
@@ -59,13 +65,24 @@ public class CorsoImpl implements Corso {
     }
     
     @Override
-    public int getDocente(){
-        return this.docente;
+    public String getLingua(){
+        return this.lingua;
     }
     
     @Override
-    public String getLingua(){
-        return this.lingua;
+    public List<Utente> getDocenti() throws DataLayerException{
+        if(this.docenti == null){
+            this.docenti = ownerDataLayer.getUtenti();
+        }
+        return this.docenti;
+    }
+    
+    @Override
+    public List<Corso_Laurea> getCorsiLaurea() throws DataLayerException{
+        if(this.corsi_laurea == null){
+            this.corsi_laurea = ownerDataLayer.getCorsoLaurea();
+        }
+        return this.corsi_laurea;
     }
     
     protected void setId(int id){
@@ -90,11 +107,6 @@ public class CorsoImpl implements Corso {
     @Override
     public void setSemestre(int semestre){
         this.semestre = semestre;
-    }
-    
-    @Override
-    public void setDocente(int docente){
-        this.docente = docente;
     }
     
     @Override
