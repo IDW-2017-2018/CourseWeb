@@ -16,7 +16,6 @@ public interface Utente {
     String getNome(); 
     String getCognome(); 
     
-    void setId(int id); 
     void setEmail(String email); 
     void setPassword(String password); 
     void setTipoUtente(String tipo_utente); 
