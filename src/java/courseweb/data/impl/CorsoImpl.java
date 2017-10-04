@@ -19,6 +19,7 @@ public class CorsoImpl implements Corso {
     private int docente;
     private String lingua;
     private CourseWebDataLayer ownerDataLayer;
+    protected boolean dirty; 
     
     public CorsoImpl(CourseWebDataLayer ownerDataLayer) {
         this.ownerDataLayer = ownerDataLayer;
@@ -29,6 +30,7 @@ public class CorsoImpl implements Corso {
         this.semestre = 0;
         this.docente = 0;
         this.lingua = "";
+        this.dirty = false; 
     }
     
     @Override
@@ -100,4 +102,13 @@ public class CorsoImpl implements Corso {
         this.lingua = lingua;
     }
     
+    @Override
+    public void setDirty(boolean dirty){
+        this.dirty = dirty; 
+    }
+    
+    @Override
+    public boolean isDirty(){
+        return this.dirty; 
+    }
 }

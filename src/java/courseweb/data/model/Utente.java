@@ -22,4 +22,7 @@ public interface Utente {
     void setNome(String nome); 
     void setCognome(String cognome); 
     
+    void setDirty(boolean dirty); 
+    boolean isDirty();  
+    
 }

@@ -19,6 +19,7 @@ public class UtenteImpl implements Utente{
     private String nome; 
     private String cognome;
     private CourseWebDataLayer ownerDataLayer;
+    protected boolean dirty; 
     
     public UtenteImpl(CourseWebDataLayer ownerDataLayer) {
         
@@ -29,6 +30,7 @@ public class UtenteImpl implements Utente{
         this.tipo_utente = "";
         this.nome = "";
         this.cognome = "";
+        this.dirty = false; 
         
     }
     
@@ -91,8 +93,14 @@ public class UtenteImpl implements Utente{
         this.cognome = cognome;  
     }
     
+    @Override
+    public void setDirty(boolean dirty){
+        this.dirty = dirty; 
+    }
     
-    
-    
+    @Override
+    public boolean isDirty(){
+        return this.dirty; 
+    }
     
 }

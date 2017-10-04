@@ -13,5 +13,8 @@ public interface Corso_Laurea {
     String getNome(); 
     
     void setNome(String nome); 
+    
+    void setDirty(boolean dirty); 
+    boolean isDirty();  
   
 }

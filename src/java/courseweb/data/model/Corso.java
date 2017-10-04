@@ -23,5 +23,7 @@ public interface Corso {
     void setSemestre(int semestre);
     void setDocente(int docente);
     void setLingua(String lingua);
-       
+    
+    void setDirty(boolean dirty); 
+    boolean isDirty();    
 }

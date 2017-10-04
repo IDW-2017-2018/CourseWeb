@@ -15,11 +15,13 @@ public class Corso_LaureaImpl implements Corso_Laurea {
     private int id; 
     private String nome; 
     private CourseWebDataLayer ownerDataLayer; 
+    protected boolean dirty; 
     
     public Corso_LaureaImpl(CourseWebDataLayer ownerDataLayer){
         this.ownerDataLayer = ownerDataLayer; 
         this.id = 0; 
         this.nome = ""; 
+        this.dirty = false; 
     }
     
     @Override
@@ -39,5 +41,15 @@ public class Corso_LaureaImpl implements Corso_Laurea {
     
     protected void setId(int id){
         this.id = id; 
+    }
+    
+    @Override
+    public void setDirty(boolean dirty){
+        this.dirty = dirty; 
+    }
+    
+    @Override
+    public boolean isDirty(){
+        return this.dirty; 
     }
 }
