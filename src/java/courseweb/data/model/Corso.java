@@ -18,7 +18,6 @@ public interface Corso {
     String getSSD();
     int getSemestre();
     String getLingua(); 
-    
     String getPrerequisiti();
     String getObiettivi();  
     String getModEsame();
@@ -35,8 +34,7 @@ public interface Corso {
     List<Corso> getCorsiPropedeutici() throws DataLayerException;       
     List<Corso> getCorsiMutuati() throws DataLayerException;            
     List<Corso> getCorsiIntegrati() throws DataLayerException; 
-    List<Materiale> getMateriali() throws DataLayerException;       //lista materiale creare interfaccia e implementazione
-    
+    List<Materiale> getMateriali() throws DataLayerException;     
     
     
     void setNome(String nome);
@@ -44,6 +42,23 @@ public interface Corso {
     void setSSD(String ssd);
     void setSemestre(int semestre);
     void setLingua(String lingua);
+    void setPrerequisiti(String prerequisiti);
+    void setObiettivi(String obiettivi);
+    void setModEsame(String mod_esame);
+    void setModInsegnamento(String insegnamento);
+    void setSillabo(String sillabo);
+    void setLinkHomePageCorso(String link_homepage_corso);
+    void setLinkRisorseEsterne(String link_risorse_esterne);
+    void setLinkForum(String link_forum);
+    void setAnno(String anno);
+    void setNote(String note);   
+    void setDocenti(List<Utente> docenti);
+    void setCorsiLaurea(List<Corso_Laurea> corsi_laurea);
+    void setLibriTesto(List<LibroTesto> libri_testo);
+    void setCorsiPropedeutici(List<Corso> corsi_propedeutici);       
+    void setCorsiMutuati(List<Corso> corsi_mutuati);            
+    void setCorsiIntegrati(List<Corso> corsi_integrati); 
+    void setMateriali(List<Materiale> materiali);
     
     void setDirty(boolean dirty); 
     boolean isDirty();    
