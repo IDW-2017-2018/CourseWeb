@@ -30,7 +30,7 @@ public interface Corso {
     String getNote();
     List<Utente> getDocenti() throws DataLayerException;
     List<Corso_Laurea> getCorsiLaurea() throws DataLayerException;
-    List<LibroTesto> getLibriTesto() throws DataLayerException;
+    List<Libro_Testo> getLibriTesto() throws DataLayerException;
     List<Corso> getCorsiPropedeutici() throws DataLayerException;       
     List<Corso> getCorsiMutuati() throws DataLayerException;            
     List<Corso> getCorsiIntegrati() throws DataLayerException; 
@@ -54,7 +54,7 @@ public interface Corso {
     void setNote(String note);   
     void setDocenti(List<Utente> docenti);
     void setCorsiLaurea(List<Corso_Laurea> corsi_laurea);
-    void setLibriTesto(List<LibroTesto> libri_testo);
+    void setLibriTesto(List<Libro_Testo> libri_testo);
     void setCorsiPropedeutici(List<Corso> corsi_propedeutici);       
     void setCorsiMutuati(List<Corso> corsi_mutuati);            
     void setCorsiIntegrati(List<Corso> corsi_integrati); 

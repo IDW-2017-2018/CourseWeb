@@ -7,10 +7,10 @@ import courseweb.data.model.Corso;
 import courseweb.data.model.Utente;
 import courseweb.data.model.Corso_Laurea;
 import courseweb.data.model.CourseWebDataLayer;
-import courseweb.data.model.LibroTesto; 
 import courseweb.data.model.Materiale; 
 import framework.data.DataLayerException;
 import java.util.List;
+import courseweb.data.model.Libro_Testo;
 
 /*
  * @author Flavio
@@ -36,7 +36,7 @@ public class CorsoImpl implements Corso {
     
     private List<Utente> docenti;
     private List<Corso_Laurea> corsi_laurea;
-    private List<LibroTesto> libri_testo;
+    private List<Libro_Testo> libri_testo;
     private List<Corso> corsi_propedeutici;
     private List<Corso> corsi_mutuati;
     private List<Corso> corsi_integrati;
@@ -172,7 +172,7 @@ public class CorsoImpl implements Corso {
     }
     
     @Override
-    public List<LibroTesto> getLibriTesto() throws DataLayerException{
+    public List<Libro_Testo> getLibriTesto() throws DataLayerException{
         if(this.libri_testo == null){
             this.libri_testo = ownerDataLayer.getLibriTesto();
         }
@@ -301,7 +301,7 @@ public class CorsoImpl implements Corso {
     }
     
     @Override
-    public void setLibriTesto(List<LibroTesto> libri_testo){
+    public void setLibriTesto(List<Libro_Testo> libri_testo){
         this.libri_testo = libri_testo; 
     }
     
