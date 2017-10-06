@@ -47,7 +47,7 @@ public interface Corso {
     void setModEsame(String mod_esame);
     void setModInsegnamento(String insegnamento);
     void setSillabo(String sillabo);
-    void setLinkHomePageCorso(String link_homepage_corso);
+    void setLinkHomepageCorso(String link_homepage_corso);
     void setLinkRisorseEsterne(String link_risorse_esterne);
     void setLinkForum(String link_forum);
     void setAnno(String anno);
