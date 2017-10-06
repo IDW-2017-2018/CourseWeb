@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * classe MaterialiImpl
  */
 package courseweb.data.impl;
 
@@ -15,10 +13,10 @@ import courseweb.data.model.Materiale;
 public class MaterialeImpl implements Materiale {
     
     private int id; 
-    String nome; 
-    String descrizione; 
-    String dimensione; 
-    String percorso;
+    private String nome; 
+    private String descrizione; 
+    private String dimensione; 
+    private String percorso;
     private CourseWebDataLayer ownerDataLayer;
     protected boolean dirty;
    
