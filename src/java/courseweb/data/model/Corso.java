@@ -17,26 +17,26 @@ public interface Corso {
     String getCodice();
     String getSSD();
     int getSemestre();
-    String getLingua();
-    List<Utente> getDocenti() throws DataLayerException;
-    List<Corso_Laurea> getCorsiLaurea() throws DataLayerException;      //aggiungere campo CFU e TipologiaCFU
+    String getLingua(); 
     
-    //campi non ancora creati nel db e nell'implementazione
     String getPrerequisiti();
-    String getObiettivi();      //può essere strutturato con i descrittori di dublino
+    String getObiettivi();  
     String getModEsame();
     String getModInsegnamento();
     String getSillabo();
-    List<LibroTesto> getLibriTesto() throws DataLayerException;
-    List<Corso> getCorsiPropedeutici() throws DataLayerException;       //propedeuticità
-    List<Corso> getCorsiMutuati() throws DataLayerException;            //sostituzione
-    List<Corso> getCorsiIntegrati() throws DataLayerException;          //moduli
     String getLinkHomepageCorso();
     String getLinkRisorseEsterne();
     String getLinkForum();
+    String getAnno();       
     String getNote();
+    List<Utente> getDocenti() throws DataLayerException;
+    List<Corso_Laurea> getCorsiLaurea() throws DataLayerException;
+    List<LibroTesto> getLibriTesto() throws DataLayerException;
+    List<Corso> getCorsiPropedeutici() throws DataLayerException;       
+    List<Corso> getCorsiMutuati() throws DataLayerException;            
+    List<Corso> getCorsiIntegrati() throws DataLayerException; 
     List<Materiale> getMateriali() throws DataLayerException;       //lista materiale creare interfaccia e implementazione
-    String getAnno();       //da vedere come inserirlo nel database, renderlo chiave
+    
     
     
     void setNome(String nome);
