@@ -158,7 +158,7 @@ public class CorsoImpl implements Corso {
     @Override
     public List<Utente> getDocenti() throws DataLayerException{
         if(this.docenti == null){
-            this.docenti = ownerDataLayer.getUtenti();
+            this.docenti = ownerDataLayer.getDocenti();
         }
         return this.docenti;
     }
