@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Ott 07, 2017 alle 17:19
+-- Creato il: Ott 06, 2017 alle 15:38
 -- Versione del server: 5.7.19
 -- Versione PHP: 5.6.31
 
@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `corsi` (
   `codice` varchar(250) NOT NULL,
   `anno` varchar(250) NOT NULL,
   `nome` text NOT NULL,
-  `SSD` text,
-  `semestre` int(11) DEFAULT NULL,
+  `SSD` text NOT NULL,
+  `semestre` int(11) NOT NULL,
   `lingua` text,
   `prerequisiti` text,
   `obiettivi` text,
@@ -212,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `utenti` (
   `cognome` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
