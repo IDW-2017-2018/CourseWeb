@@ -20,6 +20,7 @@ public interface CourseWebDataLayer extends DataLayer {
     Materiale createMateriale();
     
     List<Utente> getUtenti() throws DataLayerException;
+    List<Utente> getDocenti() throws DataLayerException;
     List<Corso> getCorsi() throws DataLayerException;
     List<Corso> getCorsiPropedeutici() throws DataLayerException;
     List<Corso> getCorsiMutuati() throws DataLayerException;
@@ -30,8 +31,5 @@ public interface CourseWebDataLayer extends DataLayer {
     
     void storeUtente(Utente utente) throws DataLayerException;
     void storeCorso(Corso corso) throws DataLayerException;
-    void storeCorsoLaurea(Corso_Laurea corso_laurea) throws DataLayerException;
-    void storeLibroTesto(Libro_Testo libro_testo) throws DataLayerException;
-    void storeMateriale(Materiale materiale) throws DataLayerException;
    
 }
