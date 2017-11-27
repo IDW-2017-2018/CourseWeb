@@ -70,6 +70,10 @@ public class Libro_TestoImpl implements Libro_Testo{
         return this.link; 
     }
     
+    protected void setId(int id){
+        this.id = id; 
+    }
+    
     @Override
     public void setAutore(String autore){
         this.autore = autore; 

@@ -19,8 +19,16 @@ public interface CourseWebDataLayer extends DataLayer {
     Libro_Testo createLibroTesto();
     Materiale createMateriale();
     
+    Utente getUtente(int utente_key) throws DataLayerException; 
+    Utente getUtente(String utente_email) throws DataLayerException; 
     List<Utente> getUtenti() throws DataLayerException;
+    
+    Utente getDocente(int docente_key) throws DataLayerException; 
+    Utente getDocente(String docente_email) throws DataLayerException; 
     List<Utente> getDocenti() throws DataLayerException;
+    
+    /* Siamo arrivati qui */
+    
     List<Corso> getCorsi() throws DataLayerException;
     List<Corso> getCorsiPropedeutici() throws DataLayerException;
     List<Corso> getCorsiMutuati() throws DataLayerException;

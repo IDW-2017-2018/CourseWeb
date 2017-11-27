@@ -27,7 +27,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     private PreparedStatement sLibroTestoById;
     private PreparedStatement sMaterialeById;
     
-    private PreparedStatement sDocenti;
+    private PreparedStatement sDocenti, sDocenteById, sDocenteByEmail;
     private PreparedStatement sCorsiPropedeutici;
     private PreparedStatement sCorsiMutuati;
     private PreparedStatement sCorsiIntegrati;
@@ -64,6 +64,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             
             //query complesse
             sDocenti = connection.prepareStatement("SELECT * FROM utenti WHERE tipo_utente='docente'");
+            sDocenteById = connection.prepareStatement("SELECT * FROM utenti WHERE tipo_utente='docente' AND id=?");
+            sDocenteByEmail = connection.prepareStatement("SELECT * FROM utenti WHERE tipo_utente='docente' AND email=?");
             
             sCorsiPropedeutici = connection.prepareStatement("SELECT * FROM corsi_corsi_propedeutici INNER JOIN corsi ON (corsi_corsi_propedeutici.id_corso_propedeutico = corsi.id) WHERE corsi_corsi_propedeutici.id_corso=?");
             sCorsiMutuati = connection.prepareStatement("SELECT * FROM corsi_corsi_mutuati INNER JOIN corsi ON (corsi_corsi_mutuati.id_corso_mutuato = corsi.id) WHERE corsi_corsi_mutuati.id_corso=?");
@@ -75,6 +77,248 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         catch(SQLException exc){
             throw new DataLayerException("Error in initializing CourseWeb DataLayer", exc);
         }  
+    }
+    
+    @Override
+    public Utente createUtente() {
+        return new UtenteImpl(this); 
+    }
+    
+    public Utente createUtente(ResultSet rs) throws DataLayerException {
+        try {
+            
+            UtenteImpl u = new UtenteImpl(this); 
+            
+            u.setId(rs.getInt("id"));
+            u.setEmail(rs.getString("email"));
+            u.setPassword(rs.getString("password"));
+            u.setTipoUtente(rs.getString("tipo_utente"));
+            u.setNome(rs.getString("nome"));
+            u.setCognome(rs.getString("cognome"));
+            
+            return u; 
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to create Utente object from ResultSet", ex); 
+        }
+    }
+    
+    @Override
+    public Corso createCorso() {
+        return new CorsoImpl(this); 
+    }
+    
+    public Corso createCorso(ResultSet rs) throws DataLayerException {
+        try {
+            
+            CorsoImpl c = new CorsoImpl(this); 
+            
+            c.setId(rs.getInt("id"));
+            c.setCodice(rs.getString("codice"));
+            c.setAnno(rs.getString("anno"));
+            c.setNome(rs.getString("nome"));
+            c.setSSD(rs.getString("SSD"));
+            c.setSemestre(rs.getInt("semestre"));
+            c.setLingua(rs.getString("lingua"));
+            c.setPrerequisiti(rs.getString("prerequisiti"));
+            c.setObiettivi(rs.getString("obiettivi"));
+            c.setModEsame(rs.getString("mod_esame")); 
+            c.setModInsegnamento(rs.getString("mod_insegnamento"));
+            c.setSillabo(rs.getString("sillabo")); 
+            c.setLinkHomepageCorso(rs.getString("link_homepage"));
+            c.setLinkRisorseEsterne(rs.getString("link_risorse"));
+            c.setLinkForum(rs.getString("link_forum"));
+            c.setNote(rs.getString("note"));
+            
+            return c; 
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to create Corso object from ResultSet", ex); 
+        }
+    }
+    
+    @Override
+    public Corso_Laurea createCorsoLaurea() {
+        return new Corso_LaureaImpl(this); 
+    }
+    
+    public Corso_Laurea createCorsoLaurea(ResultSet rs) throws DataLayerException {
+        try {
+            
+            Corso_LaureaImpl c = new Corso_LaureaImpl(this); 
+            
+            c.setId(rs.getInt("id"));
+            c.setNome(rs.getString("nome"));
+            
+            return c; 
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to create Corso_Laurea object from ResultSet", ex); 
+        }
+    }
+    
+    @Override
+    public Libro_Testo createLibroTesto() {
+        return new Libro_TestoImpl(this); 
+    }
+    
+    public Libro_Testo createLibroTesto(ResultSet rs) throws DataLayerException {
+        try {
+            
+            Libro_TestoImpl l = new Libro_TestoImpl(this); 
+            
+            l.setId(rs.getInt("id"));
+            l.setAutore(rs.getString("autore"));
+            l.setTitolo(rs.getString("titolo"));
+            l.setVolume(rs.getString("volume"));
+            l.setAnno(rs.getString("anno"));
+            l.setEditore(rs.getString("editore"));
+            l.setLink(rs.getString("link"));
+            
+            return l; 
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to create Libro_Testo object from ResultSet", ex); 
+        }
+    }
+    
+    @Override
+    public Materiale createMateriale() {
+        return new MaterialeImpl(this); 
+    }
+    
+    public Materiale createMateriale(ResultSet rs) throws DataLayerException {
+        try {
+            
+            MaterialeImpl m = new MaterialeImpl(this); 
+            
+            m.setId(rs.getInt("id"));
+            m.setNome(rs.getString("nome"));
+            m.setDescrizione(rs.getString("descrizione"));
+            m.setDimensione(rs.getString("dimensione"));
+            m.setPercorso(rs.getString("percorso"));
+            
+            return m; 
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to create Materiale object from ResultSet", ex); 
+        }
+    }
+    
+    @Override
+    public Utente getUtente(int utente_key) throws DataLayerException {
+        
+        try {
+            sUtenteById.setInt(1, utente_key);
+            try(ResultSet rs = sUtenteById.executeQuery()){
+                
+                if(rs.next()){
+                    return createUtente(rs); 
+                }
+                
+            }
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to load Utente by id", ex); 
+        }
+        
+        return null; 
+    }
+    
+    @Override
+    public Utente getUtente(String utente_email) throws DataLayerException {
+        
+        try {
+            sUtenteByEmail.setString(1, utente_email);
+            try(ResultSet rs = sUtenteByEmail.executeQuery()){
+                
+                if(rs.next()){
+                    return createUtente(rs); 
+                }
+                
+            }
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to load Utente by email", ex); 
+        }
+        
+        return null; 
+    }
+    
+    @Override
+    public List<Utente> getUtenti() throws DataLayerException {
+        List<Utente> result = new ArrayList(); 
+        
+        try(ResultSet rs = sUtente.executeQuery()) {
+            
+            while(rs.next()){
+                result.add(getUtente(rs.getInt("id")));
+            }
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to load Utente", ex); 
+        }
+            
+        return result; 
+        
+    }
+    
+    @Override
+    public Utente getDocente(int docente_key) throws DataLayerException {
+        
+        try {
+            sDocenteById.setInt(1, docente_key);
+            try(ResultSet rs = sDocenteById.executeQuery()){
+                
+                if(rs.next()){
+                    return createUtente(rs); 
+                }
+                
+            }
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to load Utente docente by id", ex); 
+        }
+        
+        return null; 
+    }
+    
+    @Override
+    public Utente getDocente(String docente_email) throws DataLayerException {
+        
+        try {
+            sDocenteByEmail.setString(1, docente_email);
+            try(ResultSet rs = sDocenteByEmail.executeQuery()){
+                
+                if(rs.next()){
+                    return createUtente(rs); 
+                }
+                
+            }
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to load Utente docente by email", ex); 
+        }
+        
+        return null; 
+    }
+    
+    @Override
+    public List<Utente> getDocenti() throws DataLayerException {
+        List<Utente> result = new ArrayList(); 
+        
+        try(ResultSet rs = sDocenti.executeQuery()) {
+            
+            while(rs.next()){
+                result.add(getUtente(rs.getInt("id")));
+            }
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to load Utente docente", ex); 
+        }
+            
+        return result; 
+        
     }
     
     
