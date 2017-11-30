@@ -26,16 +26,29 @@ public interface CourseWebDataLayer extends DataLayer {
     Utente getDocente(int docente_key) throws DataLayerException; 
     Utente getDocente(String docente_email) throws DataLayerException; 
     List<Utente> getDocenti() throws DataLayerException;
+    List<Utente> getDocentiCorso(Corso corso) throws DataLayerException;
     
-    /* Siamo arrivati qui */
-    
+    Corso getCorso(int corso_key) throws DataLayerException;
+    Corso getCorso(String codice, String anno) throws DataLayerException;
     List<Corso> getCorsi() throws DataLayerException;
-    List<Corso> getCorsiPropedeutici() throws DataLayerException;
-    List<Corso> getCorsiMutuati() throws DataLayerException;
-    List<Corso> getCorsiIntegrati() throws DataLayerException;
+    
+    Corso_Laurea getCorsoLaurea(int corso_laurea_key) throws DataLayerException;
     List<Corso_Laurea> getCorsiLaurea() throws DataLayerException;
+    
+    Libro_Testo getLibroTesto(int libro_testo_key)throws DataLayerException;
     List<Libro_Testo> getLibriTesto() throws DataLayerException;
+    
+    Materiale getMateriale(int materiale_key) throws DataLayerException;
     List<Materiale> getMateriali() throws DataLayerException;
+    
+    List<Corso> getCorsiPropedeuticiCorso(Corso corso) throws DataLayerException;
+    List<Corso> getCorsiMutuatiCorso(Corso corso) throws DataLayerException;
+    List<Corso> getCorsiIntegratiCorso(Corso corso) throws DataLayerException;
+    List<Corso> getCorsiLaureaCorso(Corso corso) throws DataLayerException;
+    List<Libro_Testo> getLibriTestoCorso(Corso corso) throws DataLayerException;
+    List<Materiale> getMaterialiCorso(Corso corso) throws DataLayerException;
+    
+   
     
     void storeUtente(Utente utente) throws DataLayerException;
     void storeCorso(Corso corso) throws DataLayerException;
