@@ -9,7 +9,7 @@ package courseweb.data.model;
  */
 public interface Materiale {
     
-        int getId(); 
+    int getId(); 
     String getNome(); 
     String getDescrizione(); 
     String getDimensione(); 
