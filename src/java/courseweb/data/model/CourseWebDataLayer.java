@@ -44,7 +44,7 @@ public interface CourseWebDataLayer extends DataLayer {
     List<Corso> getCorsiPropedeuticiCorso(Corso corso) throws DataLayerException;
     List<Corso> getCorsiMutuatiCorso(Corso corso) throws DataLayerException;
     List<Corso> getCorsiIntegratiCorso(Corso corso) throws DataLayerException;
-    List<Corso> getCorsiLaureaCorso(Corso corso) throws DataLayerException;
+    List<Corso_Laurea> getCorsiLaureaCorso(Corso corso) throws DataLayerException;
     List<Libro_Testo> getLibriTestoCorso(Corso corso) throws DataLayerException;
     List<Materiale> getMaterialiCorso(Corso corso) throws DataLayerException;
     

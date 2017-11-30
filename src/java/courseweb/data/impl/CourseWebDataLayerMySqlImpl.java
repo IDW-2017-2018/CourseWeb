@@ -21,19 +21,19 @@ import javax.sql.DataSource;
  */
 public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements CourseWebDataLayer {
     
-    private PreparedStatement sCorso, sCorsoByCodice, sCorsoByAnno, sCorsoByCodiceAnno, uCorsoByCodiceAnno, iCorsoByCodiceAnno;
+    private PreparedStatement sCorso, sCorsoById, sCorsoByCodice, sCorsoByAnno, sCorsoByCodiceAnno, uCorsoByCodiceAnno, iCorsoByCodiceAnno;
     private PreparedStatement sUtente, sUtenteById, sUtenteByEmail, uUtenteById, uUtenteByEmail, iUtente;
     private PreparedStatement sCorsoLaurea, sCorsoLaureaById, sCorsoLaureaByNome;
     private PreparedStatement sLibroTestoById;
     private PreparedStatement sMaterialeById;
     
-    private PreparedStatement sDocenti, sDocenteById, sDocenteByEmail;
-    private PreparedStatement sCorsiPropedeutici;
-    private PreparedStatement sCorsiMutuati;
-    private PreparedStatement sCorsiIntegrati;
-    private PreparedStatement sCorsiLibriTesto;
-    private PreparedStatement sCorsiCorsiLaurea;
-    private PreparedStatement sCorsiMateriali;     
+    private PreparedStatement sDocenti, sDocenteById, sDocenteByEmail, sDocentiCorso;
+    private PreparedStatement sCorsiCorsiLaureaCorso;
+    private PreparedStatement sCorsiPropedeuticiCorso;
+    private PreparedStatement sCorsiMutuatiCorso;
+    private PreparedStatement sCorsiIntegratiCorso;
+    private PreparedStatement sCorsiLibriTestoCorso;
+    private PreparedStatement sCorsiMaterialiCorso;     
             
     @Override
     public void init() throws DataLayerException{
@@ -67,12 +67,12 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sDocenteById = connection.prepareStatement("SELECT * FROM utenti WHERE tipo_utente='docente' AND id=?");
             sDocenteByEmail = connection.prepareStatement("SELECT * FROM utenti WHERE tipo_utente='docente' AND email=?");
             
-            sCorsiPropedeutici = connection.prepareStatement("SELECT * FROM corsi_corsi_propedeutici INNER JOIN corsi ON (corsi_corsi_propedeutici.id_corso_propedeutico = corsi.id) WHERE corsi_corsi_propedeutici.id_corso=?");
-            sCorsiMutuati = connection.prepareStatement("SELECT * FROM corsi_corsi_mutuati INNER JOIN corsi ON (corsi_corsi_mutuati.id_corso_mutuato = corsi.id) WHERE corsi_corsi_mutuati.id_corso=?");
-            sCorsiIntegrati = connection.prepareStatement("SELECT * FROM corsi_corsi_integrati INNER JOIN corsi ON (corsi_corsi_integrati.id_corso_integrato = corsi.id) WHERE corsi_corsi_integrati.id_corso=?");
-            sCorsiLibriTesto = connection.prepareStatement("SELECT * FROM corsi_libri_testo INNER JOIN libri_testo ON (corsi_libri_testo.id_libro_testo = libri_testo.id) WHERE corsi_libri_testo.id_corso=?");
-            sCorsiCorsiLaurea = connection.prepareStatement("SELECT * FROM corsi_corsi_laurea INNER JOIN corsi_laurea ON (corsi_corsi_laurea.id_corso_laurea = corsi_laurea.id) WHERE corsi_corsi_laurea.id_corso=?");  
-            sCorsiMateriali = connection.prepareStatement("SELECT * FROM materiali_corsi INNER JOIN materiali ON (materiali_corsi.id_materiale = materiali.id) WHERE materiali_corsi.id_corso=?");
+            sCorsiCorsiLaureaCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_laurea INNER JOIN corsi_laurea ON (corsi_corsi_laurea.id_corso_laurea = corsi_laurea.id) WHERE corsi_corsi_laurea.id_corso=?");  
+            sCorsiPropedeuticiCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_propedeutici INNER JOIN corsi ON (corsi_corsi_propedeutici.id_corso_propedeutico = corsi.id) WHERE corsi_corsi_propedeutici.id_corso=?");
+            sCorsiMutuatiCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_mutuati INNER JOIN corsi ON (corsi_corsi_mutuati.id_corso_mutuato = corsi.id) WHERE corsi_corsi_mutuati.id_corso=?");
+            sCorsiIntegratiCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_integrati INNER JOIN corsi ON (corsi_corsi_integrati.id_corso_integrato = corsi.id) WHERE corsi_corsi_integrati.id_corso=?");
+            sCorsiLibriTestoCorso = connection.prepareStatement("SELECT * FROM corsi_libri_testo INNER JOIN libri_testo ON (corsi_libri_testo.id_libro_testo = libri_testo.id) WHERE corsi_libri_testo.id_corso=?");
+            sCorsiMaterialiCorso = connection.prepareStatement("SELECT * FROM materiali_corsi INNER JOIN materiali ON (materiali_corsi.id_materiale = materiali.id) WHERE materiali_corsi.id_corso=?");
         }
         catch(SQLException exc){
             throw new DataLayerException("Error in initializing CourseWeb DataLayer", exc);

@@ -28,13 +28,13 @@ public interface Corso {
     String getLinkForum();
     String getAnno();       
     String getNote();
-    List<Utente> getDocenti() throws DataLayerException;
-    List<Corso_Laurea> getCorsiLaurea() throws DataLayerException;
-    List<Libro_Testo> getLibriTesto() throws DataLayerException;
-    List<Corso> getCorsiPropedeutici() throws DataLayerException;       
-    List<Corso> getCorsiMutuati() throws DataLayerException;            
-    List<Corso> getCorsiIntegrati() throws DataLayerException; 
-    List<Materiale> getMateriali() throws DataLayerException;     
+    List<Utente> getDocentiCorso() throws DataLayerException;
+    List<Corso_Laurea> getCorsiLaureaCorso() throws DataLayerException;
+    List<Corso> getCorsiPropedeuticiCorso() throws DataLayerException;       
+    List<Corso> getCorsiMutuatiCorso() throws DataLayerException;            
+    List<Corso> getCorsiIntegratiCorso() throws DataLayerException; 
+    List<Materiale> getMaterialiCorso() throws DataLayerException;   
+    List<Libro_Testo> getLibriTestoCorso() throws DataLayerException;
     
     
     void setNome(String nome);

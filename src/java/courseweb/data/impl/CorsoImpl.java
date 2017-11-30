@@ -156,57 +156,57 @@ public class CorsoImpl implements Corso {
     }
     
     @Override
-    public List<Utente> getDocenti() throws DataLayerException{
+    public List<Utente> getDocentiCorso() throws DataLayerException{
         if(this.docenti == null){
-            this.docenti = ownerDataLayer.getDocenti();
+            this.docenti = ownerDataLayer.getDocentiCorso(this);
         }
         return this.docenti;
     }
     
     @Override
-    public List<Corso_Laurea> getCorsiLaurea() throws DataLayerException{
+    public List<Corso_Laurea> getCorsiLaureaCorso() throws DataLayerException{
         if(this.corsi_laurea == null){
-            this.corsi_laurea = ownerDataLayer.getCorsiLaurea();
+            this.corsi_laurea = ownerDataLayer.getCorsiLaureaCorso(this);
         }
         return this.corsi_laurea;
     }
     
     @Override
-    public List<Libro_Testo> getLibriTesto() throws DataLayerException{
-        if(this.libri_testo == null){
-            this.libri_testo = ownerDataLayer.getLibriTesto();
-        }
-        return this.libri_testo;
-    }
-    
-    @Override
-    public List<Corso> getCorsiPropedeutici() throws DataLayerException{
+    public List<Corso> getCorsiPropedeuticiCorso() throws DataLayerException{
         if(this.corsi_propedeutici == null){
-            this.corsi_propedeutici = ownerDataLayer.getCorsiPropedeutici();
+            this.corsi_propedeutici = ownerDataLayer.getCorsiPropedeuticiCorso(this);
         }
         return this.corsi_propedeutici;
     }
     
     @Override
-    public List<Corso> getCorsiMutuati() throws DataLayerException{
+    public List<Corso> getCorsiMutuatiCorso() throws DataLayerException{
         if(this.corsi_mutuati == null){
-            this.corsi_mutuati = ownerDataLayer.getCorsiMutuati();
+            this.corsi_mutuati = ownerDataLayer.getCorsiMutuatiCorso(this);
         }
         return this.corsi_mutuati;
     }
     
     @Override
-    public List<Corso> getCorsiIntegrati() throws DataLayerException{
+    public List<Corso> getCorsiIntegratiCorso() throws DataLayerException{
         if(this.corsi_integrati == null){
-            this.corsi_integrati = ownerDataLayer.getCorsiIntegrati();
+            this.corsi_integrati = ownerDataLayer.getCorsiIntegratiCorso(this);
         }
         return this.corsi_integrati;
     }
     
+        @Override
+    public List<Libro_Testo> getLibriTestoCorso() throws DataLayerException{
+        if(this.libri_testo == null){
+            this.libri_testo = ownerDataLayer.getLibriTestoCorso(this);
+        }
+        return this.libri_testo;
+    }
+    
     @Override
-    public List<Materiale> getMateriali() throws DataLayerException{
+    public List<Materiale> getMaterialiCorso() throws DataLayerException{
         if(this.materiali == null){
-            this.materiali = ownerDataLayer.getMateriali();
+            this.materiali = ownerDataLayer.getMaterialiCorso(this);
         }
         return this.materiali;
     }
