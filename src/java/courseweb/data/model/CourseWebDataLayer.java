@@ -29,7 +29,9 @@ public interface CourseWebDataLayer extends DataLayer {
     List<Utente> getDocentiCorso(Corso corso) throws DataLayerException;
     
     Corso getCorso(int corso_key) throws DataLayerException;
-    Corso getCorso(String codice, String anno) throws DataLayerException;
+    Corso getCorso(String corso_codice, String corso_anno) throws DataLayerException;
+    List<Corso> getCorsoByCodice(String corso_codice) throws DataLayerException;
+    Corso getCorsoByAnno(String corso_anno) throws DataLayerException;
     List<Corso> getCorsi() throws DataLayerException;
     
     Corso_Laurea getCorsoLaurea(int corso_laurea_key) throws DataLayerException;

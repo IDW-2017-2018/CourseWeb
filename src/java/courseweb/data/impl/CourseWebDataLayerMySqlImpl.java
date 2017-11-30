@@ -321,5 +321,46 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         
     }
     
+    @Override
+    public Corso getCorso(int corso_key) throws DataLayerException {
+        
+        try {
+            sCorsoById.setInt(1, corso_key);
+            try(ResultSet rs = sCorsoById.executeQuery()){
+                
+                if(rs.next()){
+                    return createCorso(rs); 
+                }
+                
+            }
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to load Corso by id", ex); 
+        }
+        
+        return null; 
+    }
+    
+    @Override
+    public List<Corso> getCorsoByCodice(String corso_codice) throws DataLayerException {
+        List<Corso> result = new ArrayList(); 
+        
+        try{     
+            sCorsoByCodice.setString(1, corso_codice);
+            try(ResultSet rs = sCorsoByCodice.executeQuery()) {          
+                
+                while(rs.next()){
+                    result.add(getCorso(rs.getInt("id")));
+                }
+            } 
+        }
+        
+        catch(SQLException ex){
+            throw new DataLayerException("Unable to load Corso by codice", ex); 
+        }
+        
+        return result;      
+        
+    }
     
 }
