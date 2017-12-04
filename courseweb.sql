@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Ott 07, 2017 alle 17:19
+-- Creato il: Dic 04, 2017 alle 17:30
 -- Versione del server: 5.7.19
 -- Versione PHP: 5.6.31
 
@@ -151,6 +151,20 @@ CREATE TABLE IF NOT EXISTS `corsi_libri_testo` (
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `corsi_materiali`
+--
+
+DROP TABLE IF EXISTS `corsi_materiali`;
+CREATE TABLE IF NOT EXISTS `corsi_materiali` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_corso` int(11) NOT NULL,
+  `id_materiale` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `libri_testo`
 --
 
@@ -179,20 +193,6 @@ CREATE TABLE IF NOT EXISTS `materiali` (
   `descrizione` text NOT NULL,
   `dimensione` text NOT NULL,
   `percorso` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `materiali_corsi`
---
-
-DROP TABLE IF EXISTS `materiali_corsi`;
-CREATE TABLE IF NOT EXISTS `materiali_corsi` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_corso` int(11) NOT NULL,
-  `id_materiale` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
