@@ -326,6 +326,36 @@ public class CorsoImpl implements Corso {
     }
     
     @Override
+    public void copyFrom(Corso corso) throws DataLayerException{
+        id = corso.getId();
+        nome = corso.getNome();
+        codice = corso.getCodice();
+        ssd = corso.getSSD();
+        semestre = corso.getSemestre();
+        lingua = corso.getLingua();
+        prerequisiti = corso.getPrerequisiti();
+        obiettivi = corso.getObiettivi();
+        mod_esame = corso.getModEsame();
+        insegnamento = corso.getModInsegnamento();
+        sillabo = corso.getSillabo();
+        link_homepage_corso = corso.getLinkHomepageCorso();
+        link_risorse_esterne = corso.getLinkRisorseEsterne();
+        link_forum = corso.getLinkForum();
+        anno = corso.getAnno();
+        note = corso.getNote();
+        
+        docenti = corso.getDocentiCorso();
+        corsi_laurea = corso.getCorsiLaureaCorso();
+        libri_testo = corso.getLibriTestoCorso();
+        corsi_propedeutici = corso.getCorsiPropedeuticiCorso();
+        corsi_mutuati = corso.getCorsiMutuatiCorso();
+        corsi_integrati = corso.getCorsiIntegratiCorso();
+        materiali = corso.getMaterialiCorso();
+        
+        this.dirty = true;
+    }
+    
+    @Override
     public void setDirty(boolean dirty){
         this.dirty = dirty; 
     }

@@ -3,6 +3,8 @@
  */
 package courseweb.data.model;
 
+import framework.data.DataLayerException;
+
 /**
  *
  * @author Riccardo
@@ -22,6 +24,7 @@ public interface Utente {
     void setNome(String nome); 
     void setCognome(String cognome); 
     
+    void copyFrom(Utente utente) throws DataLayerException;
     void setDirty(boolean dirty); 
     boolean isDirty();  
     

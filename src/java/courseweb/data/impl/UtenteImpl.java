@@ -5,6 +5,7 @@ package courseweb.data.impl;
 
 import courseweb.data.model.Utente;
 import courseweb.data.model.CourseWebDataLayer;
+import framework.data.DataLayerException;
 
 /**
  *
@@ -91,6 +92,16 @@ public class UtenteImpl implements Utente{
     @Override
     public void setCognome(String cognome) {   
         this.cognome = cognome;  
+    }
+    
+    @Override
+    public void copyFrom(Utente utente) throws DataLayerException{
+        id = utente.getId();
+        email = utente.getEmail();
+        password = utente.getPassword();
+        nome = utente.getNome();
+        cognome = utente.getCognome();
+        this.dirty = true;
     }
     
     @Override

@@ -24,17 +24,21 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     private PreparedStatement sCorso, sCorsoById, sCorsoByCodice, sCorsoByAnno, sCorsoByCodiceAnno, uCorsoByCodiceAnno, iCorsoByCodiceAnno;
     private PreparedStatement sUtente, sUtenteById, sUtenteByEmail, uUtenteById, uUtenteByEmail, iUtente;
     private PreparedStatement sCorsoLaurea, sCorsoLaureaById, sCorsoLaureaByNome;
-    private PreparedStatement sLibroTestoById;
-    private PreparedStatement sMaterialeById;
+    private PreparedStatement sLibriTesto, sLibroTestoById;
+    private PreparedStatement sMateriali, sMaterialeById;
     
     private PreparedStatement sDocenti, sDocenteById, sDocenteByEmail, sDocentiCorso;
-    private PreparedStatement sCorsiCorsiLaureaCorso;
+    private PreparedStatement sCorsiLaureaCorso;
     private PreparedStatement sCorsiPropedeuticiCorso;
     private PreparedStatement sCorsiMutuatiCorso;
     private PreparedStatement sCorsiIntegratiCorso;
-    private PreparedStatement sCorsiLibriTestoCorso;
-    private PreparedStatement sCorsiMaterialiCorso;     
-            
+    private PreparedStatement sLibriTestoCorso;
+    private PreparedStatement sMaterialiCorso;     
+          
+    public CourseWebDataLayerMySqlImpl(DataSource datasource) throws SQLException, NamingException {
+        super(datasource);
+    }
+    
     @Override
     public void init() throws DataLayerException{
         try  {
@@ -59,20 +63,23 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsoLaureaByNome = connection.prepareStatement("SELECT * FROM corsi_laurea WHERE nome=?");
             
             sLibroTestoById = connection.prepareStatement("SELECT * FROM libri_testo WHERE id=?");
+            sLibriTesto = connection.prepareStatement("SELECT * FROM libri_testo");
             
             sMaterialeById = connection.prepareStatement("SELECT * FROM materiali WHERE id=?");
+            sMateriali = connection.prepareStatement("SELECT * FROM materiali");
             
             //query complesse
             sDocenti = connection.prepareStatement("SELECT * FROM utenti WHERE tipo_utente='docente'");
             sDocenteById = connection.prepareStatement("SELECT * FROM utenti WHERE tipo_utente='docente' AND id=?");
             sDocenteByEmail = connection.prepareStatement("SELECT * FROM utenti WHERE tipo_utente='docente' AND email=?");
             
-            sCorsiCorsiLaureaCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_laurea INNER JOIN corsi_laurea ON (corsi_corsi_laurea.id_corso_laurea = corsi_laurea.id) WHERE corsi_corsi_laurea.id_corso=?");  
+            sCorsiLaureaCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_laurea INNER JOIN corsi_laurea ON (corsi_corsi_laurea.id_corso_laurea = corsi_laurea.id) WHERE corsi_corsi_laurea.id_corso=?");  
             sCorsiPropedeuticiCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_propedeutici INNER JOIN corsi ON (corsi_corsi_propedeutici.id_corso_propedeutico = corsi.id) WHERE corsi_corsi_propedeutici.id_corso=?");
             sCorsiMutuatiCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_mutuati INNER JOIN corsi ON (corsi_corsi_mutuati.id_corso_mutuato = corsi.id) WHERE corsi_corsi_mutuati.id_corso=?");
             sCorsiIntegratiCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_integrati INNER JOIN corsi ON (corsi_corsi_integrati.id_corso_integrato = corsi.id) WHERE corsi_corsi_integrati.id_corso=?");
-            sCorsiLibriTestoCorso = connection.prepareStatement("SELECT * FROM corsi_libri_testo INNER JOIN libri_testo ON (corsi_libri_testo.id_libro_testo = libri_testo.id) WHERE corsi_libri_testo.id_corso=?");
-            sCorsiMaterialiCorso = connection.prepareStatement("SELECT * FROM materiali_corsi INNER JOIN materiali ON (materiali_corsi.id_materiale = materiali.id) WHERE materiali_corsi.id_corso=?");
+            sLibriTestoCorso = connection.prepareStatement("SELECT * FROM corsi_libri_testo INNER JOIN libri_testo ON (corsi_libri_testo.id_libro_testo = libri_testo.id) WHERE corsi_libri_testo.id_corso=?");
+            sMaterialiCorso = connection.prepareStatement("SELECT * FROM corsi_materiali INNER JOIN materiali ON (corsi_materiali.id_materiale = materiali.id) WHERE corsi_materiali.id_corso=?");
+            sDocentiCorso = connection.prepareStatement("SELECT * FROM corsi_docenti INNER JOIN utenti ON (corsi_docenti.id_docente = utenti.id) WHERE corsi_docenti.id_corso=?");
         }
         catch(SQLException exc){
             throw new DataLayerException("Error in initializing CourseWeb DataLayer", exc);
@@ -321,6 +328,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         
     }
     
+    
     @Override
     public Corso getCorso(int corso_key) throws DataLayerException {
         
@@ -336,6 +344,27 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             
         } catch(SQLException ex){
             throw new DataLayerException("Unable to load Corso by id", ex); 
+        }
+        
+        return null; 
+    }
+    
+    @Override
+    public Corso getCorso(String corso_codice, String corso_anno) throws DataLayerException {
+        
+        try {
+            sCorsoByCodiceAnno.setString(1, corso_codice);
+            sCorsoByCodiceAnno.setString(2, corso_anno);
+            try(ResultSet rs = sCorsoByCodiceAnno.executeQuery()){
+                
+                if(rs.next()){
+                    return createCorso(rs); 
+                }
+                
+            }
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to load Corso by codice & anno", ex); 
         }
         
         return null; 
@@ -363,4 +392,525 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         
     }
     
+    @Override
+    public List<Corso> getCorsoByAnno(String corso_anno) throws DataLayerException {
+        List<Corso> result = new ArrayList(); 
+        
+        try{     
+            sCorsoByAnno.setString(1, corso_anno);
+            try(ResultSet rs = sCorsoByAnno.executeQuery()) {          
+                
+                while(rs.next()){
+                    result.add(getCorso(rs.getInt("id")));
+                }
+            } 
+        }
+        
+        catch(SQLException ex){
+            throw new DataLayerException("Unable to load Corso by anno", ex); 
+        }
+        
+        return result;      
+        
+    }
+    
+    @Override
+    public List<Corso> getCorsi() throws DataLayerException {
+        List<Corso> result = new ArrayList(); 
+                   
+        try(ResultSet rs = sCorso.executeQuery()) {          
+                
+            while(rs.next()){
+                result.add(getCorso(rs.getInt("id")));
+            }
+            
+        } 
+        
+        catch(SQLException ex){
+            throw new DataLayerException("Unable to load Corsi", ex); 
+        }
+        
+        return result;      
+        
+    }
+    
+    @Override
+    public Corso_Laurea getCorsoLaurea(int corso_laurea_key) throws DataLayerException {
+        
+        try {
+            sCorsoLaureaById.setInt(1, corso_laurea_key);
+            try(ResultSet rs = sCorsoLaureaById.executeQuery()){
+                
+                if(rs.next()){
+                    return createCorsoLaurea(rs); 
+                }
+                
+            }
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to load Corso_Laurea by id", ex); 
+        }
+        
+        return null; 
+    }
+    
+    @Override
+    public Corso_Laurea getCorsoLaurea(String corso_laurea_nome) throws DataLayerException {
+        
+        try {
+            sCorsoLaureaByNome.setString(1, corso_laurea_nome);
+            try(ResultSet rs = sCorsoLaureaByNome.executeQuery()){
+                
+                if(rs.next()){
+                    return createCorsoLaurea(rs); 
+                }
+                
+            }
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to load Corso_Laurea by nome", ex); 
+        }
+        
+        return null; 
+    }
+    
+    @Override
+    public List<Corso_Laurea> getCorsiLaurea() throws DataLayerException {
+        List<Corso_Laurea> result = new ArrayList(); 
+                   
+        try(ResultSet rs = sCorsoLaurea.executeQuery()) {          
+                
+            while(rs.next()){
+                result.add(getCorsoLaurea(rs.getInt("id")));
+            }
+            
+        } 
+        
+        catch(SQLException ex){
+            throw new DataLayerException("Unable to load Corsi_Laurea", ex); 
+        }
+        
+        return result;      
+        
+    }
+    
+    @Override
+    public Libro_Testo getLibroTesto(int libro_testo_key) throws DataLayerException {
+        
+        try {
+            sLibroTestoById.setInt(1, libro_testo_key);
+            try(ResultSet rs = sLibroTestoById.executeQuery()){
+                
+                if(rs.next()){
+                    return createLibroTesto(rs); 
+                }
+                
+            }
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to load Libro_Testo by id", ex); 
+        }
+        
+        return null; 
+    }
+    
+    @Override
+    public List<Libro_Testo> getLibriTesto() throws DataLayerException {
+        List<Libro_Testo> result = new ArrayList(); 
+                   
+        try(ResultSet rs = sLibriTesto.executeQuery()) {          
+                
+            while(rs.next()){
+                result.add(getLibroTesto(rs.getInt("id")));
+            }
+            
+        } 
+        
+        catch(SQLException ex){
+            throw new DataLayerException("Unable to load Libri_Testo", ex); 
+        }
+        
+        return result;      
+        
+    }
+    
+    @Override
+    public Materiale getMateriale(int materiale_key) throws DataLayerException {
+        
+        try {
+            sMaterialeById.setInt(1, materiale_key);
+            try(ResultSet rs = sMaterialeById.executeQuery()){
+                
+                if(rs.next()){
+                    return createMateriale(rs); 
+                }
+                
+            }
+            
+        } catch(SQLException ex){
+            throw new DataLayerException("Unable to load Materiale by id", ex); 
+        }
+        
+        return null; 
+    }
+    
+    @Override
+    public List<Materiale> getMateriali() throws DataLayerException {
+        List<Materiale> result = new ArrayList(); 
+                   
+        try(ResultSet rs = sMateriali.executeQuery()) {          
+                
+            while(rs.next()){
+                result.add(getMateriale(rs.getInt("id")));
+            }
+            
+        } 
+        
+        catch(SQLException ex){
+            throw new DataLayerException("Unable to load Materiali", ex); 
+        }
+        
+        return result;      
+        
+    }
+    
+    @Override
+    public List<Corso_Laurea> getCorsiLaureaCorso(Corso corso) throws DataLayerException {
+        List<Corso_Laurea> result = new ArrayList(); 
+        
+        try{     
+            sCorsiLaureaCorso.setInt(1, corso.getId());
+            try(ResultSet rs = sCorsiLaureaCorso.executeQuery()) {          
+                
+                while(rs.next()){
+                    result.add(getCorsoLaurea(rs.getInt("id")));
+                }
+            } 
+        }
+        
+        catch(SQLException ex){
+            throw new DataLayerException("Unable to load Corsi_Laurea by Corso", ex); 
+        }
+        
+        return result;      
+        
+    }
+    
+    @Override
+    public List<Corso> getCorsiPropedeuticiCorso(Corso corso) throws DataLayerException {
+        List<Corso> result = new ArrayList(); 
+        
+        try{     
+            sCorsiPropedeuticiCorso.setInt(1, corso.getId());
+            try(ResultSet rs = sCorsiPropedeuticiCorso.executeQuery()) {          
+                
+                while(rs.next()){
+                    result.add(getCorso(rs.getInt("id")));
+                }
+            } 
+        }
+        
+        catch(SQLException ex){
+            throw new DataLayerException("Unable to load Corsi Propedeutici by Corso", ex); 
+        }
+        
+        return result;      
+        
+    }
+    
+    @Override
+    public List<Corso> getCorsiMutuatiCorso(Corso corso) throws DataLayerException {
+        List<Corso> result = new ArrayList(); 
+        
+        try{     
+            sCorsiMutuatiCorso.setInt(1, corso.getId());
+            try(ResultSet rs = sCorsiMutuatiCorso.executeQuery()) {          
+                
+                while(rs.next()){
+                    result.add(getCorso(rs.getInt("id")));
+                }
+            } 
+        }
+        
+        catch(SQLException ex){
+            throw new DataLayerException("Unable to load Corsi Mutuati by Corso", ex); 
+        }
+        
+        return result;      
+        
+    }
+    
+    @Override
+    public List<Corso> getCorsiIntegratiCorso(Corso corso) throws DataLayerException {
+        List<Corso> result = new ArrayList(); 
+        
+        try{     
+            sCorsiIntegratiCorso.setInt(1, corso.getId());
+            try(ResultSet rs = sCorsiIntegratiCorso.executeQuery()) {          
+                
+                while(rs.next()){
+                    result.add(getCorso(rs.getInt("id")));
+                }
+            } 
+        }
+        
+        catch(SQLException ex){
+            throw new DataLayerException("Unable to load Corsi Integrati by Corso", ex); 
+        }
+        
+        return result;      
+        
+    }
+    
+    @Override
+    public List<Libro_Testo> getLibriTestoCorso(Corso corso) throws DataLayerException {
+        List<Libro_Testo> result = new ArrayList(); 
+        
+        try{     
+            sLibriTestoCorso.setInt(1, corso.getId());
+            try(ResultSet rs = sLibriTestoCorso.executeQuery()) {          
+                
+                while(rs.next()){
+                    result.add(getLibroTesto(rs.getInt("id")));
+                }
+            } 
+        }
+        
+        catch(SQLException ex){
+            throw new DataLayerException("Unable to load Libri_Testo by Corso", ex); 
+        }
+        
+        return result;      
+        
+    }
+    
+    @Override
+    public List<Materiale> getMaterialiCorso(Corso corso) throws DataLayerException {
+        List<Materiale> result = new ArrayList(); 
+        
+        try{     
+            sMaterialiCorso.setInt(1, corso.getId());
+            try(ResultSet rs = sMaterialiCorso.executeQuery()) {          
+                
+                while(rs.next()){
+                    result.add(getMateriale(rs.getInt("id")));
+                }
+            } 
+        }
+        
+        catch(SQLException ex){
+            throw new DataLayerException("Unable to load Materiali by Corso", ex); 
+        }
+        
+        return result;      
+        
+    }
+    
+    @Override
+    public List<Utente> getDocentiCorso(Corso corso) throws DataLayerException {
+        List<Utente> result = new ArrayList(); 
+        
+        try{     
+            sDocentiCorso.setInt(1, corso.getId());
+            try(ResultSet rs = sDocentiCorso.executeQuery()) {          
+                
+                while(rs.next()){
+                    result.add(getUtente(rs.getInt("id")));
+                }
+            } 
+        }
+        
+        catch(SQLException ex){
+            throw new DataLayerException("Unable to load Docenti by Corso", ex); 
+        }
+        
+        return result;      
+        
+    }
+    
+    @Override
+    public void storeUtenteById(Utente utente) throws DataLayerException {
+    
+        int key = utente.getId();
+        try {
+            
+            if(utente.getId() > 0) { //update
+                if(!utente.isDirty()) {
+                    return;
+                }
+            uUtenteById.setString(1, utente.getEmail());
+            uUtenteById.setString(2, utente.getPassword());
+            uUtenteById.setString(3, utente.getNome());
+            uUtenteById.setString(4, utente.getCognome());
+            uUtenteById.setInt(5, utente.getId());
+            uUtenteById.executeUpdate();
+            }
+            else { //insert
+                iUtente.setString(1, utente.getEmail());
+                iUtente.setString(2, utente.getPassword());
+                iUtente.setString(3, utente.getTipoUtente());
+                iUtente.setString(4, utente.getNome());
+                iUtente.setString(5, utente.getCognome());
+                
+                if(iUtente.executeUpdate() == 1) {
+                    
+                    try(ResultSet keys = iUtente.getGeneratedKeys()) {
+                        if(keys.next()) {
+                            key = keys.getInt(1);
+                        }
+                    }
+                    
+                }
+            }
+            if(key > 0) {
+                utente.copyFrom(getUtente(key));
+            }
+            utente.setDirty(false);
+        }
+        catch(SQLException ex) {
+            throw new DataLayerException("Unable to store Utente by id", ex);
+        }
+        
+    }
+    
+    @Override
+    public void storeUtenteByEmail(Utente utente) throws DataLayerException {
+    
+        int key = utente.getId();
+        try {
+            
+            if(utente.getId() > 0) { //update
+                if(!utente.isDirty()) {
+                    return;
+                }
+            uUtenteByEmail.setString(1, utente.getEmail());
+            uUtenteByEmail.setString(2, utente.getPassword());
+            uUtenteByEmail.setString(3, utente.getNome());
+            uUtenteByEmail.setString(4, utente.getCognome());
+            uUtenteByEmail.setString(5, utente.getEmail());
+            uUtenteByEmail.executeUpdate();
+            }
+            else { //insert
+                iUtente.setString(1, utente.getEmail());
+                iUtente.setString(2, utente.getPassword());
+                iUtente.setString(3, utente.getTipoUtente());
+                iUtente.setString(4, utente.getNome());
+                iUtente.setString(5, utente.getCognome());
+                
+                if(iUtente.executeUpdate() == 1) {
+                    
+                    try(ResultSet keys = iUtente.getGeneratedKeys()) {
+                        if(keys.next()) {
+                            key = keys.getInt(1);
+                        }
+                    }
+                    
+                }
+            }
+            if(key > 0) {
+                utente.copyFrom(getUtente(key));
+            }
+            utente.setDirty(false);
+        }
+        catch(SQLException ex) {
+            throw new DataLayerException("Unable to store Utente by email", ex);
+        }
+        
+    }
+    
+    @Override
+    public void storeCorso(Corso corso) throws DataLayerException {
+    
+        int key = corso.getId();
+        try {
+            
+            if(corso.getId() > 0) { //update
+                if(!corso.isDirty()) {
+                    return;
+                }
+            uCorsoByCodiceAnno.setString(1, corso.getSSD());
+            uCorsoByCodiceAnno.setInt(2, corso.getSemestre());
+            uCorsoByCodiceAnno.setString(3, corso.getLingua());
+            uCorsoByCodiceAnno.setString(4, corso.getPrerequisiti());
+            uCorsoByCodiceAnno.setString(5, corso.getObiettivi());
+            uCorsoByCodiceAnno.setString(6, corso.getModEsame());
+            uCorsoByCodiceAnno.setString(7, corso.getModInsegnamento());
+            uCorsoByCodiceAnno.setString(8, corso.getSillabo());
+            uCorsoByCodiceAnno.setString(9, corso.getLinkHomepageCorso());
+            uCorsoByCodiceAnno.setString(10, corso.getLinkRisorseEsterne());
+            uCorsoByCodiceAnno.setString(11, corso.getLinkForum());
+            uCorsoByCodiceAnno.setString(12, corso.getNote());
+            uCorsoByCodiceAnno.setString(13, corso.getCodice());
+            uCorsoByCodiceAnno.setString(14, corso.getAnno());
+            uCorsoByCodiceAnno.executeUpdate();
+            }
+            else { //insert
+                iCorsoByCodiceAnno.setString(1, corso.getCodice());
+                iCorsoByCodiceAnno.setString(1, corso.getAnno());
+                iCorsoByCodiceAnno.setString(1, corso.getNome());
+                
+                if(iCorsoByCodiceAnno.executeUpdate() == 1) {
+                    
+                    try(ResultSet keys = iCorsoByCodiceAnno.getGeneratedKeys()) {
+                        if(keys.next()) {
+                            key = keys.getInt(1);
+                        }
+                    }
+                    
+                }
+            }
+            if(key > 0) {
+                corso.copyFrom(getCorso(key));
+            }
+            corso.setDirty(false);
+        }
+        catch(SQLException ex) {
+            throw new DataLayerException("Unable to store Corso by codice & anno", ex);
+        }
+        
+    }
+    
+    @Override
+    public void destroy() {
+        
+        try {
+            sCorso.close();
+            sCorsoById.close();
+            sCorsoByCodice.close();
+            sCorsoByAnno.close();
+            sCorsoByCodiceAnno.close();
+            uCorsoByCodiceAnno.close();
+            iCorsoByCodiceAnno.close();
+            sUtente.close();
+            sUtenteById.close();
+            sUtenteByEmail.close();
+            uUtenteById.close();
+            uUtenteByEmail.close();
+            iUtente.close();
+            sCorsoLaurea.close();
+            sCorsoLaureaById.close();
+            sCorsoLaureaByNome.close();
+            sLibriTesto.close();
+            sLibroTestoById.close();
+            sMateriali.close();
+            sMaterialeById.close();
+            sDocenti.close();
+            sDocenteById.close();
+            sDocenteByEmail.close();
+            sDocentiCorso.close();
+            sCorsiLaureaCorso.close();
+            sCorsiPropedeuticiCorso.close();
+            sCorsiMutuatiCorso.close();
+            sCorsiIntegratiCorso.close();
+            sLibriTestoCorso.close();
+            sMaterialiCorso.close();    
+        }
+        
+        catch(SQLException ex) {
+            //
+        }
+        
+        super.destroy();
+        
+    }
 }

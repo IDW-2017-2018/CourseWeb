@@ -60,6 +60,7 @@ public interface Corso {
     void setCorsiIntegrati(List<Corso> corsi_integrati); 
     void setMateriali(List<Materiale> materiali);
     
+    void copyFrom(Corso corso) throws DataLayerException;
     void setDirty(boolean dirty); 
     boolean isDirty();    
 }
