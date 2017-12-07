@@ -25,7 +25,7 @@ import java.io.FileNotFoundException;
  */
 public class SecurityLayer {
  
-// SESSION SECURITY    
+// ---------- SESSION SECURITY ----------    
     
     
     // controlli di sicurezza sulla sessione. se è valida, la aggiorna e la restituisce, altrimenti la cancella e ritorna null
@@ -99,7 +99,7 @@ public class SecurityLayer {
         }
     }
 
-// DATA SECURITY
+// ---------- DATA SECURITY ----------
 
     // questa funzione aggiunge un \ davanti a tutti i caratteri pericolosi usati per eseguire SQL injection
     // attraverso i parametri delle form    
@@ -121,7 +121,7 @@ public class SecurityLayer {
         }
     }
 
-// CONNECTION SECURITY
+// ---------- CONNECTION SECURITY ----------
     
     // questa funzione verifica se il protocollo https è attivo   
     public static boolean checkHttps(HttpServletRequest request){
@@ -156,55 +156,73 @@ public class SecurityLayer {
         }
     }
 
-// HASHING
+// ---------- HASHING ----------
     
     // fa l'hash di una stringa. utilizzato per le password
-    protected static String hashString(String inputString, String hashAlgorithm) throws NoSuchAlgorithmException {
+    protected static String hashString(String inputString, String hashAlgorithm) throws SecurityLayerException {
         String result = null;
         if (inputString == null || hashAlgorithm == null){
             return null;
         }
+        try {
+            // oggetto digest per hashAlgorithm. è l'oggetto che converte la stringa in hash
+            MessageDigest digest = MessageDigest.getInstance(hashAlgorithm);
+            digest.update(inputString.getBytes(), 0, inputString.length());
+            // converte il valore digest del messaggio in base 16
+            BigInteger hashInteger = new BigInteger (1, digest.digest());
+            // numbero di BigInteger convertito in stringa esadecimale
+            result = hashInteger.toString(16);
         
-        // oggetto digest per hashAlgorithm. è l'oggetto che converte la stringa in hash
-        MessageDigest digest = MessageDigest.getInstance(hashAlgorithm);
-        digest.update(inputString.getBytes(), 0, inputString.length());
-        // converte il valore digest del messaggio in base 16
-        BigInteger hashInteger = new BigInteger (1, digest.digest());
-        // numbero di BigInteger convertito in stringa esadecimale
-        result = hashInteger.toString(16);
+        } catch(NoSuchAlgorithmException ex){
+            throw new SecurityLayerException("Invalid hash algorithm", ex);
+        }
+        
         return result;
     }
     
     // fa l'md5 della stringa in input. il controller chiamerà questa funzione, non la versione protected ovviamente
-    public static String md5String(String inputString) throws NoSuchAlgorithmException {
+    public static String md5String(String inputString) throws SecurityLayerException {
         return hashString(inputString , "MD5"); 
     }
     
     // fa l'hash di un file in input
-    protected static String hashFile(File file, String hashAlgorithm) throws FileNotFoundException, NoSuchAlgorithmException, IOException{
+    protected static String hashFile(File file, String hashAlgorithm) throws SecurityLayerException {
         String result = null;
         if (file == null || hashAlgorithm == null){
             return null;
         }
-        // apro filestream su un file
-        FileInputStream inputFile = new FileInputStream (file);
-        // oggetto messagedigest per l'algoritmo hashAlgorithm
-        MessageDigest digest = MessageDigest.getInstance(hashAlgorithm);
-        // leggo il file
-        byte[] byteArray = new byte[1024];
-        int read = 0;
-        while ((read = inputFile.read(byteArray)) != -1) {
-            digest.update(byteArray, 0, read);
+        
+        try {
+            // apro filestream su un file
+            FileInputStream inputFile = new FileInputStream (file);
+            // oggetto messagedigest per l'algoritmo hashAlgorithm
+            MessageDigest digest = MessageDigest.getInstance(hashAlgorithm);
+            // leggo il file
+            byte[] byteArray = new byte[1024];
+            int read = 0;
+            while ((read = inputFile.read(byteArray)) != -1) {
+                digest.update(byteArray, 0, read);
+            }
+            inputFile.close();
+            // converto messaggio digest in base 16
+            BigInteger hashInteger = new BigInteger(1, digest.digest());
+            result = hashInteger.toString(16);
+            
+        } catch(FileNotFoundException ex1) {
+            throw new SecurityLayerException("File not found", ex1);
+        
+        } catch(NoSuchAlgorithmException ex2) {
+            throw new SecurityLayerException("Invalid hash algorithm", ex2);
+        
+        } catch(IOException ex3) {
+            throw new SecurityLayerException(ex3);
         }
-        inputFile.close();
-        // converto messaggio digest in base 16
-        BigInteger hashInteger = new BigInteger(1, digest.digest());
-        result = hashInteger.toString(16);
+        
         return result;
     }
     
     // versione pubblica che verrà utilizzata dal controller per fare l'md5 di un file
-    public static String md5File(File file) throws FileNotFoundException, IOException, NoSuchAlgorithmException{
+    public static String md5File(File file) throws SecurityLayerException {
         return hashFile(file, "MD5");
     }
 }
