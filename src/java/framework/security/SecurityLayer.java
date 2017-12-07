@@ -1,23 +1,28 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe SecurityLayer
+ * 
+ * Classe che si occupa della sicurezza dei dati, della sessione, della connessione e dell'hashing
+ * di stringhe e file
  */
 package framework.security;
 
 import java.io.IOException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import java.util.Calendar;
+
+import java.math.BigInteger;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
 
 /**
  *
@@ -148,7 +153,7 @@ public class SecurityLayer {
         } catch(IOException ex1) {
             try{
                 // in caso di problemi tentiamo prima di risolvere un errore http standard
-                response.sendError( response.SC_INTERNAL_SERVER_ERROR , "Cannot redirect to HTTPS, blocking request");    
+                response.sendError(response.SC_INTERNAL_SERVER_ERROR , "Cannot redirect to HTTPS, blocking request");    
             } catch(IOException ex2) {
                 // altrimenti generiamo un'eccezione
                 throw new ServletException("Cannot redirect to HTTPS!");
@@ -226,4 +231,3 @@ public class SecurityLayer {
         return hashFile(file, "MD5");
     }
 }
-    
