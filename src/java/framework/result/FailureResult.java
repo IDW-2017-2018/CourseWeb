@@ -60,7 +60,7 @@ public class FailureResult {
         } catch(Exception ex1){
             
             //se qualcosa va male inviamo un errore http 
-            message += ". The following exception was generated while trying to display the error page " + ex1.getMessage(); 
+            message += ". The following exception was generated while trying to display the error page: " + ex1.getMessage(); 
             try {
                 
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, message);
