@@ -155,6 +155,8 @@ public class SecurityLayer {
             }
         }
     }
+
+// HASHING
     
     // fa l'hash di una stringa. utilizzato per le password
     protected static String hashString(String inputString, String hashAlgorithm) throws NoSuchAlgorithmException {
