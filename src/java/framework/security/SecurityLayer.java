@@ -131,7 +131,6 @@ public class SecurityLayer {
     // questa funzione verifica se il protocollo https è attivo   
     public static boolean checkHttps(HttpServletRequest request){
         return request.isSecure();
-    // metodo hand made che funziona solo se il server trasmette gli header corretti
     }
     
     // questa funzione ridirige il browser sullo stesso indirizzo attuale ma con protocollo https
@@ -167,7 +166,7 @@ public class SecurityLayer {
     protected static String hashString(String inputString, String hashAlgorithm) throws SecurityLayerException {
         String result = null;
         if (inputString == null || hashAlgorithm == null){
-            return null;
+            throw new NullPointerException("Cannot hash, encountered a null string");
         }
         try {
             // oggetto digest per hashAlgorithm. è l'oggetto che converte la stringa in hash
@@ -194,7 +193,7 @@ public class SecurityLayer {
     protected static String hashFile(File file, String hashAlgorithm) throws SecurityLayerException {
         String result = null;
         if (file == null || hashAlgorithm == null){
-            return null;
+            throw new NullPointerException("Cannot hash, null encountered");
         }
         
         try {
