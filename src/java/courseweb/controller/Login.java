@@ -45,7 +45,7 @@ public class Login extends CourseWebBaseController {
             SecurityLayer.redirectToHttps(request, response);
         } else {
             
-            Locale l = Locale.getDefault();
+            Locale l = request.getLocale();
 
             if(l.getLanguage().equals("it")){
                 //Carichiamo la pagina in italiano di default
@@ -84,7 +84,7 @@ public class Login extends CourseWebBaseController {
             String password = request.getParameter("password");
             Utente utente;
             
-            if((email != null) && (password != null) && (password.equals("")) && (email.equals(""))) {
+            if((email != null) && (password != null) && (!password.equals("")) && (!email.equals(""))) {
                 utente = ((CourseWebDataLayer)request.getAttribute("datalayer")).getUtente(email);
                 
                 if(utente == null) {
