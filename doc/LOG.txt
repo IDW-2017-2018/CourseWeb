@@ -1,0 +1,358 @@
+
+LOG
+
+============================================================
+============================================================
+
+  date : 	29 settembre 2017
+author : 	Riccardo
+
+commit :	- creazione progetto da IDE Netbeans + push Github
+
+  file :	+ build.xml
+			+ lib/CopyLibs/org-netbeans-modules-java-j2seproject-copylibstask.jar
+			+ lib/freemarker.jar
+			+ lib/javaee-endorsed-api-7.0/javaee-doc-api.jar
+			+ lib/javaee-endorsed-api-7.0/javax.annotation-api.jar
+			+ lib/javaee-endorsed-api-7.0/javax.xml.soap-api.jar
+			+ lib/javaee-endorsed-api-7.0/jaxb-api-osgi.jar
+			+ lib/javaee-endorsed-api-7.0/jaxws-api.jar
+			+ lib/javaee-endorsed-api-7.0/jsr181-api.jar
+			+ lib/nblibraries.properties
+			+ nbproject/ant-deploy.xml
+			+ nbproject/build-impl.xml
+			+ nbproject/genfiles.properties
+			+ nbproject/project.properties
+			+ nbproject/project.xml
+			+ src/conf/MANIFEST.MF
+			+ web/META-INF/context.xml
+			+ web/index.html
+			
+------------------------------------------------------------
+
+  date : 	29 settembre 2017
+author : 	Riccardo
+
+commit :	- creazione progetto da IDE Netbeans + push Github
+
+ file :		+ .gitignore
+			• nbproject/genfiles.properties
+			• nbproject/project.properties
+			• nbproject/project.xml
+
+------------------------------------------------------------
+
+  date : 	1 Ottobre 2017
+author : 	Riccardo
+
+commit :	- creazione markdown Github di presentazione del progetto
+
+ file :		+ README.md
+					
+============================================================
+============================================================
+
+  date : 	2 Ottobre 2017
+author : 	Riccardo
+
+commit :	- modifica markdown Github di presentazione del progetto
+			- aggiunta file (freemarker, mysqlconnector, ecc...)
+
+ file :		+ README.md
+			• nbproject/project.properties
+			+ web/WEB-INF/lib/freemarker.jar
+			+ web/WEB-INF/lib/mysql-connector-java-5.1.44-bin.jar
+ 			+ web/WEB-INF/web.xml
+ 			- web/index.html
+						
+------------------------------------------------------------
+
+  date : 	2 Ottobre 2017
+author : 	Riccardo
+
+commit :	- modifica markdown Github di presentazione del progetto
+
+ file :		• README.md
+
+------------------------------------------------------------
+
+  date : 	2 Ottobre 2017
+author : 	Riccardo
+
+commit :	- aggiunta file specifica progetto
+
+ file :		+ doc/Specifiche_CourseWeb.pdf
+
+============================================================
+============================================================
+
+  date : 	3 Ottobre 2017
+author : 	Flavio
+
+commit :	- creazione e aggiunta file database
+
+ file :		• .gitignore
+			+ courseweb.sql
+			+ lib/mysql-connector-java-5.1.44-bin.jar
+			• nbproject/build-impl.xml
+			• nbproject/genfiles.properties
+			• nbproject/project.properties
+			• nbproject/project.xml
+
+------------------------------------------------------------
+
+  date : 	3 Ottobre 2017
+author : 	Flavio
+
+commit :	- aggiunta tag <resource-ref> in web.xml
+
+ file :		• web/WEB-INF/web.xml
+
+------------------------------------------------------------
+
+  date : 	3 Ottobre 2017
+author : 	Flavio
+
+commit :	- aggiunta tag <resource> in context.xml
+
+ file :		• web/META-INF/context.xml
+
+------------------------------------------------------------
+
+  date : 	3 Ottobre 2017
+author : 	Riccardo
+
+commit :	- creazione Interfaccia Utente
+
+ file :		+ src/java/courseweb/data/model/Utente.java
+
+------------------------------------------------------------
+
+  date : 	3 Ottobre 2017
+author : 	Riccardo
+
+commit :	- creazione DataLayerException
+			- creazione Package framework/data
+
+ file :		+ src/java/framework/data/DataLayerException.java
+
+------------------------------------------------------------
+
+  date : 	3 Ottobre 2017
+author : 	Flavio
+
+commit :	- creazione Interfaccia Corso
+
+ file :		+ src/java/courseweb/data/model/Corso.java
+
+------------------------------------------------------------
+
+  date : 	3 Ottobre 2017
+author : 	Flavio
+
+commit :	- creazione DataLayer
+			- creazione CourseWebDataLayer
+			- modifica dump database
+
+ file :		• courseweb.sql
+			+ src/java/courseweb/data/model/CourseWebDataLayer.java
+			+ src/java/framework/data/DataLayer.java
+
+------------------------------------------------------------
+
+  date : 	3 Ottobre 2017
+author : 	Riccardo
+
+commit :	- modifica CourseWebDataLayer
+
+ file :		• src/java/courseweb/data/model/CourseWebDataLayer.java
+
+------------------------------------------------------------
+
+  date : 	3 Ottobre 2017
+author : 	Riccardo
+
+commit :	- creazione Interfaccia Corso_laurea
+
+ file :		+ src/java/courseweb/data/model/Corso_laurea.java
+
+------------------------------------------------------------
+
+  date : 	3 Ottobre 2017
+author : 	Flavio
+
+commit :	- modifica nome Interfaccia Corso_Laurea
+
+ file :		+ src/java/courseweb/data/model/Corso_Laurea.java
+
+------------------------------------------------------------
+
+  date : 	3 Ottobre 2017
+author : 	Riccardo
+
+commit :	- fix modifica nome Interfaccia Corso_Laurea
+
+ file :		- src/java/courseweb/data/model/Corso_Laurea.java
+ 			• src/java/framework/data/DataLayerException.java
+
+------------------------------------------------------------
+
+  date : 	3 Ottobre 2017
+author : 	Riccardo
+
+commit :	- fix modifica nome Interfaccia Corso_Laurea
+
+ file :		+ src/java/courseweb/data/model/Corso_Laurea.java
+
+------------------------------------------------------------
+
+  date : 	3 Ottobre 2017
+author : 	Riccardo
+
+commit :	- fix modifica nome Interfaccia Corso_Laurea
+
+ file :		- src/java/courseweb/data/model/Corso_laurea.java
+
+------------------------------------------------------------
+
+  date : 	3 Ottobre 2017
+author : 	Riccardo
+
+commit :	- fix modifica nome Interfaccia Corso_Laurea
+
+ file :		- src/java/courseweb/data/model/Corso_Laurea.java
+
+------------------------------------------------------------
+
+  date : 	3 Ottobre 2017
+author : 	Riccardo
+
+commit :	- fix modifica nome Interfaccia Corso_Laurea
+
+ file :		+ src/java/courseweb/data/model/Corso_Laurea.java
+
+============================================================
+============================================================
+
+  date : 	4 Ottobre 2017
+author : 	Valentino
+
+commit :	- creazione package courseweb.data.impl
+			- creazione classe UtenteImpl in courseweb/data/impl
+
+ file :		+ src/java/courseweb/data/impl/UtenteImpl.java
+
+------------------------------------------------------------
+
+  date : 	4 Ottobre 2017
+author : 	Valentino
+
+commit :	- creazione classe DataLayerMySqlImpl in framework/data
+
+ file :		+ src/java/framework/data/DataLayerMySqlImpl.java
+
+------------------------------------------------------------
+
+  date : 	4 Ottobre 2017
+author : 	Valentino
+
+commit :	- modifica classe Utente.java in courseweb/data/model
+
+ file :		• src/java/courseweb/data/model/Utente.java
+
+------------------------------------------------------------
+
+  date : 	4 Ottobre 2017
+author : 	Valentino
+
+commit :	- modifica classe UtenteImpl.java in courseweb/data/impl
+
+ file :		• src/java/courseweb/data/impl/UtenteImpl.java
+
+------------------------------------------------------------
+
+  date : 	4 Ottobre 2017
+author : 	Flavio
+
+commit :	- modifica Interfaccia Corso
+			- modifica classe CorsoImpl
+
+ file :		+ src/java/courseweb/data/impl/CorsoImpl.java
+			• src/java/courseweb/data/model/Corso.java
+
+------------------------------------------------------------
+
+  date : 	4 Ottobre 2017
+author : 	Valentino
+
+commit :	- creazione classe CourseWebDataLayerMySqlImpl.java in courseweb.data.impl
+
+ file :		• nbproject/project.properties
+			+ src/java/courseweb/data/impl/CourseWebDataLayerMySqlImpl.java
+
+------------------------------------------------------------
+
+  date : 	4 Ottobre 2017
+author : 	Riccardo
+
+commit :	- creazione classe Corso_LaureaImpl
+			- modifica Interfaccia Corso_Laurea
+			- modifica DataLayerMySqlImpl
+
+ file :		+ src/java/courseweb/data/impl/Corso_LaureaImpl.java
+			• src/java/courseweb/data/model/Corso_Laurea.java
+			• src/java/framework/data/DataLayerMySqlImpl.java
+
+------------------------------------------------------------
+
+  date : 	4 Ottobre 2017
+author : 	Riccardo
+
+commit :	- aggiunta metodi setDirty(), isDirty()
+
+			• src/java/courseweb/data/impl/CorsoImpl.java
+			• src/java/courseweb/data/impl/Corso_LaureaImpl.java
+			• src/java/courseweb/data/impl/UtenteImpl.java
+			• src/java/courseweb/data/model/Corso.java
+			• src/java/courseweb/data/model/Corso_Laurea.java
+			• src/java/courseweb/data/model/Utente.java
+
+------------------------------------------------------------
+
+  date : 	4 Ottobre 2017
+author : 	Flavio
+
+commit :	- modifica dump database
+
+			• courseweb.sql
+			• nbproject/project.properties
+
+------------------------------------------------------------
+
+  date : 	4 Ottobre 2017
+author : 	Valentino
+
+commit :	- modifica CorsoImpl in courseweb.data.impl
+			- creazione LibroTestoImpl in courseweb.data.impl
+			- modifica Corso in coursewen.data.model 
+			- modifica CourseWebDataLayer in courseweb.data.model
+			- creazione LibroTesto in courseweb.data.model
+
+			• src/java/courseweb/data/impl/CorsoImpl.java
+			+ src/java/courseweb/data/impl/LibroTestoImpl.java
+			• src/java/courseweb/data/model/Corso.java
+			• src/java/courseweb/data/model/CourseWebDataLayer.java
+			+ src/java/courseweb/data/model/LibroTesto.java
+
+============================================================
+============================================================
+
+  date : 	6 Ottobre 2017
+author : 	Riccardo
+
+commit :	- modifica classe LibroTestoImpl
+
+			• src/java/courseweb/data/impl/LibroTestoImpl.java
+
+
+CONTINUARE DA 6 OTTOBRE VALENTINO "creazione Materiale in data.model ..."
