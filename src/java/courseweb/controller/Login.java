@@ -1,5 +1,5 @@
 /*
- * 
+ * Classe controller Login
  */
 package courseweb.controller;
 
@@ -37,6 +37,7 @@ public class Login extends CourseWebBaseController {
         
     }
     
+    //Azione compiuta al caricamento della pagina
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException, ServletException {       
         
         boolean secure = SecurityLayer.checkHttps(request); 
@@ -73,6 +74,7 @@ public class Login extends CourseWebBaseController {
         
     }
     
+    //Azione compiuta al login di un utente registrato
     private void action_login(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         try {
@@ -162,6 +164,7 @@ public class Login extends CourseWebBaseController {
         }
     }
     
+    //Azione compiuta al login di un utente anonimo
     private void action_login_guest(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         try {
