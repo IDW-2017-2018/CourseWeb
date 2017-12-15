@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-/* Rivedere antiResourceLocking */
-<Context antiResourceLocking="true" path="/CourseWeb">
+<!-- Rivedere antiResourceLocking -->
+<Context antiResourceLocking="true" path="/courseweb">
     <Resource
         name="jdbc/courseweb" 
         type="javax.sql.DataSource"

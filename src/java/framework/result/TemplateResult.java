@@ -103,7 +103,7 @@ public class TemplateResult {
             filler.fillDataModel(default_data_model);
         }
         
-        default_data_model.put("outline_tpl", context.getInitParameter("view.outline_template")); 
+        default_data_model.put("outline_tpl", context.getInitParameter("view.outline_template_eng")); 
         
         //aggiungiamo dati presi da web.xml del tipo view.data.*
         Map init_tpl_data = new HashMap(); 
@@ -132,6 +132,10 @@ public class TemplateResult {
             
             datamodel.put(attributename, request.getAttribute(attributename)); 
         }
+        
+        if(request.getAttribute("lang").equals("ita")){
+            datamodel.put("outline_tpl", context.getInitParameter("view.outline_template_ita"));
+        } 
         
         return datamodel; 
         
