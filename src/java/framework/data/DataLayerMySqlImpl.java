@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import javax.naming.InitialContext;
 
 /**
  *
@@ -30,11 +31,18 @@ public class DataLayerMySqlImpl implements DataLayer {
     public void init() throws DataLayerException {
         
         try{
+            InitialContext ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/courseweb");
+            
             //database connection
             connection = datasource.getConnection();
         } 
-        catch (SQLException sqlex) {
-            throw new DataLayerException("Error initializing data layer", sqlex);
+        catch (SQLException ex1) {
+            throw new DataLayerException("Error initializing data layer", ex1);
+        }
+        
+        catch (NamingException ex2) {
+            throw new DataLayerException("Error initializing data layer", ex2);
         }
         
     }
