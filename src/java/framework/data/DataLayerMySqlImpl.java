@@ -32,7 +32,7 @@ public class DataLayerMySqlImpl implements DataLayer {
         
         try{
             InitialContext ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/courseweb");
+            datasource = (DataSource) ctx.lookup("java:comp/env/jdbc/courseweb");
             
             //database connection
             connection = datasource.getConnection();
