@@ -1,0 +1,120 @@
+
+/* ########## LOGIN FORM ########## */
+
+.field {
+
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0px 25px 0px; /*top right bottom left*/
+    display: inline-block;
+    color: black;
+    font-family: Arial, Verdana, sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+	outline: none;
+    background-color: #d5d5d5;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.field:focus {
+
+	background-color: black;
+	border: 1px solid white;
+	color: white;
+
+}
+
+.buttoncontainer {
+
+	width: 60%; 
+	margin: auto;
+
+}
+
+.loginbutton {
+
+    width: 100%;
+    background-color: #01d475;
+    color: black;
+    font-weight: bold;
+    padding: 15px 20px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.loginbutton:hover {
+
+    background-color: #ff00ff;
+
+}
+
+.loginbutton:focus {
+
+    outline: none;
+
+}
+
+.label {
+
+	font-family: Arial, Verdana, sans-serif;
+	color: white;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.login {
+
+    border-radius: 10px;
+    background-color: black;
+    padding: 50px 0px;
+    margin: 100px auto;
+    width: 750px;
+
+}
+
+.formcontainer {
+
+	width: 80%;
+	margin: auto;
+
+}
+
+.title {
+
+	color: white;
+	font-family: Arial, Verdana, sans-serif;
+	font-weight: normal;
+	text-align: center;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.divider {
+
+	margin: 50px 0px 50px 0px; /*top right bottom left*/
+
+}
+
+@media screen and (max-width: 800px) { 
+	
+	.login {
+        width: 90%;
+    }
+
+}
+
+
+

@@ -35,7 +35,7 @@ author : 	Riccardo
 
 commit :	- creazione progetto da IDE Netbeans + push Github
 
- file :		+ .gitignore
+  file :	+ .gitignore
 			• nbproject/genfiles.properties
 			• nbproject/project.properties
 			• nbproject/project.xml
@@ -47,7 +47,7 @@ author : 	Riccardo
 
 commit :	- creazione markdown Github di presentazione del progetto
 
- file :		+ README.md
+  file :	+ README.md
 					
 ============================================================
 ============================================================
@@ -58,7 +58,7 @@ author : 	Riccardo
 commit :	- modifica markdown Github di presentazione del progetto
 			- aggiunta file (freemarker, mysqlconnector, ecc...)
 
- file :		+ README.md
+  file :	+ README.md
 			• nbproject/project.properties
 			+ web/WEB-INF/lib/freemarker.jar
 			+ web/WEB-INF/lib/mysql-connector-java-5.1.44-bin.jar
@@ -72,7 +72,7 @@ author : 	Riccardo
 
 commit :	- modifica markdown Github di presentazione del progetto
 
- file :		• README.md
+  file :	• README.md
 
 ------------------------------------------------------------
 
@@ -81,7 +81,7 @@ author : 	Riccardo
 
 commit :	- aggiunta file specifica progetto
 
- file :		+ doc/Specifiche_CourseWeb.pdf
+  file :	+ doc/Specifiche_CourseWeb.pdf
 
 ============================================================
 ============================================================
@@ -91,7 +91,7 @@ author : 	Flavio
 
 commit :	- creazione e aggiunta file database
 
- file :		• .gitignore
+  file :	• .gitignore
 			+ courseweb.sql
 			+ lib/mysql-connector-java-5.1.44-bin.jar
 			• nbproject/build-impl.xml
@@ -106,7 +106,7 @@ author : 	Flavio
 
 commit :	- aggiunta tag <resource-ref> in web.xml
 
- file :		• web/WEB-INF/web.xml
+  file :	• web/WEB-INF/web.xml
 
 ------------------------------------------------------------
 
@@ -115,7 +115,7 @@ author : 	Flavio
 
 commit :	- aggiunta tag <resource> in context.xml
 
- file :		• web/META-INF/context.xml
+  file :	• web/META-INF/context.xml
 
 ------------------------------------------------------------
 
@@ -124,7 +124,7 @@ author : 	Riccardo
 
 commit :	- creazione Interfaccia Utente
 
- file :		+ src/java/courseweb/data/model/Utente.java
+  file :	+ src/java/courseweb/data/model/Utente.java
 
 ------------------------------------------------------------
 
@@ -134,7 +134,7 @@ author : 	Riccardo
 commit :	- creazione DataLayerException
 			- creazione Package framework/data
 
- file :		+ src/java/framework/data/DataLayerException.java
+  file :	+ src/java/framework/data/DataLayerException.java
 
 ------------------------------------------------------------
 
@@ -143,7 +143,7 @@ author : 	Flavio
 
 commit :	- creazione Interfaccia Corso
 
- file :		+ src/java/courseweb/data/model/Corso.java
+  file :	+ src/java/courseweb/data/model/Corso.java
 
 ------------------------------------------------------------
 
@@ -154,7 +154,7 @@ commit :	- creazione DataLayer
 			- creazione CourseWebDataLayer
 			- modifica dump database
 
- file :		• courseweb.sql
+  file :	• courseweb.sql
 			+ src/java/courseweb/data/model/CourseWebDataLayer.java
 			+ src/java/framework/data/DataLayer.java
 
@@ -165,7 +165,7 @@ author : 	Riccardo
 
 commit :	- modifica CourseWebDataLayer
 
- file :		• src/java/courseweb/data/model/CourseWebDataLayer.java
+  file :	• src/java/courseweb/data/model/CourseWebDataLayer.java
 
 ------------------------------------------------------------
 
@@ -174,7 +174,7 @@ author : 	Riccardo
 
 commit :	- creazione Interfaccia Corso_laurea
 
- file :		+ src/java/courseweb/data/model/Corso_laurea.java
+  file :	+ src/java/courseweb/data/model/Corso_laurea.java
 
 ------------------------------------------------------------
 
@@ -183,7 +183,7 @@ author : 	Flavio
 
 commit :	- modifica nome Interfaccia Corso_Laurea
 
- file :		+ src/java/courseweb/data/model/Corso_Laurea.java
+  file :	+ src/java/courseweb/data/model/Corso_Laurea.java
 
 ------------------------------------------------------------
 
@@ -192,7 +192,7 @@ author : 	Riccardo
 
 commit :	- fix modifica nome Interfaccia Corso_Laurea
 
- file :		- src/java/courseweb/data/model/Corso_Laurea.java
+  file :	- src/java/courseweb/data/model/Corso_Laurea.java
  			• src/java/framework/data/DataLayerException.java
 
 ------------------------------------------------------------
@@ -202,7 +202,7 @@ author : 	Riccardo
 
 commit :	- fix modifica nome Interfaccia Corso_Laurea
 
- file :		+ src/java/courseweb/data/model/Corso_Laurea.java
+  file :	+ src/java/courseweb/data/model/Corso_Laurea.java
 
 ------------------------------------------------------------
 
@@ -211,7 +211,7 @@ author : 	Riccardo
 
 commit :	- fix modifica nome Interfaccia Corso_Laurea
 
- file :		- src/java/courseweb/data/model/Corso_laurea.java
+  file :	- src/java/courseweb/data/model/Corso_laurea.java
 
 ------------------------------------------------------------
 
@@ -220,7 +220,7 @@ author : 	Riccardo
 
 commit :	- fix modifica nome Interfaccia Corso_Laurea
 
- file :		- src/java/courseweb/data/model/Corso_Laurea.java
+  file :	- src/java/courseweb/data/model/Corso_Laurea.java
 
 ------------------------------------------------------------
 
@@ -229,7 +229,7 @@ author : 	Riccardo
 
 commit :	- fix modifica nome Interfaccia Corso_Laurea
 
- file :		+ src/java/courseweb/data/model/Corso_Laurea.java
+  file :	+ src/java/courseweb/data/model/Corso_Laurea.java
 
 ============================================================
 ============================================================
@@ -240,7 +240,7 @@ author : 	Valentino
 commit :	- creazione package courseweb.data.impl
 			- creazione classe UtenteImpl in courseweb/data/impl
 
- file :		+ src/java/courseweb/data/impl/UtenteImpl.java
+  file :	+ src/java/courseweb/data/impl/UtenteImpl.java
 
 ------------------------------------------------------------
 
@@ -249,7 +249,7 @@ author : 	Valentino
 
 commit :	- creazione classe DataLayerMySqlImpl in framework/data
 
- file :		+ src/java/framework/data/DataLayerMySqlImpl.java
+  file :	+ src/java/framework/data/DataLayerMySqlImpl.java
 
 ------------------------------------------------------------
 
@@ -258,7 +258,7 @@ author : 	Valentino
 
 commit :	- modifica classe Utente.java in courseweb/data/model
 
- file :		• src/java/courseweb/data/model/Utente.java
+  file :	• src/java/courseweb/data/model/Utente.java
 
 ------------------------------------------------------------
 
@@ -267,7 +267,7 @@ author : 	Valentino
 
 commit :	- modifica classe UtenteImpl.java in courseweb/data/impl
 
- file :		• src/java/courseweb/data/impl/UtenteImpl.java
+  file :	• src/java/courseweb/data/impl/UtenteImpl.java
 
 ------------------------------------------------------------
 
@@ -277,7 +277,7 @@ author : 	Flavio
 commit :	- modifica Interfaccia Corso
 			- modifica classe CorsoImpl
 
- file :		+ src/java/courseweb/data/impl/CorsoImpl.java
+  file :	+ src/java/courseweb/data/impl/CorsoImpl.java
 			• src/java/courseweb/data/model/Corso.java
 
 ------------------------------------------------------------
@@ -287,7 +287,7 @@ author : 	Valentino
 
 commit :	- creazione classe CourseWebDataLayerMySqlImpl.java in courseweb.data.impl
 
- file :		• nbproject/project.properties
+  file :	• nbproject/project.properties
 			+ src/java/courseweb/data/impl/CourseWebDataLayerMySqlImpl.java
 
 ------------------------------------------------------------
@@ -299,7 +299,7 @@ commit :	- creazione classe Corso_LaureaImpl
 			- modifica Interfaccia Corso_Laurea
 			- modifica DataLayerMySqlImpl
 
- file :		+ src/java/courseweb/data/impl/Corso_LaureaImpl.java
+  file :	+ src/java/courseweb/data/impl/Corso_LaureaImpl.java
 			• src/java/courseweb/data/model/Corso_Laurea.java
 			• src/java/framework/data/DataLayerMySqlImpl.java
 
@@ -310,7 +310,7 @@ author : 	Riccardo
 
 commit :	- aggiunta metodi setDirty(), isDirty()
 
-			• src/java/courseweb/data/impl/CorsoImpl.java
+  file :	• src/java/courseweb/data/impl/CorsoImpl.java
 			• src/java/courseweb/data/impl/Corso_LaureaImpl.java
 			• src/java/courseweb/data/impl/UtenteImpl.java
 			• src/java/courseweb/data/model/Corso.java
@@ -324,7 +324,7 @@ author : 	Flavio
 
 commit :	- modifica dump database
 
-			• courseweb.sql
+  file :	• courseweb.sql
 			• nbproject/project.properties
 
 ------------------------------------------------------------
@@ -338,7 +338,7 @@ commit :	- modifica CorsoImpl in courseweb.data.impl
 			- modifica CourseWebDataLayer in courseweb.data.model
 			- creazione LibroTesto in courseweb.data.model
 
-			• src/java/courseweb/data/impl/CorsoImpl.java
+  file :	• src/java/courseweb/data/impl/CorsoImpl.java
 			+ src/java/courseweb/data/impl/LibroTestoImpl.java
 			• src/java/courseweb/data/model/Corso.java
 			• src/java/courseweb/data/model/CourseWebDataLayer.java
@@ -352,7 +352,135 @@ author : 	Riccardo
 
 commit :	- modifica classe LibroTestoImpl
 
-			• src/java/courseweb/data/impl/LibroTestoImpl.java
+  file :	• src/java/courseweb/data/impl/LibroTestoImpl.java
 
+------------------------------------------------------------
 
-CONTINUARE DA 6 OTTOBRE VALENTINO "creazione Materiale in data.model ..."
+  date : 	6 Ottobre 2017
+author : 	Valentino
+
+commit :	- creazione MaterialeImpl in data.impl
+			- modifica Corso in data.model
+
+  file :	+ src/java/courseweb/data/impl/MaterialeImpl.java
+			• src/java/courseweb/data/model/Corso.java
+			+ src/java/courseweb/data/model/Materiale.java
+
+------------------------------------------------------------
+
+  date : 	6 Ottobre 2017
+author : 	Flavio
+
+commit :	- modifica dump database
+
+  file :	• courseweb.sql
+
+------------------------------------------------------------
+
+  date : 	6 Ottobre 2017
+author : 	Valentino
+
+commit :	- modifica Corso in data.model
+
+  file :	• src/java/courseweb/data/model/Corso.java
+
+------------------------------------------------------------
+
+  date : 	6 Ottobre 2017
+author : 	Flavio
+
+commit :	- modifica classe MaterialeImpl
+
+  file :	• src/java/courseweb/data/impl/MaterialeImpl.java
+
+------------------------------------------------------------
+
+  date : 	6 Ottobre 2017
+author : 	Valentino
+
+commit :	- modifica classe MaterialeImpl in data.impl
+
+  file :	• src/java/courseweb/data/impl/MaterialeImpl.java
+
+------------------------------------------------------------
+
+  date : 	6 Ottobre 2017
+author : 	Flavio
+
+commit :	- modifica Interfaccia Materiale
+
+  file :	• src/java/courseweb/data/model/Materiale.java
+
+------------------------------------------------------------
+
+  date : 	6 Ottobre 2017
+author : 	Valentino
+
+commit :	- modifica CourseWebDataLayer in data.model
+
+  file :	• src/java/courseweb/data/model/CourseWebDataLayer.java
+
+------------------------------------------------------------
+
+  date : 	6 Ottobre 2017
+author : 	Valentino
+
+commit :	- modifica Corso in data.model
+
+  file :	• src/java/courseweb/data/model/Corso.java
+
+------------------------------------------------------------
+
+  date : 	6 Ottobre 2017
+author : 	Riccardo
+
+commit :	- modifica CorsoImpl 
+
+  file :	• src/java/courseweb/data/impl/CorsoImpl.java
+
+------------------------------------------------------------
+
+  date : 	6 Ottobre 2017
+author : 	Riccardo
+
+commit :	- rimozione LibroTesto 
+
+  file :	- src/java/courseweb/data/model/LibroTesto.java
+
+------------------------------------------------------------
+
+  date : 	6 Ottobre 2017
+author : 	Riccardo
+
+commit :	- rimozione LibroTestoImpl 
+
+  file :	- src/java/courseweb/data/impl/LibroTestoImpl.java
+
+------------------------------------------------------------
+
+  date : 	6 Ottobre 2017
+author : 	Riccardo
+
+commit :	- modifica CorsoImpl
+			- modifica LibroTestoImpl 
+			- modifica Corso 
+			- modifica LibroTesto 
+
+  file :	• src/java/courseweb/data/impl/CorsoImpl.java
+			+ src/java/courseweb/data/impl/Libro_TestoImpl.java
+			• src/java/courseweb/data/model/Corso.java
+			+ src/java/courseweb/data/model/Libro_Testo.java
+
+------------------------------------------------------------
+
+  date : 	6 Ottobre 2017
+author : 	Valentino
+
+commit :	- modifica CourseWebDataLayer 
+
+  file :	• src/java/courseweb/data/model/CourseWebDataLayer.java
+
+============================================================
+============================================================
+
+CONTINUA CON 7 OTTOBRE
