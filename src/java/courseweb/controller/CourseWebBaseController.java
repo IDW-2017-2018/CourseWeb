@@ -28,7 +28,7 @@ import javax.sql.DataSource;
  */
 public abstract class CourseWebBaseController extends HttpServlet {
 
-    @Resource(name = "jdbc/courseweb")
+    @Resource(name = "java:comp/env/jdbc/courseweb")
     private DataSource ds;
     
     protected abstract void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException;
