@@ -50,9 +50,11 @@ public class FailureResult {
             if(context.getInitParameter("view.error_template") != null){
                 request.setAttribute("error", message);
                 request.setAttribute("outline_tmp", "");
+                request.setAttribute("lang", "");
+                request.setAttribute("navbar_tpl", "");
+                
                 template.activate(context.getInitParameter("view.error_template"), request, response); 
             } else {
-                
                 //altrimenti inviamo un errore http 
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, message);
             }

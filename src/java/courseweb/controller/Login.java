@@ -41,10 +41,10 @@ public class Login extends CourseWebBaseController {
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException, ServletException {       
         
         boolean secure = SecurityLayer.checkHttps(request); 
-        if(!secure){
-            SecurityLayer.redirectToHttps(request, response);
+        if(/*!*/secure){
+            //SecurityLayer.redirectToHttps(request, response);
         } else {
-            
+            //necessario aggiustamento HTTPS !!!!!!!
             Locale l = request.getLocale();
 
             if(l.getLanguage().equals("it")){
@@ -59,13 +59,14 @@ public class Login extends CourseWebBaseController {
             }
 
             TemplateResult result = new TemplateResult(getServletContext());
-            if(request.getParameter("lang").equals("eng")){
-                request.setAttribute("navbar_tpl", "eng/login_navbar.html.ftl");
-                result.activate("eng/login.html.ftl", request, response);  
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/login_navbar.html.ftl");
+                result.activate("/eng/login.html.ftl", request, response);  
 
-            } else if(request.getParameter("lang").equals("ita")){
-                request.setAttribute("navbar_tpl", "ita/login_navbar.html.ftl");
-                result.activate("ita/login.html.ftl", request, response); 
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/login_navbar.html.ftl");
+
+                result.activate("/ita/login.html.ftl", request, response); 
 
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -104,13 +105,13 @@ public class Login extends CourseWebBaseController {
                             case "docente":
                                 //Codice per caricare la pagina ai docenti
                                 /*
-                                if(request.getParameter("lang").equals("eng")) {
-                                    request.setAttribute("navbar_tpl", "eng/login_navbar.html.ftl");
-                                    res.activate("eng/search_courses.html.ftl", request, response);
+                                if(request.getAttribute("lang").equals("eng")) {
+                                    request.setAttribute("navbar_tpl", "/eng/login_navbar.html.ftl");
+                                    res.activate("/eng/search_courses.html.ftl", request, response);
 
-                                } else if(request.getParameter("lang").equals("ita")) {
-                                    request.setAttribute("navbar_tpl", "ita/login_navbar.html.ftl");
-                                    res.activate("ita/search_courses.html.ftl", request, response);
+                                } else if(request.getAttribute("lang").equals("ita")) {
+                                    request.setAttribute("navbar_tpl", "/ita/login_navbar.html.ftl");
+                                    res.activate("/ita/search_courses.html.ftl", request, response);
 
                                 } else {
                                     request.setAttribute("message", "Illegal language");
@@ -121,13 +122,13 @@ public class Login extends CourseWebBaseController {
                             case "amministratore":
                                 //Codice per caricare la pagina agli amministratori
                                 /*
-                                if(request.getParameter("lang").equals("eng")) {
-                                    request.setAttribute("navbar_tpl", "eng/login_navbar.html.ftl");
-                                    res.activate("eng/search_courses.html.ftl", request, response);
+                                if(request.getAttribute("lang").equals("eng")) {
+                                    request.setAttribute("navbar_tpl", "/eng/login_navbar.html.ftl");
+                                    res.activate("/eng/search_courses.html.ftl", request, response);
 
-                                } else if(request.getParameter("lang").equals("ita")) {
-                                    request.setAttribute("navbar_tpl", "ita/login_navbar.html.ftl");
-                                    res.activate("ita/search_courses.html.ftl", request, response);
+                                } else if(request.getAttribute("lang").equals("ita")) {
+                                    request.setAttribute("navbar_tpl", "/ita/login_navbar.html.ftl");
+                                    res.activate("/ita/search_courses.html.ftl", request, response);
 
                                 } else {
                                     request.setAttribute("message", "Illegal language");
@@ -188,13 +189,13 @@ public class Login extends CourseWebBaseController {
             request.setAttribute("utente", guest);
             
             //caricamento pagina search_courses
-            if(request.getParameter("lang").equals("eng")) {
-                request.setAttribute("navbar_tpl", "eng/login_navbar.html.ftl");
-                res.activate("eng/search_courses.html.ftl", request, response);
+            if(request.getAttribute("lang").equals("eng")) {
+                request.setAttribute("navbar_tpl", "/eng/login_navbar.html.ftl");
+                res.activate("/eng/search_courses.html.ftl", request, response);
 
-            } else if(request.getParameter("lang").equals("ita")) {
-                request.setAttribute("navbar_tpl", "ita/login_navbar.html.ftl");
-                res.activate("ita/search_courses.html.ftl", request, response);
+            } else if(request.getAttribute("lang").equals("ita")) {
+                request.setAttribute("navbar_tpl", "/ita/login_navbar.html.ftl");
+                res.activate("/ita/search_courses.html.ftl", request, response);
 
             } else {
                 request.setAttribute("message", "Illegal language");

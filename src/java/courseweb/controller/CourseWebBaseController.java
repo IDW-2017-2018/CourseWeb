@@ -41,7 +41,7 @@ public abstract class CourseWebBaseController extends HttpServlet {
             processRequest(request, response);
             
         } catch(Exception ex) {
-            //ex.printStackTrace();
+            ex.printStackTrace();
             (new FailureResult(getServletContext())).activate((ex.getMessage() != null || ex.getCause() == null) ? ex.getMessage() : ex.getCause().getMessage(), request, response);
         }
        
