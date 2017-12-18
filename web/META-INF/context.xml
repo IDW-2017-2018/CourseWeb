@@ -2,7 +2,7 @@
 <!-- Rivedere antiResourceLocking -->
 <Context antiResourceLocking="true" path="/courseweb">
     <Resource
-        name="java:comp/env/jdbc/courseweb" 
+        name="jdbc/courseweb" 
         type="javax.sql.DataSource"
         auth="Container"
         driverClassName="com.mysql.jdbc.Driver"

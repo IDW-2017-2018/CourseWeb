@@ -57,7 +57,7 @@ public class FailureResult {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, message);
             }
             
-        } catch(Exception ex1){
+        } catch(TemplateManagerException|IOException ex1){
             
             //se qualcosa va male inviamo un errore http 
             message += ". The following exception was generated while trying to display the error page: " + ex1.getMessage(); 
