@@ -41,8 +41,10 @@ public class Login extends CourseWebBaseController {
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException, ServletException {       
         
         boolean secure = SecurityLayer.checkHttps(request); 
-        if(/*!*/secure){
-            //SecurityLayer.redirectToHttps(request, response);
+        /* SICUREZZA HTTPS DA CONFIGURARE IN TOMCAT !! */
+        /* !secure è il procedimento corretto, secure è per farlo funzionare in HTTP per debugging */
+        if(secure){
+            SecurityLayer.redirectToHttps(request, response);
         } else {
             //necessario aggiustamento HTTPS !!!!!!!
             Locale l = request.getLocale();
@@ -97,7 +99,7 @@ public class Login extends CourseWebBaseController {
                 } else {
                     
                     if(password.equals(utente.getPassword())) {
-                        HttpSession session = SecurityLayer.createSession(request, utente.getEmail(), utente.getId());
+                        SecurityLayer.createSession(request, utente.getEmail(), utente.getId());
                         request.setAttribute("utente", utente);
                         
                         /* In base al tipo utente caricare pagina associata */
@@ -185,7 +187,7 @@ public class Login extends CourseWebBaseController {
             
             datalayer.storeUtenteById(guest);
             
-            HttpSession session = SecurityLayer.createSession(request, guest.getEmail(), guest.getId()); 
+            SecurityLayer.createSession(request, guest.getEmail(), guest.getId()); 
             request.setAttribute("utente", guest);
             
             //caricamento pagina search_courses
