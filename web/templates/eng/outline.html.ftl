@@ -1,5 +1,3 @@
-
-
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -12,7 +10,7 @@
     
     <meta name="description" content="Online Index of University Courses"/>
     <meta name="keywords" content="HTML, CSS, XML, JavaScript, Java"/>
-    <meta name="author" content="Valentino Di Giosaffatte, Riccardo Di Prinzio, Flavio Furia"/>
+    <meta name="author" content="${defaults.authors}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     
     <link rel="stylesheet" type="text/css" href="style/normalize.css"/>
