@@ -5,7 +5,6 @@ package courseweb.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.ServletException;
 
 import framework.result.FailureResult;
@@ -40,44 +39,34 @@ public class Login extends CourseWebBaseController {
     //Azione compiuta al caricamento della pagina
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException, ServletException {       
         
-        boolean secure = SecurityLayer.checkHttps(request); 
-        /* SICUREZZA HTTPS DA CONFIGURARE IN TOMCAT !! */
-        /* !secure è il procedimento corretto, secure è per farlo funzionare in HTTP per debugging */
-        /* Gestione HTTPS meglio su processRequest !!! */
-        if(secure){
-            SecurityLayer.redirectToHttps(request, response);
+        Locale l = request.getLocale();
+
+        if(l.getLanguage().equals("it")){
+            //Carichiamo la pagina in italiano di default
+            request.setAttribute("lang", "ita");
+        } else if(l.getLanguage().equals("en")){
+            //Carichiamo la pagina in inglese di default
+            request.setAttribute("lang", "eng");
         } else {
-            //necessario aggiustamento HTTPS !!!!!!!
-            Locale l = request.getLocale();
-
-            if(l.getLanguage().equals("it")){
-                //Carichiamo la pagina in italiano di default
-                request.setAttribute("lang", "ita");
-            } else if(l.getLanguage().equals("en")){
-                //Carichiamo la pagina in inglese di default
-                request.setAttribute("lang", "eng");
-            } else {
-                //Altra lingua, carichiamo la pagina in inglese
-                request.setAttribute("lang", "eng");
-            }
-
-            TemplateResult result = new TemplateResult(getServletContext());
-            if(request.getAttribute("lang").equals("eng")){
-                request.setAttribute("navbar_tpl", "/eng/login_navbar.html.ftl");
-                result.activate("/eng/login.html.ftl", request, response);  
-
-            } else if(request.getAttribute("lang").equals("ita")){
-                request.setAttribute("navbar_tpl", "/ita/login_navbar.html.ftl");
-
-                result.activate("/ita/login.html.ftl", request, response); 
-
-            } else {
-                request.setAttribute("message", "Illegal language");
-                action_error(request, response);
-
-            }   
+            //Altra lingua, carichiamo la pagina in inglese
+            request.setAttribute("lang", "eng");
         }
-        
+
+        TemplateResult result = new TemplateResult(getServletContext());
+        if(request.getAttribute("lang").equals("eng")){
+            request.setAttribute("navbar_tpl", "/eng/login_navbar.html.ftl");
+            result.activate("/eng/login.html.ftl", request, response);  
+
+        } else if(request.getAttribute("lang").equals("ita")){
+            request.setAttribute("navbar_tpl", "/ita/login_navbar.html.ftl");
+            result.activate("/ita/login.html.ftl", request, response); 
+
+        } else {
+            request.setAttribute("message", "Illegal language");
+            action_error(request, response);
+
+        }   
+         
     }
     
     //Azione compiuta al login di un utente registrato
@@ -214,18 +203,32 @@ public class Login extends CourseWebBaseController {
     
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        try {
-            if(request.getParameter("login") != null){
-                action_login(request, response); 
-            } else if(request.getParameter("login_guest") != null){
-                action_login_guest(request, response); 
-            } else {
-                action_default(request, response); 
+        
+        /* SICUREZZA HTTPS DA CONFIGURARE IN TOMCAT !! */
+        /* !secure è il procedimento corretto, secure è per farlo funzionare in HTTP per debugging */
+        boolean secure = SecurityLayer.checkHttps(request); 
+        
+        if(secure){
+            SecurityLayer.redirectToHttps(request, response);
+        } else {
+            
+            try {
+                
+                if(request.getParameter("login") != null){
+                    action_login(request, response); 
+                } else if(request.getParameter("login_guest") != null){
+                    action_login_guest(request, response); 
+                } else {
+                    action_default(request, response); 
+                }
+                
+            } catch(TemplateManagerException ex){
+                request.setAttribute("exception", ex);
+                action_error(request, response);
             }
-        } catch(TemplateManagerException ex){
-            request.setAttribute("exception", ex);
-            action_error(request, response);
+            
         }
+        
     }
     
     @Override
