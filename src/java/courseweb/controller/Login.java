@@ -204,11 +204,10 @@ public class Login extends CourseWebBaseController {
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         
-        /* SICUREZZA HTTPS DA CONFIGURARE IN TOMCAT !! */
-        /* !secure è il procedimento corretto, secure è per farlo funzionare in HTTP per debugging */
+        /* SICUREZZA HTTPS DA CONTROLLARE IN TOMCAT !! */
         boolean secure = SecurityLayer.checkHttps(request); 
         
-        if(secure){
+        if(!secure){
             SecurityLayer.redirectToHttps(request, response);
         } else {
             

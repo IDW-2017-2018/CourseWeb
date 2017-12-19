@@ -1,0 +1,3 @@
+server.xml (netbeans):
+	<Connector SSLEnabled="true" clientAuth="false" keystoreFile="C:\tomcatkeystore" keystorePass="courseweb" maxThreads="150" port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol" scheme="https" secure="true" sslProtocol="TLS"/>
+
