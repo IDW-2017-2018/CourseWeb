@@ -50,7 +50,6 @@ public class FailureResult {
             if(context.getInitParameter("view.error_template") != null){
                 request.setAttribute("error", message);
                 request.setAttribute("outline_tmp", "");
-                request.setAttribute("lang", "");
                 request.setAttribute("navbar_tpl", "");
                 
                 template.activate(context.getInitParameter("view.error_template"), request, response); 

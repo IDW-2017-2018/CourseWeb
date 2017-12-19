@@ -43,6 +43,7 @@ public class Login extends CourseWebBaseController {
         boolean secure = SecurityLayer.checkHttps(request); 
         /* SICUREZZA HTTPS DA CONFIGURARE IN TOMCAT !! */
         /* !secure è il procedimento corretto, secure è per farlo funzionare in HTTP per debugging */
+        /* Gestione HTTPS meglio su processRequest !!! */
         if(secure){
             SecurityLayer.redirectToHttps(request, response);
         } else {
