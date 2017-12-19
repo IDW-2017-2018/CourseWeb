@@ -35,8 +35,9 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     private PreparedStatement sLibriTestoCorso;
     private PreparedStatement sMaterialiCorso;     
           
-    public CourseWebDataLayerMySqlImpl(DataSource datasource) throws SQLException, NamingException {
+    public CourseWebDataLayerMySqlImpl(DataSource datasource) throws SQLException, NamingException, DataLayerException {
         super(datasource);
+        init();
     }
     
     @Override
@@ -45,6 +46,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             super.init();
             // precompilo le query
             sCorso = connection.prepareStatement("SELECT * FROM corsi");
+            sCorsoById = connection.prepareStatement("SELECT * FROM corsi WHERE id=?");
             sCorsoByCodice = connection.prepareStatement("SELECT * FROM corsi WHERE codice=?");
             sCorsoByAnno = connection.prepareStatement("SELECT * FROM corsi WHERE anno=?");
             sCorsoByCodiceAnno = connection.prepareStatement("SELECT * FROM corsi WHERE codice=? AND anno=?");

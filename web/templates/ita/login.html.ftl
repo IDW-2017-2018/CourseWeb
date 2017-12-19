@@ -7,7 +7,7 @@
     
     <div class="formcontainer">
         
-      <form action="/login" method="POST">
+      <form action="login" method="POST">
 
         <label class="label" for="email">Email</label>
         <input class="field" type="email" id="email" name="email"/>
