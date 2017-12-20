@@ -213,26 +213,29 @@ public class Login extends CourseWebBaseController {
             String lang;
             
             try {
+                if(request.getAttribute("lang") == null) {
+                    
+                    lang = request.getParameter("lang");
                 
-                lang = request.getParameter("lang");
-                
-                if(lang == null || lang.equals("")) {
-                    Locale l = request.getLocale();
-                    if(l.getLanguage().equals("it")){
-                        //Carichiamo la pagina in italiano di default
-                        request.setAttribute("lang", "ita");
-                    } else if(l.getLanguage().equals("en")){
-                        //Carichiamo la pagina in inglese di default
-                        request.setAttribute("lang", "eng");
+                    if(lang == null || lang.equals("")) {
+                        Locale l = request.getLocale();
+                        if(l.getLanguage().equals("it")){
+                            //Carichiamo la pagina in italiano di default
+                            request.setAttribute("lang", "ita");
+                        } else if(l.getLanguage().equals("en")){
+                            //Carichiamo la pagina in inglese di default
+                            request.setAttribute("lang", "eng");
+                        } else {
+                            //Altra lingua, carichiamo la pagina in inglese
+                            request.setAttribute("lang", "eng");
+                        }
+                    } else if(lang.equals("ita") || lang.equals("eng")) {
+                        request.setAttribute("lang", lang);
                     } else {
-                        //Altra lingua, carichiamo la pagina in inglese
-                        request.setAttribute("lang", "eng");
+                        request.setAttribute("lang", "eng");   
                     }
-                } else if(lang.equals("ita") || lang.equals("eng")) {
-                    request.setAttribute("lang", lang);
-                } else {
-                    request.setAttribute("lang", "eng");   
-                }
+                    
+                } // login buggo da riaggiustare
                 
                 if(request.getParameter("login") != null){
                     action_login(request, response); 
