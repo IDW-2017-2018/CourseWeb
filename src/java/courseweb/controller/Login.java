@@ -40,19 +40,6 @@ public class Login extends CourseWebBaseController {
     //Azione compiuta al caricamento della pagina
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException, ServletException {       
         
-        Locale l = request.getLocale();
-
-        if(l.getLanguage().equals("it")){
-            //Carichiamo la pagina in italiano di default
-            request.setAttribute("lang", "ita");
-        } else if(l.getLanguage().equals("en")){
-            //Carichiamo la pagina in inglese di default
-            request.setAttribute("lang", "eng");
-        } else {
-            //Altra lingua, carichiamo la pagina in inglese
-            request.setAttribute("lang", "eng");
-        }
-
         TemplateResult result = new TemplateResult(getServletContext());
         if(request.getAttribute("lang").equals("eng")){
             request.setAttribute("navbar_tpl", "/eng/login_navbar.html.ftl");
@@ -223,7 +210,29 @@ public class Login extends CourseWebBaseController {
             SecurityLayer.redirectToHttps(request, response);
         } else {
             
+            String lang;
+            
             try {
+                
+                lang = request.getParameter("lang");
+                
+                if(lang == null || lang.equals("")) {
+                    Locale l = request.getLocale();
+                    if(l.getLanguage().equals("it")){
+                        //Carichiamo la pagina in italiano di default
+                        request.setAttribute("lang", "ita");
+                    } else if(l.getLanguage().equals("en")){
+                        //Carichiamo la pagina in inglese di default
+                        request.setAttribute("lang", "eng");
+                    } else {
+                        //Altra lingua, carichiamo la pagina in inglese
+                        request.setAttribute("lang", "eng");
+                    }
+                } else if(lang.equals("ita") || lang.equals("eng")) {
+                    request.setAttribute("lang", lang);
+                } else {
+                    request.setAttribute("lang", "eng");   
+                }
                 
                 if(request.getParameter("login") != null){
                     action_login(request, response); 
