@@ -5,7 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-
+    
+    <link rel="icon" href="images/logo_imgs/favicon2.png" type="image/png"/> <!-- da sistemare usa .ico -->
     <title>CourseWeb</title>
     
     <meta name="description" content="Online Index of University Courses"/>

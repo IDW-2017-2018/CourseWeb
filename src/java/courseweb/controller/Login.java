@@ -12,6 +12,7 @@ import framework.result.TemplateResult;
 import framework.result.TemplateManagerException;
 import framework.data.DataLayerException;
 import framework.security.SecurityLayer;
+import framework.security.SecurityLayerException;
 
 import courseweb.data.model.Utente;
 import courseweb.data.model.CourseWebDataLayer;
@@ -77,6 +78,10 @@ public class Login extends CourseWebBaseController {
         
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+            
+            email = SecurityLayer.addSlashes(email);
+            password = SecurityLayer.addSlashes(password);
+            
             Utente utente;
             
             if((email != null) && (password != null) && (!password.equals("")) && (!email.equals(""))) {
@@ -87,6 +92,8 @@ public class Login extends CourseWebBaseController {
                     action_error(request, response);
                     
                 } else {
+                    
+                    password = SecurityLayer.md5String(password);
                     
                     if(password.equals(utente.getPassword())) {
                         SecurityLayer.createSession(request, utente.getEmail(), utente.getId());
@@ -155,9 +162,14 @@ public class Login extends CourseWebBaseController {
                 
             }
 
-        } catch(DataLayerException ex) {
+        } catch(DataLayerException ex1) {
             
-            request.setAttribute("message", "Data access exception: " + ex.getMessage());
+            request.setAttribute("message", "Data access exception: " + ex1.getMessage());
+            action_error(request, response);
+        
+        } catch(SecurityLayerException ex2) {
+            
+            request.setAttribute("message", "Security Layer exception: " + ex2.getMessage());
             action_error(request, response);
         
         }

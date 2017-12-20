@@ -35,9 +35,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     private PreparedStatement sLibriTestoCorso;
     private PreparedStatement sMaterialiCorso;     
           
-    public CourseWebDataLayerMySqlImpl(DataSource datasource) throws SQLException, NamingException, DataLayerException {
+    public CourseWebDataLayerMySqlImpl(DataSource datasource) throws SQLException, NamingException {
         super(datasource);
-        init();
     }
     
     @Override
