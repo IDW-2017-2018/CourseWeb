@@ -49,7 +49,7 @@ public class FailureResult {
             //se abbiamo registrato un template per i messaggi di errore, usiamo quello
             if(context.getInitParameter("view.error_template") != null){
                 request.setAttribute("error", message);
-                request.setAttribute("outline_tmp", "");
+                request.setAttribute("outline_tpl", "");
                 request.setAttribute("navbar_tpl", "");
                 
                 template.activate(context.getInitParameter("view.error_template"), request, response); 

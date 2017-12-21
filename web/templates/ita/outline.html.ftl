@@ -6,7 +6,7 @@
 
 <head>
     
-    <link rel="icon" href="images/logo_imgs/favicon.png" type="image/png"/> <!-- da sistemare usa .ico -->
+    <link rel="icon" href="images/logo_imgs/prove/favicon.png" type="image/png"/> <!-- da sistemare usa .ico -->
     <title>CourseWeb</title>
     
     <meta name="description" content="Online Index of University Courses"/>
@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="style/normalize.css"/>
     <link rel="stylesheet" type="text/css" href="style/outline.css"/>
     
-    <link rel="stylesheet" type="text/css" href="style/login.css"/> <!-- da montare dinamicamente -->
+    <link rel="stylesheet" type="text/css" href="style/${page}.css"/> <!-- da montare dinamicamente -->
 
 </head>
 
@@ -27,7 +27,7 @@
 
     <div class="title_bar">
         
-        <a href="#!">
+        <a href="${page}?lang=${lang}">
             <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
         </a>
 
@@ -41,8 +41,8 @@
 
     <ul class="lang_bar">
 
-            <li><a href="login?lang=ita">ITALIANO</a></li>
-            <li><a href="login?lang=eng">INGLESE</a></li>
+            <li><a href="${page}?lang=ita">ITALIANO</a></li>
+            <li><a href="${page}?lang=eng">INGLESE</a></li>
 
     </ul>
 
@@ -54,18 +54,18 @@
         
         <ul class="footer_link_container">
 
-            <li><a class="footer_link_item" href="contacts">CONTATTI</a></li>
-            <li><a class="footer_link_item" href="about">INFORMAZIONI</a></li>
-            <li><a class="footer_link_item" href="http://www.disim.univaq.it/main/index.php">DISIM</a></li>
+            <li><a class="footer_link_item" href="contacts?lang=${lang}">CONTATTI</a></li>
+            <li><a class="footer_link_item" href="about?lang=${lang}">INFORMAZIONI</a></li>
+            <li><a class="footer_link_item" href="http://www.disim.univaq.it/main/index.php" target="_blank">DISIM</a></li>
         
         </ul>   
         
         <div class="footer_social_container">
 
-            <a href="https://it-it.facebook.com/"><img class="footer_social_icon" src="images/footer_icons/facebook.svg" alt="facebook"/></a>
-            <a href="https://twitter.com/"><img class="footer_social_icon" src="images/footer_icons/twitter.svg" alt="twitter"/></a>
-            <a href="https://www.google.it/"><img class="footer_social_icon" src="images/footer_icons/google.svg" alt="google"/></a>
-            <a href="https://github.com/IDW-2017-2018/CourseWeb"><img class="footer_social_icon" src="images/footer_icons/github.svg" alt="github"/></a>
+            <a href="https://it-it.facebook.com/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/facebook.svg" alt="facebook"/></a>
+            <a href="https://twitter.com/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/twitter.svg" alt="twitter"/></a>
+            <a href="https://www.google.it/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/google.svg" alt="google"/></a>
+            <a href="https://github.com/IDW-2017-2018/CourseWeb" target="_blank"><img class="footer_social_icon" src="images/footer_icons/github.svg" alt="github"/></a>
 
         </div>  
 

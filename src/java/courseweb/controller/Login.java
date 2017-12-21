@@ -235,7 +235,9 @@ public class Login extends CourseWebBaseController {
                         request.setAttribute("lang", "eng");   
                     }
                     
-                } // login buggo da riaggiustare
+                }
+                
+                request.setAttribute("page", "login");
                 
                 if(request.getParameter("login") != null){
                     action_login(request, response); 

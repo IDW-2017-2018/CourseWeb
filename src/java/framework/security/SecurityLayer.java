@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 import java.math.BigInteger;
 
@@ -143,9 +144,30 @@ public class SecurityLayer {
         String path = request.getServletPath();
         String info = request.getPathInfo();
         String query = request.getQueryString();
-    
+        
+        String newUrl, lang; 
+        Locale l = request.getLocale(); 
+        if(l.getLanguage().equals("it")){
+            lang = "ita"; 
+        } else if(l.getLanguage().equals("en")) {
+            lang = "eng"; 
+        } else {
+            lang = "eng"; 
+        }
+        
         // ricostruiamo la url cambiando il protocollo e la porta come specificato nella configurazione di tomcat
-        String newUrl = "https://" + server + ":8443" + context + path + (info != null ? info : "") + (query != null ? "?" + query : "");
+        //inoltre settiamo la variabile lang che ci permette di scegliere il template giusto
+        
+        if(query != null){
+            if(query.contains("lang=")){
+                newUrl = "https://" + server + ":8443" + context + path + (info != null ? info : "") + "?" + query;
+            } else {
+                newUrl = "https://" + server + ":8443" + context + path + (info != null ? info : "") + "?lang=" + lang + "&" + query;
+            }
+        } else {
+            newUrl = "https://" + server + ":8443" + context + path + (info != null ? info : "") + "?lang=" + lang;
+        }
+        
         try {
             // ridirigiamo il client
             response.sendRedirect(newUrl);

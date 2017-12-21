@@ -134,7 +134,11 @@ public class TemplateResult {
         }
         
         if(request.getAttribute("lang").equals("ita")){
-            datamodel.put("outline_tpl", context.getInitParameter("view.outline_template_ita"));
+            if(request.getAttribute("error") != null){
+                datamodel.put("outline_tpl", "");
+            } else {
+                datamodel.put("outline_tpl", context.getInitParameter("view.outline_template_ita"));
+            }
         } 
         
         return datamodel; 

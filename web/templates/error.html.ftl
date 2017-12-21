@@ -9,6 +9,7 @@
 
     <title>CourseWeb</title>
     
+    <link rel="icon" href="images/logo_imgs/prove/favicon.png" type="image/png"/> <!-- da sistemare usa .ico -->
     <meta name="description" content="Online Index of University Courses"/>
     <meta name="keywords" content="HTML, CSS, XML, JavaScript, Java"/>
     <meta name="author" content="${defaults.authors}"/>
