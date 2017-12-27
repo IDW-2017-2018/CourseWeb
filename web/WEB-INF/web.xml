@@ -69,6 +69,15 @@
         <url-pattern>/help</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>Contacts</servlet-name>
+        <servlet-class>courseweb.controller.Contacts</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Contacts</servlet-name>
+        <url-pattern>/contacts</url-pattern>
+    </servlet-mapping>
+    
     <!-- CONFIGS -->
     
     <session-config>

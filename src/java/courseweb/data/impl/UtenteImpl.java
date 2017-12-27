@@ -16,7 +16,7 @@ public class UtenteImpl implements Utente{
     private int id; 
     private String email; 
     private String password; 
-    private String tipo_utente; 
+    private String tipoUtente; 
     private String nome; 
     private String cognome;
     private CourseWebDataLayer ownerDataLayer;
@@ -28,7 +28,7 @@ public class UtenteImpl implements Utente{
         this.id = 0;
         this.email = "";
         this.password = "";
-        this.tipo_utente = "";
+        this.tipoUtente = "";
         this.nome = "";
         this.cognome = "";
         this.dirty = false; 
@@ -52,7 +52,7 @@ public class UtenteImpl implements Utente{
     
     @Override
     public String getTipoUtente() { 
-        return this.tipo_utente;
+        return this.tipoUtente;
     }
     
     @Override
@@ -80,8 +80,8 @@ public class UtenteImpl implements Utente{
     }
     
     @Override
-    public void setTipoUtente(String tipo_utente) {  
-        this.tipo_utente = tipo_utente;  
+    public void setTipoUtente(String tipoUtente) {  
+        this.tipoUtente = tipoUtente;  
     }
     
     @Override
@@ -99,6 +99,7 @@ public class UtenteImpl implements Utente{
         id = utente.getId();
         email = utente.getEmail();
         password = utente.getPassword();
+        tipoUtente = utente.getTipoUtente(); 
         nome = utente.getNome();
         cognome = utente.getCognome();
         this.dirty = true;

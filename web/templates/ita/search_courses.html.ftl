@@ -7,6 +7,9 @@ border: 2px solid black;
 text-align: center;
 ">
 
-    <h1>HELP ENGLISH</h1>
+    <h1>SEARCH COURSES ITALIANO</h1>
+    <h2>${utente.id}</h2>
+    <h2>${utente.email}</h2>
+    <h2>${utente.tipoUtente}</h2>
         
 </div>

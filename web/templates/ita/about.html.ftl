@@ -7,6 +7,6 @@ border: 2px solid black;
 text-align: center;
 ">
 
-    <h1>HELP ENGLISH</h1>
+    <h1>ABOUT ITALIANO</h1>
         
 </div>
