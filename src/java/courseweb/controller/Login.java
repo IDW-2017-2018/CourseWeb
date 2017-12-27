@@ -90,36 +90,36 @@ public class Login extends CourseWebBaseController {
                         switch(utente.getTipoUtente()){
                             case "docente":
                                 //Codice per caricare la pagina ai docenti
-                                /*
+                                
                                 if(request.getAttribute("lang").equals("eng")) {
-                                    request.setAttribute("navbar_tpl", "/eng/login_navbar.html.ftl");
+                                    request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                                     res.activate("/eng/search_courses.html.ftl", request, response);
 
                                 } else if(request.getAttribute("lang").equals("ita")) {
-                                    request.setAttribute("navbar_tpl", "/ita/login_navbar.html.ftl");
+                                    request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                                     res.activate("/ita/search_courses.html.ftl", request, response);
 
                                 } else {
                                     request.setAttribute("message", "Illegal language");
                                     action_error(request, response); 
-                                }*/
+                                }
                                 break;
                                 
                             case "amministratore":
                                 //Codice per caricare la pagina agli amministratori
-                                /*
+                                
                                 if(request.getAttribute("lang").equals("eng")) {
-                                    request.setAttribute("navbar_tpl", "/eng/login_navbar.html.ftl");
+                                    request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                                     res.activate("/eng/search_courses.html.ftl", request, response);
 
                                 } else if(request.getAttribute("lang").equals("ita")) {
-                                    request.setAttribute("navbar_tpl", "/ita/login_navbar.html.ftl");
+                                    request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                                     res.activate("/ita/search_courses.html.ftl", request, response);
 
                                 } else {
                                     request.setAttribute("message", "Illegal language");
                                     action_error(request, response); 
-                                }*/
+                                }
                                 break;
                             
                             case "anonimo":
@@ -181,11 +181,11 @@ public class Login extends CourseWebBaseController {
             
             //caricamento pagina search_courses
             if(request.getAttribute("lang").equals("eng")) {
-                request.setAttribute("navbar_tpl", "/eng/not_logged_navbar.html.ftl");
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 res.activate("/eng/search_courses.html.ftl", request, response);
 
             } else if(request.getAttribute("lang").equals("ita")) {
-                request.setAttribute("navbar_tpl", "/ita/not_logged_navbar.html.ftl");
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 res.activate("/ita/search_courses.html.ftl", request, response);
 
             } else {
