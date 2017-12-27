@@ -60,6 +60,15 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     
+     <servlet>
+        <servlet-name>Help</servlet-name>
+        <servlet-class>courseweb.controller.Help</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Help</servlet-name>
+        <url-pattern>/help</url-pattern>
+    </servlet-mapping>
+    
     <!-- CONFIGS -->
     
     <session-config>

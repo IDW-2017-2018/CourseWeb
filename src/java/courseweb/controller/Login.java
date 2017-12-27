@@ -42,11 +42,11 @@ public class Login extends CourseWebBaseController {
         
         TemplateResult result = new TemplateResult(getServletContext());
         if(request.getAttribute("lang").equals("eng")){
-            request.setAttribute("navbar_tpl", "/eng/login_navbar.html.ftl");
+            request.setAttribute("navbar_tpl", "/eng/not_logged_navbar.html.ftl");
             result.activate("/eng/login.html.ftl", request, response);  
 
         } else if(request.getAttribute("lang").equals("ita")){
-            request.setAttribute("navbar_tpl", "/ita/login_navbar.html.ftl");
+            request.setAttribute("navbar_tpl", "/ita/not_logged_navbar.html.ftl");
             result.activate("/ita/login.html.ftl", request, response); 
 
         } else {
@@ -181,11 +181,11 @@ public class Login extends CourseWebBaseController {
             
             //caricamento pagina search_courses
             if(request.getAttribute("lang").equals("eng")) {
-                request.setAttribute("navbar_tpl", "/eng/login_navbar.html.ftl");
+                request.setAttribute("navbar_tpl", "/eng/not_logged_navbar.html.ftl");
                 res.activate("/eng/search_courses.html.ftl", request, response);
 
             } else if(request.getAttribute("lang").equals("ita")) {
-                request.setAttribute("navbar_tpl", "/ita/login_navbar.html.ftl");
+                request.setAttribute("navbar_tpl", "/ita/not_logged_navbar.html.ftl");
                 res.activate("/ita/search_courses.html.ftl", request, response);
 
             } else {

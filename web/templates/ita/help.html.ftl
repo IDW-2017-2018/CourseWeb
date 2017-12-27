@@ -16,7 +16,7 @@
     
     <link rel="stylesheet" type="text/css" href="normalize.css"/>
     
-    <link rel="stylesheet" type="text/css" href="style/error.css"/>
+    <link rel="stylesheet" type="text/css" href="style/${page}.css"/>
 
 </head>
 
@@ -25,15 +25,12 @@
         width: 60%; 
         margin: auto;
         margin-top: 50px;
+        margin-bottom: 50px;
         border: 2px solid black;
         text-align: center;
         ">
 
-            <h1>HTTP STATUS 500</h1>
-            <h1>INTERNAL SERVER ERROR</h1>
-            <p>The System encountered the following error while handling your request : </p>
-            <p>${error!"Unknown Error"}</p>
-
+            <h1>HELP ITALIANO</h1>
         
         </div>
     </body>
