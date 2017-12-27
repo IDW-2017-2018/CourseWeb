@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Creato il: Dic 04, 2017 alle 17:30
--- Versione del server: 5.7.19
--- Versione PHP: 5.6.31
+-- Host: 127.0.0.1
+-- Creato il: Dic 27, 2017 alle 17:46
+-- Versione del server: 5.7.14
+-- Versione PHP: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,8 +26,7 @@ SET time_zone = "+00:00";
 -- Struttura della tabella `corsi`
 --
 
-DROP TABLE IF EXISTS `corsi`;
-CREATE TABLE IF NOT EXISTS `corsi` (
+CREATE TABLE `corsi` (
   `id` int(11) NOT NULL,
   `codice` varchar(250) NOT NULL,
   `anno` varchar(250) NOT NULL,
@@ -45,8 +42,7 @@ CREATE TABLE IF NOT EXISTS `corsi` (
   `link_homepage` text,
   `link_risorse` text,
   `link_forum` text,
-  `note` text,
-  PRIMARY KEY (`id`,`codice`,`anno`)
+  `note` text
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -55,12 +51,10 @@ CREATE TABLE IF NOT EXISTS `corsi` (
 -- Struttura della tabella `corsi_corsi_integrati`
 --
 
-DROP TABLE IF EXISTS `corsi_corsi_integrati`;
-CREATE TABLE IF NOT EXISTS `corsi_corsi_integrati` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `corsi_corsi_integrati` (
+  `id` int(11) NOT NULL,
   `id_corso` int(11) NOT NULL,
-  `id_corso_integrato` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_corso_integrato` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -69,14 +63,12 @@ CREATE TABLE IF NOT EXISTS `corsi_corsi_integrati` (
 -- Struttura della tabella `corsi_corsi_laurea`
 --
 
-DROP TABLE IF EXISTS `corsi_corsi_laurea`;
-CREATE TABLE IF NOT EXISTS `corsi_corsi_laurea` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `corsi_corsi_laurea` (
+  `id` int(11) NOT NULL,
   `id_corso_laurea` int(11) NOT NULL,
   `id_corso` int(11) NOT NULL,
   `numero_cfu` int(11) NOT NULL,
-  `tipo_cfu` text NOT NULL,
-  PRIMARY KEY (`id`)
+  `tipo_cfu` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -85,12 +77,10 @@ CREATE TABLE IF NOT EXISTS `corsi_corsi_laurea` (
 -- Struttura della tabella `corsi_corsi_mutuati`
 --
 
-DROP TABLE IF EXISTS `corsi_corsi_mutuati`;
-CREATE TABLE IF NOT EXISTS `corsi_corsi_mutuati` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `corsi_corsi_mutuati` (
+  `id` int(11) NOT NULL,
   `id_corso` int(11) NOT NULL,
-  `id_corso_mutuato` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_corso_mutuato` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -99,12 +89,10 @@ CREATE TABLE IF NOT EXISTS `corsi_corsi_mutuati` (
 -- Struttura della tabella `corsi_corsi_propedeutici`
 --
 
-DROP TABLE IF EXISTS `corsi_corsi_propedeutici`;
-CREATE TABLE IF NOT EXISTS `corsi_corsi_propedeutici` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `corsi_corsi_propedeutici` (
+  `id` int(11) NOT NULL,
   `id_corso` int(11) NOT NULL,
-  `id_corso_propedeutico` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_corso_propedeutico` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -113,12 +101,10 @@ CREATE TABLE IF NOT EXISTS `corsi_corsi_propedeutici` (
 -- Struttura della tabella `corsi_docenti`
 --
 
-DROP TABLE IF EXISTS `corsi_docenti`;
-CREATE TABLE IF NOT EXISTS `corsi_docenti` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `corsi_docenti` (
+  `id` int(11) NOT NULL,
   `id_corso` int(11) NOT NULL,
-  `id_docente` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_docente` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -127,11 +113,9 @@ CREATE TABLE IF NOT EXISTS `corsi_docenti` (
 -- Struttura della tabella `corsi_laurea`
 --
 
-DROP TABLE IF EXISTS `corsi_laurea`;
-CREATE TABLE IF NOT EXISTS `corsi_laurea` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(500) NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `corsi_laurea` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(500) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -140,12 +124,10 @@ CREATE TABLE IF NOT EXISTS `corsi_laurea` (
 -- Struttura della tabella `corsi_libri_testo`
 --
 
-DROP TABLE IF EXISTS `corsi_libri_testo`;
-CREATE TABLE IF NOT EXISTS `corsi_libri_testo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `corsi_libri_testo` (
+  `id` int(11) NOT NULL,
   `id_corso` int(11) NOT NULL,
-  `id_libro_testo` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_libro_testo` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -154,12 +136,10 @@ CREATE TABLE IF NOT EXISTS `corsi_libri_testo` (
 -- Struttura della tabella `corsi_materiali`
 --
 
-DROP TABLE IF EXISTS `corsi_materiali`;
-CREATE TABLE IF NOT EXISTS `corsi_materiali` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `corsi_materiali` (
+  `id` int(11) NOT NULL,
   `id_corso` int(11) NOT NULL,
-  `id_materiale` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_materiale` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -168,16 +148,14 @@ CREATE TABLE IF NOT EXISTS `corsi_materiali` (
 -- Struttura della tabella `libri_testo`
 --
 
-DROP TABLE IF EXISTS `libri_testo`;
-CREATE TABLE IF NOT EXISTS `libri_testo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `libri_testo` (
+  `id` int(11) NOT NULL,
   `autore` text NOT NULL,
   `titolo` text NOT NULL,
   `volume` text NOT NULL,
   `anno` text NOT NULL,
   `editore` text NOT NULL,
-  `link` text,
-  PRIMARY KEY (`id`)
+  `link` text
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -186,14 +164,12 @@ CREATE TABLE IF NOT EXISTS `libri_testo` (
 -- Struttura della tabella `materiali`
 --
 
-DROP TABLE IF EXISTS `materiali`;
-CREATE TABLE IF NOT EXISTS `materiali` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `materiali` (
+  `id` int(11) NOT NULL,
   `nome` text NOT NULL,
   `descrizione` text NOT NULL,
   `dimensione` text NOT NULL,
-  `percorso` text NOT NULL,
-  PRIMARY KEY (`id`)
+  `percorso` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -202,19 +178,159 @@ CREATE TABLE IF NOT EXISTS `materiali` (
 -- Struttura della tabella `utenti`
 --
 
-DROP TABLE IF EXISTS `utenti`;
-CREATE TABLE IF NOT EXISTS `utenti` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `utenti` (
+  `id` int(11) NOT NULL,
   `email` varchar(1000) DEFAULT NULL,
   `password` varchar(500) DEFAULT NULL,
   `tipo_utente` varchar(500) NOT NULL,
   `nome` varchar(500) DEFAULT NULL,
-  `cognome` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-COMMIT;
+  `cognome` varchar(500) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dump dei dati per la tabella `utenti`
+--
+
+INSERT INTO `utenti` (`id`, `email`, `password`, `tipo_utente`, `nome`, `cognome`) VALUES
+(2, 'b@b', '92eb5ffee6ae2fec3ad71c777531578f', 'amministratore', 'b', 'b'),
+(1, 'a@a', 'cc175b9c0f1b6a831c399e269772661', 'docente', 'a', 'a');
+
+--
+-- Indici per le tabelle scaricate
+--
+
+--
+-- Indici per le tabelle `corsi`
+--
+ALTER TABLE `corsi`
+  ADD PRIMARY KEY (`id`,`codice`,`anno`);
+
+--
+-- Indici per le tabelle `corsi_corsi_integrati`
+--
+ALTER TABLE `corsi_corsi_integrati`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `corsi_corsi_laurea`
+--
+ALTER TABLE `corsi_corsi_laurea`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `corsi_corsi_mutuati`
+--
+ALTER TABLE `corsi_corsi_mutuati`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `corsi_corsi_propedeutici`
+--
+ALTER TABLE `corsi_corsi_propedeutici`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `corsi_docenti`
+--
+ALTER TABLE `corsi_docenti`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `corsi_laurea`
+--
+ALTER TABLE `corsi_laurea`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `corsi_libri_testo`
+--
+ALTER TABLE `corsi_libri_testo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `corsi_materiali`
+--
+ALTER TABLE `corsi_materiali`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `libri_testo`
+--
+ALTER TABLE `libri_testo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `materiali`
+--
+ALTER TABLE `materiali`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `utenti`
+--
+ALTER TABLE `utenti`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT per le tabelle scaricate
+--
+
+--
+-- AUTO_INCREMENT per la tabella `corsi_corsi_integrati`
+--
+ALTER TABLE `corsi_corsi_integrati`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT per la tabella `corsi_corsi_laurea`
+--
+ALTER TABLE `corsi_corsi_laurea`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT per la tabella `corsi_corsi_mutuati`
+--
+ALTER TABLE `corsi_corsi_mutuati`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT per la tabella `corsi_corsi_propedeutici`
+--
+ALTER TABLE `corsi_corsi_propedeutici`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT per la tabella `corsi_docenti`
+--
+ALTER TABLE `corsi_docenti`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT per la tabella `corsi_laurea`
+--
+ALTER TABLE `corsi_laurea`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT per la tabella `corsi_libri_testo`
+--
+ALTER TABLE `corsi_libri_testo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT per la tabella `corsi_materiali`
+--
+ALTER TABLE `corsi_materiali`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT per la tabella `libri_testo`
+--
+ALTER TABLE `libri_testo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT per la tabella `materiali`
+--
+ALTER TABLE `materiali`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT per la tabella `utenti`
+--
+ALTER TABLE `utenti`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
