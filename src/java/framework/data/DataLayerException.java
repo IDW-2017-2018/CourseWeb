@@ -23,7 +23,7 @@ public class DataLayerException extends Exception {
     
     @Override
     public String getMessage(){
-        return super.getMessage(); 
+        return super.getMessage() + ( (getCause()!= null) ? " (" + getCause().getMessage() + ")" : ""); 
     }
     
 }
