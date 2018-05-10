@@ -60,6 +60,15 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>SearchCourses</servlet-name>
+        <servlet-class>courseweb.controller.SearchCourses</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchCourses</servlet-name>
+        <url-pattern>/searchcourses</url-pattern>
+    </servlet-mapping>
+    
      <servlet>
         <servlet-name>Help</servlet-name>
         <servlet-class>courseweb.controller.Help</servlet-class>

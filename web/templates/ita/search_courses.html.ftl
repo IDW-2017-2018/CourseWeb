@@ -8,8 +8,9 @@ text-align: center;
 ">
 
     <h1>SEARCH COURSES ITALIANO</h1>
-    <h2>${utente.id}</h2>
-    <h2>${utente.email}</h2>
-    <h2>${utente.tipoUtente}</h2>
+    
+        <h2>${session.getAttribute('lang')}</h2>
+    
+    
         
 </div>

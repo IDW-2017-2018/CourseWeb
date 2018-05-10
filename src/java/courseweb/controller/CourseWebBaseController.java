@@ -5,13 +5,10 @@ package courseweb.controller;
 
 import courseweb.data.impl.CourseWebDataLayerMySqlImpl;
 import courseweb.data.model.CourseWebDataLayer;
-import framework.data.DataLayerException;
 import framework.result.FailureResult;
 
 import java.io.IOException;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
 
@@ -21,8 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import javax.sql.DataSource;
-import java.sql.SQLException;
-import javax.naming.NamingException;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -40,6 +36,17 @@ public abstract class CourseWebBaseController extends HttpServlet {
             
             datalayer.init();
             request.setAttribute("datalayer", datalayer);
+            
+            HttpSession s = request.getSession();
+            
+            request.setAttribute("session", s);
+            
+            if(s.getAttribute("lang") != null){
+                System.out.println("processbaserequest: " + s.getAttribute("lang"));  
+            } else {
+                System.out.println("processbaserequest: niente");  
+            }
+            
             processRequest(request, response);
             
         } catch(Exception ex) {

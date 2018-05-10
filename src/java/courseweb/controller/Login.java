@@ -6,6 +6,10 @@ package courseweb.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpSession;
+
+
+import java.io.IOException; 
 
 import framework.result.FailureResult;
 import framework.result.TemplateResult;
@@ -17,6 +21,7 @@ import framework.security.SecurityLayerException;
 import courseweb.data.model.Utente;
 import courseweb.data.model.CourseWebDataLayer;
 import courseweb.data.impl.UtenteImpl; 
+import java.io.Writer;
 
 import java.util.Locale;
 import java.util.UUID; 
@@ -83,8 +88,9 @@ public class Login extends CourseWebBaseController {
                     password = SecurityLayer.md5String(password);
                     
                     if(password.equals(utente.getPassword())) {
-                        SecurityLayer.createSession(request, utente.getEmail(), utente.getId());
+                        HttpSession session = SecurityLayer.createSession(request, utente.getEmail(), utente.getId());
                         request.setAttribute("utente", utente);
+                        session.setAttribute("utente", utente); 
                         
                         /* In base al tipo utente caricare pagina associata */
                         /* SCELTA LINGUA DA CORREGGERE, LANG NON FUNZIONANTE */
@@ -111,20 +117,18 @@ public class Login extends CourseWebBaseController {
                             case "amministratore":
                                 //Codice per caricare la pagina agli amministratori
                                 
-                                if(request.getAttribute("lang").equals("eng")) {
-                                    request.setAttribute("page", "search_courses");
-                                    request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                                    res.activate("/eng/search_courses.html.ftl", request, response);
-
-                                } else if(request.getAttribute("lang").equals("ita")) {
-                                    request.setAttribute("page", "search_courses");
-                                    request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                                    res.activate("/ita/search_courses.html.ftl", request, response);
-
-                                } else {
-                                    request.setAttribute("message", "Illegal language");
-                                    action_error(request, response); 
-                                }
+                                try {
+                                    System.out.println("parte amministratore login: " + request.getAttribute("lang"));
+                                    session.setAttribute("lang", request.getAttribute("lang"));
+                                    
+                                    request.setAttribute("session", session); 
+                                    
+                                    response.sendRedirect(response.encodeURL(request.getContextPath() + "/searchcourses?lang=" + request.getAttribute("lang")));
+                                    
+                                    
+                                } catch(IOException e){
+                                    e.printStackTrace();
+                                }                     
                                 break;
                             
                             case "anonimo":
@@ -210,6 +214,8 @@ public class Login extends CourseWebBaseController {
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         
+        System.out.println("processrequest login: " + request.getAttribute("lang"));
+        
         /* SICUREZZA HTTPS DA CONTROLLARE IN TOMCAT !! */
         boolean secure = SecurityLayer.checkHttps(request); 
         
@@ -217,10 +223,14 @@ public class Login extends CourseWebBaseController {
             SecurityLayer.redirectToHttps(request, response);
         } else {
             
+            System.out.println("processrequest login2: " + request.getAttribute("lang"));
+            
             String lang;
             
             try {
                 if(request.getAttribute("lang") == null) {
+                    
+                    System.out.println("processrequest login3: " + request.getAttribute("lang"));
                     
                     lang = request.getParameter("lang");
                 
@@ -243,6 +253,8 @@ public class Login extends CourseWebBaseController {
                     }
                     
                 }
+                
+                System.out.println("processrequest login4: " + request.getAttribute("lang"));
                 
                 request.setAttribute("page", "login");
                 

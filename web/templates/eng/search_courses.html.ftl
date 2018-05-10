@@ -8,8 +8,8 @@ text-align: center;
 ">
 
     <h1>SEARCH COURSES ENGLISH</h1>
-    <h2>${utente.id}</h2>
-    <h2>${utente.email}</h2>
-    <h2>${utente.tipo_utente}</h2>
+    <h2>${Session.utente.id}</h2>
+    <h2>${Session.utente.email}</h2>
+    <h2>${Session.utente.tipo_utente}</h2>
 
 </div>
