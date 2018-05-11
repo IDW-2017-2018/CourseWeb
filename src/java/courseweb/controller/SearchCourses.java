@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe controller SearchCourses
  */
 package courseweb.controller;
 
@@ -52,12 +50,8 @@ public class SearchCourses extends CourseWebBaseController {
     
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        
-        System.out.println("lingua processrequest searchcourses: " + request.getParameter("lang"));
+
         HttpSession s = (HttpSession) request.getAttribute("session"); 
-        
-        
-        System.out.println("lingua processrequest searchcourses2: " + s.getAttribute("lang")); 
         
         /* SICUREZZA HTTPS DA CONTROLLARE IN TOMCAT !! */
         boolean secure = SecurityLayer.checkHttps(request); 
@@ -66,14 +60,10 @@ public class SearchCourses extends CourseWebBaseController {
             SecurityLayer.redirectToHttps(request, response);
         } else {
             
-            System.out.println("lang2: " + request.getAttribute("lang"));
-            
             String lang;
             
             try {
                 if(request.getAttribute("lang") == null) {
-                    
-                    System.out.println("lang3: " + request.getAttribute("lang"));
                     
                     lang = request.getParameter("lang");
                 
@@ -86,10 +76,8 @@ public class SearchCourses extends CourseWebBaseController {
                     }
                     
                 }
-                
-                System.out.println("lang4: " + request.getAttribute("lang"));
-                
-                request.setAttribute("page", "login");
+                               
+                request.setAttribute("page", "searchcourses");
                 
                 if(request.getParameter("login") != null){
                     //action_login(request, response); 

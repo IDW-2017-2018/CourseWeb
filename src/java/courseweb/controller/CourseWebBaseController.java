@@ -39,13 +39,11 @@ public abstract class CourseWebBaseController extends HttpServlet {
             
             HttpSession s = request.getSession();
             
-            request.setAttribute("session", s);
+            String lang = request.getParameter("lang"); 
+            if(lang != null)
+                request.setAttribute("lang", lang); 
             
-            if(s.getAttribute("lang") != null){
-                System.out.println("processbaserequest: " + s.getAttribute("lang"));  
-            } else {
-                System.out.println("processbaserequest: niente");  
-            }
+            request.setAttribute("session", s);
             
             processRequest(request, response);
             

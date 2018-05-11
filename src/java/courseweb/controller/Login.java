@@ -98,27 +98,25 @@ public class Login extends CourseWebBaseController {
                             case "docente":
                                 //Codice per caricare la pagina ai docenti
                                 
-                                if(request.getAttribute("lang").equals("eng")) {
-                                    request.setAttribute("page", "search_courses");
-                                    request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                                    res.activate("/eng/search_courses.html.ftl", request, response);
-
-                                } else if(request.getAttribute("lang").equals("ita")) {
-                                    request.setAttribute("page", "search_courses");
-                                    request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                                    res.activate("/ita/search_courses.html.ftl", request, response);
-
-                                } else {
-                                    request.setAttribute("message", "Illegal language");
-                                    action_error(request, response); 
-                                }
+                                try {
+  
+                                    session.setAttribute("lang", request.getAttribute("lang"));
+                                    
+                                    request.setAttribute("session", session); 
+                                    
+                                    response.sendRedirect(response.encodeURL(request.getContextPath() + "/searchcourses?lang=" + request.getAttribute("lang")));
+                                    
+                                    
+                                } catch(IOException e){
+                                    e.printStackTrace();
+                                }                     
                                 break;
                                 
                             case "amministratore":
                                 //Codice per caricare la pagina agli amministratori
                                 
                                 try {
-                                    System.out.println("parte amministratore login: " + request.getAttribute("lang"));
+  
                                     session.setAttribute("lang", request.getAttribute("lang"));
                                     
                                     request.setAttribute("session", session); 
@@ -185,26 +183,20 @@ public class Login extends CourseWebBaseController {
             
             datalayer.storeUtenteById(guest);
             
-            SecurityLayer.createSession(request, guest.getEmail(), guest.getId()); 
+            HttpSession session = SecurityLayer.createSession(request, guest.getEmail(), guest.getId()); 
             request.setAttribute("utente", guest);
+            session.setAttribute("utente", guest); 
             
             //caricamento pagina search_courses
-            if(request.getAttribute("lang").equals("eng")) {
-                request.setAttribute("page", "search_courses");
-                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                res.activate("/eng/search_courses.html.ftl", request, response);
-
-            } else if(request.getAttribute("lang").equals("ita")) {
-                request.setAttribute("page", "search_courses");
-                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                res.activate("/ita/search_courses.html.ftl", request, response);
-
-            } else {
-                request.setAttribute("message", "Illegal language");
-                action_error(request, response); 
-            }
             
-        } catch(DataLayerException ex){
+            session.setAttribute("lang", request.getAttribute("lang"));
+
+            request.setAttribute("session", session); 
+
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/searchcourses?lang=" + request.getAttribute("lang")));
+                                                                        
+            
+        } catch(DataLayerException|IOException ex){
             request.setAttribute("message", "Data access exception: " + ex.getMessage());
             action_error(request, response);
         }
@@ -213,27 +205,21 @@ public class Login extends CourseWebBaseController {
     
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        
-        System.out.println("processrequest login: " + request.getAttribute("lang"));
-        
+           
         /* SICUREZZA HTTPS DA CONTROLLARE IN TOMCAT !! */
         boolean secure = SecurityLayer.checkHttps(request); 
         
         if(!secure){
             SecurityLayer.redirectToHttps(request, response);
         } else {
-            
-            System.out.println("processrequest login2: " + request.getAttribute("lang"));
-            
+                     
             String lang;
             
             try {
                 if(request.getAttribute("lang") == null) {
-                    
-                    System.out.println("processrequest login3: " + request.getAttribute("lang"));
-                    
+                                                         
                     lang = request.getParameter("lang");
-                
+                                                     
                     if(lang == null || lang.equals("")) {
                         Locale l = request.getLocale();
                         if(l.getLanguage().equals("it")){
@@ -253,9 +239,7 @@ public class Login extends CourseWebBaseController {
                     }
                     
                 }
-                
-                System.out.println("processrequest login4: " + request.getAttribute("lang"));
-                
+                               
                 request.setAttribute("page", "login");
                 
                 if(request.getParameter("login") != null){
