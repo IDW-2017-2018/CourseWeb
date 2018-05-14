@@ -66,6 +66,34 @@ public class SearchCourses extends CourseWebBaseController {
          
     }
     
+    //Azione compiuta al filtraggio della ricerca
+    private void action_filter(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException, ServletException {
+        
+        //request.getParameter() per ogni parametro filtro
+        //ricaricare la pagina con la nuova List di corsi
+ 
+        TemplateResult result = new TemplateResult(getServletContext());
+        
+        
+        //carica la pagina
+        if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                //request.setAttribute("corsi", corsi_filtrati);
+                result.activate("/eng/search_courses.html.ftl", request, response);  
+
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                //request.setAttribute("corsi", corsi_filtrati);
+                result.activate("/ita/search_courses.html.ftl", request, response); 
+
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response);
+
+            }
+        
+    }
+    
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
@@ -98,7 +126,7 @@ public class SearchCourses extends CourseWebBaseController {
                 request.setAttribute("page", "searchcourses");
                 
                 if(request.getParameter("filtra") != null){
-                    //action_filter(request, response); 
+                    action_filter(request, response); 
                 } else {
                     action_default(request, response); 
                 }
