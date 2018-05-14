@@ -3,6 +3,8 @@
  */
 package courseweb.controller;
 
+import courseweb.data.model.Corso;
+import courseweb.data.model.CourseWebDataLayer;
 import framework.result.FailureResult;
 import framework.result.TemplateManagerException;
 import framework.result.TemplateResult;
@@ -11,6 +13,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import framework.data.DataLayerException; 
+import java.util.List;
 
 /**
  *
@@ -32,19 +37,32 @@ public class SearchCourses extends CourseWebBaseController {
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException, ServletException {       
         
         TemplateResult result = new TemplateResult(getServletContext());
-        if(request.getAttribute("lang").equals("eng")){
-            request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-            result.activate("/eng/search_courses.html.ftl", request, response);  
+        
+        try {
+        
+            String lang = (String) request.getAttribute("lang"); 
+            List<Corso> corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiAggiornati(); 
+            List<Corso> corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(lang, corsi_non_filtrati); 
+                   
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("corsi", corsi_filtrati);
+                result.activate("/eng/search_courses.html.ftl", request, response);  
 
-        } else if(request.getAttribute("lang").equals("ita")){
-            request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-            result.activate("/ita/search_courses.html.ftl", request, response); 
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("corsi", corsi_filtrati);
+                result.activate("/ita/search_courses.html.ftl", request, response); 
 
-        } else {
-            request.setAttribute("message", "Illegal language");
-            action_error(request, response);
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response);
 
-        }   
+            }
+            
+        } catch(DataLayerException e){
+            e.printStackTrace();
+        }
          
     }
     
@@ -79,10 +97,8 @@ public class SearchCourses extends CourseWebBaseController {
                                
                 request.setAttribute("page", "searchcourses");
                 
-                if(request.getParameter("login") != null){
-                    //action_login(request, response); 
-                } else if(request.getParameter("login_guest") != null){
-                    //action_login_guest(request, response); 
+                if(request.getParameter("filtra") != null){
+                    //action_filter(request, response); 
                 } else {
                     action_default(request, response); 
                 }

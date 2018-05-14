@@ -28,6 +28,9 @@ public interface Corso {
     String getLinkForum();
     String getAnno();       
     String getNote();
+    
+    String getLang();
+    
     List<Utente> getDocentiCorso() throws DataLayerException;
     List<Corso_Laurea> getCorsiLaureaCorso() throws DataLayerException;
     List<Corso> getCorsiPropedeuticiCorso() throws DataLayerException;       
@@ -59,6 +62,8 @@ public interface Corso {
     void setCorsiMutuati(List<Corso> corsi_mutuati);            
     void setCorsiIntegrati(List<Corso> corsi_integrati); 
     void setMateriali(List<Materiale> materiali);
+    
+    void setLang(String lang); 
     
     void copyFrom(Corso corso) throws DataLayerException;
     void setDirty(boolean dirty); 

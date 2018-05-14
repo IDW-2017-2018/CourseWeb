@@ -34,6 +34,8 @@ public class CorsoImpl implements Corso {
     private String anno; 
     private String note; 
     
+    private String lang; 
+    
     private List<Utente> docenti;
     private List<Corso_Laurea> corsi_laurea;
     private List<Libro_Testo> libri_testo;
@@ -63,6 +65,8 @@ public class CorsoImpl implements Corso {
         this.link_forum = ""; 
         this.anno = ""; 
         this.note = ""; 
+        
+        this.lang = ""; 
         
         this.docenti = null;
         this.corsi_laurea = null;
@@ -153,6 +157,11 @@ public class CorsoImpl implements Corso {
     @Override
     public String getNote(){
         return this.note;
+    }
+    
+    @Override
+    public String getLang(){
+        return this.lang; 
     }
     
     @Override
@@ -325,6 +334,12 @@ public class CorsoImpl implements Corso {
         this.materiali = materiali; 
     }
     
+    
+    @Override
+    public void setLang(String lang){
+        this.lang = lang; 
+    }
+
     @Override
     public void copyFrom(Corso corso) throws DataLayerException{
         id = corso.getId();
@@ -343,7 +358,10 @@ public class CorsoImpl implements Corso {
         link_forum = corso.getLinkForum();
         anno = corso.getAnno();
         note = corso.getNote();
-        
+       
+       
+        lang = corso.getLang(); 
+              
         docenti = corso.getDocentiCorso();
         corsi_laurea = corso.getCorsiLaureaCorso();
         libri_testo = corso.getLibriTestoCorso();

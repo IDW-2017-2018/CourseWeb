@@ -49,8 +49,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsoByCodice = connection.prepareStatement("SELECT * FROM corsi WHERE codice=?");
             sCorsoByAnno = connection.prepareStatement("SELECT * FROM corsi WHERE anno=?");
             sCorsoByCodiceAnno = connection.prepareStatement("SELECT * FROM corsi WHERE codice=? AND anno=?");
-            uCorsoByCodiceAnno = connection.prepareStatement("UPDATE corsi SET codice=?, anno=?, ssd=?, semestre=?, lingua=?, prerequisiti=?, obiettivi=?, mod_esame=?, mod_insegnamento=?, sillabo=?, link_homepage=?, link_risorse=?, link_forum=?, note=? WHERE codice=? AND anno=?");
-            iCorsoByCodiceAnno = connection.prepareStatement("INSERT INTO corsi (codice,anno,nome) VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uCorsoByCodiceAnno = connection.prepareStatement("UPDATE corsi SET codice=?, anno=?, ssd=?, semestre=?, lingua=?, prerequisiti=?, obiettivi=?, mod_esame=?, mod_insegnamento=?, sillabo=?, link_homepage=?, link_risorse=?, link_forum=?, note=?, lang=? WHERE codice=? AND anno=? AND lang=?");
+            iCorsoByCodiceAnno = connection.prepareStatement("INSERT INTO corsi (codice,anno,nome,lang) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             
             sUtente = connection.prepareStatement("SELECT * FROM utenti");
             sUtenteById = connection.prepareStatement("SELECT * FROM utenti WHERE id=?");
@@ -78,6 +78,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsiPropedeuticiCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_propedeutici INNER JOIN corsi ON (corsi_corsi_propedeutici.id_corso_propedeutico = corsi.id) WHERE corsi_corsi_propedeutici.id_corso=?");
             sCorsiMutuatiCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_mutuati INNER JOIN corsi ON (corsi_corsi_mutuati.id_corso_mutuato = corsi.id) WHERE corsi_corsi_mutuati.id_corso=?");
             sCorsiIntegratiCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_integrati INNER JOIN corsi ON (corsi_corsi_integrati.id_corso_integrato = corsi.id) WHERE corsi_corsi_integrati.id_corso=?");
+            
             sLibriTestoCorso = connection.prepareStatement("SELECT * FROM corsi_libri_testo INNER JOIN libri_testo ON (corsi_libri_testo.id_libro_testo = libri_testo.id) WHERE corsi_libri_testo.id_corso=?");
             sMaterialiCorso = connection.prepareStatement("SELECT * FROM corsi_materiali INNER JOIN materiali ON (corsi_materiali.id_materiale = materiali.id) WHERE corsi_materiali.id_corso=?");
             sDocentiCorso = connection.prepareStatement("SELECT * FROM corsi_docenti INNER JOIN utenti ON (corsi_docenti.id_docente = utenti.id) WHERE corsi_docenti.id_corso=?");
@@ -137,6 +138,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             c.setLinkRisorseEsterne(rs.getString("link_risorse"));
             c.setLinkForum(rs.getString("link_forum"));
             c.setNote(rs.getString("note"));
+            
+            c.setLang(rs.getString("lang"));
             
             return c; 
             
@@ -351,15 +354,18 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     }
     
     @Override
-    public Corso getCorso(String corso_codice, String corso_anno) throws DataLayerException {
+    public List<Corso> getCorso(String corso_codice, String corso_anno) throws DataLayerException {
+        //2 corsi, in base a lang
+        
+        List<Corso> result = new ArrayList<Corso>(); 
         
         try {
             sCorsoByCodiceAnno.setString(1, corso_codice);
             sCorsoByCodiceAnno.setString(2, corso_anno);
             try(ResultSet rs = sCorsoByCodiceAnno.executeQuery()){
                 
-                if(rs.next()){
-                    return createCorso(rs); 
+                while(rs.next()){
+                    result.add(createCorso(rs)); 
                 }
                 
             }
@@ -368,7 +374,11 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             throw new DataLayerException("Unable to load Corso by codice & anno", ex); 
         }
         
-        return null; 
+        if(result.isEmpty())
+            return null; 
+        else 
+            return result; 
+        
     }
     
     @Override
@@ -433,6 +443,77 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         
         return result;      
         
+    }
+    
+    @Override
+    public List<Corso> getCorsiAggiornati() throws DataLayerException {
+        List<Corso> corsi = getCorsi(); 
+        List<Corso> result = new ArrayList<Corso>(); 
+        
+        for(int i = 0; i < corsi.size(); i++){
+            Corso item = corsi.get(i); 
+           
+            for(int j = i + 1; i < corsi.size(); j++){
+                Corso now = corsi.get(j);
+                
+                if(now.getNome().equals(item.getNome())){
+                    //assunzione campo anno tipo "2016/2017" stringa
+                   
+                    String anno_1 = item.getAnno().substring(0, item.getAnno().lastIndexOf("/")); //2016
+                    String anno_2 = now.getAnno().substring(0, now.getAnno().lastIndexOf("/"));
+                    
+                    if(anno_2.compareTo(anno_1) > 0){
+                        item = now; 
+                    }
+                 
+                } else {
+                    //prosegui ricerca
+                }
+                
+            }
+            
+            result.add(item); 
+        }
+        
+        return result;      
+        
+    }
+    
+    @Override
+    public List<Corso> filterCorsiByLang(String lang, List<Corso> lista_corsi){
+       
+        List<Corso> result = new ArrayList<Corso>(); 
+        
+        if(lang == null)
+            return result; 
+        
+        for(int i = 0; i < lista_corsi.size(); i++){
+            Corso item = lista_corsi.get(i); 
+           
+            for(int j = i + 1; i < lista_corsi.size(); j++){
+                Corso now = lista_corsi.get(j);
+                
+                if( (now.getCodice().equals(item.getCodice())) && (now.getAnno().equals(item.getAnno())) ){
+                    
+                    String lang_corso_1 = item.getLang(); 
+                    String lang_corso_2 = now.getLang(); 
+                    
+                    if(lang.equals(lang_corso_2)){
+                        //scegliamo il corso in accordo alla lingua, cambiamo se l'item scelto precedentemente
+                        //non ha la lingua esatta
+                        item = now; 
+                    }
+                 
+                } else {
+                    //prosegui ricerca
+                }
+                
+            }
+            
+            result.add(item); 
+        }
+        
+        return result; 
     }
     
     @Override
@@ -829,26 +910,38 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 if(!corso.isDirty()) {
                     return;
                 }
-            uCorsoByCodiceAnno.setString(1, corso.getSSD());
-            uCorsoByCodiceAnno.setInt(2, corso.getSemestre());
-            uCorsoByCodiceAnno.setString(3, corso.getLingua());
-            uCorsoByCodiceAnno.setString(4, corso.getPrerequisiti());
-            uCorsoByCodiceAnno.setString(5, corso.getObiettivi());
-            uCorsoByCodiceAnno.setString(6, corso.getModEsame());
-            uCorsoByCodiceAnno.setString(7, corso.getModInsegnamento());
-            uCorsoByCodiceAnno.setString(8, corso.getSillabo());
-            uCorsoByCodiceAnno.setString(9, corso.getLinkHomepageCorso());
-            uCorsoByCodiceAnno.setString(10, corso.getLinkRisorseEsterne());
-            uCorsoByCodiceAnno.setString(11, corso.getLinkForum());
-            uCorsoByCodiceAnno.setString(12, corso.getNote());
-            uCorsoByCodiceAnno.setString(13, corso.getCodice());
-            uCorsoByCodiceAnno.setString(14, corso.getAnno());
+                
+            uCorsoByCodiceAnno.setString(1, corso.getCodice());
+            uCorsoByCodiceAnno.setString(2, corso.getAnno());
+                
+            uCorsoByCodiceAnno.setString(3, corso.getSSD());
+            uCorsoByCodiceAnno.setInt(4, corso.getSemestre());
+            uCorsoByCodiceAnno.setString(5, corso.getLingua());
+            uCorsoByCodiceAnno.setString(6, corso.getPrerequisiti());
+            uCorsoByCodiceAnno.setString(7, corso.getObiettivi());
+            uCorsoByCodiceAnno.setString(8, corso.getModEsame());
+            uCorsoByCodiceAnno.setString(9, corso.getModInsegnamento());
+            uCorsoByCodiceAnno.setString(10, corso.getSillabo());
+            uCorsoByCodiceAnno.setString(11, corso.getLinkHomepageCorso());
+            uCorsoByCodiceAnno.setString(12, corso.getLinkRisorseEsterne());
+            uCorsoByCodiceAnno.setString(13, corso.getLinkForum());
+            uCorsoByCodiceAnno.setString(14, corso.getNote());
+            
+            uCorsoByCodiceAnno.setString(15, corso.getLang());
+            
+            uCorsoByCodiceAnno.setString(16, corso.getCodice());
+            uCorsoByCodiceAnno.setString(17, corso.getAnno());
+            
+            uCorsoByCodiceAnno.setString(18, corso.getLang());
+            
+            
             uCorsoByCodiceAnno.executeUpdate();
             }
             else { //insert
                 iCorsoByCodiceAnno.setString(1, corso.getCodice());
-                iCorsoByCodiceAnno.setString(1, corso.getAnno());
-                iCorsoByCodiceAnno.setString(1, corso.getNome());
+                iCorsoByCodiceAnno.setString(2, corso.getAnno());
+                iCorsoByCodiceAnno.setString(3, corso.getNome());
+                iCorsoByCodiceAnno.setString(4, corso.getLang());
                 
                 if(iCorsoByCodiceAnno.executeUpdate() == 1) {
                     
