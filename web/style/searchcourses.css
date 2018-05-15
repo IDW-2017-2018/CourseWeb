@@ -1,0 +1,192 @@
+
+/* ########## SEARCHCOURSER FILTER FORM ########## */
+
+.field { 
+
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0px 25px 0px; /*top right bottom left*/
+    display: block;
+    color: black;
+    font-family: Arial, Verdana, sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+	outline: none;
+    background-color: #d5d5d5;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.field:focus { 
+
+	background-color: black;
+	border: 1px solid white;
+	color: white;
+
+}
+
+.fieldcontainerleft { 
+
+	width: 45%; 
+	float: left; 
+
+}
+
+.fieldcontainerright { 
+
+	width: 45%; 
+	float: right; 
+	
+}
+
+
+.buttoncontainer { 
+
+	width: 45%; 
+	margin: auto;
+
+}
+
+.filterbutton { 
+
+    width: 100%;
+    background-color: #01d475;
+    color: black;
+    font-weight: bold;
+    padding: 15px 20px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.filterbutton:hover { 
+
+    background-color: #ff00ff;
+
+}
+
+.filterbutton:focus { 
+
+    outline: none;
+
+}
+
+.label { 
+
+	font-family: Arial, Verdana, sans-serif;
+	color: white;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.filter { 
+
+    border-radius: 10px;
+    background-color: black;
+    padding: 50px 0px;
+    margin: 100px auto;
+    width: 85%;
+
+}
+
+.formcontainer { 
+
+	width: 80%;
+	margin: auto;
+
+}
+
+.title { 
+
+	color: white;
+	font-family: Arial, Verdana, sans-serif;
+	font-weight: normal;
+	text-align: center;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.tablecontainer {
+
+	overflow-x:auto;
+	width: 85%;
+	margin: 100px auto;
+
+}
+
+.tableresult {
+
+    font-family: Arial, Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 2px solid black; 
+    margin: 0 auto;
+    width: 100%;
+
+}
+
+.thresult { 
+
+    padding: 20px !important;
+    text-align: center !important;
+    color: #ff00ff;
+    background-color: black;
+    border-bottom: 1px solid grey;
+    text-align: left;
+    padding: 8px;
+
+}
+
+.tdresult { 
+    
+    padding: 20px !important;
+    text-align: center !important;
+    border-bottom: 1px solid grey;
+    color: white;
+    text-align: left;
+    padding: 8px;
+
+}
+
+.trresult:hover {
+
+	background-color: rgb(40, 40, 40) !important;
+	
+}
+
+.trresult:hover .linkresult {
+
+	color : #ff00ff;
+
+}
+
+.trresult:nth-child(even) {
+    background-color: #121212;
+}
+
+
+.trresult:nth-child(odd) {
+    background-color: #121212;
+}
+
+.linkresult {
+
+	color: #01d475;
+
+}
+
+.linkresult:hover {
+
+	color: orange !important;
+
+}
