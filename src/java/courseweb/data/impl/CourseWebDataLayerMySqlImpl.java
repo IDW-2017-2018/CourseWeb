@@ -478,11 +478,17 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         List<Corso> corsi = getCorsi(); 
         List<Corso> result = new ArrayList<Corso>(); 
         
+        System.out.println(corsi.size());
+        
         for(int i = 0; i < corsi.size(); i++){
             Corso item = corsi.get(i); 
            
-            for(int j = i + 1; i < corsi.size(); j++){
+                System.out.println("i = " + i);
+            
+            for(int j = i + 1; j < (corsi.size() - 1); j++){
                 Corso now = corsi.get(j);
+                
+                    System.out.println("j = " + j);
                 
                 if(now.getNome().equals(item.getNome())){
                     //assunzione campo anno tipo "2016/2017" stringa
@@ -515,7 +521,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         for(int i = 0; i < corsi.size(); i++){
             Corso item = corsi.get(i); 
            
-            for(int j = i + 1; i < corsi.size(); j++){
+            for(int j = i + 1; j < (corsi.size() - 1); j++){
                 Corso now = corsi.get(j);
                 
                 if(now.getNome().equals(item.getNome())){
@@ -552,7 +558,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         for(int i = 0; i < lista_corsi.size(); i++){
             Corso item = lista_corsi.get(i); 
            
-            for(int j = i + 1; i < lista_corsi.size(); j++){
+            for(int j = i + 1; j < (lista_corsi.size() - 1); j++){
                 Corso now = lista_corsi.get(j);
                 
                 if( (now.getCodice().equals(item.getCodice())) && (now.getAnno().equals(item.getAnno())) ){
