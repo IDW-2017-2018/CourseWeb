@@ -66,6 +66,20 @@ ul.navbar li.menu_item {
 
 }
 
+ul.navbar li.profile_item {
+    
+    float: right;
+    color: white;
+
+}
+
+.profile_icon {
+    
+    float: right;
+    height: 30px !important; 
+    margin: 10px 10px 0px 10px; /*top right bottom left*/
+
+}
 
 ul.navbar li a {
     
@@ -92,6 +106,18 @@ ul.navbar li a:hover {
     ul.navbar li.menu_item {
 
     	float: none;
+
+    }
+
+    ul.navbar li.profile_item {
+
+        display: none;
+
+    }
+
+    ul.navbar .profile_icon {
+
+        display: none;
 
     }
 

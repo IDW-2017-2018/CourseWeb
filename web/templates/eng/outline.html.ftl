@@ -62,10 +62,10 @@
         
         <div class="footer_social_container">
 
-            <a href="https://it-it.facebook.com/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/facebook.svg" alt="facebook"/></a>
-            <a href="https://twitter.com/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/twitter.svg" alt="twitter"/></a>
-            <a href="https://www.google.it/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/google.svg" alt="google"/></a>
-            <a href="https://github.com/IDW-2017-2018/CourseWeb" target="_blank"><img class="footer_social_icon" src="images/footer_icons/github.svg" alt="github"/></a>
+            <a href="https://it-it.facebook.com/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/facebook.svg" alt="facebook"/></a>
+            <a href="https://twitter.com/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/twitter.svg" alt="twitter"/></a>
+            <a href="https://www.google.it/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/google.svg" alt="google"/></a>
+            <a href="https://github.com/IDW-2017-2018/CourseWeb" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/github.svg" alt="github"/></a>
 
         </div>  
 
