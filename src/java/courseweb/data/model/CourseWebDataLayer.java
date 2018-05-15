@@ -31,8 +31,10 @@ public interface CourseWebDataLayer extends DataLayer {
     List<Corso> getCorso(String corso_codice, String corso_anno) throws DataLayerException;
     List<Corso> getCorsoByCodice(String corso_codice) throws DataLayerException;
     List<Corso> getCorsoByAnno(String corso_anno) throws DataLayerException;
+    List<Corso> getCorsoByNome (String corso_nome) throws DataLayerException;
     List<Corso> getCorsi() throws DataLayerException;
     List<Corso> getCorsiAggiornati() throws DataLayerException; 
+    List<Corso> getCorsiByNomeAggiornati(String corso_nome) throws DataLayerException;
     
     List<Corso> filterCorsiByLang(String lang, List<Corso> lista_corsi); 
     
@@ -57,5 +59,7 @@ public interface CourseWebDataLayer extends DataLayer {
     void storeUtenteById(Utente utente) throws DataLayerException;    
     void storeUtenteByEmail(Utente utente) throws DataLayerException;
     void storeCorso(Corso corso) throws DataLayerException;
+    
+    List<Corso> filtraCorsi (List<Corso> corsi, String attributo, String filtro);
    
 }

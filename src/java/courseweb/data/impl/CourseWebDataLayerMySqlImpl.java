@@ -21,7 +21,7 @@ import javax.sql.DataSource;
  */
 public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements CourseWebDataLayer {
     
-    private PreparedStatement sCorso, sCorsoById, sCorsoByCodice, sCorsoByAnno, sCorsoByCodiceAnno, uCorsoByCodiceAnno, iCorsoByCodiceAnno;
+    private PreparedStatement sCorso, sCorsoById, sCorsoByCodice, sCorsoByAnno, sCorsoByNome, sCorsoByCodiceAnno, uCorsoByCodiceAnno, iCorsoByCodiceAnno;
     private PreparedStatement sUtente, sUtenteById, sUtenteByEmail, uUtenteById, uUtenteByEmail, iUtente;
     private PreparedStatement sCorsoLaurea, sCorsoLaureaById, sCorsoLaureaByNome;
     private PreparedStatement sLibriTesto, sLibroTestoById;
@@ -48,6 +48,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsoById = connection.prepareStatement("SELECT * FROM corsi WHERE id=?");
             sCorsoByCodice = connection.prepareStatement("SELECT * FROM corsi WHERE codice=?");
             sCorsoByAnno = connection.prepareStatement("SELECT * FROM corsi WHERE anno=?");
+            sCorsoByNome = connection.prepareStatement("SELECT * FROM corsi WHERE nome LIKE '%?%'");
             sCorsoByCodiceAnno = connection.prepareStatement("SELECT * FROM corsi WHERE codice=? AND anno=?");
             uCorsoByCodiceAnno = connection.prepareStatement("UPDATE corsi SET codice=?, anno=?, ssd=?, semestre=?, lingua=?, prerequisiti=?, obiettivi=?, mod_esame=?, mod_insegnamento=?, sillabo=?, link_homepage=?, link_risorse=?, link_forum=?, note=?, lang=? WHERE codice=? AND anno=? AND lang=?");
             iCorsoByCodiceAnno = connection.prepareStatement("INSERT INTO corsi (codice,anno,nome,lang) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -426,6 +427,24 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     }
     
     @Override
+    public List<Corso> getCorsoByNome(String corso_nome) throws DataLayerException{
+        List<Corso> result = new ArrayList();
+          
+        try{
+            sCorsoByNome.setString(1,corso_nome);
+            try(ResultSet rs = sCorsoByNome.executeQuery()) {
+                while(rs.next()){
+                    result.add(getCorso(rs.getInt("id")));
+                }
+            }
+        }
+        catch(SQLException exc){
+            exc.printStackTrace();
+        }
+        return result;
+    }
+    
+    @Override
     public List<Corso> getCorsi() throws DataLayerException {
         List<Corso> result = new ArrayList(); 
                    
@@ -448,6 +467,40 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     @Override
     public List<Corso> getCorsiAggiornati() throws DataLayerException {
         List<Corso> corsi = getCorsi(); 
+        List<Corso> result = new ArrayList<Corso>(); 
+        
+        for(int i = 0; i < corsi.size(); i++){
+            Corso item = corsi.get(i); 
+           
+            for(int j = i + 1; i < corsi.size(); j++){
+                Corso now = corsi.get(j);
+                
+                if(now.getNome().equals(item.getNome())){
+                    //assunzione campo anno tipo "2016/2017" stringa
+                   
+                    String anno_1 = item.getAnno().substring(0, item.getAnno().lastIndexOf("/")); //2016
+                    String anno_2 = now.getAnno().substring(0, now.getAnno().lastIndexOf("/"));
+                    
+                    if(anno_2.compareTo(anno_1) > 0){
+                        item = now; 
+                    }
+                 
+                } else {
+                    //prosegui ricerca
+                }
+                
+            }
+            
+            result.add(item); 
+        }
+        
+        return result;      
+        
+    }
+    
+    @Override
+    public List<Corso> getCorsiByNomeAggiornati(String corso_nome) throws DataLayerException {
+        List<Corso> corsi = getCorsoByNome(corso_nome); 
         List<Corso> result = new ArrayList<Corso>(); 
         
         for(int i = 0; i < corsi.size(); i++){
@@ -1007,4 +1060,9 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         super.destroy();
         
     }
+    
+    public List<Corso> filtraCorsi (List<Corso> corsi, String attributo, String filtro){
+        return null; 
+    }
+    
 }
