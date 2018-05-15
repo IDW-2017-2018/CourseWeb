@@ -75,7 +75,7 @@ public class SearchCourses extends CourseWebBaseController {
         String corso_nome = request.getParameter("corso_nome");
         String corso_codice = request.getParameter("corso_codice");
         String corso_ssd = request.getParameter("corso_ssd");
-        int corso_semestre = Integer.parseInt(request.getParameter("corso_semestre"));
+        String corso_semestre = request.getParameter("corso_semestre");
         String corso_docente = request.getParameter("corso_docente");
         String corso_lingua = request.getParameter("corso_lingua");
         String corso_corsi_laurea = request.getParameter("corso_corsi_laurea");
@@ -85,22 +85,40 @@ public class SearchCourses extends CourseWebBaseController {
             String lang = (String) request.getAttribute("lang");
             
             if(corso_nome != null){
-            corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiByNomeAggiornati(corso_nome); 
+                corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiByNomeAggiornati(corso_nome); 
             }
             else {
-            corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiAggiornati();
+                corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiAggiornati();
             }
+            
             corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(lang, corsi_non_filtrati); 
             // abbiamo lista dei corsi aggiornati e filtrati in base alla lingua e al nome, se è stato inserito
             
             // codice , SSD , semestre , docente , lingua , corsi di laurea
-            /*
-            if (corso_codice != null){
-                corsi_filtrati = 
-            }
-            */
             
-           
+            if (corso_codice != null){
+                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_codice", corso_codice); 
+            } 
+            
+            if (corso_ssd != null){
+                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_ssd", corso_ssd); 
+            } 
+            
+            if (corso_semestre != null){
+                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_semestre", corso_semestre); 
+            } 
+            
+            if (corso_docente != null){
+                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_docente", corso_docente); 
+            } 
+            
+            if (corso_lingua != null){
+                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_lingua", corso_lingua); 
+            } 
+            
+            if (corso_corsi_laurea != null){
+                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_corsi_laurea", corso_corsi_laurea); 
+            } 
         }
         catch(DataLayerException exc){
             exc.printStackTrace();
@@ -108,16 +126,15 @@ public class SearchCourses extends CourseWebBaseController {
         
         TemplateResult result = new TemplateResult(getServletContext());
         
-        
         //carica la pagina
         if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                //request.setAttribute("corsi", corsi_filtrati);
+                request.setAttribute("corsi", corsi_filtrati);
                 result.activate("/eng/search_courses.html.ftl", request, response);  
 
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                //request.setAttribute("corsi", corsi_filtrati);
+                request.setAttribute("corsi", corsi_filtrati);
                 result.activate("/ita/search_courses.html.ftl", request, response); 
 
             } else {

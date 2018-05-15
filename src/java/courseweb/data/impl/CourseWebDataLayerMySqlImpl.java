@@ -142,6 +142,15 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             
             c.setLang(rs.getString("lang"));
             
+            /* oggetti complessi */
+            c.setDocenti(getDocentiCorso(c));
+            c.setCorsiLaurea(getCorsiLaureaCorso(c));
+            c.setLibriTesto(getLibriTestoCorso(c));
+            c.setCorsiPropedeutici(getCorsiPropedeuticiCorso(c));
+            c.setCorsiMutuati(getCorsiMutuatiCorso(c));
+            c.setCorsiIntegrati(getCorsiIntegratiCorso(c));
+            c.setMateriali(getMaterialiCorso(c));
+            
             return c; 
             
         } catch(SQLException ex){
@@ -1061,8 +1070,56 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         
     }
     
-    public List<Corso> filtraCorsi (List<Corso> corsi, String attributo, String filtro){
-        return null; 
+    public List<Corso> filtraCorsi (List<Corso> corsi, String attributo, String filtro) throws DataLayerException {
+        List<Corso> result = new ArrayList();
+        
+        switch(attributo){
+            case "corso_codice": 
+                for(int i=0; i<corsi.size(); i++){
+                    if(corsi.get(i).getCodice().equals(filtro)) result.add(corsi.get(i));
+                }
+                break;
+            case "corso_ssd":
+                for(int i=0; i<corsi.size(); i++){
+                    if(corsi.get(i).getCodice().equals(filtro)) result.add(corsi.get(i));
+                }
+                break;
+            case "corso_semestre":
+                for(int i=0; i<corsi.size(); i++){
+                    if(corsi.get(i).getSemestre() == Integer.parseInt(filtro)) result.add(corsi.get(i));
+                }
+                break;
+            case "corso_docente":
+                for(int i=0; i<corsi.size(); i++){
+                    List<Utente> docenti = corsi.get(i).getDocentiCorso();
+                    for(int j=0; j<docenti.size();j++){
+                        if(docenti.get(j).getNome().equals(filtro)) {
+                            result.add(corsi.get(i));
+                            break;
+                        }
+                    }    
+                }
+                break;
+            case "corso_lingua":
+                for(int i=0; i<corsi.size(); i++){
+                    if(corsi.get(i).getLingua().equals(filtro)) result.add(corsi.get(i));
+                }
+                break;
+            case "corso_corsi_laurea":
+                for(int i=0; i<corsi.size(); i++){
+                    List<Corso_Laurea> corsi_laurea = corsi.get(i).getCorsiLaureaCorso();
+                    for(int j=0; j<corsi_laurea.size();j++){
+                        if(corsi_laurea.get(j).getNome().equals(filtro)) {
+                            result.add(corsi.get(i));
+                            break;
+                        }
+                    }    
+                }
+                break;
+            default: 
+                break;
+        }
+        return result; 
     }
     
 }

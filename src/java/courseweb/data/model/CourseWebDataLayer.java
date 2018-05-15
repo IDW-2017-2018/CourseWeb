@@ -60,6 +60,7 @@ public interface CourseWebDataLayer extends DataLayer {
     void storeUtenteByEmail(Utente utente) throws DataLayerException;
     void storeCorso(Corso corso) throws DataLayerException;
     
-    List<Corso> filtraCorsi (List<Corso> corsi, String attributo, String filtro);
+    List<Corso> filtraCorsi (List<Corso> corsi, String attributo, String filtro) throws DataLayerException;
+    
    
 }
