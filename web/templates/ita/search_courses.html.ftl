@@ -78,7 +78,7 @@
 
 			<tr class="trresult">
 				<td class="tdresult">${corso.codice}</td>
-				<td class="tdresult"><a class="linkresult" href="">${corso.nome}</a></td>
+				<td class="tdresult"><a class="linkresult" href="/course?lang=${lang}&id=${corso.id}">${corso.nome}</a></td>
 				<td class="tdresult">nomedocente</td>
 				<td class="tdresult">${corso.lingua}</td>
 				<td class="tdresult">${corso.semestre}</td>

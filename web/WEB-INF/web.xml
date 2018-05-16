@@ -87,6 +87,24 @@
         <url-pattern>/contacts</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>Course</servlet-name>
+        <servlet-class>courseweb.controller.Course</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Course</servlet-name>
+        <url-pattern>/course</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>BackOffice</servlet-name>
+        <servlet-class>courseweb.controller.BackOffice</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BackOffice</servlet-name>
+        <url-pattern>/backoffice</url-pattern>
+    </servlet-mapping>
+    
     <!-- CONFIGS -->
     
     <session-config>
