@@ -1095,7 +1095,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 break;
             case "corso_ssd":
                 for(int i=0; i<corsi.size(); i++){
-                    if(corsi.get(i).getCodice().equals(filtro)) result.add(corsi.get(i));
+                    if(corsi.get(i).getSSD().equals(filtro)) result.add(corsi.get(i));
                 }
                 break;
             case "corso_semestre":

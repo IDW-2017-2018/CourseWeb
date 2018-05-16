@@ -101,6 +101,8 @@ public class SearchCourses extends CourseWebBaseController {
             
             System.out.println(corsi_filtrati); 
             
+            System.out.println(corso_ssd); 
+            
             if (!corso_codice.equals("")){
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_codice", corso_codice); 
             } 
