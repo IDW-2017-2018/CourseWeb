@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 16, 2018 alle 14:38
+-- Creato il: Mag 16, 2018 alle 16:36
 -- Versione del server: 5.7.14
 -- Versione PHP: 5.6.25
 
@@ -51,11 +51,37 @@ CREATE TABLE `corsi` (
 --
 
 INSERT INTO `corsi` (`id`, `codice`, `anno`, `nome`, `SSD`, `semestre`, `lingua`, `prerequisiti`, `obiettivi`, `mod_esame`, `mod_insegnamento`, `sillabo`, `link_homepage`, `link_risorse`, `link_forum`, `note`, `lang`) VALUES
-(1, '34OFHGDG', '2016/2017', 'Analisi', 'INF/01', 1, 'italiano', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ita'),
-(2, '349HG5435T', '2017/2018', 'Analisi', 'INF/01', 2, 'italiano', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ita'),
-(3, '389HG453', '2017/2018', 'Ingegneria del Web', 'INF/01', 1, 'inglese', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'eng'),
-(5, 'OJ3F5982', '2016/2017', 'Matematica Discreta', 'MAT/01', 1, 'italiano', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ita'),
-(6, '2984T5UJ', '2015/2016', 'Architetture degli Elaboratori', 'INF/01', 1, 'inglese', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'eng');
+(12, 'F0050', '2017/2018', 'FONDAMENTI DI PROGRAMMAZIONE', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', 'ita		'),
+(13, 'F1I018', '2017/2018', 'INGEGNERIA DEL SOFTWARE', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', 'ita	'),
+(14, 'F1I010', '2017/2018', 'LABORATORIO DI ARCHITETTURA DEGLI ELABORATORI', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita	'),
+(15, 'F0151', '2017/2018', 'LINGUAGGI DI PROGRAMMAZIONE E COMPILATOTORI', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', 'ita'),
+(25, 'F0139', '2017/2018', 'OTTIMIZZAZIONE COMBINATORIA', 'MAT/09', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita		'),
+(24, 'F0139', '2017/2018', 'RICERCA OPERATIVA', 'MAT/09', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita		'),
+(23, 'F0081', '2017/2018', 'ADVANCED COMPUTER NETWORKS: INTERNETWORKING', 'INF/01', 2, 'inglese', '', '', '', '', '', '', '', '', '', 'eng	'),
+(22, 'F0081', '2017/2018', 'RETI DI CALCOLATORI EVOLUTE: ARCHITETTURE', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', 'ita	'),
+(21, 'F0144', '2017/2018', 'RETI DI CALCOLATORI', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita		'),
+(20, 'DT0008', '2017/2018', 'PRINCIPI E PARADIGMI DI PROGRAMMAZIONE', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita	'),
+(19, 'DT0208', '2017/2018', 'OBJECT-ORIENTED SOFTWARE DESIGN', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita	'),
+(18, 'F0123', '2017/2018', 'MATEMATICA DISCRETA II', 'MAT/02-03', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita		'),
+(16, 'DT0096', '2017/2018', 'MATEMATICA DI BASE', 'MAT/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', 'ita				'),
+(17, 'F0123', '2017/2018', 'MATEMATICA DISCRETA I', 'MAT/02-03', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita		'),
+(11, 'F0050', '2017/2018', 'LABORATORIO DI PROGRAMMAZIONE I', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', 'ita		'),
+(10, 'F0143', '2017/2018', 'FISICA', 'FIS/02', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita			'),
+(9, 'F0633', '2017/2018', 'LINGUA INGLESE B1', 'L-LIN/12', 2, 'inglese', '', '', '', '', '', '', '', '', '', 'eng			'),
+(8, 'DT0003', '2017/2018', 'CALCOLO DELLE PROBABILITA\' E STATISTICA MATEMATICA', 'MAT/06', 1, 'italiano', '', '', '', '', '', '', '', '', '', 'ita'),
+(7, 'I0323', '2017/2018', 'COMBINATORIA E CRITTOGRAFIA', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita		'),
+(6, 'F0136', '2017/2018', 'BASI DI DATI CON LABORATORIO', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita			'),
+(5, 'F0136', '2017/2018', 'BASI DI DATI', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita			'),
+(4, 'F0130', '2017/2018', 'LABORATORIO DI ALGORITMI E STRUTTURE DATI', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', 'ita	'),
+(3, 'F0130', '2017/2018', 'ALGORITMI E STRUTTURE DATI', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', 'ita	'),
+(2, 'F1I005', '2017/2018', 'ARCHITETTURA DEGLI ELABORATORI', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', 'ita				'),
+(1, 'DT0002', '2017/2018', 'ANALISI MATEMATICA', 'MAT/05', 1, 'italiano', '', '', '', '', '', '', '', '', '', 'ita				'),
+(26, 'DT0009', '2017/2018', 'SISTEMI OPERATIVI', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', 'ita		'),
+(27, 'DT0009', '2017/2018', 'LABORATORIO DI SISTEMI OPERATIVI', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', 'ita		'),
+(28, 'F0149', '2017/2018', 'TECNOLOGIE DEL WEB', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', 'ita			'),
+(29, 'F0158', '2017/2018', 'TEORIA DELL\'INFORMAZIONE', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita'),
+(30, 'F0150', '2017/2018', 'TEORIA DELLA CALCOLABILITA\' E COMPLESSITA\'', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita'),
+(31, 'DT0180', '2017/2018', 'WEB ENGENEERING', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', 'ita			');
 
 -- --------------------------------------------------------
 
@@ -205,9 +231,7 @@ CREATE TABLE `utenti` (
 
 INSERT INTO `utenti` (`id`, `email`, `password`, `tipo_utente`, `nome`, `cognome`) VALUES
 (2, 'b@b', '92eb5ffee6ae2fec3ad71c777531578f', 'amministratore', 'b', 'b'),
-(1, 'a@a', 'cc175b9c0f1b6a831c399e269772661', 'docente', 'a', 'a'),
-(12, 'e6bcb9fbf93549d99f086e413d46cee5', '', 'anonimo', '', ''),
-(13, '16583045e19e4f98a0def61b0137536b', '', 'anonimo', '', '');
+(1, 'a@a', 'cc175b9c0f1b6a831c399e269772661', 'docente', 'a', 'a');
 
 --
 -- Indici per le tabelle scaricate
@@ -217,8 +241,7 @@ INSERT INTO `utenti` (`id`, `email`, `password`, `tipo_utente`, `nome`, `cognome
 -- Indici per le tabelle `corsi`
 --
 ALTER TABLE `corsi`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `codice` (`codice`,`anno`,`lang`);
+  ADD PRIMARY KEY (`id`,`codice`,`anno`,`lang`);
 
 --
 -- Indici per le tabelle `corsi_corsi_integrati`
