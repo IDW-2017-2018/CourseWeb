@@ -48,7 +48,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsoById = connection.prepareStatement("SELECT * FROM corsi WHERE id=?");
             sCorsoByCodice = connection.prepareStatement("SELECT * FROM corsi WHERE codice=?");
             sCorsoByAnno = connection.prepareStatement("SELECT * FROM corsi WHERE anno=?");
-            sCorsoByNome = connection.prepareStatement("SELECT * FROM corsi WHERE nome LIKE '%?%'");
+            sCorsoByNome = connection.prepareStatement("SELECT * FROM corsi WHERE corsi.nome LIKE ?");
             sCorsoByCodiceAnno = connection.prepareStatement("SELECT * FROM corsi WHERE codice=? AND anno=?");
             uCorsoByCodiceAnno = connection.prepareStatement("UPDATE corsi SET codice=?, anno=?, ssd=?, semestre=?, lingua=?, prerequisiti=?, obiettivi=?, mod_esame=?, mod_insegnamento=?, sillabo=?, link_homepage=?, link_risorse=?, link_forum=?, note=?, lang=? WHERE codice=? AND anno=? AND lang=?");
             iCorsoByCodiceAnno = connection.prepareStatement("INSERT INTO corsi (codice,anno,nome,lang) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -440,7 +440,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         List<Corso> result = new ArrayList();
           
         try{
-            sCorsoByNome.setString(1,corso_nome);
+            sCorsoByNome.setString(1, "%" + corso_nome + "%");
             try(ResultSet rs = sCorsoByNome.executeQuery()) {
                 while(rs.next()){
                     result.add(getCorso(rs.getInt("id")));
@@ -475,38 +475,37 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     
     @Override
     public List<Corso> getCorsiAggiornati() throws DataLayerException {
-        List<Corso> corsi = getCorsi(); 
+        List<Corso> corsi = getCorsi();
         List<Corso> result = new ArrayList<Corso>(); 
-        
-        System.out.println(corsi.size());
-        
+                
         for(int i = 0; i < corsi.size(); i++){
             Corso item = corsi.get(i); 
-           
-                System.out.println("i = " + i);
-            
+                                   
             for(int j = i + 1; j < (corsi.size() - 1); j++){
                 Corso now = corsi.get(j);
-                
-                    System.out.println("j = " + j);
-                
+                                                 
                 if(now.getNome().equals(item.getNome())){
                     //assunzione campo anno tipo "2016/2017" stringa
-                   
+                                       
                     String anno_1 = item.getAnno().substring(0, item.getAnno().lastIndexOf("/")); //2016
                     String anno_2 = now.getAnno().substring(0, now.getAnno().lastIndexOf("/"));
-                    
+                                                           
                     if(anno_2.compareTo(anno_1) > 0){
                         item = now; 
                     }
                  
-                } else {
-                    //prosegui ricerca
-                }
+                } 
+                //prosegui ricerca
                 
             }
-            
-            result.add(item); 
+            result.add(item);
+            for(int k = i + 1; k < corsi.size(); k++){
+                Corso a = corsi.get(k); 
+                if(a.getNome().equals(item.getNome()))
+                    corsi.remove(a); 
+            }
+                
+                 
         }
         
         return result;      
@@ -515,7 +514,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     
     @Override
     public List<Corso> getCorsiByNomeAggiornati(String corso_nome) throws DataLayerException {
-        List<Corso> corsi = getCorsoByNome(corso_nome); 
+        List<Corso> corsi = getCorsoByNome(corso_nome);                      
         List<Corso> result = new ArrayList<Corso>(); 
         
         for(int i = 0; i < corsi.size(); i++){
@@ -534,13 +533,17 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                         item = now; 
                     }
                  
-                } else {
-                    //prosegui ricerca
-                }
-                
+                }                
+                //prosegui ricerca
+                            
             }
-            
-            result.add(item); 
+            result.add(item);
+            for(int k = i + 1; k < corsi.size(); k++){
+                Corso a = corsi.get(k); 
+                if(a.getNome().equals(item.getNome()))
+                    corsi.remove(a); 
+            }
+           
         }
         
         return result;      
@@ -579,6 +582,11 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             }
             
             result.add(item); 
+            for(int k = i + 1; k < lista_corsi.size(); k++){
+                Corso a = lista_corsi.get(k); 
+                if(a.getNome().equals(item.getNome()))
+                    lista_corsi.remove(a); 
+            }
         }
         
         return result; 

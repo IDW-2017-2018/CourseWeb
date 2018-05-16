@@ -80,27 +80,32 @@ public class SearchCourses extends CourseWebBaseController {
         String corso_lingua = request.getParameter("corso_lingua");
         String corso_corsi_laurea = request.getParameter("corso_corsi_laurea");
         //ricaricare la pagina con la nuova List di corsi
-        
+                  
         try {
             String lang = (String) request.getAttribute("lang");
-            
-            if(corso_nome != null){
+                                
+            if(!corso_nome.equals("")){
                 corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiByNomeAggiornati(corso_nome); 
             }
             else {
                 corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiAggiornati();
             }
             
+            
+            System.out.println(corsi_non_filtrati); 
+            
             corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(lang, corsi_non_filtrati); 
             // abbiamo lista dei corsi aggiornati e filtrati in base alla lingua e al nome, se è stato inserito
             
             // codice , SSD , semestre , docente , lingua , corsi di laurea
             
-            if (corso_codice != null){
+            System.out.println(corsi_filtrati); 
+            
+            if (!corso_codice.equals("")){
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_codice", corso_codice); 
             } 
             
-            if (corso_ssd != null){
+            if (!corso_ssd.equals("")){
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_ssd", corso_ssd); 
             } 
             
@@ -108,7 +113,7 @@ public class SearchCourses extends CourseWebBaseController {
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_semestre", corso_semestre); 
             } 
             
-            if (corso_docente != null){
+            if (!corso_docente.equals("")){
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_docente", corso_docente); 
             } 
             
@@ -116,9 +121,13 @@ public class SearchCourses extends CourseWebBaseController {
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_lingua", corso_lingua); 
             } 
             
-            if (corso_corsi_laurea != null){
+            if (!corso_corsi_laurea.equals("")){
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_corsi_laurea", corso_corsi_laurea); 
             } 
+            
+            
+            System.out.println(corsi_filtrati); 
+            
         }
         catch(DataLayerException exc){
             exc.printStackTrace();

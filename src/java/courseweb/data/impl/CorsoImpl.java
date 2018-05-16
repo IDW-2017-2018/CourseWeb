@@ -382,4 +382,9 @@ public class CorsoImpl implements Corso {
     public boolean isDirty(){
         return this.dirty; 
     }
+    
+    @Override 
+    public String toString(){
+        return this.getCodice() + " - " + this.getNome();   
+    }
 }
