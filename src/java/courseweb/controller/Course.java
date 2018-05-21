@@ -35,7 +35,7 @@ public class Course extends CourseWebBaseController {
         
         try {
             
-            String id_corso = (String) request.getAttribute("id");
+            String id_corso = (String) request.getParameter("id");
             Corso corso = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorso(Integer.parseInt(id_corso));
 
             if(request.getAttribute("lang").equals("eng")){
