@@ -33,6 +33,7 @@ public class CorsoImpl implements Corso {
     private String link_forum; 
     private String anno; 
     private String note; 
+    private String descrittori_dublino;
     
     private String lang; 
     
@@ -65,7 +66,7 @@ public class CorsoImpl implements Corso {
         this.link_forum = ""; 
         this.anno = ""; 
         this.note = ""; 
-        
+        this.descrittori_dublino = "";
         this.lang = ""; 
         
         this.docenti = null;
@@ -157,6 +158,11 @@ public class CorsoImpl implements Corso {
     @Override
     public String getNote(){
         return this.note;
+    }
+    
+    @Override
+    public String getDescrittoriDublino(){
+        return this.descrittori_dublino;
     }
     
     @Override
@@ -297,6 +303,11 @@ public class CorsoImpl implements Corso {
     @Override
     public void setNote(String note){
         this.note = note;
+    }
+    
+    @Override
+    public void setDescrittoriDublino(String descrittori_dublino){
+        this.descrittori_dublino = descrittori_dublino;
     }
     
     @Override

@@ -28,6 +28,7 @@ public interface Corso {
     String getLinkForum();
     String getAnno();       
     String getNote();
+    String getDescrittoriDublino();
     
     String getLang();
     
@@ -54,7 +55,8 @@ public interface Corso {
     void setLinkRisorseEsterne(String link_risorse_esterne);
     void setLinkForum(String link_forum);
     void setAnno(String anno);
-    void setNote(String note);   
+    void setNote(String note);
+    void setDescrittoriDublino(String descrittori_dublino);
     void setDocenti(List<Utente> docenti);
     void setCorsiLaurea(List<Corso_Laurea> corsi_laurea);
     void setLibriTesto(List<Libro_Testo> libri_testo);

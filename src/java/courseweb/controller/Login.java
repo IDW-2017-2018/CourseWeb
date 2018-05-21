@@ -180,7 +180,6 @@ public class Login extends CourseWebBaseController {
             Utente guest = new UtenteImpl(datalayer); 
             guest.setEmail(UUID.randomUUID().toString().replace("-", ""));
             guest.setTipoUtente("anonimo");
-            
             datalayer.storeUtenteById(guest);
             
             HttpSession session = SecurityLayer.createSession(request, guest.getEmail(), guest.getId()); 
