@@ -11,7 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
@@ -21,7 +23,7 @@ import javax.sql.DataSource;
  */
 public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements CourseWebDataLayer {
     
-    private PreparedStatement sCorso, sCorsoById, sCorsoByCodice, sCorsoByAnno, sCorsoByNome, sCorsoByCodiceAnno, uCorsoByCodiceAnno, iCorsoByCodiceAnno;
+    private PreparedStatement sCorso, sCorsoById, sCorsoByCodice, sCorsoByAnno, sCorsoByNome, sCorsoByNomeVersioni, sCorsoByCodiceAnno, uCorsoByCodiceAnno, iCorsoByCodiceAnno;
     private PreparedStatement sUtente, sUtenteById, sUtenteByEmail, uUtenteById, uUtenteByEmail, iUtente;
     private PreparedStatement sCorsoLaurea, sCorsoLaureaById, sCorsoLaureaByNome;
     private PreparedStatement sLibriTesto, sLibroTestoById;
@@ -33,7 +35,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     private PreparedStatement sCorsiMutuatiCorso;
     private PreparedStatement sCorsiIntegratiCorso;
     private PreparedStatement sLibriTestoCorso;
-    private PreparedStatement sMaterialiCorso;     
+    private PreparedStatement sMaterialiCorso;
+    private PreparedStatement sCFUCorsoCorsoLaurea;
           
     public CourseWebDataLayerMySqlImpl(DataSource datasource) throws SQLException, NamingException {
         super(datasource);
@@ -49,6 +52,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsoByCodice = connection.prepareStatement("SELECT * FROM corsi WHERE codice=?");
             sCorsoByAnno = connection.prepareStatement("SELECT * FROM corsi WHERE anno=?");
             sCorsoByNome = connection.prepareStatement("SELECT * FROM corsi WHERE corsi.nome LIKE ?");
+            sCorsoByNomeVersioni = connection.prepareStatement("SELECT * FROM corsi WHERE corsi.nome=?");
             sCorsoByCodiceAnno = connection.prepareStatement("SELECT * FROM corsi WHERE codice=? AND anno=?");
             uCorsoByCodiceAnno = connection.prepareStatement("UPDATE corsi SET codice=?, anno=?, ssd=?, semestre=?, lingua=?, prerequisiti=?, obiettivi=?, mod_esame=?, mod_insegnamento=?, sillabo=?, link_homepage=?, link_risorse=?, link_forum=?, note=?, lang=? WHERE codice=? AND anno=? AND lang=?");
             iCorsoByCodiceAnno = connection.prepareStatement("INSERT INTO corsi (codice,anno,nome,lang) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -83,6 +87,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sLibriTestoCorso = connection.prepareStatement("SELECT * FROM corsi_libri_testo INNER JOIN libri_testo ON (corsi_libri_testo.id_libro_testo = libri_testo.id) WHERE corsi_libri_testo.id_corso=?");
             sMaterialiCorso = connection.prepareStatement("SELECT * FROM corsi_materiali INNER JOIN materiali ON (corsi_materiali.id_materiale = materiali.id) WHERE corsi_materiali.id_corso=?");
             sDocentiCorso = connection.prepareStatement("SELECT * FROM corsi_docenti INNER JOIN utenti ON (corsi_docenti.id_docente = utenti.id) WHERE corsi_docenti.id_corso=?");
+            sCFUCorsoCorsoLaurea = connection.prepareStatement("SELECT * FROM corsi_corsi_laurea WHERE id_corso=? AND id_corso_laurea=?");
         }
         catch(SQLException exc){
             throw new DataLayerException("Error in initializing CourseWeb DataLayer", exc);
@@ -134,6 +139,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             c.setObiettivi(rs.getString("obiettivi"));
             c.setModEsame(rs.getString("mod_esame")); 
             c.setModInsegnamento(rs.getString("mod_insegnamento"));
+            c.setDescrittoriDublino(rs.getString("descrittori_dublino"));
             c.setSillabo(rs.getString("sillabo")); 
             c.setLinkHomepageCorso(rs.getString("link_homepage"));
             c.setLinkRisorseEsterne(rs.getString("link_risorse"));
@@ -442,6 +448,24 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         try{
             sCorsoByNome.setString(1, "%" + corso_nome + "%");
             try(ResultSet rs = sCorsoByNome.executeQuery()) {
+                while(rs.next()){
+                    result.add(getCorso(rs.getInt("id")));
+                }
+            }
+        }
+        catch(SQLException exc){
+            exc.printStackTrace();
+        }
+        return result;
+    }
+    
+    @Override
+    public List<Corso> getCorsoByNomeVersioni(String corso_nome) throws DataLayerException {
+        List<Corso> result = new ArrayList();
+          
+        try{
+            sCorsoByNomeVersioni.setString(1, corso_nome);
+            try(ResultSet rs = sCorsoByNomeVersioni.executeQuery()) {
                 while(rs.next()){
                     result.add(getCorso(rs.getInt("id")));
                 }
@@ -1048,6 +1072,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsoById.close();
             sCorsoByCodice.close();
             sCorsoByAnno.close();
+            sCorsoByNome.close();
+            sCorsoByNomeVersioni.close();
             sCorsoByCodiceAnno.close();
             uCorsoByCodiceAnno.close();
             iCorsoByCodiceAnno.close();
@@ -1060,20 +1086,21 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsoLaurea.close();
             sCorsoLaureaById.close();
             sCorsoLaureaByNome.close();
-            sLibriTesto.close();
             sLibroTestoById.close();
-            sMateriali.close();
+            sLibriTesto.close();
             sMaterialeById.close();
+            sMateriali.close();                   
             sDocenti.close();
             sDocenteById.close();
             sDocenteByEmail.close();
-            sDocentiCorso.close();
             sCorsiLaureaCorso.close();
             sCorsiPropedeuticiCorso.close();
             sCorsiMutuatiCorso.close();
             sCorsiIntegratiCorso.close();
             sLibriTestoCorso.close();
-            sMaterialiCorso.close();    
+            sMaterialiCorso.close();   
+            sDocentiCorso.close();
+            sCFUCorsoCorsoLaurea.close();
         }
         
         catch(SQLException ex) {
@@ -1134,6 +1161,38 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 break;
         }
         return result; 
+    }
+    
+    @Override
+    public List<Map<String, Object>> getCFU(Corso corso) throws DataLayerException {
+        int id_corso = corso.getId();
+        List<Corso_Laurea> corsi_laurea = corso.getCorsiLaureaCorso();
+        List<Map<String, Object>> result = new ArrayList<Map<String, Object>>(); 
+        
+        for(Corso_Laurea corso_laurea : corsi_laurea){
+            Map<String, Object> map = new HashMap<String, Object>(); 
+            try {
+                sCFUCorsoCorsoLaurea.setInt(1, id_corso);
+                sCFUCorsoCorsoLaurea.setInt(2, corso_laurea.getId());
+                try(ResultSet rs = sCFUCorsoCorsoLaurea.executeQuery()){
+
+                    while(rs.next()){
+                        map.put("corso_laurea", corso_laurea.getNome());
+                        map.put("numero_cfu", rs.getString("numero_cfu"));
+                        map.put("tipo_cfu", rs.getString("tipo_cfu"));
+                        
+                        result.add(map);
+                    }
+
+                }
+
+            } catch(SQLException ex){
+                throw new DataLayerException("Unable to load Utente by id", ex); 
+            }
+            
+        }
+        
+        return result;
     }
     
 }

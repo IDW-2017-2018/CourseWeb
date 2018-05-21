@@ -6,6 +6,7 @@ package courseweb.data.model;
 import framework.data.DataLayer;
 import framework.data.DataLayerException;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -32,6 +33,7 @@ public interface CourseWebDataLayer extends DataLayer {
     List<Corso> getCorsoByCodice(String corso_codice) throws DataLayerException;
     List<Corso> getCorsoByAnno(String corso_anno) throws DataLayerException;
     List<Corso> getCorsoByNome (String corso_nome) throws DataLayerException;
+    List<Corso> getCorsoByNomeVersioni (String corso_nome) throws DataLayerException;
     List<Corso> getCorsi() throws DataLayerException;
     List<Corso> getCorsiAggiornati() throws DataLayerException; 
     List<Corso> getCorsiByNomeAggiornati(String corso_nome) throws DataLayerException;
@@ -61,6 +63,6 @@ public interface CourseWebDataLayer extends DataLayer {
     void storeCorso(Corso corso) throws DataLayerException;
     
     List<Corso> filtraCorsi (List<Corso> corsi, String attributo, String filtro) throws DataLayerException;
+    List<Map<String, Object>> getCFU(Corso corso) throws DataLayerException;
     
-   
 }
