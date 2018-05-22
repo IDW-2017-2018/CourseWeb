@@ -40,25 +40,35 @@ public class Course extends CourseWebBaseController {
 
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+             
                 request.setAttribute("corso", corso);
+                request.setAttribute("corso_anni", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsoByNomeVersioni(corso.getNome()));
                 request.setAttribute("docenti", corso.getDocentiCorso());
-                request.setAttribute("corsi_laurea", corso.getCorsiLaureaCorso());
+                
+                request.setAttribute("corsi_laurea", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCFU(corso));
+                
                 request.setAttribute("libri_testo", corso.getLibriTestoCorso());
                 request.setAttribute("corsi_propedeutici", corso.getCorsiPropedeuticiCorso());
                 request.setAttribute("corsi_mutuati", corso.getCorsiMutuatiCorso());
                 request.setAttribute("corsi_integrati", corso.getCorsiIntegratiCorso());
                 request.setAttribute("corso_materiali", corso.getMaterialiCorso());
+                
                 result.activate("/eng/course.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                
                 request.setAttribute("corso", corso);
+                request.setAttribute("corso_anni", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsoByNomeVersioni(corso.getNome()));
                 request.setAttribute("docenti", corso.getDocentiCorso());
-                request.setAttribute("corsi_laurea", corso.getCorsiLaureaCorso());
+                
+                request.setAttribute("corsi_laurea", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCFU(corso));
+                
                 request.setAttribute("libri_testo", corso.getLibriTestoCorso());
                 request.setAttribute("corsi_propedeutici", corso.getCorsiPropedeuticiCorso());
                 request.setAttribute("corsi_mutuati", corso.getCorsiMutuatiCorso());
                 request.setAttribute("corsi_integrati", corso.getCorsiIntegratiCorso());
                 request.setAttribute("corso_materiali", corso.getMaterialiCorso());
+                
                 result.activate("/ita/course.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -103,6 +113,7 @@ public class Course extends CourseWebBaseController {
                 }
                                
                 request.setAttribute("page", "course");
+                request.setAttribute("id", request.getParameter("id"));
                 
                 action_default(request, response); 
                 

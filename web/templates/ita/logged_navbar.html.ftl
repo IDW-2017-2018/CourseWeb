@@ -2,9 +2,14 @@
 
 <ul class="navbar">
 
-    <li class="menu_item"><a href="search_courses?lang=${lang}">CORSI</a></li>
+    <li class="menu_item"><a href="searchcourses?lang=${lang}">CORSI</a></li>
 
-	<li class="profile_item"><p>${session.getAttribute('utente').nome}</p></li>
+        <#if (session.getAttribute('utente').nome != "")>
+            <li class="profile_item"><p>${session.getAttribute('utente').nome}</p></li>
+        <#else>
+            <li class="profile_item"><p>ospite</p></li>
+        </#if>
+            
     <img class="profile_icon" src="images/footer_icons/white_svg/user-circle.svg" alt="user-circle"/>
 
 </ul>

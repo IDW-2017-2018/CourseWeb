@@ -148,15 +148,6 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             
             c.setLang(rs.getString("lang"));
             
-            /* oggetti complessi */
-            c.setDocenti(getDocentiCorso(c));
-            c.setCorsiLaurea(getCorsiLaureaCorso(c));
-            c.setLibriTesto(getLibriTestoCorso(c));
-            c.setCorsiPropedeutici(getCorsiPropedeuticiCorso(c));
-            c.setCorsiMutuati(getCorsiMutuatiCorso(c));
-            c.setCorsiIntegrati(getCorsiIntegratiCorso(c));
-            c.setMateriali(getMaterialiCorso(c));
-            
             return c; 
             
         } catch(SQLException ex){
@@ -765,7 +756,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             try(ResultSet rs = sCorsiLaureaCorso.executeQuery()) {          
                 
                 while(rs.next()){
-                    result.add(getCorsoLaurea(rs.getInt("id")));
+                    result.add(getCorsoLaurea(rs.getInt("corsi_laurea.id")));
                 }
             } 
         }
@@ -787,8 +778,10 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             try(ResultSet rs = sCorsiPropedeuticiCorso.executeQuery()) {          
                 
                 while(rs.next()){
-                    result.add(getCorso(rs.getInt("id")));
+          
+                    result.add(getCorso(rs.getInt("corsi.id")));
                 }
+                
             } 
         }
         
@@ -1177,7 +1170,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 try(ResultSet rs = sCFUCorsoCorsoLaurea.executeQuery()){
 
                     while(rs.next()){
-                        map.put("corso_laurea", corso_laurea.getNome());
+                        map.put("nome", corso_laurea.getNome());
                         map.put("numero_cfu", rs.getString("numero_cfu"));
                         map.put("tipo_cfu", rs.getString("tipo_cfu"));
                         

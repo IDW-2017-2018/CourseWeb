@@ -62,7 +62,7 @@
 
     <tr class="trresult-list">
 
-        <td class="tdresult-list" colspan="6">${docente.nome}</td>
+        <td class="tdresult-list" colspan="6">${docente.nome}&nbsp;${docente.cognome}</td>
 
     </tr>
 
@@ -110,7 +110,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${corso.mod_esame}</td>
+        <td class="tdresult" colspan="6">${corso.modEsame}</td>
 
     </tr>
 
@@ -122,7 +122,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${corso.insegnamento}</td>
+        <td class="tdresult" colspan="6">${corso.modInsegnamento}</td>
 
     </tr>
 
@@ -178,7 +178,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${corso.descrittori_dublino}</td>
+        <td class="tdresult" colspan="6">${corso.descrittoriDublino}</td>
 
     </tr>
 
@@ -309,9 +309,9 @@
 
      <tr class="trresult">
 
-        <td class="tdresult" colspan="2"><a class="linkresult" href="">${corso.link_homepage_corso}</a></td>
-        <td class="tdresult" colspan="2"><a class="linkresult" href="">${corso.link_risorse_esterne}</a></td>
-        <td class="tdresult" colspan="2"><a class="linkresult" href="">${corso.link_forum}</a></td>
+        <td class="tdresult" colspan="2"><a class="linkresult" href="">${corso.linkHomepageCorso}</a></td>
+        <td class="tdresult" colspan="2"><a class="linkresult" href="">${corso.linkRisorseEsterne}</a></td>
+        <td class="tdresult" colspan="2"><a class="linkresult" href="">${corso.linkForum}</a></td>
 
     </tr>
 

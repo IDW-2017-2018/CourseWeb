@@ -27,9 +27,15 @@
 
     <div class="title_bar">
         
-        <a href="${page}?lang=${lang}">
-            <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
-        </a>
+        <#if id??>
+            <a href="${page}?lang=${lang}&id=${id}">
+                <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
+            </a>
+        <#else>
+            <a href="${page}?lang=${lang}">
+                <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
+            </a>
+        </#if>
 
     </div>
 
@@ -40,10 +46,15 @@
     <!-- ########## LANG BAR ########## -->
 
     <ul class="lang_bar">
-
+        
+        <#if id??>
+            <li><a href="${page}?lang=ita&id=${id}">ITALIANO</a></li>
+            <li><a href="${page}?lang=eng&id=${id}">INGLESE</a></li>
+        <#else>
             <li><a href="${page}?lang=ita">ITALIANO</a></li>
             <li><a href="${page}?lang=eng">INGLESE</a></li>
-
+        </#if>
+        
     </ul>
 
     <!-- ########## FOOTER ########## -->
