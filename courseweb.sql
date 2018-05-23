@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 21, 2018 alle 16:32
+-- Creato il: Mag 23, 2018 alle 15:35
 -- Versione del server: 5.7.14
 -- Versione PHP: 5.6.25
 
@@ -30,59 +30,63 @@ CREATE TABLE `corsi` (
   `id` int(11) NOT NULL,
   `codice` varchar(250) NOT NULL,
   `anno` varchar(250) NOT NULL,
-  `lang` varchar(250) NOT NULL,
   `nome` text NOT NULL,
-  `SSD` text,
-  `semestre` int(11) DEFAULT NULL,
-  `lingua` text,
-  `prerequisiti` text,
-  `obiettivi` text,
-  `mod_esame` text,
-  `mod_insegnamento` text,
-  `descrittori_dublino` text,
-  `sillabo` text,
-  `link_homepage` text,
-  `link_risorse` text,
-  `link_forum` text,
-  `note` text
+  `SSD` text NOT NULL,
+  `semestre` int(11) NOT NULL,
+  `lingua` text NOT NULL,
+  `prerequisiti` text NOT NULL,
+  `obiettivi` text NOT NULL,
+  `mod_esame` text NOT NULL,
+  `mod_insegnamento` text NOT NULL,
+  `descrittori_dublino` text NOT NULL,
+  `sillabo` text NOT NULL,
+  `link_homepage` text NOT NULL,
+  `link_risorse` text NOT NULL,
+  `link_forum` text NOT NULL,
+  `note` text NOT NULL,
+  `lang` varchar(250) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `corsi`
 --
 
-INSERT INTO `corsi` (`id`, `codice`, `anno`, `lang`, `nome`, `SSD`, `semestre`, `lingua`, `prerequisiti`, `obiettivi`, `mod_esame`, `mod_insegnamento`, `descrittori_dublino`, `sillabo`, `link_homepage`, `link_risorse`, `link_forum`, `note`) VALUES
-(12, 'F0050', '2017/2018', 'ita		', 'FONDAMENTI DI PROGRAMMAZIONE', 'INF/01', 1, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(13, 'F1I018', '2017/2018', 'ita	', 'INGEGNERIA DEL SOFTWARE', 'INF/01', 1, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(14, 'F1I010', '2017/2018', 'ita	', 'LABORATORIO DI ARCHITETTURA DEGLI ELABORATORI', 'INF/01', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(15, 'F0151', '2017/2018', 'ita', 'LINGUAGGI DI PROGRAMMAZIONE E COMPILATOTORI', 'INF/01', 1, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(25, 'F0139', '2017/2018', 'ita		', 'OTTIMIZZAZIONE COMBINATORIA', 'MAT/09', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(24, 'F0139', '2017/2018', 'ita		', 'RICERCA OPERATIVA', 'MAT/09', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(23, 'F0081', '2017/2018', 'eng	', 'ADVANCED COMPUTER NETWORKS: INTERNETWORKING', 'INF/01', 2, 'inglese', '', '', '', '', NULL, '', '', '', '', ''),
-(22, 'F0081', '2017/2018', 'ita	', 'RETI DI CALCOLATORI EVOLUTE: ARCHITETTURE', 'INF/01', 1, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(21, 'F0144', '2017/2018', 'ita		', 'RETI DI CALCOLATORI', 'INF/01', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(20, 'DT0008', '2017/2018', 'ita	', 'PRINCIPI E PARADIGMI DI PROGRAMMAZIONE', 'INF/01', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(19, 'DT0208', '2017/2018', 'ita	', 'OBJECT-ORIENTED SOFTWARE DESIGN', 'INF/01', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(18, 'F0123', '2017/2018', 'ita		', 'MATEMATICA DISCRETA II', 'MAT/02-03', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(16, 'DT0096', '2017/2018', 'ita				', 'MATEMATICA DI BASE', 'MAT/01', 1, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(17, 'F0123', '2017/2018', 'ita		', 'MATEMATICA DISCRETA I', 'MAT/02-03', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(11, 'F0050', '2017/2018', 'ita		', 'LABORATORIO DI PROGRAMMAZIONE I', 'INF/01', 1, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(10, 'F0143', '2017/2018', 'ita			', 'FISICA', 'FIS/02', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(9, 'F0633', '2017/2018', 'eng			', 'LINGUA INGLESE B1', 'L-LIN/12', 2, 'inglese', '', '', '', '', NULL, '', '', '', '', ''),
-(8, 'DT0003', '2017/2018', 'ita', 'CALCOLO DELLE PROBABILITA\' E STATISTICA MATEMATICA', 'MAT/06', 1, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(7, 'I0323', '2017/2018', 'ita		', 'COMBINATORIA E CRITTOGRAFIA', 'INF/01', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(6, 'F0136', '2017/2018', 'ita			', 'BASI DI DATI CON LABORATORIO', 'INF/01', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(5, 'F0136', '2017/2018', 'ita			', 'BASI DI DATI', 'INF/01', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(4, 'F0130', '2017/2018', 'ita	', 'LABORATORIO DI ALGORITMI E STRUTTURE DATI', 'INF/01', 1, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(3, 'F0130', '2017/2018', 'ita	', 'ALGORITMI E STRUTTURE DATI', 'INF/01', 1, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(2, 'F1I005', '2017/2018', 'ita				', 'ARCHITETTURA DEGLI ELABORATORI', 'INF/01', 1, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(1, 'DT0002', '2017/2018', 'ita				', 'ANALISI MATEMATICA', 'MAT/05', 1, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(26, 'DT0009', '2017/2018', 'ita		', 'SISTEMI OPERATIVI', 'INF/01', 1, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(27, 'DT0009', '2017/2018', 'ita		', 'LABORATORIO DI SISTEMI OPERATIVI', 'INF/01', 1, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(28, 'F0149', '2017/2018', 'ita			', 'TECNOLOGIE DEL WEB', 'INF/01', 1, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(29, 'F0158', '2017/2018', 'ita', 'TEORIA DELL\'INFORMAZIONE', 'INF/01', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(30, 'F0150', '2017/2018', 'ita', 'TEORIA DELLA CALCOLABILITA\' E COMPLESSITA\'', 'INF/01', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', ''),
-(31, 'DT0180', '2017/2018', 'ita			', 'WEB ENGENEERING', 'INF/01', 2, 'italiano', '', '', '', '', NULL, '', '', '', '', '');
+INSERT INTO `corsi` (`id`, `codice`, `anno`, `nome`, `SSD`, `semestre`, `lingua`, `prerequisiti`, `obiettivi`, `mod_esame`, `mod_insegnamento`, `descrittori_dublino`, `sillabo`, `link_homepage`, `link_risorse`, `link_forum`, `note`, `lang`) VALUES
+(1, 'DT0002', '2017/2018', 'ANALISI MATEMATICA', 'MAT/05', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita				'),
+(2, 'F1I005', '2017/2018', 'ARCHITETTURA DEGLI ELABORATORI', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita				'),
+(3, 'F0130', '2017/2018', '[modulo] ALGORITMI E STRUTTURE DATI', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita	'),
+(4, 'F0130', '2017/2018', '[modulo] LABORATORIO DI ALGORITMI E STRUTTURE DATI', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita	'),
+(5, 'F0136', '2017/2018', '[modulo] BASI DI DATI', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita			'),
+(6, 'F0136', '2017/2018', '[modulo] BASI DI DATI CON LABORATORIO', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita			'),
+(7, 'I0323', '2017/2018', 'COMBINATORIA E CRITTOGRAFIA', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita		'),
+(8, 'DT0003', '2017/2018', 'CALCOLO DELLE PROBABILITA\' E STATISTICA MATEMATICA', 'MAT/06', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita'),
+(9, 'F0633', '2017/2018', 'LINGUA INGLESE B1', 'L-LIN/12', 2, 'inglese', '', '', '', '', '', '', '', '', '', '', 'eng			'),
+(10, 'F0143', '2017/2018', 'FISICA', 'FIS/02', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita			'),
+(11, 'F0050', '2017/2018', 'LABORATORIO DI PROGRAMMAZIONE I', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita		'),
+(12, 'F0050', '2017/2018', 'FONDAMENTI DI PROGRAMMAZIONE', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita		'),
+(13, 'F1I018', '2017/2018', 'INGEGNERIA DEL SOFTWARE', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita	'),
+(14, 'F1I010', '2017/2018', 'LABORATORIO DI ARCHITETTURA DEGLI ELABORATORI', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita	'),
+(15, 'F0151', '2017/2018', 'LINGUAGGI DI PROGRAMMAZIONE E COMPILATOTORI', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita'),
+(16, 'DT0096', '2017/2018', 'MATEMATICA DI BASE', 'MAT/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita				'),
+(17, 'F0123', '2017/2018', 'MATEMATICA DISCRETA I', 'MAT/02-03', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita		'),
+(18, 'F0123', '2017/2018', 'MATEMATICA DISCRETA II', 'MAT/02-03', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita		'),
+(19, 'DT0208', '2017/2018', 'OBJECT-ORIENTED SOFTWARE DESIGN', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita	'),
+(20, 'DT0008', '2017/2018', 'PRINCIPI E PARADIGMI DI PROGRAMMAZIONE', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita	'),
+(21, 'F0144', '2017/2018', 'RETI DI CALCOLATORI', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita		'),
+(22, 'F0081', '2017/2018', 'RETI DI CALCOLATORI EVOLUTE: ARCHITETTURE', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita	'),
+(23, 'F0081', '2017/2018', 'ADVANCED COMPUTER NETWORKS: INTERNETWORKING', 'INF/01', 2, 'inglese', '', '', '', '', '', '', '', '', '', '', 'eng	'),
+(24, 'F0139', '2017/2018', 'RICERCA OPERATIVA', 'MAT/09', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita		'),
+(25, 'F0139', '2017/2018', 'OTTIMIZZAZIONE COMBINATORIA', 'MAT/09', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita		'),
+(26, 'DT0009', '2017/2018', 'SISTEMI OPERATIVI', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita		'),
+(27, 'DT0009', '2017/2018', 'LABORATORIO DI SISTEMI OPERATIVI', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita		'),
+(28, 'F0149', '2017/2018', 'TECNOLOGIE DEL WEB', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita			'),
+(29, 'F0158', '2017/2018', 'TEORIA DELL\'INFORMAZIONE', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita'),
+(30, 'F0150', '2017/2018', 'TEORIA DELLA CALCOLABILITA\' E COMPLESSITA\'', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita'),
+(31, 'DT0180', '2017/2018', 'WEB ENGENEERING', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita			'),
+(32, 'DT0002', '2016/2017', 'ANALISI MATEMATICA', 'MAT/05', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita'),
+(33, 'DT0002', '2015/2016', 'ANALISI MATEMATICA', 'MAT/05', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita'),
+(34, 'F0130', '2017/2018', 'ALGORITMI E STRUTTURE DATI CON LABORATORIO', 'INF/01', 1, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita	'),
+(35, 'F0136', '2017/2018', 'BASI DI DATI CON LABORATORIO', 'INF/01', 2, 'italiano', '', '', '', '', '', '', '', '', '', '', 'ita			');
 
 -- --------------------------------------------------------
 
@@ -95,6 +99,14 @@ CREATE TABLE `corsi_corsi_integrati` (
   `id_corso` int(11) NOT NULL,
   `id_corso_integrato` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `corsi_corsi_integrati`
+--
+
+INSERT INTO `corsi_corsi_integrati` (`id`, `id_corso`, `id_corso_integrato`) VALUES
+(1, 3, 34),
+(2, 4, 34);
 
 -- --------------------------------------------------------
 
@@ -110,6 +122,16 @@ CREATE TABLE `corsi_corsi_laurea` (
   `tipo_cfu` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dump dei dati per la tabella `corsi_corsi_laurea`
+--
+
+INSERT INTO `corsi_corsi_laurea` (`id`, `id_corso_laurea`, `id_corso`, `numero_cfu`, `tipo_cfu`) VALUES
+(1, 1, 3, 6, 'A'),
+(2, 1, 4, 6, 'A'),
+(3, 1, 1, 9, 'A'),
+(4, 2, 1, 12, 'A');
+
 -- --------------------------------------------------------
 
 --
@@ -122,6 +144,13 @@ CREATE TABLE `corsi_corsi_mutuati` (
   `id_corso_mutuato` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dump dei dati per la tabella `corsi_corsi_mutuati`
+--
+
+INSERT INTO `corsi_corsi_mutuati` (`id`, `id_corso`, `id_corso_mutuato`) VALUES
+(1, 1, 8);
+
 -- --------------------------------------------------------
 
 --
@@ -133,6 +162,14 @@ CREATE TABLE `corsi_corsi_propedeutici` (
   `id_corso` int(11) NOT NULL,
   `id_corso_propedeutico` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `corsi_corsi_propedeutici`
+--
+
+INSERT INTO `corsi_corsi_propedeutici` (`id`, `id_corso`, `id_corso_propedeutico`) VALUES
+(1, 3, 1),
+(2, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -154,8 +191,16 @@ CREATE TABLE `corsi_docenti` (
 
 CREATE TABLE `corsi_laurea` (
   `id` int(11) NOT NULL,
-  `nome` varchar(500) NOT NULL
+  `nome` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `corsi_laurea`
+--
+
+INSERT INTO `corsi_laurea` (`id`, `nome`) VALUES
+(1, 'Informatica'),
+(2, 'Matematica');
 
 -- --------------------------------------------------------
 
@@ -194,7 +239,7 @@ CREATE TABLE `libri_testo` (
   `volume` text NOT NULL,
   `anno` text NOT NULL,
   `editore` text NOT NULL,
-  `link` text
+  `link` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -219,11 +264,11 @@ CREATE TABLE `materiali` (
 
 CREATE TABLE `utenti` (
   `id` int(11) NOT NULL,
-  `email` varchar(1000) DEFAULT NULL,
-  `password` varchar(500) DEFAULT NULL,
-  `tipo_utente` varchar(500) NOT NULL,
-  `nome` varchar(500) DEFAULT NULL,
-  `cognome` varchar(500) DEFAULT NULL
+  `email` varchar(250) NOT NULL,
+  `password` text NOT NULL,
+  `tipo_utente` text NOT NULL,
+  `nome` text NOT NULL,
+  `cognome` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -231,8 +276,8 @@ CREATE TABLE `utenti` (
 --
 
 INSERT INTO `utenti` (`id`, `email`, `password`, `tipo_utente`, `nome`, `cognome`) VALUES
-(2, 'b@b', '92eb5ffee6ae2fec3ad71c777531578f', 'amministratore', 'b', 'b'),
-(1, 'a@a', 'cc175b9c0f1b6a831c399e269772661', 'docente', 'a', 'a');
+(1, 'a@a', '0cc175b9c0f1b6a831c399e269772661', 'amministratore', 'a', 'a		'),
+(2, 'b@b', '92eb5ffee6ae2fec3ad71c777531578f', 'docente', 'b', 'b		');
 
 --
 -- Indici per le tabelle scaricate
@@ -308,33 +353,37 @@ ALTER TABLE `materiali`
 -- Indici per le tabelle `utenti`
 --
 ALTER TABLE `utenti`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`id`,`email`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
 --
 
 --
+-- AUTO_INCREMENT per la tabella `corsi`
+--
+ALTER TABLE `corsi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+--
 -- AUTO_INCREMENT per la tabella `corsi_corsi_integrati`
 --
 ALTER TABLE `corsi_corsi_integrati`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT per la tabella `corsi_corsi_laurea`
 --
 ALTER TABLE `corsi_corsi_laurea`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT per la tabella `corsi_corsi_mutuati`
 --
 ALTER TABLE `corsi_corsi_mutuati`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT per la tabella `corsi_corsi_propedeutici`
 --
 ALTER TABLE `corsi_corsi_propedeutici`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT per la tabella `corsi_docenti`
 --
@@ -344,7 +393,7 @@ ALTER TABLE `corsi_docenti`
 -- AUTO_INCREMENT per la tabella `corsi_laurea`
 --
 ALTER TABLE `corsi_laurea`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT per la tabella `corsi_libri_testo`
 --
