@@ -5,6 +5,8 @@ package courseweb.data.impl;
 
 import courseweb.data.model.CourseWebDataLayer; 
 import courseweb.data.model.Libro_Testo;
+import courseweb.data.model.Materiale;
+import framework.data.DataLayerException;
 
 /**
  *
@@ -112,6 +114,20 @@ public class Libro_TestoImpl implements Libro_Testo{
     @Override
     public boolean isDirty(){
         return this.dirty; 
+    }
+    
+    @Override
+    public void copyFrom(Libro_Testo libro_testo) throws DataLayerException {
+        
+        id = libro_testo.getId();
+        autore = libro_testo.getAutore();
+        titolo = libro_testo.getTitolo();
+        editore = libro_testo.getEditore();
+        volume = libro_testo.getVolume();
+        anno = libro_testo.getAnno();
+        link = libro_testo.getLink();
+        dirty = true;
+        
     }
     
 }

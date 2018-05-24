@@ -5,6 +5,7 @@ package courseweb.data.impl;
 
 import courseweb.data.model.CourseWebDataLayer; 
 import courseweb.data.model.Materiale;
+import framework.data.DataLayerException;
 
 /**
  *
@@ -89,6 +90,18 @@ public class MaterialeImpl implements Materiale {
     @Override
     public boolean isDirty(){
         return this.dirty; 
+    }
+    
+    @Override
+    public void copyFrom(Materiale materiale) throws DataLayerException {
+        
+        id = materiale.getId();
+        nome = materiale.getNome();
+        descrizione = materiale.getDescrizione();
+        dimensione = materiale.getDimensione();
+        percorso = materiale.getPercorso();
+        dirty = true;
+        
     }
     
 }

@@ -23,11 +23,14 @@ import javax.sql.DataSource;
  */
 public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements CourseWebDataLayer {
     
+    /* TODO : query insert relazioni con corso */
+    /* rivedere query corso */
+    
     private PreparedStatement sCorso, sCorsoById, sCorsoByCodice, sCorsoByAnno, sCorsoByNome, sCorsoByNomeVersioni, sCorsoByCodiceAnno, uCorsoByCodiceAnno, iCorsoByCodiceAnno;
     private PreparedStatement sUtente, sUtenteById, sUtenteByEmail, uUtenteById, uUtenteByEmail, iUtente;
     private PreparedStatement sCorsoLaurea, sCorsoLaureaById, sCorsoLaureaByNome;
-    private PreparedStatement sLibriTesto, sLibroTestoById;
-    private PreparedStatement sMateriali, sMaterialeById;
+    private PreparedStatement sLibriTesto, sLibroTestoById, iLibroTesto, uLibroTesto;
+    private PreparedStatement sMateriali, sMaterialeById, iMateriale, uMateriale;
     
     private PreparedStatement sDocenti, sDocenteById, sDocenteByEmail, sDocentiCorso;
     private PreparedStatement sCorsiLaureaCorso;
@@ -37,6 +40,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     private PreparedStatement sLibriTestoCorso;
     private PreparedStatement sMaterialiCorso;
     private PreparedStatement sCFUCorsoCorsoLaurea;
+   
+    private PreparedStatement iCorsiCorsiIntegrati, iCorsiCorsiMutuati, iCorsiCorsiPropedeutici, iCorsiCorsiLaurea, iCorsiDocenti, iCorsiLibriTesto, iCorsiMateriali;
           
     public CourseWebDataLayerMySqlImpl(DataSource datasource) throws SQLException, NamingException {
         super(datasource);
@@ -70,9 +75,13 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             
             sLibroTestoById = connection.prepareStatement("SELECT * FROM libri_testo WHERE id=?");
             sLibriTesto = connection.prepareStatement("SELECT * FROM libri_testo");
+            iLibroTesto = connection.prepareStatement("INSERT INTO libri_testo (autore, titolo, volume, anno, editore, link) VALUES (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uLibroTesto = connection.prepareStatement("UPDATE libri_testo SET autore=?, titolo=?, volume=?, anno=?, editore=?, link=? WHERE id=?");
             
             sMaterialeById = connection.prepareStatement("SELECT * FROM materiali WHERE id=?");
             sMateriali = connection.prepareStatement("SELECT * FROM materiali");
+            iMateriale = connection.prepareStatement("INSERT INTO materiali (nome, descrizione, dimensione, percorso) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uMateriale = connection.prepareStatement("UPDATE materiali SET nome=?, descrizione=?, dimensione=?, percorso=? WHERE id=?");
             
             //query complesse
             sDocenti = connection.prepareStatement("SELECT * FROM utenti WHERE tipo_utente='docente'");
@@ -88,6 +97,17 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sMaterialiCorso = connection.prepareStatement("SELECT * FROM corsi_materiali INNER JOIN materiali ON (corsi_materiali.id_materiale = materiali.id) WHERE corsi_materiali.id_corso=?");
             sDocentiCorso = connection.prepareStatement("SELECT * FROM corsi_docenti INNER JOIN utenti ON (corsi_docenti.id_docente = utenti.id) WHERE corsi_docenti.id_corso=?");
             sCFUCorsoCorsoLaurea = connection.prepareStatement("SELECT * FROM corsi_corsi_laurea WHERE id_corso=? AND id_corso_laurea=?");
+            
+            // INSERT SULLE RELAZIONI
+            iCorsiCorsiIntegrati = connection.prepareStatement("INSERT INTO corsi_corsi_integrati (id_corso, id_corso_integrato) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
+            iCorsiCorsiMutuati = connection.prepareStatement("INSERT INTO corsi_corsi_mutuati (id_corso, id_corso_mutuato) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
+            iCorsiCorsiPropedeutici = connection.prepareStatement("INSERT INTO corsi_corsi_propedeutici (id_corso, id_corso_propedeutico) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
+            iCorsiCorsiLaurea = connection.prepareStatement("INSERT INTO corsi_corsi_laurea (id_corso_laurea, id_corso, numero_cfu, tipo_cfu) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            iCorsiDocenti = connection.prepareStatement("INSERT INTO corsi_docenti (id_corso, id_docente) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
+            iCorsiLibriTesto = connection.prepareStatement("INSERT INTO corsi_libri_testo (id_corso, id_libro_testo) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
+            iCorsiMateriali = connection.prepareStatement("INSERT INTO corsi_materiali (id_corso, id_materiale) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
+         
+        
         }
         catch(SQLException exc){
             throw new DataLayerException("Error in initializing CourseWeb DataLayer", exc);
@@ -1058,6 +1078,98 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     }
     
     @Override
+    public void storeMateriale(Materiale materiale) throws DataLayerException {
+    
+        int key = materiale.getId();
+        try {
+            
+            if(materiale.getId() > 0) { //update
+                if(!materiale.isDirty()) {
+                    return;
+                }
+            uMateriale.setString(1, materiale.getNome());
+            uMateriale.setString(2, materiale.getDescrizione());
+            uMateriale.setString(3, materiale.getDimensione());
+            uMateriale.setString(4, materiale.getPercorso());
+            uMateriale.setInt(5, materiale.getId());
+            uMateriale.executeUpdate();
+            }
+            else { //insert
+                iMateriale.setString(1, materiale.getNome());
+                iMateriale.setString(2, materiale.getDescrizione());
+                iMateriale.setString(3, materiale.getDimensione());
+                iMateriale.setString(4, materiale.getPercorso());
+                
+                if(iMateriale.executeUpdate() == 1) {
+                    
+                    try(ResultSet keys = iMateriale.getGeneratedKeys()) {
+                        if(keys.next()) {
+                            key = keys.getInt(1);
+                        }
+                    }
+                    
+                }
+            }
+            if(key > 0) {
+                materiale.copyFrom(getMateriale(key));
+            }
+            materiale.setDirty(false);
+        }
+        catch(SQLException ex) {
+            throw new DataLayerException("Unable to store Materiale", ex);
+        }
+        
+    }
+    
+    @Override
+    public void storeLibroTesto(Libro_Testo libro_testo) throws DataLayerException {
+    
+        int key = libro_testo.getId();
+        try {
+            
+            if(libro_testo.getId() > 0) { //update
+                if(!libro_testo.isDirty()) {
+                    return;
+                }
+            uLibroTesto.setString(1, libro_testo.getAutore());
+            uLibroTesto.setString(2, libro_testo.getTitolo());
+            uLibroTesto.setString(3, libro_testo.getVolume());
+            uLibroTesto.setString(4, libro_testo.getAnno());
+            uLibroTesto.setString(5, libro_testo.getEditore());
+            uLibroTesto.setString(6, libro_testo.getLink());
+            uLibroTesto.setInt(7, libro_testo.getId());
+            uLibroTesto.executeUpdate();
+            }
+            else { //insert
+                iLibroTesto.setString(1, libro_testo.getAutore());
+                iLibroTesto.setString(2, libro_testo.getTitolo());
+                iLibroTesto.setString(3, libro_testo.getVolume());
+                iLibroTesto.setString(4, libro_testo.getAnno());
+                iLibroTesto.setString(5, libro_testo.getEditore());
+                iLibroTesto.setString(6, libro_testo.getLink());
+                
+                if(iLibroTesto.executeUpdate() == 1) {
+                    
+                    try(ResultSet keys = iLibroTesto.getGeneratedKeys()) {
+                        if(keys.next()) {
+                            key = keys.getInt(1);
+                        }
+                    }
+                    
+                }
+            }
+            if(key > 0) {
+                libro_testo.copyFrom(getLibroTesto(key));
+            }
+            libro_testo.setDirty(false);
+        }
+        catch(SQLException ex) {
+            throw new DataLayerException("Unable to store Libro_Testo", ex);
+        }
+        
+    }
+    
+    @Override
     public void destroy() {
         
         try {
@@ -1081,8 +1193,12 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsoLaureaByNome.close();
             sLibroTestoById.close();
             sLibriTesto.close();
+            iLibroTesto.close();
+            uLibroTesto.close();
             sMaterialeById.close();
-            sMateriali.close();                   
+            sMateriali.close();   
+            iMateriale.close();
+            uMateriale.close();
             sDocenti.close();
             sDocenteById.close();
             sDocenteByEmail.close();
@@ -1094,6 +1210,15 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sMaterialiCorso.close();   
             sDocentiCorso.close();
             sCFUCorsoCorsoLaurea.close();
+            
+            iCorsiCorsiIntegrati.close();
+            iCorsiCorsiMutuati.close();
+            iCorsiCorsiPropedeutici.close();
+            iCorsiCorsiLaurea.close();
+            iCorsiDocenti.close();
+            iCorsiLibriTesto.close();
+            iCorsiMateriali.close();
+              
         }
         
         catch(SQLException ex) {

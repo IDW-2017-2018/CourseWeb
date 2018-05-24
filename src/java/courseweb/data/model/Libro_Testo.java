@@ -3,6 +3,8 @@
  */
 package courseweb.data.model;
 
+import framework.data.DataLayerException;
+
 /**
  *
  * @author valen
@@ -24,6 +26,7 @@ public interface Libro_Testo {
     void setEditore(String editore); 
     void setLink(String link);
     
+    void copyFrom(Libro_Testo libro_testo) throws DataLayerException;
     void setDirty(boolean dirty); 
     boolean isDirty();  
     

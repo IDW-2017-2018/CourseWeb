@@ -3,6 +3,8 @@
  */
 package courseweb.data.model;
 
+import framework.data.DataLayerException;
+
 /**
  *
  * @author valen
@@ -20,6 +22,7 @@ public interface Materiale {
     void setDimensione(String dimensione); 
     void setPercorso(String percorso);
     
+    void copyFrom(Materiale materiale) throws DataLayerException;
     void setDirty(boolean dirty); 
     boolean isDirty();  
     
