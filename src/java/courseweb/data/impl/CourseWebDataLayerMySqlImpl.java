@@ -802,7 +802,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             try(ResultSet rs = sCorsiMutuatiCorso.executeQuery()) {          
                 
                 while(rs.next()){
-                    result.add(getCorso(rs.getInt("id")));
+                    result.add(getCorso(rs.getInt("corsi.id")));
                 }
             } 
         }
@@ -824,7 +824,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             try(ResultSet rs = sCorsiIntegratiCorso.executeQuery()) {          
                 
                 while(rs.next()){
-                    result.add(getCorso(rs.getInt("id")));
+                    result.add(getCorso(rs.getInt("corsi.id")));
                 }
             } 
         }
@@ -846,7 +846,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             try(ResultSet rs = sLibriTestoCorso.executeQuery()) {          
                 
                 while(rs.next()){
-                    result.add(getLibroTesto(rs.getInt("id")));
+                    result.add(getLibroTesto(rs.getInt("libri_testo.id")));
                 }
             } 
         }
@@ -868,7 +868,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             try(ResultSet rs = sMaterialiCorso.executeQuery()) {          
                 
                 while(rs.next()){
-                    result.add(getMateriale(rs.getInt("id")));
+                    result.add(getMateriale(rs.getInt("materiali.id")));
                 }
             } 
         }
@@ -890,7 +890,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             try(ResultSet rs = sDocentiCorso.executeQuery()) {          
                 
                 while(rs.next()){
-                    result.add(getUtente(rs.getInt("id")));
+                    result.add(getUtente(rs.getInt("utenti.id")));
                 }
             } 
         }
