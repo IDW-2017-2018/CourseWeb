@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    
+    <link rel="icon" href="images/logo_imgs/prove/favicon.png" type="image/png"/> <!-- da sistemare usa .ico -->
+    <title>CourseWeb</title>
+    
+    <meta name="description" content="Online Index of University Courses"/>
+    <meta name="keywords" content="HTML, CSS, XML, JavaScript, Java"/>
+    <meta name="author" content="${defaults.authors}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <link rel="stylesheet" type="text/css" href="style/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="style/outline.css"/>
+    
+    <link rel="stylesheet" type="text/css" href="style/backend.css"/> <!-- da montare dinamicamente -->
+
+</head>
+
+<body>
+    
+    <!-- ########## TITLE BAR ########## -->
+
+    <div class="title_bar">
+        
+            <a href="${page}?lang=${lang}&id=${id}">
+                <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
+            </a>
+            <a href="${page}?lang=${lang}">
+                <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
+            </a>
+
+    </div>
+
+    <!-- ########## LOGIN NAV BAR ########## -->
+
+    <ul class="navbar">
+
+        <li class="menu_item"><a href="searchcourses?lang=${lang}">CORSI</a></li>
+
+                <li class="profile_item"><p>${session.getAttribute('utente').nome}</p></li>
+                <li class="profile_item"><p>ospite</p></li>
+                
+        <img class="profile_icon" src="images/footer_icons/white_svg/user-circle.svg" alt="user-circle"/>
+
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="tablecontainersum">
+            
+            <table class="tableresult">
+
+
+            <tr class="trresult">
+
+            
+            <th class="thresultfront" colspan="7"><h1 class="title">TABELLA DI RIEPILOGO CORSO</h1></th>
+
+            </tr>
+
+            <tr class="trresult">
+
+                <th class="thresult" colspan="2">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+
+            </tr>
+
+            <tr class="trresult">
+
+                <td class="tdresult" colspan="2">${row_value}</td>
+                <td class="tdresult">${row_value}</td>
+                <td class="tdresult">${row_value}</td>
+                <td class="tdresult">${row_value}</td>
+                <td class="tdresult">${row_value}</td>
+                <td class="tdresult">${row_value}</td>
+
+            </tr>
+        
+         </table>
+
+        </div>
+
+
+<div class="filter">
+    
+    <h1 class="title">MODIFICA CORSO</h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+        
+            <div class="fieldcontainerleft">
+                
+                <label class="label" for="corso_nome">${column_name}</label>
+                <input class="field" type="text" id="corso_nome" name="corso_nome" placeholder="${column_content}"/>
+                
+                <label class="label" for="corso_codice">${column_name}</label>
+                <input class="field" type="text" id="corso_codice" name="corso_codice" placeholder="${column_content}"/>
+        
+                <label class="label" for="corso_ssd">${column_name}</label>
+                <input class="field" type="text" id="corso_ssd" name="corso_ssd" placeholder="${column_content}"/>
+
+                <label class="label" for="corso_semestre">${column_name}</label>
+                <select class="field" name="corso_semestre" placeholder="${column_content}">
+                    <option value="---">---</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+
+            </div>
+
+
+            <div class="fieldcontainerright">
+                
+            
+            <label class="label" for="corso_nome">${column_name}</label>
+                <input class="field" type="text" id="corso_nome" name="corso_nome" placeholder="${column_content}"/>
+                
+                <label class="label" for="corso_codice">${column_name}</label>
+                <input class="field" type="text" id="corso_codice" name="corso_codice" placeholder="${column_content}"/>
+        
+                <label class="label" for="corso_ssd">${column_name}</label>
+                <input class="field" type="text" id="corso_ssd" name="corso_ssd" placeholder="${column_content}"/>
+
+                <label class="label" for="corso_semestre">${column_name}</label>
+                <select class="field" name="corso_semestre" placeholder="${column_content}">
+                    <option value="---">---</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+                            
+            </div>
+
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="MODIFICA"/>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+
+<hr style="border: 1px solid black;" />
+
+
+        <div class="tablecontainer">
+            
+            <table class="tableresult">
+
+
+            <tr class="trresult">
+
+            
+            <th class="thresultfront" colspan="7"><h1 class="title">TABELLA DI RIEPILOGO CORSI</h1></th>
+
+            </tr>
+
+            <tr class="trresult">
+
+                <th class="thresultadd" colspan="7"><a href="${aggiungi_corso_form}" class="linkresultaddmoddel">AGGIUNGI CORSO</a></th>
+                
+            </tr>
+
+            <tr class="trresult">
+
+                <th class="thresult" colspan="2">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">MODIFICA</th>
+                <th class="thresult">ELIMINA</th>
+
+            </tr>
+
+            <tr class="trresult-list">
+
+                <td class="tdresult-list" colspan="2">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresultmod"><a href="${modifica_corso_form}" class="linkresultaddmoddel">MODIFICA</a></td>
+                <td class="tdresultdel"><a href="${elimina_corso_form}" class="linkresultaddmoddel">ELIMINA</a></td>
+
+            </tr>
+            
+            <tr class="trresult-list">
+
+                <td class="tdresult-list" colspan="2">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresultmod"><a href="${modifica_corso_form}" class="linkresultaddmoddel">MODIFICA</a></td>
+                <td class="tdresultdel"><a href="${elimina_corso_form}" class="linkresultaddmoddel">ELIMINA</a></td>
+
+            </tr>
+
+
+            <tr class="trresult-list">
+
+                <td class="tdresult-list" colspan="2">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list"><a href="${modifica_corso_form}" class="linkresultmod">MODIFICA</a></td>
+                <td class="tdresult-list"><a href="${elimina_corso_form}" class="linkresultdel">ELIMINA</a></td>
+
+            </tr>
+            
+            <tr class="trresult-list">
+
+                <td class="tdresult-list" colspan="2">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list"><a href="${modifica_corso_form}" class="linkresultmod">MODIFICA</a></td>
+                <td class="tdresult-list"><a href="${elimina_corso_form}" class="linkresultdel">ELIMINA</a></td>
+
+            </tr>
+
+            </table>
+
+        </div>
+
+
+<hr style="border: 1px solid black;" />
+
+
+<div class="filter">
+    
+    <h1 class="title">AGGIUNGI CORSO</h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+        
+            <div class="fieldcontainerleft">
+                
+                <label class="label" for="corso_nome">${column_name}</label>
+                <input class="field" type="text" id="corso_nome" name="corso_nome""/>
+                
+                <label class="label" for="corso_codice">${column_name}</label>
+                <input class="field" type="text" id="corso_codice" name="corso_codice""/>
+        
+                <label class="label" for="corso_ssd">${column_name}</label>
+                <input class="field" type="text" id="corso_ssd" name="corso_ssd""/>
+
+                <label class="label" for="corso_semestre">${column_name}</label>
+                <select class="field" name="corso_semestre"">
+                    <option value="---">---</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+
+            </div>
+
+
+            <div class="fieldcontainerright">
+                
+            
+            <label class="label" for="corso_nome">${column_name}</label>
+                <input class="field" type="text" id="corso_nome" name="corso_nome""/>
+                
+                <label class="label" for="corso_codice">${column_name}</label>
+                <input class="field" type="text" id="corso_codice" name="corso_codice""/>
+        
+                <label class="label" for="corso_ssd">${column_name}</label>
+                <input class="field" type="text" id="corso_ssd" name="corso_ssd""/>
+
+                <label class="label" for="corso_semestre">${column_name}</label>
+                <select class="field" name="corso_semestre"">
+                    <option value="---">---</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+                            
+            </div>
+
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+
+<hr style="border: 1px solid black;" />
+
+
+<div class="tablecontainersum">
+            
+            <table class="tableresult">
+
+
+            <tr class="trresult">
+
+            
+            <th class="thresultfront" colspan="7"><h1 class="title">TABELLA DI RIEPILOGO CORSO</h1></th>
+
+            </tr>
+
+            <tr class="trresult">
+
+                <th class="thresult" colspan="2">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+
+            </tr>
+
+            <tr class="trresult">
+
+                <td class="tdresult" colspan="2">${row_value}</td>
+                <td class="tdresult">${row_value}</td>
+                <td class="tdresult">${row_value}</td>
+                <td class="tdresult">${row_value}</td>
+                <td class="tdresult">${row_value}</td>
+                <td class="tdresult">${row_value}</td>
+
+            </tr>
+        
+         </table>
+
+        </div>
+
+
+<div class="filter">
+    
+    <h1 class="title">SEI SICURO DI VOLER ELIMINARE QUESTO CORSO ?</h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="CONFERMA"/>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+
+<hr style="border: 1px solid black;" />
+
+
+<div class="tablecontainersum">
+            
+            <table class="tableresult">
+
+
+            <tr class="trresult">
+
+            
+            <th class="thresultfront" colspan="7"><h1 class="title">TABELLA DI RIEPILOGO TIPO-RELAZIONE CORSO</h1></th>
+
+            </tr>
+
+            <tr class="trresult">
+
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">MODIFICA</th>
+                <th class="thresult">ELIMINA</th>
+
+            </tr>
+
+            <tr class="trresult-list">
+
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresultmod"><a href="${modifica_corso_form}" class="linkresultaddmoddel">MODIFICA</a></td>
+                <td class="tdresultdel"><a href="${elimina_corso_form}" class="linkresultaddmoddel">ELIMINA</a></td>
+
+            </tr>
+
+            <tr class="trresult-list">
+
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresultmod"><a href="${modifica_corso_form}" class="linkresultaddmoddel">MODIFICA</a></td>
+                <td class="tdresultdel"><a href="${elimina_corso_form}" class="linkresultaddmoddel">ELIMINA</a></td>
+
+            </tr>
+
+            <tr class="trresult-list">
+
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list"><a href="${modifica_corso_form}" class="linkresultmod">MODIFICA</a></td>
+                <td class="tdresult-list"><a href="${elimina_corso_form}" class="linkresultdel">ELIMINA</a></td>
+                
+            </tr>
+
+            <tr class="trresult-list">
+
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list">${row_value}</td>
+                <td class="tdresult-list"><a href="${modifica_corso_form}" class="linkresultmod">MODIFICA</a></td>
+                <td class="tdresult-list"><a href="${elimina_corso_form}" class="linkresultdel">ELIMINA</a></td>
+            
+            </tr>
+        
+         </table>
+
+        </div>
+
+
+<div class="filter">
+    
+    <h1 class="title">AGGIUNGI RELAZIONE CORSO</h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+        
+            <div class="fieldcontainerleft">
+
+                
+                <label class="label" for="corso_nome">${column_name}</label>
+                <input class="field" type="text" id="corso_nome" name="corso_nome" placeholder="${column_content} DISABLED FIELD !!!" disabled/>
+
+
+            </div>
+
+
+            <div class="fieldcontainerright">
+                
+
+                <label class="label" for="corso_semestre">${column_name}</label>
+                <select class="field" name="corso_semestre">
+                    <option value="---">---</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+                
+                <label class="label" for="corso_codice">${column_name}</label>
+                <input class="field" type="text" id="corso_codice" name="corso_codice"/>
+        
+                <label class="label" for="corso_ssd">${column_name}</label>
+                <input class="field" type="text" id="corso_ssd" name="corso_ssd"/>
+
+                            
+            </div>
+
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+
+<hr style="border: 1px solid black;" />
+
+
+
+<div class="tablecontainersum">
+            
+            <table class="tableresult">
+
+
+            <tr class="trresult">
+
+            
+            <th class="thresultfront" colspan="7"><h1 class="title">TABELLA DI RIEPILOGO RELAZIONE CORSO</h1></th>
+
+            </tr>
+
+            <tr class="trresult">
+
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+                <th class="thresult">${column_name}</th>
+
+            </tr>
+
+            <tr class="trresult">
+
+                <td class="tdresult">${row_value}</td>
+                <td class="tdresult">${row_value}</td>
+                <td class="tdresult">${row_value}</td>
+                <td class="tdresult">${row_value}</td>
+
+            </tr>
+        
+         </table>
+
+        </div>
+
+
+<div class="filter">
+    
+    <h1 class="title">MODIFICA RELAZIONE CORSO</h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+        
+            <div class="fieldcontainerleft">
+
+                
+                <label class="label" for="corso_nome">${column_name}</label>
+                <input class="field" type="text" id="corso_nome" name="corso_nome" placeholder="${column_content} DISABLED FIELD !!!" disabled/>
+
+
+            </div>
+
+
+            <div class="fieldcontainerright">
+                
+
+                <label class="label" for="corso_semestre">${column_name}</label>
+                <select class="field" name="corso_semestre" placeholder="${column_content}">
+                    <option value="---">---</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+                
+                <label class="label" for="corso_codice">${column_name}</label>
+                <input class="field" type="text" id="corso_codice" name="corso_codice" placeholder="${column_content}"/>
+        
+                <label class="label" for="corso_ssd">${column_name}</label>
+                <input class="field" type="text" id="corso_ssd" name="corso_ssd" placeholder="${column_content}"/>
+
+                            
+            </div>
+
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="MODIFICA"/>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ########## LANG BAR ########## -->
+
+    <ul class="lang_bar">
+        
+            <li><a href="${page}?lang=ita&id=${id}">ITALIANO</a></li>
+            <li><a href="${page}?lang=eng&id=${id}">INGLESE</a></li>
+        
+    </ul>
+
+
+    <!-- ########## FOOTER ########## -->
+
+    <div class="footer">
+        
+        <img src="images/logo_imgs/logominDEF.svg" alt="Logo"/>     
+        
+        <ul class="footer_link_container">
+
+            <li><a class="footer_link_item" href="contacts?lang=${lang}">CONTATTI</a></li>
+            <li><a class="footer_link_item" href="about?lang=${lang}">INFORMAZIONI</a></li>
+            <li><a class="footer_link_item" href="http://www.disim.univaq.it/main/index.php" target="_blank">DISIM</a></li>
+        
+        </ul>   
+        
+        <div class="footer_social_container">
+
+            <a href="https://it-it.facebook.com/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/facebook.svg" alt="facebook"/></a>
+            <a href="https://twitter.com/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/twitter.svg" alt="twitter"/></a>
+            <a href="https://www.google.it/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/google.svg" alt="google"/></a>
+            <a href="https://github.com/IDW-2017-2018/CourseWeb" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/github.svg" alt="github"/></a>
+
+        </div>  
+
+    </div>
+    
+    <div class="copyright">
+        
+        <p class="copyright_text">2017 &#47; 2018 &copy; CourseWeb</p>
+    
+    </div>
+    
+</body>
+</html>

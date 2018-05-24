@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    
+    <link rel="icon" href="images/logo_imgs/prove/favicon.png" type="image/png"/> <!-- da sistemare usa .ico -->
+    <title>CourseWeb</title>
+    
+    <meta name="description" content="Online Index of University Courses"/>
+    <meta name="keywords" content="HTML, CSS, XML, JavaScript, Java"/>
+    <meta name="author" content="${defaults.authors}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <link rel="stylesheet" type="text/css" href="style/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="style/outline.css"/>
+    
+    <link rel="stylesheet" type="text/css" href="style/backend.css"/> <!-- da montare dinamicamente -->
+
+</head>
+
+<body>
+    
+    <!-- ########## TITLE BAR ########## -->
+
+    <div class="title_bar">
+        
+            <a href="${page}?lang=${lang}&id=${id}">
+                <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
+            </a>
+            <a href="${page}?lang=${lang}">
+                <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
+            </a>
+
+    </div>
+
+    <!-- ########## LOGIN NAV BAR ########## -->
+
+    <ul class="navbar">
+
+        <li class="menu_item"><a href="searchcourses?lang=${lang}">CORSI</a></li>
+
+                <li class="profile_item"><p>${session.getAttribute('utente').nome}</p></li>
+                <li class="profile_item"><p>ospite</p></li>
+                
+        <img class="profile_icon" src="images/footer_icons/white_svg/user-circle.svg" alt="user-circle"/>
+
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="filter">
+    
+    <h1 class="title">AGGIUNGI CORSO</h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+        
+            <div class="fieldcontainerleft">
+                
+                <label class="label" for="corso_codice">Codice</label>
+                <input class="field" type="text" id="corso_codice" name="corso_codice""/>
+
+                <label class="label" for="cors_anno">Anno</label>
+                <input class="field" type="text" id="cors_anno" name="cors_anno""/>
+
+                <label class="label" for="corso_nome">Nome</label>
+                <input class="field" type="text" id="corso_nome" name="corso_nome""/>
+        
+                <label class="label" for="corso_ssd">SSD</label>
+                <input class="field" type="text" id="corso_ssd" name="corso_ssd""/>
+
+                <label class="label" for="corso_semestre">Semestre</label>
+                <select class="field" name="corso_semestre"">
+                    <option value="---">---</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+
+                <label class="label" for="corso_lingua">Lingua</label>
+                <select class="field" name="corso_lingua"">
+                    <option value="---">---</option>
+                    <option value="1">Italiano</option>
+                    <option value="2">Inglese</option>
+                </select>
+
+                <label class="label" for="corso_link_homepage">Link Homepage</label>
+                <input class="field" type="text" id="corso_link_homepage" name="corso_link_homepage""/>
+
+                <label class="label" for="corso_link_risorse">Link Risorse</label>
+                <input class="field" type="text" id="corso_link_risorse" name="corso_link_risorse""/>
+
+                <label class="label" for="corso_link_forum">Link Forum</label>
+                <input class="field" type="text" id="corso_link_forum" name="corso_link_forum""/>
+
+            </div>
+
+
+            <div class="fieldcontainerright">
+                
+            
+                <label class="label" for="corso_prerequisiti">Prerequisiti</label>
+                <textarea class="field" type"text" id="corso_prerequisiti" name="corso_prerequisiti" style="resize: vertical;"> </textarea>
+
+                <label class="label" for="corso_obiettivi">Obiettivi</label>
+                <textarea class="field" type"text" id="corso_obiettivi" name="corso_obiettivi" style="resize: vertical;"> </textarea>
+                
+                <label class="label" for="corso_mod_esame">Modalit&agrave; Esame</label>
+                <textarea class="field" type"text" id="corso_mod_esame" name="corso_mod_esame" style="resize: vertical;"> </textarea>
+
+                <label class="label" for="corso_mod_insegnamento">Modalit&agrave; Insegnamento</label>
+                <textarea class="field" type"text" id="corso_mod_insegnamento" name="corso_mod_insegnamento" style="resize: vertical;"> </textarea>
+                
+                <label class="label" for="corso_descrittori_dublino">Descrittori Dublino</label>
+                <textarea class="field" type"text" id="corso_descrittori_dublino" name="corso_descrittori_dublino" style="resize: vertical;"> </textarea>
+
+                <label class="label" for="corso_sillabo">Sillabo</label>
+                <textarea class="field" type"text" id="corso_sillabo" name="corso_sillabo" style="resize: vertical;"> </textarea>
+
+                <label class="label" for="corso_note">Note</label>
+                <textarea class="field" type"text" id="corso_note" name="corso_note" style="resize: vertical;"> </textarea>
+                
+                <label class="label" for="corso_lang">LANG</label>
+                <input class="field" type="text" id="corso_lang" name="corso_lang""/>
+
+            </div>
+
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+
+<#list corsi>
+
+<div class="tablecontainer">
+    
+    <table class="tableresult">
+
+        <tr class="trresult">
+
+            <th class="thresultfront" colspan="7"><h1 class="title">CORSI</h1></th>
+
+        </tr>
+
+        <tr class="trresult">
+
+            <th class="thresult">CODICE</th>
+            <th class="thresult" colspan="2">NOME</th>
+            <th class="thresult">SSD</th>
+            <th class="thresult">ANNO</th>
+
+        </tr>
+
+        <#items as corso>
+
+        <tr class="trresult-list">
+
+            <td class="tdresult-list" colspan="2">${corsi.codice}</td>
+            <td class="tdresult-list">${corsi.nome}</td>
+            <td class="tdresult-list">${corsi.SSD}</td>
+            <td class="tdresult-list">${corsi.anno}</td>
+            
+        </tr>
+
+        </#items>
+
+    </table>
+
+</div>
+
+<#else>
+
+</#list>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ########## LANG BAR ########## -->
+
+    <ul class="lang_bar">
+        
+            <li><a href="${page}?lang=ita&id=${id}">ITALIANO</a></li>
+            <li><a href="${page}?lang=eng&id=${id}">INGLESE</a></li>
+        
+    </ul>
+
+
+    <!-- ########## FOOTER ########## -->
+
+    <div class="footer">
+        
+        <img src="images/logo_imgs/logominDEF.svg" alt="Logo"/>     
+        
+        <ul class="footer_link_container">
+
+            <li><a class="footer_link_item" href="contacts?lang=${lang}">CONTATTI</a></li>
+            <li><a class="footer_link_item" href="about?lang=${lang}">INFORMAZIONI</a></li>
+            <li><a class="footer_link_item" href="http://www.disim.univaq.it/main/index.php" target="_blank">DISIM</a></li>
+        
+        </ul>   
+        
+        <div class="footer_social_container">
+
+            <a href="https://it-it.facebook.com/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/facebook.svg" alt="facebook"/></a>
+            <a href="https://twitter.com/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/twitter.svg" alt="twitter"/></a>
+            <a href="https://www.google.it/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/google.svg" alt="google"/></a>
+            <a href="https://github.com/IDW-2017-2018/CourseWeb" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/github.svg" alt="github"/></a>
+
+        </div>  
+
+    </div>
+    
+    <div class="copyright">
+        
+        <p class="copyright_text">2017 &#47; 2018 &copy; CourseWeb</p>
+    
+    </div>
+    
+</body>
+</html>

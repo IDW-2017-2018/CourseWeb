@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    
+    <link rel="icon" href="images/logo_imgs/prove/favicon.png" type="image/png"/> <!-- da sistemare usa .ico -->
+    <title>CourseWeb</title>
+    
+    <meta name="description" content="Online Index of University Courses"/>
+    <meta name="keywords" content="HTML, CSS, XML, JavaScript, Java"/>
+    <meta name="author" content="${defaults.authors}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <link rel="stylesheet" type="text/css" href="style/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="style/outline.css"/>
+    
+    <link rel="stylesheet" type="text/css" href="style/backend.css"/> <!-- da montare dinamicamente -->
+
+</head>
+
+<body>
+    
+    <!-- ########## TITLE BAR ########## -->
+
+    <div class="title_bar">
+        
+            <a href="${page}?lang=${lang}&id=${id}">
+                <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
+            </a>
+            <a href="${page}?lang=${lang}">
+                <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
+            </a>
+
+    </div>
+
+    <!-- ########## LOGIN NAV BAR ########## -->
+
+    <ul class="navbar">
+
+        <li class="menu_item"><a href="searchcourses?lang=${lang}">CORSI</a></li>
+
+                <li class="profile_item"><p>${session.getAttribute('utente').nome}</p></li>
+                <li class="profile_item"><p>ospite</p></li>
+                
+        <img class="profile_icon" src="images/footer_icons/white_svg/user-circle.svg" alt="user-circle"/>
+
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="filter">
+    
+    <h1 class="title">FILTRI</h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+        
+
+            <div class="fieldcontainerleft">
+                
+            
+            <label class="label" for="utente_nome">Nome</label>
+            <input class="field" type="text" id="utente_nome" name="utente_nome"/>
+            
+            <label class="label" for="utente_cognome">Cognome</label>
+            <input class="field" type="text" id="utente_cognome" name="utente_cognome"/>
+
+
+            </div>
+
+
+            <div class="fieldcontainerright">
+                
+            
+            <label class="label" for="utente_email">Email</label>
+            <input class="field" type="text" id="utente_email" name="utente_email"/>
+    
+            <label class="label" for="utente_tipo_utente">Tipo Utente</label>
+            <input class="field" type="text" id="utente_tipo_utente" name="utente_tipo_utente"/>
+                   
+
+            </div>
+
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="CERCA"/>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+
+<#list corsi>
+
+<div class="tablecontainer">
+    
+    <table class="tableresult">
+
+        <tr class="trresult">
+
+            <th class="thresultfront" colspan="7"><h1 class="title">UTENTI</h1></th>
+
+        </tr>
+
+        <tr class="trresult">
+
+            <th class="thresult">NOME</th>
+            <th class="thresult" colspan="2">COGNOME</th>
+            <th class="thresult">EMAIL</th>
+            <th class="thresult">TIPO UTENTE</th>
+            <th class="thresult">MODIFICA</th>
+
+        </tr>
+
+        <#items as corso>
+
+        <tr class="trresult-list">
+
+            <td class="tdresult-list" colspan="2">${utenti.nome}</td>
+            <td class="tdresult-list">${utenti.cognome}</td>
+            <td class="tdresult-list">${utenti.email}</td>
+            <td class="tdresult-list">${utenti.tipo_utente}</td>
+            <td class="tdresult-list"><a href="${modifica_corso_form}" class="linkresultmod">MODIFICA</a></td>
+            
+        </tr>
+
+        </#items>
+
+    </table>
+
+</div>
+
+<#else>
+
+</#list>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ########## LANG BAR ########## -->
+
+    <ul class="lang_bar">
+        
+            <li><a href="${page}?lang=ita&id=${id}">ITALIANO</a></li>
+            <li><a href="${page}?lang=eng&id=${id}">INGLESE</a></li>
+        
+    </ul>
+
+
+    <!-- ########## FOOTER ########## -->
+
+    <div class="footer">
+        
+        <img src="images/logo_imgs/logominDEF.svg" alt="Logo"/>     
+        
+        <ul class="footer_link_container">
+
+            <li><a class="footer_link_item" href="contacts?lang=${lang}">CONTATTI</a></li>
+            <li><a class="footer_link_item" href="about?lang=${lang}">INFORMAZIONI</a></li>
+            <li><a class="footer_link_item" href="http://www.disim.univaq.it/main/index.php" target="_blank">DISIM</a></li>
+        
+        </ul>   
+        
+        <div class="footer_social_container">
+
+            <a href="https://it-it.facebook.com/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/facebook.svg" alt="facebook"/></a>
+            <a href="https://twitter.com/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/twitter.svg" alt="twitter"/></a>
+            <a href="https://www.google.it/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/google.svg" alt="google"/></a>
+            <a href="https://github.com/IDW-2017-2018/CourseWeb" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/github.svg" alt="github"/></a>
+
+        </div>  
+
+    </div>
+    
+    <div class="copyright">
+        
+        <p class="copyright_text">2017 &#47; 2018 &copy; CourseWeb</p>
+    
+    </div>
+    
+</body>
+</html>
