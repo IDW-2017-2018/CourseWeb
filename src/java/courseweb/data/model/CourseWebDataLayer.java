@@ -64,6 +64,15 @@ public interface CourseWebDataLayer extends DataLayer {
     void storeMateriale(Materiale materiale) throws DataLayerException;
     void storeLibroTesto(Libro_Testo libro_testo) throws DataLayerException;
     
+    void storeCorsiCorsiIntegrati(int corso_key, int corso_integrato_key) throws DataLayerException;
+    void storeCorsiCorsiMutuati(int corso_key, int corso_mutuato_key) throws DataLayerException;
+    void storeCorsiCorsiPropedeutici(int corso_key, int corso_propedeutico_key) throws DataLayerException;
+    void storeCorsiCorsiLaurea(int corso_laurea_key, int corso_key, String numero_cfu, String tipo_cfu) throws DataLayerException;
+    void storeCorsiDocenti(int corso_key, int docente_key) throws DataLayerException;
+    void storeCorsiLibriTesto(int corso_key, int libro_testo_key) throws DataLayerException;
+    void storeCorsiMateriali(int corso_key, int materiale_key) throws DataLayerException;
+    
+    
     List<Corso> filtraCorsi (List<Corso> corsi, String attributo, String filtro) throws DataLayerException;
     List<Map<String, Object>> getCFU(Corso corso) throws DataLayerException;
     

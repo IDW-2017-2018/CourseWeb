@@ -23,10 +23,7 @@ import javax.sql.DataSource;
  */
 public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements CourseWebDataLayer {
     
-    /* TODO : query insert relazioni con corso */
-    /* rivedere query corso */
-    
-    private PreparedStatement sCorso, sCorsoById, sCorsoByCodice, sCorsoByAnno, sCorsoByNome, sCorsoByNomeVersioni, sCorsoByCodiceAnno, uCorsoByCodiceAnno, iCorsoByCodiceAnno;
+    private PreparedStatement sCorso, sCorsoById, sCorsoByCodice, sCorsoByAnno, sCorsoByNome, sCorsoByNomeVersioni, sCorsoByCodiceAnno, uCorsoById, iCorso;
     private PreparedStatement sUtente, sUtenteById, sUtenteByEmail, uUtenteById, uUtenteByEmail, iUtente;
     private PreparedStatement sCorsoLaurea, sCorsoLaureaById, sCorsoLaureaByNome;
     private PreparedStatement sLibriTesto, sLibroTestoById, iLibroTesto, uLibroTesto;
@@ -59,8 +56,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsoByNome = connection.prepareStatement("SELECT * FROM corsi WHERE corsi.nome LIKE ?");
             sCorsoByNomeVersioni = connection.prepareStatement("SELECT * FROM corsi WHERE corsi.nome=?");
             sCorsoByCodiceAnno = connection.prepareStatement("SELECT * FROM corsi WHERE codice=? AND anno=?");
-            uCorsoByCodiceAnno = connection.prepareStatement("UPDATE corsi SET codice=?, anno=?, ssd=?, semestre=?, lingua=?, prerequisiti=?, obiettivi=?, mod_esame=?, mod_insegnamento=?, sillabo=?, link_homepage=?, link_risorse=?, link_forum=?, note=?, lang=? WHERE codice=? AND anno=? AND lang=?");
-            iCorsoByCodiceAnno = connection.prepareStatement("INSERT INTO corsi (codice,anno,nome,lang) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uCorsoById = connection.prepareStatement("UPDATE corsi SET codice=?, ssd=?, semestre=?, lingua=?, prerequisiti=?, obiettivi=?, mod_esame=?, mod_insegnamento=?, descrittori_dublino=?, sillabo=?, link_homepage=?, link_risorse=?, link_forum=?, note=? WHERE id=?");
+            iCorso = connection.prepareStatement("INSERT INTO corsi (codice,anno,nome,ssd,semestre,lingua,prerequisiti,obiettivi,mod_esame,mod_insegnamento,descrittori_dublino,sillabo,link_homepage,link_risorse,link_forum,note,lang) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             
             sUtente = connection.prepareStatement("SELECT * FROM utenti");
             sUtenteById = connection.prepareStatement("SELECT * FROM utenti WHERE id=?");
@@ -465,7 +462,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             }
         }
         catch(SQLException exc){
-            exc.printStackTrace();
+            throw new DataLayerException("Unable to load Corso by nome", exc); 
         }
         return result;
     }
@@ -483,7 +480,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             }
         }
         catch(SQLException exc){
-            exc.printStackTrace();
+            throw new DataLayerException("Unable to load versioni Corso by nome", exc); 
         }
         return result;
     }
@@ -1024,41 +1021,48 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                     return;
                 }
                 
-            uCorsoByCodiceAnno.setString(1, corso.getCodice());
-            uCorsoByCodiceAnno.setString(2, corso.getAnno());
-                
-            uCorsoByCodiceAnno.setString(3, corso.getSSD());
-            uCorsoByCodiceAnno.setInt(4, corso.getSemestre());
-            uCorsoByCodiceAnno.setString(5, corso.getLingua());
-            uCorsoByCodiceAnno.setString(6, corso.getPrerequisiti());
-            uCorsoByCodiceAnno.setString(7, corso.getObiettivi());
-            uCorsoByCodiceAnno.setString(8, corso.getModEsame());
-            uCorsoByCodiceAnno.setString(9, corso.getModInsegnamento());
-            uCorsoByCodiceAnno.setString(10, corso.getSillabo());
-            uCorsoByCodiceAnno.setString(11, corso.getLinkHomepageCorso());
-            uCorsoByCodiceAnno.setString(12, corso.getLinkRisorseEsterne());
-            uCorsoByCodiceAnno.setString(13, corso.getLinkForum());
-            uCorsoByCodiceAnno.setString(14, corso.getNote());
-            
-            uCorsoByCodiceAnno.setString(15, corso.getLang());
-            
-            uCorsoByCodiceAnno.setString(16, corso.getCodice());
-            uCorsoByCodiceAnno.setString(17, corso.getAnno());
-            
-            uCorsoByCodiceAnno.setString(18, corso.getLang());
+            uCorsoById.setString(1, corso.getCodice());                          
+            uCorsoById.setString(2, corso.getSSD());
+            uCorsoById.setInt(3, corso.getSemestre());
+            uCorsoById.setString(4, corso.getLingua());
+            uCorsoById.setString(5, corso.getPrerequisiti());
+            uCorsoById.setString(6, corso.getObiettivi());
+            uCorsoById.setString(7, corso.getModEsame());
+            uCorsoById.setString(8, corso.getModInsegnamento());
+            uCorsoById.setString(9, corso.getDescrittoriDublino());
+            uCorsoById.setString(10, corso.getSillabo());
+            uCorsoById.setString(11, corso.getLinkHomepageCorso());
+            uCorsoById.setString(12, corso.getLinkRisorseEsterne());
+            uCorsoById.setString(13, corso.getLinkForum());
+            uCorsoById.setString(14, corso.getNote());
+                                  
+            uCorsoById.setInt(15, corso.getId());
             
             
-            uCorsoByCodiceAnno.executeUpdate();
+            uCorsoById.executeUpdate();
             }
             else { //insert
-                iCorsoByCodiceAnno.setString(1, corso.getCodice());
-                iCorsoByCodiceAnno.setString(2, corso.getAnno());
-                iCorsoByCodiceAnno.setString(3, corso.getNome());
-                iCorsoByCodiceAnno.setString(4, corso.getLang());
+                iCorso.setString(1, corso.getCodice());
+                iCorso.setString(2, corso.getAnno());
+                iCorso.setString(3, corso.getNome());
+                iCorso.setString(4, corso.getSSD());
+                iCorso.setInt(5, corso.getSemestre());
+                iCorso.setString(6, corso.getLingua());
+                iCorso.setString(7, corso.getPrerequisiti());
+                iCorso.setString(8, corso.getObiettivi());
+                iCorso.setString(9, corso.getModEsame());
+                iCorso.setString(10, corso.getModInsegnamento());
+                iCorso.setString(11, corso.getDescrittoriDublino());
+                iCorso.setString(12, corso.getSillabo());
+                iCorso.setString(13, corso.getLinkHomepageCorso());
+                iCorso.setString(14, corso.getLinkRisorseEsterne());
+                iCorso.setString(15, corso.getLinkForum());
+                iCorso.setString(16, corso.getNote());
+                iCorso.setString(17, corso.getLang());
                 
-                if(iCorsoByCodiceAnno.executeUpdate() == 1) {
+                if(iCorso.executeUpdate() == 1) {
                     
-                    try(ResultSet keys = iCorsoByCodiceAnno.getGeneratedKeys()) {
+                    try(ResultSet keys = iCorso.getGeneratedKeys()) {
                         if(keys.next()) {
                             key = keys.getInt(1);
                         }
@@ -1072,7 +1076,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             corso.setDirty(false);
         }
         catch(SQLException ex) {
-            throw new DataLayerException("Unable to store Corso by codice & anno", ex);
+            throw new DataLayerException("Unable to store Corso by id", ex);
         }
         
     }
@@ -1170,6 +1174,120 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     }
     
     @Override
+    public void storeCorsiCorsiIntegrati(int corso_key, int corso_integrato_key) throws DataLayerException {
+        
+        try {
+            
+            iCorsiCorsiIntegrati.setInt(1, corso_key);
+            iCorsiCorsiIntegrati.setInt(2, corso_integrato_key);
+            
+            iCorsiCorsiIntegrati.executeUpdate();
+            
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in relation CorsiCorsiIntegrati", e);
+        }
+        
+    }
+    
+    @Override
+    public void storeCorsiCorsiMutuati(int corso_key, int corso_mutuato_key) throws DataLayerException {
+        
+        try {
+            
+            iCorsiCorsiMutuati.setInt(1, corso_key);
+            iCorsiCorsiMutuati.setInt(2, corso_mutuato_key);
+            
+            iCorsiCorsiMutuati.executeUpdate();
+            
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in relation CorsiCorsiMutuati", e);
+        }
+        
+    }
+    
+    @Override
+    public void storeCorsiCorsiPropedeutici(int corso_key, int corso_propedeutico_key) throws DataLayerException {
+        
+        try {
+            
+            iCorsiCorsiPropedeutici.setInt(1, corso_key);
+            iCorsiCorsiPropedeutici.setInt(2, corso_propedeutico_key);
+            
+            iCorsiCorsiPropedeutici.executeUpdate();
+            
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in relation CorsiCorsiPropedeutici", e);
+        }
+        
+    }
+    
+    @Override
+    public void storeCorsiCorsiLaurea(int corso_laurea_key, int corso_key, String numero_cfu, String tipo_cfu) throws DataLayerException {
+        
+        try {
+            
+            iCorsiCorsiLaurea.setInt(1, corso_laurea_key);
+            iCorsiCorsiLaurea.setInt(2, corso_key);
+            iCorsiCorsiLaurea.setString(3, numero_cfu);
+            iCorsiCorsiLaurea.setString(4, tipo_cfu);
+            
+            iCorsiCorsiLaurea.executeUpdate();
+            
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in relation CorsiCorsiLaurea", e);
+        }
+        
+    }
+    
+    @Override
+    public void storeCorsiDocenti(int corso_key, int docente_key) throws DataLayerException {
+        
+        try {
+            
+            iCorsiDocenti.setInt(1, corso_key);
+            iCorsiDocenti.setInt(2, docente_key);
+            
+            iCorsiDocenti.executeUpdate();
+            
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in relation CorsiDocenti", e);
+        }
+        
+    }
+    
+    @Override
+    public void storeCorsiLibriTesto(int corso_key, int libro_testo_key) throws DataLayerException {
+        
+        try {
+            
+            iCorsiLibriTesto.setInt(1, corso_key);
+            iCorsiLibriTesto.setInt(2, libro_testo_key);
+            
+            iCorsiLibriTesto.executeUpdate();
+            
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in relation CorsiLibriTesto", e);
+        }
+        
+    }
+    
+    @Override
+    public void storeCorsiMateriali(int corso_key, int materiale_key) throws DataLayerException {
+        
+        try {
+            
+            iCorsiMateriali.setInt(1, corso_key);
+            iCorsiMateriali.setInt(2, materiale_key);
+            
+            iCorsiMateriali.executeUpdate();
+            
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in relation CorsiMateriali", e);
+        }
+        
+    }
+    
+    @Override
     public void destroy() {
         
         try {
@@ -1180,8 +1298,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsoByNome.close();
             sCorsoByNomeVersioni.close();
             sCorsoByCodiceAnno.close();
-            uCorsoByCodiceAnno.close();
-            iCorsoByCodiceAnno.close();
+            uCorsoById.close();
+            iCorso.close();
             sUtente.close();
             sUtenteById.close();
             sUtenteByEmail.close();
@@ -1305,7 +1423,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 }
 
             } catch(SQLException ex){
-                throw new DataLayerException("Unable to load Utente by id", ex); 
+                throw new DataLayerException("Unable to get CFU by Corso", ex); 
             }
             
         }
