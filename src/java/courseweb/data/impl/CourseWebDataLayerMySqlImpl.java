@@ -39,6 +39,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     private PreparedStatement sCFUCorsoCorsoLaurea;
    
     private PreparedStatement iCorsiCorsiIntegrati, iCorsiCorsiMutuati, iCorsiCorsiPropedeutici, iCorsiCorsiLaurea, iCorsiDocenti, iCorsiLibriTesto, iCorsiMateriali;
+    private PreparedStatement uCorsiCorsiIntegrati, uCorsiCorsiMutuati, uCorsiCorsiPropedeutici, uCorsiCorsiLaurea, uCorsiDocenti;
     
     private PreparedStatement iLogMessage, sLogMessage;
     
@@ -107,8 +108,14 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             iCorsiLibriTesto = connection.prepareStatement("INSERT INTO corsi_libri_testo (id_corso, id_libro_testo) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
             iCorsiMateriali = connection.prepareStatement("INSERT INTO corsi_materiali (id_corso, id_materiale) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
             iLogMessage = connection.prepareStatement("INSERT INTO log (messaggio) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
-
             
+            // UPDATE SULLE RELAZIONI
+            uCorsiCorsiIntegrati = connection.prepareStatement("UPDATE corsi_corsi_integrati SET id_corso_integrato=? where id=?");
+            uCorsiCorsiMutuati = connection.prepareStatement("UPDATE corsi_corsi_mutuati SET id_corso_mutuato=? where id=?");
+            uCorsiCorsiPropedeutici = connection.prepareStatement("UPDATE corsi_corsi_propedeutici SET id_corso_propedeutico=?, numero_cfu=?, tipo_cfu=? where id=?");
+            uCorsiCorsiLaurea = connection.prepareStatement("UPDATE corsi_corsi_corsi_laurea SET id_corso_laurea=? where id=?");
+            uCorsiDocenti = connection.prepareStatement("UPDATE corsi_docenti SET id_docente=? where id=?");
+       
         }
         catch(SQLException exc){
             throw new DataLayerException("Error in initializing CourseWeb DataLayer", exc);
@@ -1342,6 +1349,12 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             iCorsiLibriTesto.close();
             iCorsiMateriali.close();
             iLogMessage.close();
+            
+            uCorsiCorsiIntegrati.close();
+            uCorsiCorsiMutuati.close();
+            uCorsiCorsiPropedeutici.close();
+            uCorsiCorsiLaurea.close();
+            uCorsiDocenti.close();
             
         }
         
