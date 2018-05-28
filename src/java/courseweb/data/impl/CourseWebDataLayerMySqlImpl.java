@@ -39,7 +39,9 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     private PreparedStatement sCFUCorsoCorsoLaurea;
    
     private PreparedStatement iCorsiCorsiIntegrati, iCorsiCorsiMutuati, iCorsiCorsiPropedeutici, iCorsiCorsiLaurea, iCorsiDocenti, iCorsiLibriTesto, iCorsiMateriali;
-          
+    
+    private PreparedStatement iLogMessage, sLogMessage;
+    
     public CourseWebDataLayerMySqlImpl(DataSource datasource) throws SQLException, NamingException {
         super(datasource);
     }
@@ -94,6 +96,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sMaterialiCorso = connection.prepareStatement("SELECT * FROM corsi_materiali INNER JOIN materiali ON (corsi_materiali.id_materiale = materiali.id) WHERE corsi_materiali.id_corso=?");
             sDocentiCorso = connection.prepareStatement("SELECT * FROM corsi_docenti INNER JOIN utenti ON (corsi_docenti.id_docente = utenti.id) WHERE corsi_docenti.id_corso=?");
             sCFUCorsoCorsoLaurea = connection.prepareStatement("SELECT * FROM corsi_corsi_laurea WHERE id_corso=? AND id_corso_laurea=?");
+            sLogMessage = connection.prepareStatement("SELECT * FROM log");
             
             // INSERT SULLE RELAZIONI
             iCorsiCorsiIntegrati = connection.prepareStatement("INSERT INTO corsi_corsi_integrati (id_corso, id_corso_integrato) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -103,8 +106,9 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             iCorsiDocenti = connection.prepareStatement("INSERT INTO corsi_docenti (id_corso, id_docente) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
             iCorsiLibriTesto = connection.prepareStatement("INSERT INTO corsi_libri_testo (id_corso, id_libro_testo) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
             iCorsiMateriali = connection.prepareStatement("INSERT INTO corsi_materiali (id_corso, id_materiale) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
-         
-        
+            iLogMessage = connection.prepareStatement("INSERT INTO log (messaggio) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+
+            
         }
         catch(SQLException exc){
             throw new DataLayerException("Error in initializing CourseWeb DataLayer", exc);
@@ -1328,6 +1332,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sMaterialiCorso.close();   
             sDocentiCorso.close();
             sCFUCorsoCorsoLaurea.close();
+            sLogMessage.close();
             
             iCorsiCorsiIntegrati.close();
             iCorsiCorsiMutuati.close();
@@ -1336,7 +1341,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             iCorsiDocenti.close();
             iCorsiLibriTesto.close();
             iCorsiMateriali.close();
-              
+            iLogMessage.close();
+            
         }
         
         catch(SQLException ex) {
@@ -1431,4 +1437,36 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         return result;
     }
     
+    @Override
+    public void storeLogMessage(String message) throws DataLayerException{
+        
+         try {
+            
+            iLogMessage.setString(1, message);
+            
+            iLogMessage.executeUpdate();
+            
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in log", e);
+        }
+        
+    }
+    
+    @Override
+    public List<String> getLogMessage() throws DataLayerException{
+        List<String> result = new ArrayList();
+        
+        try{
+            try(ResultSet rs = sLogMessage.executeQuery()){
+                while(rs.next()){
+                    result.add(rs.getTimestamp("timestamp").toString()+" - "+rs.getString("messaggio"));
+                }
+            }
+        }
+        catch(SQLException ex){
+            throw new DataLayerException("Unable to load log", ex);
+        }
+        
+        return result;
+    }
 }

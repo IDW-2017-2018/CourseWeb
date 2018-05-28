@@ -3,9 +3,7 @@
  */
 package courseweb.controller;
 
-import courseweb.data.model.Corso;
-import courseweb.data.model.CourseWebDataLayer;
-import framework.data.DataLayerException;
+import courseweb.data.model.Utente;
 import framework.result.FailureResult;
 import framework.result.TemplateManagerException;
 import framework.result.TemplateResult;
@@ -79,6 +77,16 @@ public class BackOffice extends CourseWebBaseController {
                 }
                                
                 request.setAttribute("page", "backoffice");
+                if(((Utente)s.getAttribute("utente")) == null){
+                    request.setAttribute("message", "not permitted");
+                    action_error(request,response);
+                    return;
+                }
+                if(!(((Utente)s.getAttribute("utente")).getTipoUtente().equals("amministratore")||((Utente)s.getAttribute("utente")).getTipoUtente().equals("docente"))){
+                  request.setAttribute("message", "not permitted");
+                  action_error(request,response);
+                  return;
+                }
                 
                 action_default(request, response); 
                 

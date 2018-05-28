@@ -57,6 +57,7 @@ public interface CourseWebDataLayer extends DataLayer {
     List<Libro_Testo> getLibriTestoCorso(Corso corso) throws DataLayerException;
     List<Materiale> getMaterialiCorso(Corso corso) throws DataLayerException;
     List<Utente> getDocentiCorso(Corso corso) throws DataLayerException;
+    List<String> getLogMessage() throws DataLayerException;
     
     void storeUtenteById(Utente utente) throws DataLayerException;    
     void storeUtenteByEmail(Utente utente) throws DataLayerException;
@@ -71,7 +72,7 @@ public interface CourseWebDataLayer extends DataLayer {
     void storeCorsiDocenti(int corso_key, int docente_key) throws DataLayerException;
     void storeCorsiLibriTesto(int corso_key, int libro_testo_key) throws DataLayerException;
     void storeCorsiMateriali(int corso_key, int materiale_key) throws DataLayerException;
-    
+    void storeLogMessage(String message) throws DataLayerException;
     
     List<Corso> filtraCorsi (List<Corso> corsi, String attributo, String filtro) throws DataLayerException;
     List<Map<String, Object>> getCFU(Corso corso) throws DataLayerException;

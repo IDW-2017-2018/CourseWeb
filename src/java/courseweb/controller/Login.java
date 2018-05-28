@@ -104,7 +104,7 @@ public class Login extends CourseWebBaseController {
                                     
                                     request.setAttribute("session", session); 
                                     
-                                    response.sendRedirect(response.encodeURL(request.getContextPath() + "/searchcourses?lang=" + request.getAttribute("lang")));
+                                    response.sendRedirect(response.encodeURL(request.getContextPath() + "/backoffice?lang=" + request.getAttribute("lang")));
                                     
                                     
                                 } catch(IOException e){
@@ -121,7 +121,7 @@ public class Login extends CourseWebBaseController {
                                     
                                     request.setAttribute("session", session); 
                                     
-                                    response.sendRedirect(response.encodeURL(request.getContextPath() + "/searchcourses?lang=" + request.getAttribute("lang")));
+                                    response.sendRedirect(response.encodeURL(request.getContextPath() + "/backoffice?lang=" + request.getAttribute("lang")));
                                     
                                     
                                 } catch(IOException e){
