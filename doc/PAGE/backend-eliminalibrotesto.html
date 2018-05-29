@@ -73,54 +73,49 @@
 
 
 
-<div class="filter">
+<#list corsi>
+
+<div class="tablecontainer">
     
-    <h1 class="title">MODIFICA UTENTE</h1>
-    
-    <div class="formcontainer">
-        
-      <form action="searchcourses?lang=${lang}" method="POST">
+    <table class="tableresult">
 
-            <div class="fieldcontainerleft">
+        <tr class="trresult">
 
-                <label class="label" for="utente_email">Email</label>
-                <input class="field" type="text" id="utente_email" name="utente_email"" placeholder="${utente.email}" />
+            <th class="thresultfront" colspan="7"><h1 class="title">LIBRI DI TESTO ASSOCIATI</h1></th>
 
-                <label class="label" for="utente_password">Password</label>
-                <input class="field" type="text" id="utente_password" name="utente_password"" placeholder="${utente.password}" />
+        </tr>
 
-                <label class="label" for="utente_password">Riscrivi Password</label>
-                <input class="field" type="text" id="utente_password" name="utente_password"" />
+        <tr class="trresult">
 
-            </div>
+            <th class="thresult">AUTORE</th>
+            <th class="thresult">TITOLO</th>
+            <th class="thresult">VOLUME</th>
+            <th class="thresult">ANNO</th>
+            <th class="thresult">ELIMINA</th>
 
+        </tr>
 
-            <div class="fieldcontainerright">
-                
-                <label class="label" for="utente_nome">Nome</label>
-                <input class="field" type="text" id="utente_nome" name="utente_nome"" placeholder="${utente.nome}" />
+        <#items as corso>
 
-                <label class="label" for="utente_cognome">Cognome</label>
-                <input class="field" type="text" id="utente_cognome" name="utente_cognome"" placeholder="${utente.cognome}" />
-                
-                <label class="label" for="utente_tipo_utente">Tipo Utente</label>
-                <select class="field" name="utente_tipo_utente"" placeholder="${utente.tipo_utente}" >
-                    <option value="1">Docente</option>
-                    <option value="2">Amministratore</option>
-                </select>
+        <tr class="trresult-list">
 
-            </div>
+            <td class="tdresult-list" >${libro_testo.autore}</td>
+            <td class="tdresult-list" >${libro_testo.titolo}</td>
+            <td class="tdresult-list" >${libro_testo.volume}</td>
+            <td class="tdresult-list" >${libro_testo.anno}</td>
+            <td class="tdresult-list"><a href="backend-deletecheck.html" class="linkresultmod">ELIMINA</a></td>
+            
+        </tr>
 
+        </#items>
 
-        <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="MODIFICA"/>
-        </div>
-
-      </form>
-
-    </div>
+    </table>
 
 </div>
+
+<#else>
+
+</#list>
 
 
 

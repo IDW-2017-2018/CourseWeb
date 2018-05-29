@@ -75,7 +75,7 @@
 
 <div class="filter">
     
-    <h1 class="title">MODIFICA UTENTE</h1>
+    <h1 class="title">AGGIUNGI RELAZIONE CORSO PROPEDEUTICO</h1>
     
     <div class="formcontainer">
         
@@ -83,37 +83,24 @@
 
             <div class="fieldcontainerleft">
 
-                <label class="label" for="utente_email">Email</label>
-                <input class="field" type="text" id="utente_email" name="utente_email"" placeholder="${utente.email}" />
-
-                <label class="label" for="utente_password">Password</label>
-                <input class="field" type="text" id="utente_password" name="utente_password"" placeholder="${utente.password}" />
-
-                <label class="label" for="utente_password">Riscrivi Password</label>
-                <input class="field" type="text" id="utente_password" name="utente_password"" />
+                <label class="label" for="corso_nome">Corso</label>
+                <input class="field" type="text" id="corso_nome" name="corso_nome"" placeholder="${corso.nome}" disabled />
 
             </div>
 
 
             <div class="fieldcontainerright">
                 
-                <label class="label" for="utente_nome">Nome</label>
-                <input class="field" type="text" id="utente_nome" name="utente_nome"" placeholder="${utente.nome}" />
-
-                <label class="label" for="utente_cognome">Cognome</label>
-                <input class="field" type="text" id="utente_cognome" name="utente_cognome"" placeholder="${utente.cognome}" />
-                
-                <label class="label" for="utente_tipo_utente">Tipo Utente</label>
-                <select class="field" name="utente_tipo_utente"" placeholder="${utente.tipo_utente}" >
-                    <option value="1">Docente</option>
-                    <option value="2">Amministratore</option>
+                <label class="label" for="corso_nome">Corso Propedeutico</label>
+                <select class="field" name="corso_nome">
+                    <option value="1">1</option>
                 </select>
-
+                
             </div>
 
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="MODIFICA"/>
+            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/>
         </div>
 
       </form>

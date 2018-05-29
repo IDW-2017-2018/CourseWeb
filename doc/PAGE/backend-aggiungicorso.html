@@ -80,50 +80,50 @@
     <div class="formcontainer">
         
       <form action="searchcourses?lang=${lang}" method="POST">
+
+        <div class="fieldcontainercentral">
+
+            <label class="label" for="corso_codice">Codice</label>
+            <input class="field" type="text" id="corso_codice" name="corso_codice""/>
+
+            <label class="label" for="cors_anno">Anno</label>
+            <input class="field" type="text" id="cors_anno" name="cors_anno""/>
+
+            <label class="label" for="corso_nome">Nome</label>
+            <input class="field" type="text" id="corso_nome" name="corso_nome""/>
+    
+            <label class="label" for="corso_ssd">SSD</label>
+            <input class="field" type="text" id="corso_ssd" name="corso_ssd""/>
+
+            <label class="label" for="corso_semestre">Semestre</label>
+            <select class="field" name="corso_semestre"">
+                <option value="---">---</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
+
+            <label class="label" for="corso_lingua">Lingua</label>
+            <select class="field" name="corso_lingua"">
+                <option value="---">---</option>
+                <option value="1">Italiano</option>
+                <option value="2">Inglese</option>
+            </select>
+
+            <label class="label" for="corso_link_homepage">Link Homepage</label>
+            <input class="field" type="text" id="corso_link_homepage" name="corso_link_homepage""/>
+
+            <label class="label" for="corso_link_risorse">Link Risorse</label>
+            <input class="field" type="text" id="corso_link_risorse" name="corso_link_risorse""/>
+
+            <label class="label" for="corso_link_forum">Link Forum</label>
+            <input class="field" type="text" id="corso_link_forum" name="corso_link_forum""/>
         
+        </div>
+
             <div class="fieldcontainerleft">
+
+                <h1 class="title">INFO CORSO ITALIANO</h1>
                 
-                <label class="label" for="corso_codice">Codice</label>
-                <input class="field" type="text" id="corso_codice" name="corso_codice""/>
-
-                <label class="label" for="cors_anno">Anno</label>
-                <input class="field" type="text" id="cors_anno" name="cors_anno""/>
-
-                <label class="label" for="corso_nome">Nome</label>
-                <input class="field" type="text" id="corso_nome" name="corso_nome""/>
-        
-                <label class="label" for="corso_ssd">SSD</label>
-                <input class="field" type="text" id="corso_ssd" name="corso_ssd""/>
-
-                <label class="label" for="corso_semestre">Semestre</label>
-                <select class="field" name="corso_semestre"">
-                    <option value="---">---</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
-
-                <label class="label" for="corso_lingua">Lingua</label>
-                <select class="field" name="corso_lingua"">
-                    <option value="---">---</option>
-                    <option value="1">Italiano</option>
-                    <option value="2">Inglese</option>
-                </select>
-
-                <label class="label" for="corso_link_homepage">Link Homepage</label>
-                <input class="field" type="text" id="corso_link_homepage" name="corso_link_homepage""/>
-
-                <label class="label" for="corso_link_risorse">Link Risorse</label>
-                <input class="field" type="text" id="corso_link_risorse" name="corso_link_risorse""/>
-
-                <label class="label" for="corso_link_forum">Link Forum</label>
-                <input class="field" type="text" id="corso_link_forum" name="corso_link_forum""/>
-
-            </div>
-
-
-            <div class="fieldcontainerright">
-                
-            
                 <label class="label" for="corso_prerequisiti">Prerequisiti</label>
                 <textarea class="field" type"text" id="corso_prerequisiti" name="corso_prerequisiti" style="resize: vertical;"> </textarea>
 
@@ -145,9 +145,34 @@
                 <label class="label" for="corso_note">Note</label>
                 <textarea class="field" type"text" id="corso_note" name="corso_note" style="resize: vertical;"> </textarea>
                 
-                <label class="label" for="corso_lang">LANG</label>
-                <input class="field" type="text" id="corso_lang" name="corso_lang""/>
+            </div>
 
+
+            <div class="fieldcontainerright">
+                
+                <h1 class="title">INFO CORSO INGLESE</h1>
+
+                <label class="label" for="corso_prerequisiti">Prerequisiti</label>
+                <textarea class="field" type"text" id="corso_prerequisiti" name="corso_prerequisiti" style="resize: vertical;"> </textarea>
+
+                <label class="label" for="corso_obiettivi">Obiettivi</label>
+                <textarea class="field" type"text" id="corso_obiettivi" name="corso_obiettivi" style="resize: vertical;"> </textarea>
+                
+                <label class="label" for="corso_mod_esame">Modalit&agrave; Esame</label>
+                <textarea class="field" type"text" id="corso_mod_esame" name="corso_mod_esame" style="resize: vertical;"> </textarea>
+
+                <label class="label" for="corso_mod_insegnamento">Modalit&agrave; Insegnamento</label>
+                <textarea class="field" type"text" id="corso_mod_insegnamento" name="corso_mod_insegnamento" style="resize: vertical;"> </textarea>
+                
+                <label class="label" for="corso_descrittori_dublino">Descrittori Dublino</label>
+                <textarea class="field" type"text" id="corso_descrittori_dublino" name="corso_descrittori_dublino" style="resize: vertical;"> </textarea>
+
+                <label class="label" for="corso_sillabo">Sillabo</label>
+                <textarea class="field" type"text" id="corso_sillabo" name="corso_sillabo" style="resize: vertical;"> </textarea>
+
+                <label class="label" for="corso_note">Note</label>
+                <textarea class="field" type"text" id="corso_note" name="corso_note" style="resize: vertical;"> </textarea>
+                
             </div>
 
 
@@ -160,49 +185,6 @@
     </div>
 
 </div>
-
-
-<#list corsi>
-
-<div class="tablecontainer">
-    
-    <table class="tableresult">
-
-        <tr class="trresult">
-
-            <th class="thresultfront" colspan="7"><h1 class="title">CORSI</h1></th>
-
-        </tr>
-
-        <tr class="trresult">
-
-            <th class="thresult">CODICE</th>
-            <th class="thresult" colspan="2">NOME</th>
-            <th class="thresult">SSD</th>
-            <th class="thresult">ANNO</th>
-
-        </tr>
-
-        <#items as corso>
-
-        <tr class="trresult-list">
-
-            <td class="tdresult-list" colspan="2">${corsi.codice}</td>
-            <td class="tdresult-list">${corsi.nome}</td>
-            <td class="tdresult-list">${corsi.SSD}</td>
-            <td class="tdresult-list">${corsi.anno}</td>
-            
-        </tr>
-
-        </#items>
-
-    </table>
-
-</div>
-
-<#else>
-
-</#list>
 
 
 

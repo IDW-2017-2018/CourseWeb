@@ -75,45 +75,50 @@
 
 <div class="filter">
     
-    <h1 class="title">MODIFICA UTENTE</h1>
+    <h1 class="title">FILTRI</h1>
     
     <div class="formcontainer">
         
       <form action="searchcourses?lang=${lang}" method="POST">
+        
 
             <div class="fieldcontainerleft">
+                
+            
+            <label class="label" for="corso_nome">Nome</label>
+            <input class="field" type="text" id="corso_nome" name="corso_nome"/>
+            
+            <label class="label" for="corso_codice">Codice</label>
+            <input class="field" type="text" id="corso_codice" name="corso_codice"/>
+    
+            <label class="label" for="corso_ssd">SSD</label>
+            <input class="field" type="text" id="corso_ssd" name="corso_ssd"/>
 
-                <label class="label" for="utente_email">Email</label>
-                <input class="field" type="text" id="utente_email" name="utente_email"" placeholder="${utente.email}" />
-
-                <label class="label" for="utente_password">Password</label>
-                <input class="field" type="text" id="utente_password" name="utente_password"" placeholder="${utente.password}" />
-
-                <label class="label" for="utente_password">Riscrivi Password</label>
-                <input class="field" type="text" id="utente_password" name="utente_password"" />
 
             </div>
 
 
             <div class="fieldcontainerright">
                 
-                <label class="label" for="utente_nome">Nome</label>
-                <input class="field" type="text" id="utente_nome" name="utente_nome"" placeholder="${utente.nome}" />
-
-                <label class="label" for="utente_cognome">Cognome</label>
-                <input class="field" type="text" id="utente_cognome" name="utente_cognome"" placeholder="${utente.cognome}" />
-                
-                <label class="label" for="utente_tipo_utente">Tipo Utente</label>
-                <select class="field" name="utente_tipo_utente"" placeholder="${utente.tipo_utente}" >
-                    <option value="1">Docente</option>
-                    <option value="2">Amministratore</option>
+            
+            <label class="label" for="corso_docente">Docente</label>
+            <input class="field" type="text" id="corso_docente" name="corso_docente"/>
+    
+            <label class="label" for="corso_corsi_laurea">Corsi di Laurea</label>
+            <input class="field" type="text" id="corso_corsi_laurea" name="corso_corsi_laurea"/>
+                   
+            <label class="label" for="corso_lingua">Lingua</label>
+                <select class="field" name="corso_lingua"">
+                    <option value="---">---</option>
+                    <option value="1">Italiano</option>
+                    <option value="2">Inglese</option>
                 </select>
 
             </div>
 
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="MODIFICA"/>
+            <input class="filterbutton" type="submit" name="filtra" value="CERCA"/>
         </div>
 
       </form>
@@ -121,6 +126,51 @@
     </div>
 
 </div>
+
+
+<#list corsi>
+
+<div class="tablecontainer">
+    
+    <table class="tableresult">
+
+        <tr class="trresult">
+
+            <th class="thresultfront" colspan="7"><h1 class="title">CORSI</h1></th>
+
+        </tr>
+
+        <tr class="trresult">
+
+            <th class="thresult">CODICE</th>
+            <th class="thresult" colspan="2">NOME</th>
+            <th class="thresult">SSD</th>
+            <th class="thresult">ANNO</th>
+            <th class="thresult">MODIFICA</th>
+
+        </tr>
+
+        <#items as corso>
+
+        <tr class="trresult-list">
+
+            <td class="tdresult-list" colspan="2">${corsi.codice}</td>
+            <td class="tdresult-list">${corsi.nome}</td>
+            <td class="tdresult-list">${corsi.SSD}</td>
+            <td class="tdresult-list">${corsi.anno}</td>
+            <td class="tdresult-list"><a href="backend-modificacorsohub.html" class="linkresultmod">MODIFICA</a></td>
+            
+        </tr>
+
+        </#items>
+
+    </table>
+
+</div>
+
+<#else>
+
+</#list>
 
 
 

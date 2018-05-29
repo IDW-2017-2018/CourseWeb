@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    
+    <link rel="icon" href="images/logo_imgs/prove/favicon.png" type="image/png"/> <!-- da sistemare usa .ico -->
+    <title>CourseWeb</title>
+    
+    <meta name="description" content="Online Index of University Courses"/>
+    <meta name="keywords" content="HTML, CSS, XML, JavaScript, Java"/>
+    <meta name="author" content="${defaults.authors}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <link rel="stylesheet" type="text/css" href="style/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="style/outline.css"/>
+    
+    <link rel="stylesheet" type="text/css" href="style/backend.css"/> <!-- da montare dinamicamente -->
+
+</head>
+
+<body>
+    
+    <!-- ########## TITLE BAR ########## -->
+
+    <div class="title_bar">
+        
+            <a href="${page}?lang=${lang}&id=${id}">
+                <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
+            </a>
+            <a href="${page}?lang=${lang}">
+                <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
+            </a>
+
+    </div>
+
+    <!-- ########## LOGIN NAV BAR ########## -->
+
+    <ul class="navbar">
+
+        <li class="menu_item"><a href="searchcourses?lang=${lang}">CORSI</a></li>
+
+                <li class="profile_item"><p>${session.getAttribute('utente').nome}</p></li>
+                <li class="profile_item"><p>ospite</p></li>
+                
+        <img class="profile_icon" src="images/footer_icons/white_svg/user-circle.svg" alt="user-circle"/>
+
+    </ul>
+
+
+
+
+
+
+
+
+
+
+<div class="filter">
+    
+    <h1 class="title"> CORSO </h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="MODIFICA"/><a href="backend-modificacorso.html">AAAA</a>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+<div class="filter">
+    
+    <h1 class="title"> CORSI LAUREA ASSOCIATI </h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/><a href="backend-aggiungicorsolaurea.html">AAAA</a>
+        </div>
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="ELIMINA"/><a href="backend-eliminacorsolaurea.html">AAAA</a>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+
+<div class="filter-divider">  
+    
+<div class="filter-left">
+    
+    <h1 class="title"> CORSI MUTUATI ASSOCIATI </h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/><a href="backend-aggiungicorsomutuato.html">AAAA</a>
+        </div>
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="ELIMINA"/><a href="backend-eliminacorsomutuato.html">AAAA</a>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+
+<div class="filter-right">
+    
+    <h1 class="title"> CORSI INTEGRATI ASSOCIATI </h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/><a href="backend-aggiungicorsointegrato.html">AAAA</a>
+        </div>
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="ELIMINA"/><a href="backend-eliminacorsointegrato.html">AAAA</a>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<div class="filter-divider">  
+    
+<div class="filter-left">
+    
+    <h1 class="title"> CORSI PROPEDEUTICI ASSOCIATI </h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/><a href="backend-aggiungicorsopropedeutico.html">AAAA</a>
+        </div>
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="ELIMINA"/><a href="backend-eliminacorsopropedeutico.html">AAAA</a>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+
+<div class="filter-right">
+    
+    <h1 class="title"> DOCENTI ASSOCIATI </h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/><a href="backend-aggiungidocente.html">AAAA</a>
+        </div>
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="ELIMINA"/><a href="backend-eliminadocente.html">AAAA</a>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<div class="filter-divider-last">  
+    
+<div class="filter-left">
+    
+    <h1 class="title"> LIBRO DI TESTO</h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/><a href="backend-aggiungilibrotesto.html">AAAA</a>
+        </div>
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="ELIMINA"/><a href="backend-eliminalibrotesto.html">AAAA</a>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+
+<div class="filter-right">
+    
+    <h1 class="title"> MATERIALE</h1>
+    
+    <div class="formcontainer">
+        
+      <form action="searchcourses?lang=${lang}" method="POST">
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/><a href="backend-aggiungimateriale.html">AAAA</a>
+        </div>
+
+        <div class="buttoncontainer">               
+            <input class="filterbutton" type="submit" name="filtra" value="ELIMINA"/><a href="backend-eliminamateriale.html">AAAA</a>
+        </div>
+
+      </form>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ########## LANG BAR ########## -->
+
+    <ul class="lang_bar">
+        
+            <li><a href="${page}?lang=ita&id=${id}">ITALIANO</a></li>
+            <li><a href="${page}?lang=eng&id=${id}">INGLESE</a></li>
+        
+    </ul>
+
+
+    <!-- ########## FOOTER ########## -->
+
+    <div class="footer">
+        
+        <img src="images/logo_imgs/logominDEF.svg" alt="Logo"/>     
+        
+        <ul class="footer_link_container">
+
+            <li><a class="footer_link_item" href="contacts?lang=${lang}">CONTATTI</a></li>
+            <li><a class="footer_link_item" href="about?lang=${lang}">INFORMAZIONI</a></li>
+            <li><a class="footer_link_item" href="http://www.disim.univaq.it/main/index.php" target="_blank">DISIM</a></li>
+        
+        </ul>   
+        
+        <div class="footer_social_container">
+
+            <a href="https://it-it.facebook.com/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/facebook.svg" alt="facebook"/></a>
+            <a href="https://twitter.com/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/twitter.svg" alt="twitter"/></a>
+            <a href="https://www.google.it/" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/google.svg" alt="google"/></a>
+            <a href="https://github.com/IDW-2017-2018/CourseWeb" target="_blank"><img class="footer_social_icon" src="images/footer_icons/white_svg/github.svg" alt="github"/></a>
+
+        </div>  
+
+    </div>
+    
+    <div class="copyright">
+        
+        <p class="copyright_text">2017 &#47; 2018 &copy; CourseWeb</p>
+    
+    </div>
+    
+</body>
+</html>

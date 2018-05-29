@@ -75,44 +75,109 @@
 
 <div class="filter">
     
-    <h1 class="title">FILTRI</h1>
+    <h1 class="title">MODIFICA CORSO</h1>
     
     <div class="formcontainer">
         
       <form action="searchcourses?lang=${lang}" method="POST">
-        
 
-            <div class="fieldcontainerleft">
-                
-            
-            <label class="label" for="corso_nome">Nome</label>
-            <input class="field" type="text" id="corso_nome" name="corso_nome"/>
-            
+        <div class="fieldcontainercentral">
+
             <label class="label" for="corso_codice">Codice</label>
-            <input class="field" type="text" id="corso_codice" name="corso_codice"/>
+            <input class="field" type="text" id="corso_codice" name="corso_codice"" placeholder="${corso.codice}" />
+
+            <label class="label" for="corso_anno">Anno</label>
+            <input class="field" type="text" id="corso_anno" name="corso_anno"" placeholder="${corso.anno}" />
+
+            <label class="label" for="corso_nome">Nome</label>
+            <input class="field" type="text" id="corso_nome" name="corso_nome"" placeholder="${corso.nome}" />
     
             <label class="label" for="corso_ssd">SSD</label>
-            <input class="field" type="text" id="corso_ssd" name="corso_ssd"/>
+            <input class="field" type="text" id="corso_ssd" name="corso_ssd"" placeholder="${corso.SSD}" />
 
+            <label class="label" for="corso_semestre">Semestre</label>
+            <select class="field" name="corso_semestre"" placeholder="${corso.semestre}" >
+                <option value="---">---</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
 
+            <label class="label" for="corso_lingua">Lingua</label>
+            <select class="field" name="corso_lingua"" placeholder="${corso.lingua}" >
+                <option value="---">---</option>
+                <option value="1">Italiano</option>
+                <option value="2">Inglese</option>
+            </select>
+
+            <label class="label" for="corso_link_homepage">Link Homepage</label>
+            <input class="field" type="text" id="corso_link_homepage" name="corso_link_homepage"" placeholder="${corso.linkHomepageCorso}" />
+
+            <label class="label" for="corso_link_risorse">Link Risorse</label>
+            <input class="field" type="text" id="corso_link_risorse" name="corso_link_risorse"" placeholder="${corso.linkRisorseEsterne}" />
+
+            <label class="label" for="corso_link_forum">Link Forum</label>
+            <input class="field" type="text" id="corso_link_forum" name="corso_link_forum"" placeholder="${corso.linkForum}" />
+        
+        </div>
+
+            <div class="fieldcontainerleft">
+
+                <h1 class="title">INFO CORSO ITALIANO</h1>
+                
+                <label class="label" for="corso_prerequisiti">Prerequisiti</label>
+                <textarea class="field" type"text" id="corso_prerequisiti" name="corso_prerequisiti" placeholder="${corso.prerequisiti}" "></textarea>
+
+                <label class="label" for="corso_obiettivi">Obiettivi</label>
+                <textarea class="field" type"text" id="corso_obiettivi" name="corso_obiettivi" placeholder="${corso.obiettivi}" "></textarea>
+                
+                <label class="label" for="corso_mod_esame">Modalit&agrave; Esame</label>
+                <textarea class="field" type"text" id="corso_mod_esame" name="corso_mod_esame" placeholder="${corso.modEsame}" "></textarea>
+
+                <label class="label" for="corso_mod_insegnamento">Modalit&agrave; Insegnamento</label>
+                <textarea class="field" type"text" id="corso_mod_insegnamento" name="corso_mod_insegnamento" placeholder="${corso.modInsegnamento}" "></textarea>
+                
+                <label class="label" for="corso_descrittori_dublino">Descrittori Dublino</label>
+                <textarea class="field" type"text" id="corso_descrittori_dublino" name="corso_descrittori_dublino" placeholder="${corso.descittoriDublino}" "></textarea>
+
+                <label class="label" for="corso_sillabo">Sillabo</label>
+                <textarea class="field" type"text" id="corso_sillabo" name="corso_sillabo" placeholder="${corso.sillabo}" "></textarea>
+
+                <label class="label" for="corso_note">Note</label>
+                <textarea class="field" type"text" id="corso_note" name="corso_note" placeholder="${corso.note}" "></textarea>
+                
             </div>
 
 
             <div class="fieldcontainerright">
                 
-            
-            <label class="label" for="corso_docente">Docente</label>
-            <input class="field" type="text" id="corso_docente" name="corso_docente"/>
-    
-            <label class="label" for="corso_corsi_laurea">Corsi di Laurea</label>
-            <input class="field" type="text" id="corso_corsi_laurea" name="corso_corsi_laurea"/>
-                   
+                <h1 class="title">INFO CORSO INGLESE</h1>
 
+                <label class="label" for="corso_prerequisiti">Prerequisiti</label>
+                <textarea class="field" type"text" id="corso_prerequisiti" name="corso_prerequisiti" placeholder="${corso.prerequisiti}" "></textarea>
+
+                <label class="label" for="corso_obiettivi">Obiettivi</label>
+                <textarea class="field" type"text" id="corso_obiettivi" name="corso_obiettivi" placeholder="${corso.obiettivi}" "></textarea>
+                
+                <label class="label" for="corso_mod_esame">Modalit&agrave; Esame</label>
+                <textarea class="field" type"text" id="corso_mod_esame" name="corso_mod_esame" placeholder="${corso.modEsame}" "></textarea>
+
+                <label class="label" for="corso_mod_insegnamento">Modalit&agrave; Insegnamento</label>
+                <textarea class="field" type"text" id="corso_mod_insegnamento" name="corso_mod_insegnamento" placeholder="${corso.modInsegnamento}" "></textarea>
+                
+                <label class="label" for="corso_descrittori_dublino">Descrittori Dublino</label>
+                <textarea class="field" type"text" id="corso_descrittori_dublino" name="corso_descrittori_dublino" placeholder="${corso.descrittoriDublino}" "></textarea>
+
+                <label class="label" for="corso_sillabo">Sillabo</label>
+                <textarea class="field" type"text" id="corso_sillabo" name="corso_sillabo" placeholder="${corso.sillabo}" "></textarea>
+
+                <label class="label" for="corso_note">Note</label>
+                <textarea class="field" type"text" id="corso_note" name="corso_note" placeholder="${corso.note}" "></textarea>
+                
             </div>
 
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="CERCA"/>
+            <input class="filterbutton" type="submit" name="filtra" value="MODIFICA"/>
         </div>
 
       </form>
@@ -120,51 +185,6 @@
     </div>
 
 </div>
-
-
-<#list corsi>
-
-<div class="tablecontainer">
-    
-    <table class="tableresult">
-
-        <tr class="trresult">
-
-            <th class="thresultfront" colspan="7"><h1 class="title">CORSI</h1></th>
-
-        </tr>
-
-        <tr class="trresult">
-
-            <th class="thresult">CODICE</th>
-            <th class="thresult" colspan="2">NOME</th>
-            <th class="thresult">SSD</th>
-            <th class="thresult">ANNO</th>
-            <th class="thresult">MODIFICA</th>
-
-        </tr>
-
-        <#items as corso>
-
-        <tr class="trresult-list">
-
-            <td class="tdresult-list" colspan="2">${corsi.codice}</td>
-            <td class="tdresult-list">${corsi.nome}</td>
-            <td class="tdresult-list">${corsi.SSD}</td>
-            <td class="tdresult-list">${corsi.anno}</td>
-            <td class="tdresult-list"><a href="${modifica_corso_form}" class="linkresultmod">MODIFICA</a></td>
-            
-        </tr>
-
-        </#items>
-
-    </table>
-
-</div>
-
-<#else>
-
-</#list>
 
 
 

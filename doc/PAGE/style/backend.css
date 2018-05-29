@@ -1,6 +1,24 @@
 
 /* ########## BACKEND CSS ########## */
 
+textarea {
+
+    resize: vertical;
+}
+
+p {
+
+    word-break: break-all;
+    font-family: Arial, Verdana, sans-serif;
+
+}
+
+hr {
+
+    border: 0.5px solid black;
+
+}
+
 .field { 
 
     width: 100%;
@@ -25,6 +43,13 @@
     background-color: black;
     border: 1px solid white;
     color: white;
+
+}
+
+.fieldcontainercentral { 
+
+    width: 60%; 
+    margin: 0 auto;
 
 }
 
@@ -97,8 +122,78 @@
     margin: 100px auto;
     width: 85%;
     max-width: 1500px;
+
 }
 
+.filterhelper { 
+
+    border-radius: 10px;
+    background-color: black;
+    padding: 50px 0px;
+    margin: 100px auto;
+    margin-top: 20px;
+    width: 85%;
+    max-width: 1500px;
+
+}
+
+.helper { 
+
+    border-radius: 5px;
+    background-color: lightcoral;
+    margin: 100px auto;
+    margin-bottom: 20px;
+    width: 85%;
+    max-width: 1500px;
+
+}
+
+.helpertext {
+
+    padding: 40px 70px;
+
+}
+
+.filter-divider {
+
+    overflow: auto; 
+    width: 85%; 
+    margin: 50px auto;
+    max-width: 1500px;
+    
+}
+
+.filter-divider-last {
+
+    overflow: auto; 
+    width: 85%; 
+    margin: 50px auto;
+    margin-bottom: 100px;
+    max-width: 1500px;
+    
+}
+
+.filter-left { 
+
+    border-radius: 10px;
+    background-color: black;
+    padding: 50px 0px;
+    width: 48%; 
+    float: left; 
+    margin: 0;
+
+}
+
+.filter-right { 
+
+    border-radius: 10px;
+    background-color: black;
+    padding: 50px 0px;
+    width: 48%; 
+    float: right; 
+    margin: 0;
+
+}
 
 .formcontainer { 
 
