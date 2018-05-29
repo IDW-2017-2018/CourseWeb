@@ -28,8 +28,8 @@ public interface CourseWebDataLayer extends DataLayer {
     Utente getDocente(String docente_email) throws DataLayerException; 
     List<Utente> getDocenti() throws DataLayerException;
     
-    Corso getCorso(int corso_key) throws DataLayerException;
-    List<Corso> getCorso(String corso_codice, String corso_anno) throws DataLayerException;
+    Corso getCorso(int corso_key, String lang) throws DataLayerException;
+    List<Corso> getCorso(String corso_codice, String corso_anno, String lang) throws DataLayerException;
     List<Corso> getCorsoByCodice(String corso_codice) throws DataLayerException;
     List<Corso> getCorsoByAnno(String corso_anno) throws DataLayerException;
     List<Corso> getCorsoByNome (String corso_nome) throws DataLayerException;
