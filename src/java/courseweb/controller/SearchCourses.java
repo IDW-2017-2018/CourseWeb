@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import framework.data.DataLayerException; 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -167,6 +168,23 @@ public class SearchCourses extends CourseWebBaseController {
         if(!secure){
             SecurityLayer.redirectToHttps(request, response);
         } else {
+            
+            //session check
+            if(s == null){
+                //session not valid
+                //redirect to login page
+
+                try {
+
+                    response.sendRedirect(response.encodeURL(request.getContextPath() + "/login?lang=" + request.getAttribute("lang")));
+
+                } catch(IOException e){
+                    request.setAttribute("exception", e);
+                    action_error(request, response); 
+                }
+
+                return;
+            }
             
             String lang;
             

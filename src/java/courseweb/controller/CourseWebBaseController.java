@@ -6,6 +6,7 @@ package courseweb.controller;
 import courseweb.data.impl.CourseWebDataLayerMySqlImpl;
 import courseweb.data.model.CourseWebDataLayer;
 import framework.result.FailureResult;
+import framework.security.SecurityLayer;
 
 import java.io.IOException;
 
@@ -36,13 +37,17 @@ public abstract class CourseWebBaseController extends HttpServlet {
             
             datalayer.init();
             request.setAttribute("datalayer", datalayer);
-            
-            HttpSession s = request.getSession();
-            
+           
             String lang = request.getParameter("lang"); 
             if(lang != null)
                 request.setAttribute("lang", lang); 
+           
+            //gestione sessione (da rivedere)
+            //HttpSession s = request.getSession();
+            //request.setAttribute("session", s);
             
+            //aggiustamento
+            HttpSession s = SecurityLayer.checkSession(request);
             request.setAttribute("session", s);
             
             processRequest(request, response);

@@ -8,6 +8,7 @@ import framework.result.FailureResult;
 import framework.result.TemplateManagerException;
 import framework.result.TemplateResult;
 import framework.security.SecurityLayer;
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,6 +59,23 @@ public class BackOffice extends CourseWebBaseController {
         if(!secure){
             SecurityLayer.redirectToHttps(request, response);
         } else {
+            
+            //session check
+            if(s == null){
+                //session not valid
+                //redirect to login page
+
+                try {
+
+                    response.sendRedirect(response.encodeURL(request.getContextPath() + "/login?lang=" + request.getAttribute("lang")));
+
+                } catch(IOException e){
+                    request.setAttribute("exception", e);
+                    action_error(request, response); 
+                }
+
+                return;
+            }
             
             String lang;
             
