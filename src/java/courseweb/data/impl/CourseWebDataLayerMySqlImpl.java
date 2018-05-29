@@ -40,7 +40,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
    
     private PreparedStatement iCorsiCorsiIntegrati, iCorsiCorsiMutuati, iCorsiCorsiPropedeutici, iCorsiCorsiLaurea, iCorsiDocenti, iCorsiLibriTesto, iCorsiMateriali;
     private PreparedStatement uCorsiCorsiIntegrati, uCorsiCorsiMutuati, uCorsiCorsiPropedeutici, uCorsiCorsiLaurea, uCorsiDocenti;
-    private PreparedStatement sCorsiCorsiIntegrati, sCorsiCorsiMutuati, sCorsiCorsiPropedeutici, sCorsiCorsiLaurea, sCorsiDocenti;
+    private PreparedStatement sCorsiCorsiIntegrati, sCorsiCorsiMutuati, sCorsiCorsiPropedeutici, sCorsiCorsiLaurea, sCorsiDocenti, sCorsiLibriTesto, sCorsiMateriali;;
+    private PreparedStatement dCorsiCorsiIntegrati, dCorsiCorsiMutuati, dCorsiCorsiPropedeutici, dCorsiCorsiLaurea, dCorsiDocenti, dCorsiLibriTesto, dCorsiMateriali;
     
     private PreparedStatement iLogMessage, sLogMessage;
     
@@ -117,12 +118,24 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             uCorsiCorsiLaurea = connection.prepareStatement("UPDATE corsi_corsi_laurea SET id_corso_laurea=?, numero_cfu=?, tipo_cfu=? WHERE id=?");
             uCorsiDocenti = connection.prepareStatement("UPDATE corsi_docenti SET id_docente=? WHERE id=?");
        
-            //SELECT NECESSARIE PER UPDATE SU RELAZIONI
+            // SELECT NECESSARIE PER UPDATE SU RELAZIONI
             sCorsiCorsiIntegrati = connection.prepareStatement("SELECT * FROM corsi_corsi_integrati WHERE id_corso=? AND id_corso_integrato=?");
             sCorsiCorsiMutuati = connection.prepareStatement("SELECT * FROM corsi_corsi_mutuati WHERE id_corso=? AND id_corso_mutuato=?");
             sCorsiCorsiPropedeutici = connection.prepareStatement("SELECT * FROM corsi_corsi_propedeutici WHERE id_corso=? AND id_corso_propedeutico=?");
             sCorsiCorsiLaurea = connection.prepareStatement("SELECT * FROM corsi_corsi_laurea WHERE id_corso=? AND id_corso_laurea=?");
             sCorsiDocenti = connection.prepareStatement("SELECT * FROM corsi_docenti WHERE id_corso=? AND id_docente=?");
+            sCorsiLibriTesto = connection.prepareStatement("SELECT * FROM corsi_libri_testo WHERE id_corso=? AND id_libro_testo=?");
+            sCorsiMateriali = connection.prepareStatement("SELECT * FROM  corsi_materiali WHERE id_corso=? AND id_materiale=?");
+            
+            
+            // ELIMINAZIONI SULLE RELAZIONI
+            dCorsiCorsiIntegrati = connection.prepareStatement("DELETE FROM corsi_corsi_integrati WHERE id=?");
+            dCorsiCorsiMutuati = connection.prepareStatement("DELETE FROM corsi_corsi_mutuati WHERE id=?");
+            dCorsiCorsiPropedeutici = connection.prepareStatement("DELETE FROM corsi_corsi_propedeutici WHERE id=?");
+            dCorsiCorsiLaurea = connection.prepareStatement("DELETE FROM corsi_corsi_laurea WHERE id=?");
+            dCorsiDocenti = connection.prepareStatement("DELETE FROM corsi_docenti WHERE id=?");
+            dCorsiLibriTesto = connection.prepareStatement("DELETE FROM corsi_libri_testo WHERE id=?");
+            dCorsiMateriali = connection.prepareStatement("DELETE FROM corsi_materiali WHERE id=?");
             
         }
         catch(SQLException exc){
@@ -1372,6 +1385,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 //update
                 uCorsiDocenti.setInt(1, docente_key);
                 uCorsiDocenti.setInt(2, key);
+                
                 uCorsiDocenti.executeUpdate();
                 
             } else {
@@ -1420,6 +1434,239 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         }
         
     }
+    
+    @Override
+    public void deleteCorsiCorsiIntegrati(int corso_key, int corso_integrato_key) throws DataLayerException {
+        
+        int key = 0;
+        
+        try {
+            sCorsiCorsiIntegrati.setInt(1, corso_key); 
+            sCorsiCorsiIntegrati.setInt(2, corso_integrato_key); 
+            try(ResultSet rs = sCorsiCorsiIntegrati.executeQuery()){
+                
+                if(rs.next()){
+                    key = rs.getInt("id");
+                }
+                
+            }
+            
+            //riga già presente, delete possibile
+            if(key > 0){
+                //delete
+                dCorsiCorsiIntegrati.setInt(1, key);
+                
+                dCorsiCorsiIntegrati.executeUpdate();
+                
+            } else {
+                throw new DataLayerException("Unable to delete in CorsiCorsiIntegrati, no such row");
+            }
+          
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in relation CorsiCorsiIntegrati", e);
+        }
+        
+    }
+    
+    @Override
+    public void deleteCorsiCorsiMutuati(int corso_key, int corso_mutuato_key) throws DataLayerException {
+        
+        int key = 0;
+        
+        try {
+            sCorsiCorsiMutuati.setInt(1, corso_key); 
+            sCorsiCorsiMutuati.setInt(2, corso_mutuato_key); 
+            try(ResultSet rs = sCorsiCorsiMutuati.executeQuery()){
+                
+                if(rs.next()){
+                    key = rs.getInt("id");
+                }
+                
+            }
+            
+            //delete se possibile
+            if(key > 0){
+                //delete
+                dCorsiCorsiMutuati.setInt(1, key);
+                
+                dCorsiCorsiMutuati.executeUpdate();
+                
+            } else {
+                throw new DataLayerException("Unable to delete in relation CorsiCorsiMutuati, no such row");
+            }
+            
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in relation CorsiCorsiMutuati", e);
+        }
+        
+    }
+    
+    @Override
+    public void deleteCorsiCorsiPropedeutici(int corso_key, int corso_propedeutico_key) throws DataLayerException {
+        
+        int key = 0;
+        
+        try {
+            sCorsiCorsiPropedeutici.setInt(1, corso_key); 
+            sCorsiCorsiPropedeutici.setInt(2, corso_propedeutico_key); 
+            try(ResultSet rs = sCorsiCorsiPropedeutici.executeQuery()){
+                
+                if(rs.next()){
+                    key = rs.getInt("id");
+                }
+                
+            }
+            
+            //delete or insert
+            if(key > 0){
+                //delete
+                dCorsiCorsiPropedeutici.setInt(1, key);
+                
+                dCorsiCorsiPropedeutici.executeUpdate();
+                
+            } else {
+                throw new DataLayerException("Unable to delete in relation CorsiCorsiPropedeutici, no such row");
+            }
+            
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in relation CorsiCorsiPropedeutici", e);
+        }
+        
+    }
+    
+    @Override
+    public void deleteCorsiCorsiLaurea(int corso_laurea_key, int corso_key) throws DataLayerException {
+        
+        int key = 0;
+        
+        try {
+            sCorsiCorsiLaurea.setInt(1, corso_key); 
+            sCorsiCorsiLaurea.setInt(2, corso_laurea_key); 
+            try(ResultSet rs = sCorsiCorsiLaurea.executeQuery()){
+                
+                if(rs.next()){
+                    key = rs.getInt("id");
+                }
+                
+            }
+            
+            //delete or insert
+            if(key > 0){
+                //delete                
+                dCorsiCorsiLaurea.setInt(1, key);
+                
+                dCorsiCorsiLaurea.executeUpdate();
+                
+            } else {
+                throw new DataLayerException("Unable to delete in relation CorsiCorsiLaurea, no such row");
+            }
+            
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in relation CorsiCorsiLaurea", e);
+        }
+        
+    }
+    
+    @Override
+    public void deleteCorsiDocenti(int corso_key, int docente_key) throws DataLayerException {
+        
+        int key = 0;
+        
+        try {
+            sCorsiDocenti.setInt(1, corso_key); 
+            sCorsiDocenti.setInt(2, docente_key); 
+            try(ResultSet rs = sCorsiDocenti.executeQuery()){
+                
+                if(rs.next()){
+                    key = rs.getInt("id");
+                }
+                
+            }
+            
+            //delete or insert
+            if(key > 0){
+                //delete
+                dCorsiDocenti.setInt(1, key);
+                
+                dCorsiDocenti.executeUpdate();
+                
+            } else {
+                throw new DataLayerException("Unable to delete in relation CorsiDocenti, no such row");
+            }
+                                 
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in relation CorsiDocenti", e);
+        }
+        
+    }
+    
+    @Override
+    public void deleteCorsiLibriTesto(int corso_key, int libro_testo_key) throws DataLayerException {
+        
+        int key = 0;
+        
+        try {
+            sCorsiLibriTesto.setInt(1, corso_key); 
+            sCorsiLibriTesto.setInt(2, libro_testo_key); 
+            try(ResultSet rs = sCorsiLibriTesto.executeQuery()){
+                
+                if(rs.next()){
+                    key = rs.getInt("id");
+                }
+                
+            }
+            
+            //delete or insert
+            if(key > 0){
+                //delete
+                dCorsiLibriTesto.setInt(1, key);
+                
+                dCorsiLibriTesto.executeUpdate();
+                
+            } else {
+                throw new DataLayerException("Unable to delete in relation CorsiLibriTesto, no such row");
+            }
+                                 
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in relation CorsiMateriali", e);
+        }
+        
+    }
+    
+    @Override
+    public void deleteCorsiMateriali(int corso_key, int materiale_key) throws DataLayerException {
+        
+        int key = 0;
+        
+        try {
+            sCorsiMateriali.setInt(1, corso_key); 
+            sCorsiMateriali.setInt(2, materiale_key); 
+            try(ResultSet rs = sCorsiMateriali.executeQuery()){
+                
+                if(rs.next()){
+                    key = rs.getInt("id");
+                }
+                
+            }
+            
+            //delete or insert
+            if(key > 0){
+                //delete
+                dCorsiMateriali.setInt(1, key);
+                
+                dCorsiMateriali.executeUpdate();
+                
+            } else {
+                throw new DataLayerException("Unable to delete in relation CorsiMateriali, no such row");
+            }
+                                 
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to store in relation CorsiMateriali", e);
+        }
+        
+    }
+    
+    
     
     @Override
     public void destroy() {
@@ -1484,6 +1731,16 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsiCorsiPropedeutici.close();
             sCorsiCorsiLaurea.close();
             sCorsiDocenti.close();
+            sCorsiLibriTesto.close();
+            sCorsiMateriali.close();
+            
+            dCorsiCorsiIntegrati.close();
+            dCorsiCorsiMutuati.close();
+            dCorsiCorsiPropedeutici.close();
+            dCorsiCorsiLaurea.close();
+            dCorsiDocenti.close();
+            dCorsiLibriTesto.close();
+            dCorsiMateriali.close();
             
         }
         
