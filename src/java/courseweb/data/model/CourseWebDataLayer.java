@@ -53,7 +53,7 @@ public interface CourseWebDataLayer extends DataLayer {
     List<Corso_Laurea> getCorsiLaureaCorso(Corso corso) throws DataLayerException;
     List<Corso> getCorsiPropedeuticiCorso(Corso corso) throws DataLayerException;
     List<Corso> getCorsiMutuatiCorso(Corso corso) throws DataLayerException;
-    List<Corso> getCorsiIntegratiCorso(Corso corso) throws DataLayerException;
+    List<Corso> getModuliCorso(Corso corso) throws DataLayerException;
     List<Libro_Testo> getLibriTestoCorso(Corso corso) throws DataLayerException;
     List<Materiale> getMaterialiCorso(Corso corso) throws DataLayerException;
     List<Utente> getDocentiCorso(Corso corso) throws DataLayerException;
@@ -65,7 +65,7 @@ public interface CourseWebDataLayer extends DataLayer {
     void storeMateriale(Materiale materiale) throws DataLayerException;
     void storeLibroTesto(Libro_Testo libro_testo) throws DataLayerException;
     
-    void storeCorsiCorsiIntegrati(int corso_key, int corso_integrato_key) throws DataLayerException;
+    void storeCorsiModuli(int modulo_key, int corso_integrato_key) throws DataLayerException;
     void storeCorsiCorsiMutuati(int corso_key, int corso_mutuato_key) throws DataLayerException;
     void storeCorsiCorsiPropedeutici(int corso_key, int corso_propedeutico_key) throws DataLayerException;
     void storeCorsiCorsiLaurea(int corso_laurea_key, int corso_key, String numero_cfu, String tipo_cfu) throws DataLayerException;
@@ -74,7 +74,7 @@ public interface CourseWebDataLayer extends DataLayer {
     void storeCorsiMateriali(int corso_key, int materiale_key) throws DataLayerException;
     void storeLogMessage(String message) throws DataLayerException;
     
-    void deleteCorsiCorsiIntegrati(int corso_key, int corso_integrato_key) throws DataLayerException;
+    void deleteCorsiModuli(int modulo_key, int corso_integrato_key) throws DataLayerException;
     void deleteCorsiCorsiMutuati(int corso_key, int corso_mutuato_key) throws DataLayerException;
     void deleteCorsiCorsiPropedeutici(int corso_key, int corso_propedeutico_key) throws DataLayerException;
     void deleteCorsiCorsiLaurea(int corso_laurea_key, int corso_key) throws DataLayerException;

@@ -93,5 +93,7 @@
 
 	<#else>
 
+	<h1 class="no_results">NO RESULTS</h1>
+
 </#list>
 	  

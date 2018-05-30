@@ -67,7 +67,7 @@ public class Course extends CourseWebBaseController {
                 request.setAttribute("libri_testo", corso.getLibriTestoCorso());
                 request.setAttribute("corsi_propedeutici", corso.getCorsiPropedeuticiCorso());
                 request.setAttribute("corsi_mutuati", corso.getCorsiMutuatiCorso());
-                request.setAttribute("corsi_integrati", corso.getCorsiIntegratiCorso());
+                request.setAttribute("moduli", corso.getModuliCorso());
                 request.setAttribute("corso_materiali", corso.getMaterialiCorso());
                 
                 result.activate("/eng/course.html.ftl", request, response);
@@ -84,7 +84,7 @@ public class Course extends CourseWebBaseController {
                 request.setAttribute("libri_testo", corso.getLibriTestoCorso());
                 request.setAttribute("corsi_propedeutici", corso.getCorsiPropedeuticiCorso());
                 request.setAttribute("corsi_mutuati", corso.getCorsiMutuatiCorso());
-                request.setAttribute("corsi_integrati", corso.getCorsiIntegratiCorso());
+                request.setAttribute("moduli", corso.getModuliCorso());
                 request.setAttribute("corso_materiali", corso.getMaterialiCorso());
                 
                 result.activate("/ita/course.html.ftl", request, response);

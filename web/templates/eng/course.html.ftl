@@ -271,7 +271,7 @@
 
 </#list>
 
-<#list corsi_integrati>
+<#list moduli>
 
     <tr class="trresult">
 
@@ -279,11 +279,11 @@
 
     </tr>
     
-    <#items as corso_integrato>
+    <#items as modulo>
 
      <tr class="trresult">
 
-        <td class="tdresult" colspan="6"><a class="linkresult" href="course?lang=${lang}&id=${corso_integrato.id}">${corso_integrato.nome}</a></td>
+        <td class="tdresult" colspan="6"><a class="linkresult" href="course?lang=${lang}&id=${modulo.id}">${modulo.nome}</a></td>
 
     </tr>
 

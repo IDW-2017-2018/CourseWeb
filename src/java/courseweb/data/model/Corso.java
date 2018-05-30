@@ -36,7 +36,7 @@ public interface Corso {
     List<Corso_Laurea> getCorsiLaureaCorso() throws DataLayerException;
     List<Corso> getCorsiPropedeuticiCorso() throws DataLayerException;       
     List<Corso> getCorsiMutuatiCorso() throws DataLayerException;            
-    List<Corso> getCorsiIntegratiCorso() throws DataLayerException; 
+    List<Corso> getModuliCorso() throws DataLayerException; 
     List<Materiale> getMaterialiCorso() throws DataLayerException;   
     List<Libro_Testo> getLibriTestoCorso() throws DataLayerException;
     
@@ -62,7 +62,7 @@ public interface Corso {
     void setLibriTesto(List<Libro_Testo> libri_testo);
     void setCorsiPropedeutici(List<Corso> corsi_propedeutici);       
     void setCorsiMutuati(List<Corso> corsi_mutuati);            
-    void setCorsiIntegrati(List<Corso> corsi_integrati); 
+    void setModuliCorso(List<Corso> moduli); 
     void setMateriali(List<Materiale> materiali);
     
     void setLang(String lang); 

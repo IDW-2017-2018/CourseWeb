@@ -42,7 +42,7 @@ public class CorsoImpl implements Corso {
     private List<Libro_Testo> libri_testo;
     private List<Corso> corsi_propedeutici;
     private List<Corso> corsi_mutuati;
-    private List<Corso> corsi_integrati;
+    private List<Corso> moduli;
     private List<Materiale> materiali;
     
     private CourseWebDataLayer ownerDataLayer;
@@ -74,7 +74,7 @@ public class CorsoImpl implements Corso {
         this.libri_testo = null; 
         this.corsi_propedeutici = null;
         this.corsi_mutuati = null;
-        this.corsi_integrati = null;
+        this.moduli = null;
         this.materiali = null; 
         
         this.dirty = false; 
@@ -205,12 +205,12 @@ public class CorsoImpl implements Corso {
     }
     
     @Override
-    public List<Corso> getCorsiIntegratiCorso() throws DataLayerException{
-        if(this.corsi_integrati == null){
-            this.corsi_integrati = ownerDataLayer.getCorsiIntegratiCorso(this);
-            this.corsi_integrati = ownerDataLayer.filterCorsiByLang(this.lang, this.corsi_integrati);
+    public List<Corso> getModuliCorso() throws DataLayerException{
+        if(this.moduli == null){
+            this.moduli = ownerDataLayer.getModuliCorso(this);
+            this.moduli = ownerDataLayer.filterCorsiByLang(this.lang, this.moduli);
         }
-        return this.corsi_integrati;
+        return this.moduli;
     }
     
         @Override
@@ -339,8 +339,8 @@ public class CorsoImpl implements Corso {
     }
     
     @Override
-    public void setCorsiIntegrati(List<Corso> corsi_integrati){
-        this.corsi_integrati = corsi_integrati; 
+    public void setModuliCorso(List<Corso> moduli){
+        this.moduli = moduli; 
     }
     
     @Override
@@ -381,7 +381,7 @@ public class CorsoImpl implements Corso {
         libri_testo = corso.getLibriTestoCorso();
         corsi_propedeutici = corso.getCorsiPropedeuticiCorso();
         corsi_mutuati = corso.getCorsiMutuatiCorso();
-        corsi_integrati = corso.getCorsiIntegratiCorso();
+        moduli = corso.getModuliCorso();
         materiali = corso.getMaterialiCorso();
         
         this.dirty = true;

@@ -23,6 +23,8 @@ import javax.sql.DataSource;
  */
 public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements CourseWebDataLayer {
     
+    //TODO : filterByLang rivedere cicli
+    
     private PreparedStatement sCorso, sCorsoByIdLang, sCorsoByCodice, sCorsoByAnno, sCorsoByNome, sCorsoByNomeVersioni, sCorsoByCodiceAnnoLang, uCorsoById, iCorso;
     private PreparedStatement sInfoCorsiByIdCorsoLang, uInfoCorsiById, iInfoCorso;
     private PreparedStatement sUtente, sUtenteById, sUtenteByEmail, uUtenteById, uUtenteByEmail, iUtente;
@@ -34,15 +36,15 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     private PreparedStatement sCorsiLaureaCorso;
     private PreparedStatement sCorsiPropedeuticiCorso;
     private PreparedStatement sCorsiMutuatiCorso;
-    private PreparedStatement sCorsiIntegratiCorso;
+    private PreparedStatement sModuliCorso;
     private PreparedStatement sLibriTestoCorso;
     private PreparedStatement sMaterialiCorso;
     private PreparedStatement sCFUCorsoCorsoLaurea;
    
-    private PreparedStatement iCorsiCorsiIntegrati, iCorsiCorsiMutuati, iCorsiCorsiPropedeutici, iCorsiCorsiLaurea, iCorsiDocenti, iCorsiLibriTesto, iCorsiMateriali;
-    private PreparedStatement uCorsiCorsiIntegrati, uCorsiCorsiMutuati, uCorsiCorsiPropedeutici, uCorsiCorsiLaurea, uCorsiDocenti;
-    private PreparedStatement sCorsiCorsiIntegrati, sCorsiCorsiMutuati, sCorsiCorsiPropedeutici, sCorsiCorsiLaurea, sCorsiDocenti, sCorsiLibriTesto, sCorsiMateriali;;
-    private PreparedStatement dCorsiCorsiIntegrati, dCorsiCorsiMutuati, dCorsiCorsiPropedeutici, dCorsiCorsiLaurea, dCorsiDocenti, dCorsiLibriTesto, dCorsiMateriali;
+    private PreparedStatement iCorsiModuli, iCorsiCorsiMutuati, iCorsiCorsiPropedeutici, iCorsiCorsiLaurea, iCorsiDocenti, iCorsiLibriTesto, iCorsiMateriali;
+    private PreparedStatement uCorsiModuli, uCorsiCorsiMutuati, uCorsiCorsiPropedeutici, uCorsiCorsiLaurea, uCorsiDocenti;
+    private PreparedStatement sCorsiModuli, sCorsiCorsiMutuati, sCorsiCorsiPropedeutici, sCorsiCorsiLaurea, sCorsiDocenti, sCorsiLibriTesto, sCorsiMateriali;;
+    private PreparedStatement dCorsiModuli, dCorsiCorsiMutuati, dCorsiCorsiPropedeutici, dCorsiCorsiLaurea, dCorsiDocenti, dCorsiLibriTesto, dCorsiMateriali;
     
     private PreparedStatement iLogMessage, sLogMessage;
     
@@ -103,7 +105,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsiLaureaCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_laurea INNER JOIN corsi_laurea ON (corsi_corsi_laurea.id_corso_laurea = corsi_laurea.id) WHERE corsi_corsi_laurea.id_corso=?");  
             sCorsiPropedeuticiCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_propedeutici INNER JOIN corsi ON (corsi_corsi_propedeutici.id_corso_propedeutico = corsi.id) WHERE corsi_corsi_propedeutici.id_corso=?");
             sCorsiMutuatiCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_mutuati INNER JOIN corsi ON (corsi_corsi_mutuati.id_corso_mutuato = corsi.id) WHERE corsi_corsi_mutuati.id_corso=?");
-            sCorsiIntegratiCorso = connection.prepareStatement("SELECT * FROM corsi_corsi_integrati INNER JOIN corsi ON (corsi_corsi_integrati.id_corso_integrato = corsi.id) WHERE corsi_corsi_integrati.id_corso=?");
+            sModuliCorso = connection.prepareStatement("SELECT * FROM corsi_moduli INNER JOIN corsi ON (corsi_moduli.id_modulo = corsi.id) WHERE corsi_moduli.id_corso_integrato=?");
             
             sLibriTestoCorso = connection.prepareStatement("SELECT * FROM corsi_libri_testo INNER JOIN libri_testo ON (corsi_libri_testo.id_libro_testo = libri_testo.id) WHERE corsi_libri_testo.id_corso=?");
             sMaterialiCorso = connection.prepareStatement("SELECT * FROM corsi_materiali INNER JOIN materiali ON (corsi_materiali.id_materiale = materiali.id) WHERE corsi_materiali.id_corso=?");
@@ -112,7 +114,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sLogMessage = connection.prepareStatement("SELECT * FROM log");
             
             // INSERT SULLE RELAZIONI
-            iCorsiCorsiIntegrati = connection.prepareStatement("INSERT INTO corsi_corsi_integrati (id_corso, id_corso_integrato) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
+            iCorsiModuli = connection.prepareStatement("INSERT INTO corsi_moduli (id_modulo, id_corso_integrato) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
             iCorsiCorsiMutuati = connection.prepareStatement("INSERT INTO corsi_corsi_mutuati (id_corso, id_corso_mutuato) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
             iCorsiCorsiPropedeutici = connection.prepareStatement("INSERT INTO corsi_corsi_propedeutici (id_corso, id_corso_propedeutico) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
             iCorsiCorsiLaurea = connection.prepareStatement("INSERT INTO corsi_corsi_laurea (id_corso_laurea, id_corso, numero_cfu, tipo_cfu) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -122,14 +124,14 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             iLogMessage = connection.prepareStatement("INSERT INTO log (messaggio) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
             
             // UPDATE SULLE RELAZIONI
-            uCorsiCorsiIntegrati = connection.prepareStatement("UPDATE corsi_corsi_integrati SET id_corso_integrato=? WHERE id=?");
+            uCorsiModuli = connection.prepareStatement("UPDATE corsi_moduli SET id_corso_integrato=? WHERE id=?");
             uCorsiCorsiMutuati = connection.prepareStatement("UPDATE corsi_corsi_mutuati SET id_corso_mutuato=? WHERE id=?");
             uCorsiCorsiPropedeutici = connection.prepareStatement("UPDATE corsi_corsi_propedeutici SET id_corso_propedeutico=? WHERE id=?");
             uCorsiCorsiLaurea = connection.prepareStatement("UPDATE corsi_corsi_laurea SET id_corso_laurea=?, numero_cfu=?, tipo_cfu=? WHERE id=?");
             uCorsiDocenti = connection.prepareStatement("UPDATE corsi_docenti SET id_docente=? WHERE id=?");
        
             // SELECT NECESSARIE PER UPDATE SU RELAZIONI
-            sCorsiCorsiIntegrati = connection.prepareStatement("SELECT * FROM corsi_corsi_integrati WHERE id_corso=? AND id_corso_integrato=?");
+            sCorsiModuli = connection.prepareStatement("SELECT * FROM corsi_moduli WHERE id_modulo=? AND id_corso_integrato=?");
             sCorsiCorsiMutuati = connection.prepareStatement("SELECT * FROM corsi_corsi_mutuati WHERE id_corso=? AND id_corso_mutuato=?");
             sCorsiCorsiPropedeutici = connection.prepareStatement("SELECT * FROM corsi_corsi_propedeutici WHERE id_corso=? AND id_corso_propedeutico=?");
             sCorsiCorsiLaurea = connection.prepareStatement("SELECT * FROM corsi_corsi_laurea WHERE id_corso=? AND id_corso_laurea=?");
@@ -139,7 +141,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             
             
             // ELIMINAZIONI SULLE RELAZIONI
-            dCorsiCorsiIntegrati = connection.prepareStatement("DELETE FROM corsi_corsi_integrati WHERE id=?");
+            dCorsiModuli = connection.prepareStatement("DELETE FROM corsi_moduli WHERE id=?");
             dCorsiCorsiMutuati = connection.prepareStatement("DELETE FROM corsi_corsi_mutuati WHERE id=?");
             dCorsiCorsiPropedeutici = connection.prepareStatement("DELETE FROM corsi_corsi_propedeutici WHERE id=?");
             dCorsiCorsiLaurea = connection.prepareStatement("DELETE FROM corsi_corsi_laurea WHERE id=?");
@@ -839,9 +841,14 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             try(ResultSet rs = sCorsiPropedeuticiCorso.executeQuery()) {          
                 
                 while(rs.next()){
-          
-                    result.add(getCorso(rs.getInt("corsi.id"), "ita"));
-                    result.add(getCorso(rs.getInt("corsi.id"), "eng"));
+                    
+                    Corso corso_ita = getCorso(rs.getInt("corsi.id"), "ita");
+                    Corso corso_eng = getCorso(rs.getInt("corsi.id"), "eng");
+                    
+                    if(corso_ita != null)
+                        result.add(corso_ita);
+                    if(corso_eng != null)
+                        result.add(corso_eng);
                 }
                 
             } 
@@ -864,8 +871,13 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             try(ResultSet rs = sCorsiMutuatiCorso.executeQuery()) {          
                 
                 while(rs.next()){
-                    result.add(getCorso(rs.getInt("corsi.id"), "ita"));
-                    result.add(getCorso(rs.getInt("corsi.id"), "eng"));
+                    Corso corso_ita = getCorso(rs.getInt("corsi.id"), "ita");
+                    Corso corso_eng = getCorso(rs.getInt("corsi.id"), "eng");
+                    
+                    if(corso_ita != null)
+                        result.add(corso_ita);
+                    if(corso_eng != null)
+                        result.add(corso_eng);
                 }
             } 
         }
@@ -879,16 +891,21 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     }
     
     @Override
-    public List<Corso> getCorsiIntegratiCorso(Corso corso) throws DataLayerException {
+    public List<Corso> getModuliCorso(Corso corso) throws DataLayerException {
         List<Corso> result = new ArrayList(); 
         
         try{     
-            sCorsiIntegratiCorso.setInt(1, corso.getId());
-            try(ResultSet rs = sCorsiIntegratiCorso.executeQuery()) {          
+            sModuliCorso.setInt(1, corso.getId());
+            try(ResultSet rs = sModuliCorso.executeQuery()) {          
                 
                 while(rs.next()){
-                    result.add(getCorso(rs.getInt("corsi.id"), "ita"));
-                    result.add(getCorso(rs.getInt("corsi.id"), "eng"));
+                    Corso corso_ita = getCorso(rs.getInt("corsi.id"), "ita");
+                    Corso corso_eng = getCorso(rs.getInt("corsi.id"), "eng");
+                    
+                    if(corso_ita != null)
+                        result.add(corso_ita);
+                    if(corso_eng != null)
+                        result.add(corso_eng);
                 }
             } 
         }
@@ -1244,14 +1261,14 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     }
     
     @Override
-    public void storeCorsiCorsiIntegrati(int corso_key, int corso_integrato_key) throws DataLayerException {
+    public void storeCorsiModuli(int modulo_key, int corso_integrato_key) throws DataLayerException {
         
         int key = 0;
         
         try {
-            sCorsiCorsiIntegrati.setInt(1, corso_key); 
-            sCorsiCorsiIntegrati.setInt(2, corso_integrato_key); 
-            try(ResultSet rs = sCorsiCorsiIntegrati.executeQuery()){
+            sCorsiModuli.setInt(1, modulo_key); 
+            sCorsiModuli.setInt(2, corso_integrato_key); 
+            try(ResultSet rs = sCorsiModuli.executeQuery()){
                 
                 if(rs.next()){
                     key = rs.getInt("id");
@@ -1262,22 +1279,22 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             //update or insert
             if(key > 0){
                 //update
-                uCorsiCorsiIntegrati.setInt(1, corso_integrato_key);
-                uCorsiCorsiIntegrati.setInt(2, key);
+                uCorsiModuli.setInt(1, corso_integrato_key);
+                uCorsiModuli.setInt(2, key);
                 
-                uCorsiCorsiIntegrati.executeUpdate();
+                uCorsiModuli.executeUpdate();
                 
             } else {
                 //insert
-                iCorsiCorsiIntegrati.setInt(1, corso_key);
-                iCorsiCorsiIntegrati.setInt(2, corso_integrato_key);
+                iCorsiModuli.setInt(1, modulo_key);
+                iCorsiModuli.setInt(2, corso_integrato_key);
 
-                iCorsiCorsiIntegrati.executeUpdate();
+                iCorsiModuli.executeUpdate();
                 
             }
           
         } catch(SQLException e){
-            throw new DataLayerException("Unable to store in relation CorsiCorsiIntegrati", e);
+            throw new DataLayerException("Unable to store in relation CorsiModuli", e);
         }
         
     }
@@ -1474,14 +1491,14 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     }
     
     @Override
-    public void deleteCorsiCorsiIntegrati(int corso_key, int corso_integrato_key) throws DataLayerException {
+    public void deleteCorsiModuli(int modulo_key, int corso_integrato_key) throws DataLayerException {
         
         int key = 0;
         
         try {
-            sCorsiCorsiIntegrati.setInt(1, corso_key); 
-            sCorsiCorsiIntegrati.setInt(2, corso_integrato_key); 
-            try(ResultSet rs = sCorsiCorsiIntegrati.executeQuery()){
+            sCorsiModuli.setInt(1, modulo_key); 
+            sCorsiModuli.setInt(2, corso_integrato_key); 
+            try(ResultSet rs = sCorsiModuli.executeQuery()){
                 
                 if(rs.next()){
                     key = rs.getInt("id");
@@ -1492,16 +1509,16 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             //riga già presente, delete possibile
             if(key > 0){
                 //delete
-                dCorsiCorsiIntegrati.setInt(1, key);
+                dCorsiModuli.setInt(1, key);
                 
-                dCorsiCorsiIntegrati.executeUpdate();
+                dCorsiModuli.executeUpdate();
                 
             } else {
-                throw new DataLayerException("Unable to delete in CorsiCorsiIntegrati, no such row");
+                throw new DataLayerException("Unable to delete in CorsiModuli, no such row");
             }
           
         } catch(SQLException e){
-            throw new DataLayerException("Unable to store in relation CorsiCorsiIntegrati", e);
+            throw new DataLayerException("Unable to store in relation CorsiModuli", e);
         }
         
     }
@@ -1742,14 +1759,14 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsiLaureaCorso.close();
             sCorsiPropedeuticiCorso.close();
             sCorsiMutuatiCorso.close();
-            sCorsiIntegratiCorso.close();
+            sModuliCorso.close();
             sLibriTestoCorso.close();
             sMaterialiCorso.close();   
             sDocentiCorso.close();
             sCFUCorsoCorsoLaurea.close();
             sLogMessage.close();
             
-            iCorsiCorsiIntegrati.close();
+            iCorsiModuli.close();
             iCorsiCorsiMutuati.close();
             iCorsiCorsiPropedeutici.close();
             iCorsiCorsiLaurea.close();
@@ -1758,13 +1775,13 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             iCorsiMateriali.close();
             iLogMessage.close();
             
-            uCorsiCorsiIntegrati.close();
+            uCorsiModuli.close();
             uCorsiCorsiMutuati.close();
             uCorsiCorsiPropedeutici.close();
             uCorsiCorsiLaurea.close();
             uCorsiDocenti.close();
             
-            sCorsiCorsiIntegrati.close();
+            sCorsiModuli.close();
             sCorsiCorsiMutuati.close();
             sCorsiCorsiPropedeutici.close();
             sCorsiCorsiLaurea.close();
@@ -1772,7 +1789,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsiLibriTesto.close();
             sCorsiMateriali.close();
             
-            dCorsiCorsiIntegrati.close();
+            dCorsiModuli.close();
             dCorsiCorsiMutuati.close();
             dCorsiCorsiPropedeutici.close();
             dCorsiCorsiLaurea.close();
