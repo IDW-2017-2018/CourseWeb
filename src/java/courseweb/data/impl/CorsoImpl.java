@@ -190,6 +190,7 @@ public class CorsoImpl implements Corso {
     public List<Corso> getCorsiPropedeuticiCorso() throws DataLayerException{
         if(this.corsi_propedeutici == null){
             this.corsi_propedeutici = ownerDataLayer.getCorsiPropedeuticiCorso(this);
+            this.corsi_propedeutici = ownerDataLayer.filterCorsiByLang(this.lang, this.corsi_propedeutici);
         }
         return this.corsi_propedeutici;
     }
@@ -198,6 +199,7 @@ public class CorsoImpl implements Corso {
     public List<Corso> getCorsiMutuatiCorso() throws DataLayerException{
         if(this.corsi_mutuati == null){
             this.corsi_mutuati = ownerDataLayer.getCorsiMutuatiCorso(this);
+            this.corsi_mutuati = ownerDataLayer.filterCorsiByLang(this.lang, this.corsi_mutuati);
         }
         return this.corsi_mutuati;
     }
@@ -206,6 +208,7 @@ public class CorsoImpl implements Corso {
     public List<Corso> getCorsiIntegratiCorso() throws DataLayerException{
         if(this.corsi_integrati == null){
             this.corsi_integrati = ownerDataLayer.getCorsiIntegratiCorso(this);
+            this.corsi_integrati = ownerDataLayer.filterCorsiByLang(this.lang, this.corsi_integrati);
         }
         return this.corsi_integrati;
     }

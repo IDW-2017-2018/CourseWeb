@@ -108,6 +108,8 @@ public class Login extends CourseWebBaseController {
                                     
                                     
                                 } catch(IOException e){
+                                    request.setAttribute("exception", e); 
+                                    action_error(request, response);
                                     e.printStackTrace();
                                 }                     
                                 break;
@@ -125,6 +127,8 @@ public class Login extends CourseWebBaseController {
                                     
                                     
                                 } catch(IOException e){
+                                    request.setAttribute("exception", e); 
+                                    action_error(request, response);
                                     e.printStackTrace();
                                 }                     
                                 break;
@@ -158,12 +162,12 @@ public class Login extends CourseWebBaseController {
 
         } catch(DataLayerException ex1) {
             
-            request.setAttribute("message", "Data access exception: " + ex1.getMessage());
+            request.setAttribute("exception", ex1);
             action_error(request, response);
         
         } catch(SecurityLayerException ex2) {
             
-            request.setAttribute("message", "Security Layer exception: " + ex2.getMessage());
+            request.setAttribute("exception", ex2);
             action_error(request, response);
         
         }
@@ -196,7 +200,7 @@ public class Login extends CourseWebBaseController {
                                                                         
             
         } catch(DataLayerException|IOException ex){
-            request.setAttribute("message", "Data access exception: " + ex.getMessage());
+            request.setAttribute("exception", ex);
             action_error(request, response);
         }
         

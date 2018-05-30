@@ -11,6 +11,7 @@ import framework.result.TemplateManagerException;
 import framework.result.TemplateResult;
 import framework.security.SecurityLayer;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,17 +38,32 @@ public class Course extends CourseWebBaseController {
         try {
             
             String id_corso = (String) request.getParameter("id");
-            Corso corso = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorso(Integer.parseInt(id_corso));
-
+            Corso corso_ita = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorso(Integer.parseInt(id_corso), "ita");
+            Corso corso_eng = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorso(Integer.parseInt(id_corso), "eng");
+            Corso corso; 
+            
+            //in base a lingua scelta corso visualizzato in italiano o in inglese
+            if(corso_ita != null && request.getAttribute("lang").equals("ita"))
+                corso = corso_ita;
+            else if(corso_ita == null && request.getAttribute("lang").equals("ita"))
+                corso = corso_eng;
+            else if(corso_eng != null && request.getAttribute("lang").equals("eng"))
+                corso = corso_eng;
+            else if(corso_eng == null && request.getAttribute("lang").equals("eng"))
+                corso = corso_ita;
+            else 
+                corso = corso_eng;
+            
+            
             if(request.getAttribute("lang").equals("eng")){
+                
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
              
-                request.setAttribute("corso", corso);
-                request.setAttribute("corso_anni", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsoByNomeVersioni(corso.getNome()));
-                request.setAttribute("docenti", corso.getDocentiCorso());
-                
-                request.setAttribute("corsi_laurea", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCFU(corso));
-                
+                request.setAttribute("corso", corso);               
+                List<Corso> VersioniCorsoSecondoLingua = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsoByNomeVersioni(corso.getNome());
+                request.setAttribute("corso_anni", ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(corso.getLang(), VersioniCorsoSecondoLingua));                
+                request.setAttribute("docenti", corso.getDocentiCorso());               
+                request.setAttribute("corsi_laurea", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiLaureaANDCFU(corso));                
                 request.setAttribute("libri_testo", corso.getLibriTestoCorso());
                 request.setAttribute("corsi_propedeutici", corso.getCorsiPropedeuticiCorso());
                 request.setAttribute("corsi_mutuati", corso.getCorsiMutuatiCorso());
@@ -55,15 +71,16 @@ public class Course extends CourseWebBaseController {
                 request.setAttribute("corso_materiali", corso.getMaterialiCorso());
                 
                 result.activate("/eng/course.html.ftl", request, response);
+                
             } else if(request.getAttribute("lang").equals("ita")){
+                
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 
-                request.setAttribute("corso", corso);
-                request.setAttribute("corso_anni", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsoByNomeVersioni(corso.getNome()));
-                request.setAttribute("docenti", corso.getDocentiCorso());
-                
-                request.setAttribute("corsi_laurea", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCFU(corso));
-                
+                request.setAttribute("corso", corso);               
+                List<Corso> VersioniCorsoSecondoLingua = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsoByNomeVersioni(corso.getNome());
+                request.setAttribute("corso_anni", ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(corso.getLang(), VersioniCorsoSecondoLingua));               
+                request.setAttribute("docenti", corso.getDocentiCorso());               
+                request.setAttribute("corsi_laurea", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiLaureaANDCFU(corso));               
                 request.setAttribute("libri_testo", corso.getLibriTestoCorso());
                 request.setAttribute("corsi_propedeutici", corso.getCorsiPropedeuticiCorso());
                 request.setAttribute("corsi_mutuati", corso.getCorsiMutuatiCorso());
@@ -71,12 +88,15 @@ public class Course extends CourseWebBaseController {
                 request.setAttribute("corso_materiali", corso.getMaterialiCorso());
                 
                 result.activate("/ita/course.html.ftl", request, response);
+                
             } else {
                 request.setAttribute("message", "Illegal language");
                 action_error(request, response); 
             }
             
-        } catch(DataLayerException e){
+        } catch(DataLayerException|NumberFormatException e){
+            request.setAttribute("exception", e); 
+            action_error(request, response);
             e.printStackTrace();
         }
         

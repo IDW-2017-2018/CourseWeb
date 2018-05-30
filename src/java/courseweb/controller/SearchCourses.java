@@ -45,7 +45,7 @@ public class SearchCourses extends CourseWebBaseController {
             String lang = (String) request.getAttribute("lang"); 
             List<Corso> corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiAggiornati(); 
             List<Corso> corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(lang, corsi_non_filtrati); 
-                   
+                       
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 request.setAttribute("corsi", corsi_filtrati);
@@ -63,6 +63,8 @@ public class SearchCourses extends CourseWebBaseController {
             }
             
         } catch(DataLayerException e){
+            request.setAttribute("exception", e); 
+            action_error(request, response);
             e.printStackTrace();
         }
          
@@ -91,19 +93,12 @@ public class SearchCourses extends CourseWebBaseController {
             else {
                 corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiAggiornati();
             }
-            
-            
-            System.out.println(corsi_non_filtrati); 
-            
+                                             
             corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(lang, corsi_non_filtrati); 
             // abbiamo lista dei corsi aggiornati e filtrati in base alla lingua e al nome, se è stato inserito
             
             // codice , SSD , semestre , docente , lingua , corsi di laurea
-            
-            System.out.println(corsi_filtrati); 
-            
-            System.out.println(corso_ssd); 
-            
+                                   
             if (!corso_codice.equals("")){
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_codice", corso_codice); 
             } 
@@ -128,11 +123,10 @@ public class SearchCourses extends CourseWebBaseController {
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_corsi_laurea", corso_corsi_laurea); 
             } 
             
-            
-            System.out.println(corsi_filtrati); 
-            
         }
         catch(DataLayerException exc){
+            request.setAttribute("exception", exc); 
+            action_error(request, response);
             exc.printStackTrace();
         }
         
