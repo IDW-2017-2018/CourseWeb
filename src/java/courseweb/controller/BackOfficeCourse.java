@@ -219,8 +219,11 @@ public class BackOfficeCourse extends CourseWebBaseController {
                     return;
                 }
                 
-                if(request.getParameter("hub_aggiungi_corso") != null){
+                if(action.equals("add_course") && (request.getParameter("aggiungi_corso") != null)){
                   action_aggiungi_corso(request,response);  
+                }
+                else if(action.equals("add_course") && !(request.getParameter("aggiungi_corso") != null)){
+                  action_aggiungi_corso_default(request,response);
                 }
                 else if(request.getParameter("hub_modifica_corso") != null){
                   action_aggiungi_corso_default(request,response);

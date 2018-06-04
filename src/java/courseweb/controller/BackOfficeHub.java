@@ -55,7 +55,7 @@ public class BackOfficeHub extends CourseWebBaseController {
         
         try {
             
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backoufficecourse?action=add_course&lang=" + request.getAttribute("lang")));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficecourse?action=add_course&lang=" + request.getAttribute("lang")));
             
         } catch(IOException e){
             request.setAttribute("exception", e);
@@ -72,7 +72,7 @@ public class BackOfficeHub extends CourseWebBaseController {
         
         try {
             
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeuser?action=edit_user&lang=" + request.getAttribute("lang")));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficecourse?action=edit_user&lang=" + request.getAttribute("lang")));
             
         } catch(IOException e){
             request.setAttribute("exception", e);
@@ -107,7 +107,7 @@ public class BackOfficeHub extends CourseWebBaseController {
         
         try {
             
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backoufficeuser?action=add_user&lang=" + request.getAttribute("lang")));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficecourse?action=add_user&lang=" + request.getAttribute("lang")));
             
         } catch(IOException e){
             request.setAttribute("exception", e);
