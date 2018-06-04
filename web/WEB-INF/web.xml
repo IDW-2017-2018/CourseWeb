@@ -83,6 +83,22 @@
         <servlet-name>BackOfficeHub</servlet-name>
         <url-pattern>/backofficehub</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>BackOfficeUser</servlet-name>
+        <servlet-class>courseweb.controller.BackOfficeUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BackOfficeUser</servlet-name>
+        <url-pattern>/backofficeuser</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>BackOfficeCourse</servlet-name>
+        <servlet-class>courseweb.controller.BackOfficeCourse</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BackOfficeCourse</servlet-name>
+        <url-pattern>/backofficecourse</url-pattern>
+    </servlet-mapping>
     <!-- CONFIGS -->
     <session-config>
         <session-timeout>

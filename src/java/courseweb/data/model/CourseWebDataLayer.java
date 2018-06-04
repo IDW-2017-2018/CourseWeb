@@ -23,6 +23,7 @@ public interface CourseWebDataLayer extends DataLayer {
     Utente getUtente(int utente_key) throws DataLayerException; 
     Utente getUtente(String utente_email) throws DataLayerException; 
     List<Utente> getUtenti() throws DataLayerException;
+    List<Utente> getUtenteByEmailLike(String utente_email) throws DataLayerException;
     
     Utente getDocente(int docente_key) throws DataLayerException; 
     Utente getDocente(String docente_email) throws DataLayerException; 
@@ -84,5 +85,7 @@ public interface CourseWebDataLayer extends DataLayer {
     
     List<Corso> filtraCorsi (List<Corso> corsi, String attributo, String filtro) throws DataLayerException;
     List<Map<String, Object>> getCorsiLaureaANDCFU(Corso corso) throws DataLayerException;
+    
+    List<Utente> filtraUtenti (List<Utente> utenti, String attributo, String filtro) throws DataLayerException;
     
 }

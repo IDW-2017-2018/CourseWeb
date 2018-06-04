@@ -27,7 +27,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     
     private PreparedStatement sCorso, sCorsoByIdLang, sCorsoByCodice, sCorsoByAnno, sCorsoByNome, sCorsoByNomeVersioni, sCorsoByCodiceAnnoLang, uCorsoById, iCorso;
     private PreparedStatement sInfoCorsiByIdCorsoLang, uInfoCorsiById, iInfoCorso;
-    private PreparedStatement sUtente, sUtenteById, sUtenteByEmail, uUtenteById, uUtenteByEmail, iUtente;
+    private PreparedStatement sUtente, sUtenteById, sUtenteByEmail, uUtenteById, uUtenteByEmail, iUtente, sUtenteByEmailLike;
     private PreparedStatement sCorsoLaurea, sCorsoLaureaById, sCorsoLaureaByNome;
     private PreparedStatement sLibriTesto, sLibroTestoById, iLibroTesto, uLibroTesto;
     private PreparedStatement sMateriali, sMaterialeById, iMateriale, uMateriale;
@@ -79,6 +79,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sUtente = connection.prepareStatement("SELECT * FROM utenti");
             sUtenteById = connection.prepareStatement("SELECT * FROM utenti WHERE id=?");
             sUtenteByEmail = connection.prepareStatement("SELECT * FROM utenti WHERE email=?");
+            sUtenteByEmailLike = connection.prepareStatement("SELECT * FROM utenti WHERE utenti.email LIKE ?");
             uUtenteById = connection.prepareStatement("UPDATE utenti SET email=?, password=?, nome=?, cognome=? WHERE id=?");
             uUtenteByEmail = connection.prepareStatement("UPDATE utenti SET email=?, password=?, nome=?, cognome=? WHERE email=?");
             iUtente = connection.prepareStatement("INSERT INTO utenti (email,password,tipo_utente,nome,cognome) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -340,6 +341,24 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             
         return result; 
         
+    }
+    
+    @Override
+    public List<Utente> getUtenteByEmailLike(String utente_email) throws DataLayerException{
+        List<Utente> result = new ArrayList();
+          
+        try{
+            sUtenteByEmailLike.setString(1, "%" + utente_email + "%");
+            try(ResultSet rs = sUtenteByEmailLike.executeQuery()) {
+                while(rs.next()){
+                    result.add(getUtente(rs.getInt("id")));
+                }
+            }
+        }
+        catch(SQLException exc){
+            throw new DataLayerException("Unable to load Utente by email", exc); 
+        }
+        return result;
     }
     
     @Override
@@ -1739,6 +1758,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sUtente.close();
             sUtenteById.close();
             sUtenteByEmail.close();
+            sUtenteByEmailLike.close();
             uUtenteById.close();
             uUtenteByEmail.close();
             iUtente.close();
@@ -1800,7 +1820,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sInfoCorsiByIdCorsoLang.close();
             uInfoCorsiById.close();
             iInfoCorso.close();
-            
+                       
         }
         
         catch(SQLException ex) {
@@ -1860,6 +1880,37 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             default: 
                 break;
         }
+        return result; 
+    }
+    
+    @Override
+    public List<Utente> filtraUtenti (List<Utente> utenti, String attributo, String filtro) throws DataLayerException {
+        List<Utente> result = new ArrayList();
+        
+        switch(attributo){
+            case "utente_nome": 
+                for(int i=0; i<utenti.size(); i++){
+                    if(utenti.get(i).getNome().equals(filtro)) result.add(utenti.get(i));
+                }
+                break;
+            case "utente_cognome":
+                for(int i=0; i<utenti.size(); i++){
+                    if(utenti.get(i).getCognome().equals(filtro)) result.add(utenti.get(i));
+                }
+                break;
+            case "utente_tipo_utente":
+                for(int i=0; i<utenti.size(); i++){
+                    if(utenti.get(i).getTipoUtente().equals(filtro)) result.add(utenti.get(i));
+                }
+                break;
+            case "utente_email":
+                result = getUtenteByEmailLike(filtro); 
+                break;
+            
+            default: 
+                break;
+        }
+        
         return result; 
     }
     
