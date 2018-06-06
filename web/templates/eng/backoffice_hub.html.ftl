@@ -22,11 +22,11 @@
       <form action="backofficehub?lang=${lang}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="hub_aggiungi_corso" value="ADD"/><a href="backend-aggiungicorso.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="hub_aggiungi_corso" value="ADD"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="hub_modifica_corso" value="EDIT"/><a href="backend-searchmodificacorso.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="hub_modifica_corso" value="EDIT"/>
         </div>
 
       </form>
@@ -59,11 +59,11 @@
       <form action="backofficehub?lang=${lang}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="hub_aggiungi_utente" value="ADD"/><a href="backend-aggiungiutente.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="hub_aggiungi_utente" value="ADD"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="hub_modifica_utente" value="EDIT"/><a href="backend-searchmodificautente.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="hub_modifica_utente" value="EDIT"/>
         </div>
 
       </form>

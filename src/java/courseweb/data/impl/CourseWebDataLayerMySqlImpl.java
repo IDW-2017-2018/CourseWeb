@@ -73,7 +73,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             
             sInfoCorsiByIdCorsoLang = connection.prepareStatement("SELECT * FROM info_corsi WHERE id_corso=? AND lang=?");
             
-            iCorso = connection.prepareStatement("INSERT INTO corsi (codice,anno,nome,ssd,semestre,lingua,link_homepage,link_risorse,link_forum,note) VALUES(?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            iCorso = connection.prepareStatement("INSERT INTO corsi (codice,anno,nome,ssd,semestre,lingua,link_homepage,link_risorse,link_forum) VALUES(?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             iInfoCorso = connection.prepareStatement("INSERT INTO info_corsi (prerequisiti,obiettivi,mod_esame,mod_insegnamento,descrittori_dublino,sillabo,note,lang,id_corso) VALUES(?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             
             sUtente = connection.prepareStatement("SELECT * FROM utenti");
@@ -1155,6 +1155,40 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 iCorso.setString(8, corso.getLinkRisorseEsterne());
                 iCorso.setString(9, corso.getLinkForum());
                 
+                if(iCorso.executeUpdate() == 1) {
+                    
+                    try(ResultSet keys = iCorso.getGeneratedKeys()) {
+                        if(keys.next()) {
+                            key = keys.getInt(1);
+                        }
+                    }
+                }
+            }
+            if(key > 0) {
+                
+                if(corso.getLang().equals("")){
+                    corso.setId(key);
+                    corso.setDirty(false);
+                }
+                
+                else{
+                    corso.copyFrom(getCorso(key, corso.getLang()));
+                }
+            }
+            corso.setDirty(false);
+        }
+        catch(SQLException ex) {
+            throw new DataLayerException("Unable to store Corso by id", ex);
+        }
+        
+    }
+    
+    @Override
+    public void storeInfoCorso(Corso corso) throws DataLayerException {
+        
+        int key = corso.getId();
+        try {
+                
                 iInfoCorso.setString(1, corso.getPrerequisiti());
                 iInfoCorso.setString(2, corso.getObiettivi());
                 iInfoCorso.setString(3, corso.getModEsame());
@@ -1163,26 +1197,13 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 iInfoCorso.setString(6, corso.getSillabo());                
                 iInfoCorso.setString(7, corso.getNote());
                 iInfoCorso.setString(8, corso.getLang());
-                
-                if(iCorso.executeUpdate() == 1) {
-                    
-                    try(ResultSet keys = iCorso.getGeneratedKeys()) {
-                        if(keys.next()) {
-                            key = keys.getInt(1);
-                        }
-                    }
-                    
-                    iInfoCorso.setInt(9, key);
-                    iInfoCorso.executeUpdate();
-                }
-            }
-            if(key > 0) {
-                corso.copyFrom(getCorso(key, corso.getLang()));
-            }
-            corso.setDirty(false);
+                                    
+                iInfoCorso.setInt(9, key);
+                iInfoCorso.executeUpdate();
+            
         }
         catch(SQLException ex) {
-            throw new DataLayerException("Unable to store Corso by id", ex);
+            throw new DataLayerException("Unable to store InfoCorso by id", ex);
         }
         
     }

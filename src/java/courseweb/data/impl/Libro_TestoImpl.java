@@ -74,41 +74,48 @@ public class Libro_TestoImpl implements Libro_Testo{
     
     protected void setId(int id){
         this.id = id; 
+        this.dirty = true; 
     }
     
     @Override
     public void setAutore(String autore){
         this.autore = autore; 
+        this.dirty = true;
     }
     
     @Override
     public void setTitolo(String titolo){
         this.titolo = titolo; 
+        this.dirty = true;
     }
     
     @Override
     public void setEditore(String editore){
         this.editore = editore; 
+        this.dirty = true;
     }
     
     @Override
     public void setVolume(String volume){
         this.volume = volume; 
+        this.dirty = true;
     }
     
     @Override
     public void setAnno(String anno){
         this.anno = anno; 
+        this.dirty = true;
     }
     
     @Override
     public void setLink(String link){
         this.link = link; 
+        this.dirty = true;
     }
     
     @Override
     public void setDirty(boolean dirty){
-        this.dirty = dirty; 
+        this.dirty = dirty;
     }
     
     @Override

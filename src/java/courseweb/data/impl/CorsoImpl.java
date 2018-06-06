@@ -229,129 +229,155 @@ public class CorsoImpl implements Corso {
         return this.materiali;
     }
     
-    protected void setId(int id){
+    @Override
+    public void setId(int id){
         this.id = id;
+        this.dirty = true;
     }
     
     @Override
     public void setNome(String nome){
         this.nome = nome;
+        this.dirty = true;
     }
     
     @Override
     public void setCodice(String codice){
         this.codice = codice;
+        this.dirty = true;
     }
     
     @Override
     public void setSSD(String ssd){
         this.ssd = ssd;
+        this.dirty = true;
     }
     
     @Override
     public void setSemestre(int semestre){
         this.semestre = semestre;
+        this.dirty = true;
     }
     
     @Override
     public void setLingua(String lingua){
         this.lingua = lingua;
+        this.dirty = true;
     }
     
     @Override
     public void setPrerequisiti(String prerequisiti){
         this.prerequisiti = prerequisiti;
+        this.dirty = true;
     }
     
     @Override
     public void setObiettivi(String obiettivi){
         this.obiettivi = obiettivi;
+        this.dirty = true;
     }
     
     @Override
     public void setModEsame(String mod_esame){
         this.mod_esame = mod_esame;
+        this.dirty = true;
     }
     
     @Override
     public void setModInsegnamento(String insegnamento){
         this.insegnamento = insegnamento;
+        this.dirty = true;
     }
     
     @Override
     public void setSillabo(String sillabo){
         this.sillabo = sillabo;
+        this.dirty = true;
     }
     
     @Override
     public void setLinkHomepageCorso(String link_homepage_corso){
         this.link_homepage_corso = link_homepage_corso;
+        this.dirty = true;
     }
     
     @Override
     public void setLinkRisorseEsterne(String link_risorse_esterne){
         this.link_risorse_esterne = link_risorse_esterne;
+        this.dirty = true;
     }
     
     @Override
     public void setLinkForum(String link_forum){
         this.link_forum = link_forum;
+        this.dirty = true;
     }
     
     @Override
     public void setAnno(String anno){
         this.anno = anno;
+        this.dirty = true;
     }
     
     @Override
     public void setNote(String note){
         this.note = note;
+        this.dirty = true;
     }
     
     @Override
     public void setDescrittoriDublino(String descrittori_dublino){
         this.descrittori_dublino = descrittori_dublino;
+        this.dirty = true;
     }
     
     @Override
     public void setDocenti(List<Utente> docenti){
         this.docenti = docenti; 
+        this.dirty = true;
     }
     
     @Override
     public void setCorsiLaurea(List<Corso_Laurea> corsi_laurea){
         this.corsi_laurea = corsi_laurea; 
+        this.dirty = true;
     }
     
     @Override
     public void setLibriTesto(List<Libro_Testo> libri_testo){
         this.libri_testo = libri_testo; 
+        this.dirty = true;
     }
     
     @Override
     public void setCorsiPropedeutici(List<Corso> corsi_propedeutici){
         this.corsi_propedeutici = corsi_propedeutici; 
+        this.dirty = true;
     }
     
     @Override
     public void setCorsiMutuati(List<Corso> corsi_mutuati){
         this.corsi_mutuati = corsi_mutuati; 
+        this.dirty = true;
     }
     
     @Override
     public void setModuliCorso(List<Corso> moduli){
         this.moduli = moduli; 
+        this.dirty = true;
     }
     
     @Override
     public void setMateriali(List<Materiale> materiali){
         this.materiali = materiali; 
+        this.dirty = true;
     }
     
     
     @Override
     public void setLang(String lang){
         this.lang = lang; 
+        this.dirty = true;
     }
 
     @Override

@@ -28,8 +28,8 @@
 
             <label class="label" for="corso_lingua">Lingua</label>
             <select class="field" name="corso_lingua"">
-                <option value="1">Italiano</option>
-                <option value="2">Inglese</option>
+                <option value="italiano">Italiano</option>
+                <option value="inglese">Inglese</option>
             </select>
 
             <label class="label" for="corso_link_homepage">Link Homepage</label>

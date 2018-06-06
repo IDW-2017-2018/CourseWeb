@@ -41,6 +41,7 @@ public interface Corso {
     List<Libro_Testo> getLibriTestoCorso() throws DataLayerException;
     
     
+    void setId(int id);
     void setNome(String nome);
     void setCodice(String codice);
     void setSSD(String ssd);

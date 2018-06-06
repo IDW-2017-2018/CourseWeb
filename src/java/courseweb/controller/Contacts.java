@@ -81,6 +81,7 @@ public class Contacts extends CourseWebBaseController {
                 }
                 
                 request.setAttribute("page", "contacts");
+                request.setAttribute("style", "contacts");
                 
                 action_default(request, response); 
                 

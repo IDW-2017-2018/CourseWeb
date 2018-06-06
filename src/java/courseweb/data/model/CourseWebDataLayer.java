@@ -63,6 +63,7 @@ public interface CourseWebDataLayer extends DataLayer {
     void storeUtenteById(Utente utente) throws DataLayerException;    
     void storeUtenteByEmail(Utente utente) throws DataLayerException;
     void storeCorso(Corso corso) throws DataLayerException;
+    void storeInfoCorso(Corso corso) throws DataLayerException;
     void storeMateriale(Materiale materiale) throws DataLayerException;
     void storeLibroTesto(Libro_Testo libro_testo) throws DataLayerException;
     

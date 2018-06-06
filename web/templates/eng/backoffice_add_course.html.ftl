@@ -28,8 +28,8 @@
 
             <label class="label" for="corso_lingua">Language</label>
             <select class="field" name="corso_lingua"">
-                <option value="1">Italian</option>
-                <option value="2">English</option>
+                <option value="italiano">Italian</option>
+                <option value="inglese">English</option>
             </select>
 
             <label class="label" for="corso_link_homepage">Homepage Link</label>
@@ -100,7 +100,7 @@
 
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="aggiungi_corso" value="AGGIUNGI"/>
+            <input class="filterbutton" type="submit" name="aggiungi_corso" value="ADD"/>
         </div>
 
       </form>

@@ -60,26 +60,31 @@ public class MaterialeImpl implements Materiale {
     
     protected void setId(int id) {   
         this.id = id;   
+        this.dirty = true;
     }
     
     @Override
     public void setNome(String nome) {    
-        this.nome = nome;   
+        this.nome = nome; 
+        this.dirty = true;
     }
     
     @Override
     public void setDescrizione(String descrizione) {    
         this.descrizione = descrizione;   
+        this.dirty = true;
     }
     
     @Override
     public void setDimensione(String dimensione) {    
         this.dimensione = dimensione;   
+        this.dirty = true;
     }
     
     @Override
     public void setPercorso(String percorso) {    
         this.percorso = percorso;   
+        this.dirty = true;
     }
     
     @Override

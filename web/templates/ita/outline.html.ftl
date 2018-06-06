@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="style/normalize.css"/>
     <link rel="stylesheet" type="text/css" href="style/outline.css"/>
     
-    <link rel="stylesheet" type="text/css" href="style/${page}.css"/> <!-- da montare dinamicamente -->
+    <link rel="stylesheet" type="text/css" href="style/${style}.css"/> <!-- da montare dinamicamente -->
 
 </head>
 
@@ -47,12 +47,22 @@
 
     <ul class="lang_bar">
         
-        <#if id??>
+        <#if id?? && action??>
+            <li><a href="${page}?lang=ita&id=${id}&action=${action}">ITALIANO</a></li>
+            <li><a href="${page}?lang=eng&id=${id}&action=${action}">INGLESE</a></li>
+
+        <#elseif id??>
             <li><a href="${page}?lang=ita&id=${id}">ITALIANO</a></li>
             <li><a href="${page}?lang=eng&id=${id}">INGLESE</a></li>
+
+        <#elseif action??>
+            <li><a href="${page}?lang=ita&action=${action}">ITALIANO</a></li>
+            <li><a href="${page}?lang=eng&action=${action}">INGLESE</a></li>
+
         <#else>
             <li><a href="${page}?lang=ita">ITALIANO</a></li>
             <li><a href="${page}?lang=eng">INGLESE</a></li>
+
         </#if>
         
     </ul>

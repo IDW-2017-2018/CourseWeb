@@ -39,7 +39,7 @@ public class BackOfficeUser extends CourseWebBaseController {
         try{
             String email = request.getParameter("utente_email");
             String password = request.getParameter("utente_password");
-            String ripetiPassword = request.getParameter("utente_riscrivi_password");
+            String ripetiPassword = request.getParameter("utente_ripeti_password");
             String nome = request.getParameter("utente_nome");
             String cognome = request.getParameter("utente_cognome");
             String tipoUtente = request.getParameter("utente_tipo_utente");
@@ -72,9 +72,11 @@ public class BackOfficeUser extends CourseWebBaseController {
             utente.setTipoUtente(tipoUtente);
             
             datalayer.storeUtenteByEmail(utente);
+            
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
                         
         }
-        catch(SecurityLayerException|DataLayerException e){
+        catch(SecurityLayerException|DataLayerException|IOException e){
             request.setAttribute("exception", e);
             action_error(request, response);
         }
@@ -95,7 +97,7 @@ public class BackOfficeUser extends CourseWebBaseController {
             
             String email = request.getParameter("utente_email");
             String password = request.getParameter("utente_password");
-            String ripetiPassword = request.getParameter("utente_riscrivi_password");
+            String ripetiPassword = request.getParameter("utente_ripeti_password");
             String nome = request.getParameter("utente_nome");
             String cognome = request.getParameter("utente_cognome");
             
@@ -142,9 +144,11 @@ public class BackOfficeUser extends CourseWebBaseController {
             
             if(edited == true)
                 datalayer.storeUtenteById(utente);
+            
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
                        
         }
-        catch(SecurityLayerException|DataLayerException|NumberFormatException e){
+        catch(SecurityLayerException|DataLayerException|NumberFormatException|IOException e){
             request.setAttribute("exception", e);
             action_error(request, response);
         }
@@ -326,7 +330,8 @@ public class BackOfficeUser extends CourseWebBaseController {
                     
                 }
                                
-                request.setAttribute("page", "backoffice");
+                request.setAttribute("style", "backoffice");
+                request.setAttribute("page", "backofficeuser");
                 if(((Utente)s.getAttribute("utente")) == null){
                     request.setAttribute("message", "not permitted");
                     action_error(request,response);
@@ -339,6 +344,13 @@ public class BackOfficeUser extends CourseWebBaseController {
                 }
                 
                 String action = request.getParameter("action"); 
+                request.setAttribute("action", action);
+                if(request.getParameter("id") != null)
+                    request.setAttribute("id", request.getParameter("id"));
+                else{
+                    request.setAttribute("id", null);
+                }
+                    
                 
                 if(action == null){
                     request.setAttribute("message", "Illegal action");

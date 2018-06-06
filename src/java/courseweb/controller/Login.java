@@ -244,6 +244,7 @@ public class Login extends CourseWebBaseController {
                 }
                                
                 request.setAttribute("page", "login");
+                request.setAttribute("style", "login");
                 
                 if(request.getParameter("login") != null){
                     action_login(request, response); 

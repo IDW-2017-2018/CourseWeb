@@ -37,10 +37,13 @@ public class Corso_LaureaImpl implements Corso_Laurea {
     @Override
     public void setNome(String nome){
         this.nome = nome; 
+        this.dirty = true;
+
     }
     
     protected void setId(int id){
         this.id = id; 
+        this.dirty = true;
     }
     
     @Override

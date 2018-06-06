@@ -72,7 +72,7 @@ public class BackOfficeHub extends CourseWebBaseController {
         
         try {
             
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficecourse?action=edit_user&lang=" + request.getAttribute("lang")));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeuser?action=edit_user&lang=" + request.getAttribute("lang")));
             
         } catch(IOException e){
             request.setAttribute("exception", e);
@@ -107,7 +107,7 @@ public class BackOfficeHub extends CourseWebBaseController {
         
         try {
             
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficecourse?action=add_user&lang=" + request.getAttribute("lang")));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeuser?action=add_user&lang=" + request.getAttribute("lang")));
             
         } catch(IOException e){
             request.setAttribute("exception", e);
@@ -162,7 +162,8 @@ public class BackOfficeHub extends CourseWebBaseController {
                     
                 }
                                
-                request.setAttribute("page", "backoffice");
+                request.setAttribute("style", "backoffice");
+                request.setAttribute("page", "backofficehub");
                 if(((Utente)s.getAttribute("utente")) == null){
                     request.setAttribute("message", "not permitted");
                     action_error(request,response);

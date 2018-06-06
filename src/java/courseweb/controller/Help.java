@@ -82,6 +82,7 @@ public class Help extends CourseWebBaseController {
                 }
                 
                 request.setAttribute("page", "help");
+                request.setAttribute("style", "help");               
                 action_default(request, response);
                 
             } catch(TemplateManagerException ex){

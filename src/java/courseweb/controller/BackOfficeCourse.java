@@ -99,6 +99,8 @@ public class BackOfficeCourse extends CourseWebBaseController {
             corso.setLinkHomepageCorso(linkHomepage);
             corso.setLinkRisorseEsterne(linkRisorse);
             corso.setLinkForum(linkForum);
+            
+            datalayer.storeCorso(corso);
                                  
             if(!(prerequisiti.equals("")&&obiettivi.equals("")&&modEsame.equals("")&&modInsegnamento.equals("")&&descrittoriDublino.equals("")&&sillabo.equals("")&&note.equals(""))){
                 corso.setPrerequisiti(prerequisiti);
@@ -110,7 +112,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 corso.setNote(note);
                 corso.setLang("ita");
                 
-                datalayer.storeCorso(corso);
+                datalayer.storeInfoCorso(corso);
                 
             }
             
@@ -124,12 +126,14 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 corso.setNote(noteEng);
                 corso.setLang("eng");
                 
-                datalayer.storeCorso(corso);
+                datalayer.storeInfoCorso(corso);
                 
             }
+            
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
                         
         }
-        catch(DataLayerException e){
+        catch(DataLayerException|IOException e){
             request.setAttribute("exception", e);
             action_error(request, response);
         }
@@ -199,7 +203,8 @@ public class BackOfficeCourse extends CourseWebBaseController {
                     
                 }
                                
-                request.setAttribute("page", "backoffice");
+                request.setAttribute("style", "backoffice");
+                request.setAttribute("page", "backofficecourse");
                 if(((Utente)s.getAttribute("utente")) == null){
                     request.setAttribute("message", "not permitted");
                     action_error(request,response);
@@ -212,6 +217,12 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 }
                 
                 String action = request.getParameter("action"); 
+                request.setAttribute("action", action);
+                if(request.getParameter("id") != null)
+                    request.setAttribute("id", request.getParameter("id"));
+                else{
+                    request.setAttribute("id", null);
+                }
                 
                 if(action == null){
                     request.setAttribute("message", "Illegal action");

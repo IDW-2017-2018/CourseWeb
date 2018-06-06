@@ -198,6 +198,7 @@ public class SearchCourses extends CourseWebBaseController {
                 }
                                
                 request.setAttribute("page", "searchcourses");
+                request.setAttribute("style", "searchcourses");
                 
                 if(request.getParameter("filtra") != null){
                     action_filter(request, response); 

@@ -151,6 +151,7 @@ public class Course extends CourseWebBaseController {
                 }
                                
                 request.setAttribute("page", "course");
+                request.setAttribute("style", "course");
                 request.setAttribute("id", request.getParameter("id"));
                 
                 action_default(request, response); 

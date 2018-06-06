@@ -66,32 +66,38 @@ public class UtenteImpl implements Utente{
     }
     
     protected void setId(int id) {   
-        this.id = id;   
+        this.id = id; 
+        this.dirty = true; 
     }
     
     @Override
     public void setEmail(String email) {    
         this.email = email;   
+        this.dirty = true;
     }
     
     @Override
     public void setPassword(String password) {   
-        this.password = password;  
+        this.password = password;
+        this.dirty = true;
     }
     
     @Override
     public void setTipoUtente(String tipoUtente) {  
         this.tipoUtente = tipoUtente;  
+        this.dirty = true;
     }
     
     @Override
     public void setNome(String nome) {  
         this.nome = nome;  
+        this.dirty = true;
     }
     
     @Override
     public void setCognome(String cognome) {   
         this.cognome = cognome;  
+        this.dirty = true;
     }
     
     @Override
