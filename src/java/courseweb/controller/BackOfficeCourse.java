@@ -13,6 +13,8 @@ import framework.result.TemplateManagerException;
 import framework.result.TemplateResult;
 import framework.security.SecurityLayer;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -157,6 +159,130 @@ public class BackOfficeCourse extends CourseWebBaseController {
               
     }
     
+    private void action_filter_modifica_corso_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
+        
+        TemplateResult result = new TemplateResult(getServletContext()); 
+        
+        try {
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("corsi", ((CourseWebDataLayer)request.getAttribute("datalayer")).getCorsi());
+                result.activate("/eng/backoffice_filter_edit_course.html.ftl", request, response);
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("corsi", ((CourseWebDataLayer)request.getAttribute("datalayer")).getCorsi());
+                result.activate("/ita/backoffice_filter_edit_course.html.ftl", request, response);
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response); 
+            }
+        }
+        catch(DataLayerException e){
+            request.setAttribute("exception", e);
+            action_error(request,response);
+        }
+    }        
+    private void action_filter_modifica_corso(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
+       List<Corso> corsi_non_filtrati = new ArrayList();
+       List<Corso> corsi_filtrati = new ArrayList();
+       //request.getParameter() per ogni parametro filtro
+       String corso_nome = request.getParameter("corso_nome");
+       String corso_codice = request.getParameter("corso_codice");
+       String corso_ssd = request.getParameter("corso_ssd");
+       String corso_semestre = request.getParameter("corso_semestre");
+       String corso_docente = request.getParameter("corso_docente");
+       String corso_lingua = request.getParameter("corso_lingua");
+       String corso_corsi_laurea = request.getParameter("corso_corsi_laurea");
+       //ricaricare la pagina con la nuova List di corsi
+                  
+       try {
+           String lang = (String) request.getAttribute("lang");
+                               
+           if(!corso_nome.equals("")){
+               corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiByNomeAggiornati(corso_nome); 
+           }
+           else {
+               corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiAggiornati();
+           }
+                                            
+           corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(lang, corsi_non_filtrati); 
+            // abbiamo lista dei corsi aggiornati e filtrati in base alla lingua e al nome, se è stato inserito
+            
+            // codice , SSD , semestre , docente , lingua , corsi di laurea
+                                   
+            if (!corso_codice.equals("")){
+                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_codice", corso_codice); 
+            } 
+            
+            if (!corso_ssd.equals("")){
+                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_ssd", corso_ssd); 
+            } 
+            
+            if (!corso_semestre.equals("---")){
+                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_semestre", corso_semestre); 
+            } 
+            
+            if (!corso_docente.equals("")){
+                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_docente", corso_docente); 
+            } 
+            
+            if (!corso_lingua.equals("---")){
+                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_lingua", corso_lingua); 
+            } 
+            
+            if (!corso_corsi_laurea.equals("")){
+                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_corsi_laurea", corso_corsi_laurea); 
+            } 
+            
+        }
+        catch(DataLayerException exc){
+            request.setAttribute("exception", exc); 
+            action_error(request, response);
+            exc.printStackTrace();
+        }
+        
+        TemplateResult result = new TemplateResult(getServletContext());
+        
+        //carica la pagina
+        if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("corsi", corsi_filtrati);
+                result.activate("/eng/backoffice_filter_edit_course.html.ftl", request, response);  
+
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("corsi", corsi_filtrati);
+                result.activate("/ita/backoffice_filter_edit_course.html.ftl", request, response); 
+
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response);
+
+            } 
+    }  
+
+    private void action_modifica_corso_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
+                
+        HttpSession session = (HttpSession) request.getAttribute("session"); 
+        session.setAttribute("lang", request.getAttribute("lang"));                            
+        request.setAttribute("session", session); 
+        
+        
+        try {
+            if(request.getParameter("id") == null){
+            request.setAttribute("message","not a valid corso id");
+            action_error(request,response);
+            return;
+            }
+            int id = Integer.parseInt(request.getParameter("id"));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?id=" + id + "&lang=" + request.getAttribute("lang")));
+            
+        } catch(IOException e){
+            request.setAttribute("exception", e);
+            action_error(request, response); 
+        }                      
+                        
+    }
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         
@@ -236,8 +362,14 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 else if(action.equals("add_course") && !(request.getParameter("aggiungi_corso") != null)){
                   action_aggiungi_corso_default(request,response);
                 }
-                else if(request.getParameter("hub_modifica_corso") != null){
-                  action_aggiungi_corso_default(request,response);
+                else if(action.equals("edit_course") && !(request.getParameter("filtra") != null) && !(request.getParameter("id") != null)){
+                  action_filter_modifica_corso_default(request,response);  
+                }
+                else if(action.equals("edit_course") && (request.getParameter("filtra") != null) && !(request.getParameter("id") != null)){
+                  action_filter_modifica_corso(request,response);
+                }
+                else if(!(request.getParameter("filtra") != null) && (request.getParameter("id") != null)){
+                  action_modifica_corso_default(request,response);
                 }
                 else {
                     request.setAttribute("message", "Illegal action");

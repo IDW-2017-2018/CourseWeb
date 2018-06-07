@@ -99,6 +99,14 @@
         <servlet-name>BackOfficeCourse</servlet-name>
         <url-pattern>/backofficecourse</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>BackOfficeEditCourse</servlet-name>
+        <servlet-class>courseweb.controller.BackOfficeEditCourse</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BackOfficeEditCourse</servlet-name>
+        <url-pattern>/backofficeeditcourse</url-pattern>
+    </servlet-mapping>
     <!-- CONFIGS -->
     <session-config>
         <session-timeout>
