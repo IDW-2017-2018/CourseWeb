@@ -1,13 +1,13 @@
 <div class="filter">
     
-    <h1 class="title"> CORSO </h1>
+    <h1 class="title"> COURSE </h1>
     
     <div class="formcontainer">
         
       <form action="backofficecoursehub?lang=${lang}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="MODIFICA"/><a href="backend-modificacorso.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="modifica_corso" value="MODIFICA"/>
         </div>
 
       </form>
@@ -25,11 +25,11 @@
       <form action="backofficecoursehub?lang=${lang}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/><a href="backend-aggiungicorsolaurea.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="aggiungi_corso_laurea" value="AGGIUNGI"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="ELIMINA"/><a href="backend-eliminacorsolaurea.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="elimina_corso_laurea" value="ELIMINA"/>
         </div>
 
       </form>
@@ -50,11 +50,11 @@
       <form action="backofficecoursehub?lang=${lang}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/><a href="backend-aggiungicorsomutuato.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="aggiungi_corso_mutuato" value="AGGIUNGI"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="ELIMINA"/><a href="backend-eliminacorsomutuato.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="elimina_corso_mutuato" value="ELIMINA"/>
         </div>
 
       </form>
@@ -73,11 +73,11 @@
       <form action="backofficecoursehub?lang=${lang}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/><a href="backend-aggiungicorsointegrato.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="aggiungi_corso_associato" value="AGGIUNGI"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="ELIMINA"/><a href="backend-eliminacorsointegrato.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="elimina_corso_associato" value="ELIMINA"/>
         </div>
 
       </form>
@@ -100,11 +100,11 @@
       <form action="backofficecoursehub?lang=${lang}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/><a href="backend-aggiungicorsopropedeutico.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="aggiungi_corso_propedeutico" value="AGGIUNGI"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="ELIMINA"/><a href="backend-eliminacorsopropedeutico.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="elimina_corso_propedeutico" value="ELIMINA"/>
         </div>
 
       </form>
@@ -123,11 +123,11 @@
       <form action="backofficecoursehub?lang=${lang}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/><a href="backend-aggiungidocente.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="aggiungi_docente" value="AGGIUNGI"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="ELIMINA"/><a href="backend-eliminadocente.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="elimina_docente" value="ELIMINA"/>
         </div>
 
       </form>
@@ -150,11 +150,11 @@
       <form action="backofficecoursehub?lang=${lang}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/><a href="backend-aggiungilibrotesto.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="aggiungi_libro_testo" value="AGGIUNGI"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="ELIMINA"/><a href="backend-eliminalibrotesto.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="elimina_libro_testo" value="ELIMINA"/>
         </div>
 
       </form>
@@ -173,11 +173,11 @@
       <form action="backofficecoursehub?lang=${lang}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="AGGIUNGI"/><a href="backend-aggiungimateriale.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="aggiungi_materiale" value="AGGIUNGI"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="filtra" value="ELIMINA"/><a href="backend-eliminamateriale.html">AAAA</a>
+            <input class="filterbutton" type="submit" name="elimina_materiale" value="ELIMINA"/>
         </div>
 
       </form>
