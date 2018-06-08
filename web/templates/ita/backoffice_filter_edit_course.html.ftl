@@ -83,7 +83,7 @@
             <td class="tdresult-list">${corso.nome}</td>
             <td class="tdresult-list">${corso.SSD}</td>
             <td class="tdresult-list">${corso.anno}</td>
-            <td class="tdresult-list"><a href="backofficecourse?lang=${lang}&id=${corso.id}" class="linkresultmod">MODIFICA</a></td>
+            <td class="tdresult-list"><a href="backofficecourse?lang=${lang}&action=edit_course&id=${corso.id}" class="linkresultmod">MODIFICA</a></td>
             
         </tr>
 

@@ -189,7 +189,6 @@ public class BackOfficeCourse extends CourseWebBaseController {
        String corso_nome = request.getParameter("corso_nome");
        String corso_codice = request.getParameter("corso_codice");
        String corso_ssd = request.getParameter("corso_ssd");
-       String corso_semestre = request.getParameter("corso_semestre");
        String corso_docente = request.getParameter("corso_docente");
        String corso_lingua = request.getParameter("corso_lingua");
        String corso_corsi_laurea = request.getParameter("corso_corsi_laurea");
@@ -216,10 +215,6 @@ public class BackOfficeCourse extends CourseWebBaseController {
             
             if (!corso_ssd.equals("")){
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_ssd", corso_ssd); 
-            } 
-            
-            if (!corso_semestre.equals("---")){
-                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_semestre", corso_semestre); 
             } 
             
             if (!corso_docente.equals("")){
@@ -275,7 +270,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
             return;
             }
             int id = Integer.parseInt(request.getParameter("id"));
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?id=" + id + "&lang=" + request.getAttribute("lang")));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id));
             
         } catch(IOException e){
             request.setAttribute("exception", e);
@@ -355,7 +350,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
                     action_error(request, response);
                     return;
                 }
-                
+                  
                 if(action.equals("add_course") && (request.getParameter("aggiungi_corso") != null)){
                   action_aggiungi_corso(request,response);  
                 }
@@ -368,7 +363,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 else if(action.equals("edit_course") && (request.getParameter("filtra") != null) && !(request.getParameter("id") != null)){
                   action_filter_modifica_corso(request,response);
                 }
-                else if(!(request.getParameter("filtra") != null) && (request.getParameter("id") != null)){
+                else if(action.equals("edit_course") && !(request.getParameter("filtra") != null) && (request.getParameter("id") != null)){
                   action_modifica_corso_default(request,response);
                 }
                 else {
