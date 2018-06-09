@@ -1,6 +1,6 @@
 <div class="filter">
     
-    <h1 class="title"> COURSE </h1>
+    <h1 class="title"> CORSO </h1>
     
     <div class="formcontainer">
         

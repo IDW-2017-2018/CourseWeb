@@ -7,7 +7,7 @@
       <form action="backofficeeditcourse?lang=${lang}&id=${id}&action=edit_course" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="modifica_corso" value="MODIFICA"/>
+            <input class="filterbutton" type="submit" name="modifica_corso" value="EDIT"/>
         </div>
 
       </form>
@@ -18,18 +18,18 @@
 
 <div class="filter">
     
-    <h1 class="title"> CORSI LAUREA ASSOCIATI </h1>
+    <h1 class="title"> DEGREES </h1>
     
     <div class="formcontainer">
         
       <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="aggiungi_corso_laurea" value="AGGIUNGI"/>
+            <input class="filterbutton" type="submit" name="aggiungi_corso_laurea" value="ADD"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="elimina_corso_laurea" value="ELIMINA"/>
+            <input class="filterbutton" type="submit" name="elimina_corso_laurea" value="DELETE"/>
         </div>
 
       </form>
@@ -43,18 +43,18 @@
     
 <div class="filter-left">
     
-    <h1 class="title"> CORSI MUTUATI ASSOCIATI </h1>
+    <h1 class="title"> SAME AS COURSES </h1>
     
     <div class="formcontainer">
         
       <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="aggiungi_corso_mutuato" value="AGGIUNGI"/>
+            <input class="filterbutton" type="submit" name="aggiungi_corso_mutuato" value="ADD"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="elimina_corso_mutuato" value="ELIMINA"/>
+            <input class="filterbutton" type="submit" name="elimina_corso_mutuato" value="DELETE"/>
         </div>
 
       </form>
@@ -66,18 +66,18 @@
 
 <div class="filter-right">
     
-    <h1 class="title"> CORSI INTEGRATI ASSOCIATI </h1>
+    <h1 class="title"> INTEGRATED COURSES </h1>
     
     <div class="formcontainer">
         
       <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="aggiungi_corso_associato" value="AGGIUNGI"/>
+            <input class="filterbutton" type="submit" name="aggiungi_corso_associato" value="ADD"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="elimina_corso_associato" value="ELIMINA"/>
+            <input class="filterbutton" type="submit" name="elimina_corso_associato" value="DELETE"/>
         </div>
 
       </form>
@@ -93,18 +93,18 @@
     
 <div class="filter-left">
     
-    <h1 class="title"> CORSI PROPEDEUTICI ASSOCIATI </h1>
+    <h1 class="title"> PROPAEDEUTICS </h1>
     
     <div class="formcontainer">
         
       <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="aggiungi_corso_propedeutico" value="AGGIUNGI"/>
+            <input class="filterbutton" type="submit" name="aggiungi_corso_propedeutico" value="ADD"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="elimina_corso_propedeutico" value="ELIMINA"/>
+            <input class="filterbutton" type="submit" name="elimina_corso_propedeutico" value="DELETE"/>
         </div>
 
       </form>
@@ -116,18 +116,18 @@
 
 <div class="filter-right">
     
-    <h1 class="title"> DOCENTI ASSOCIATI </h1>
+    <h1 class="title"> TEACHERS </h1>
     
     <div class="formcontainer">
         
       <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="aggiungi_docente" value="AGGIUNGI"/>
+            <input class="filterbutton" type="submit" name="aggiungi_docente" value="ADD"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="elimina_docente" value="ELIMINA"/>
+            <input class="filterbutton" type="submit" name="elimina_docente" value="DELETE"/>
         </div>
 
       </form>
@@ -143,18 +143,18 @@
     
 <div class="filter-left">
     
-    <h1 class="title"> LIBRO DI TESTO</h1>
+    <h1 class="title"> TEXT BOOKS </h1>
     
     <div class="formcontainer">
         
       <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="aggiungi_libro_testo" value="AGGIUNGI"/>
+            <input class="filterbutton" type="submit" name="aggiungi_libro_testo" value="ADD"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="elimina_libro_testo" value="ELIMINA"/>
+            <input class="filterbutton" type="submit" name="elimina_libro_testo" value="DELETE"/>
         </div>
 
       </form>
@@ -166,18 +166,18 @@
 
 <div class="filter-right">
     
-    <h1 class="title"> MATERIALE</h1>
+    <h1 class="title"> MATERIALS </h1>
     
     <div class="formcontainer">
         
       <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="aggiungi_materiale" value="AGGIUNGI"/>
+            <input class="filterbutton" type="submit" name="aggiungi_materiale" value="ADD"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="elimina_materiale" value="ELIMINA"/>
+            <input class="filterbutton" type="submit" name="elimina_materiale" value="DELETE"/>
         </div>
 
       </form>

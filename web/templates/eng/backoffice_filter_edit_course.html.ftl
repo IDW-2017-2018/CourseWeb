@@ -29,7 +29,7 @@
             <label class="label" for="corso_docente">Teacher</label>
             <input class="field" type="text" id="corso_docente" name="corso_docente"/>
     
-            <label class="label" for="corso_corsi_laurea">Degree Courses</label>
+            <label class="label" for="corso_corsi_laurea">Degrees</label>
             <input class="field" type="text" id="corso_corsi_laurea" name="corso_corsi_laurea"/>
                    
             <label class="label" for="corso_lingua">Language</label>
