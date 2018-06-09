@@ -270,7 +270,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
             return;
             }
             int id = Integer.parseInt(request.getParameter("id"));
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
             
         } catch(IOException e){
             request.setAttribute("exception", e);
