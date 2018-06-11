@@ -16,6 +16,7 @@ import framework.result.FailureResult;
 import framework.result.TemplateManagerException;
 import framework.result.TemplateResult;
 import framework.security.SecurityLayer;
+import framework.security.SecurityLayerException;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -70,7 +71,51 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
         }
             
     }
+    private void action_elimina_confirm_default(HttpServletRequest request, HttpServletResponse response){
+    
+        TemplateResult result = new TemplateResult(getServletContext()); 
         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            int id = Integer.parseInt(request.getParameter("id"));    
+            
+            if(request.getParameter("item") == null) {
+                request.setAttribute("message","not a valid item id");
+                action_error(request,response);
+                return;
+            }
+            
+            int item = Integer.parseInt(request.getParameter("item"));            
+                      
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("item", item);
+                request.setAttribute("delete_action", request.getParameter("name"));
+                result.activate("/eng/backoffice_delete_check.html.ftl", request, response);
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("item", item);
+                request.setAttribute("delete_action", request.getParameter("name"));                
+                result.activate("/ita/backoffice_delete_check.html.ftl", request, response);
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response); 
+            }
+            
+        } catch(NumberFormatException | TemplateManagerException e){ 
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }                       
+    }    
+    
     private void action_elimina(HttpServletRequest request, HttpServletResponse response){
         
         try {
@@ -432,6 +477,39 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     private void action_corsi_laurea_aggiungi(HttpServletRequest request, HttpServletResponse response){
         
+        try{
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            String nome = request.getParameter("corso_laurea_nome");
+            String numero_cfu = request.getParameter("numero_cfu");
+            String tipo_cfu = request.getParameter("tipo_cfu");
+            
+            nome = SecurityLayer.addSlashes(nome);
+            numero_cfu = SecurityLayer.addSlashes(numero_cfu);
+
+            if(nome.equals("")||numero_cfu.equals("")){
+                request.setAttribute("message","empty fields");
+                action_error(request,response);
+                return;
+            }
+
+            int id_corso_laurea = datalayer.getCorsoLaurea(nome).getId();  
+            datalayer.storeCorsiCorsiLaurea(id_corso_laurea, id, numero_cfu, tipo_cfu);
+            
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+                        
+        }
+        catch(DataLayerException|IOException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }        
     }
     
     private void action_corsi_laurea_elimina_default(HttpServletRequest request, HttpServletResponse response){
@@ -515,6 +593,26 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     private void action_corsi_mutuati_aggiungi(HttpServletRequest request, HttpServletResponse response){
         
+        try{
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            String id_corso_mutuato = request.getParameter("corsi_mutuati");
+            datalayer.storeCorsiCorsiMutuati(id, Integer.parseInt(id_corso_mutuato));
+            
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+                        
+        }
+        catch(DataLayerException|IOException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }                
     }
     
     private void action_corsi_mutuati_elimina_default(HttpServletRequest request, HttpServletResponse response){
@@ -597,6 +695,26 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     private void action_corsi_propedeutici_aggiungi(HttpServletRequest request, HttpServletResponse response){
         
+        try{
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            String id_corso_propedeutico = request.getParameter("corsi_propedeutici");
+            datalayer.storeCorsiCorsiPropedeutici(id, Integer.parseInt(id_corso_propedeutico));
+            
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+                        
+        }
+        catch(DataLayerException|IOException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }                       
     }
     
     private void action_corsi_propedeutici_elimina_default(HttpServletRequest request, HttpServletResponse response){
@@ -679,6 +797,26 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     private void action_moduli_aggiungi(HttpServletRequest request, HttpServletResponse response){
         
+        try{
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            String id_modulo = request.getParameter("moduli");
+            datalayer.storeCorsiModuli(id, Integer.parseInt(id_modulo));
+            
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+                        
+        }
+        catch(DataLayerException|IOException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }                       
     }
     
     private void action_moduli_elimina_default(HttpServletRequest request, HttpServletResponse response){
@@ -761,6 +899,26 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     private void action_docenti_aggiungi(HttpServletRequest request, HttpServletResponse response){
         
+        try{
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            String id_docente = request.getParameter("corsi_docenti");
+            datalayer.storeCorsiDocenti(id, Integer.parseInt(id_docente));
+            
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+                        
+        }
+        catch(DataLayerException|IOException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }                       
     }
     
     private void action_docenti_elimina_default(HttpServletRequest request, HttpServletResponse response){
@@ -843,6 +1001,26 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     private void action_libri_testo_aggiungi(HttpServletRequest request, HttpServletResponse response){
         
+        try{
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            String id_libro_testo = request.getParameter("libri_testo");
+            datalayer.storeCorsiLibriTesto(id, Integer.parseInt(id_libro_testo));
+            
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+                        
+        }
+        catch(DataLayerException|IOException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }                       
     }
     
     private void action_libri_testo_elimina_default(HttpServletRequest request, HttpServletResponse response){
@@ -925,6 +1103,26 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     private void action_materiali_aggiungi(HttpServletRequest request, HttpServletResponse response){
         
+        try{
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            String id_materiale = request.getParameter("materiali");
+            datalayer.storeCorsiMateriali(id, Integer.parseInt(id_materiale));
+            
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+                        
+        }
+        catch(DataLayerException|IOException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }                       
     }
     
     private void action_materiali_elimina_default(HttpServletRequest request, HttpServletResponse response){
@@ -1131,7 +1329,10 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 }
                 else if((request.getParameter("elimina_materiali_action") != null) && (request.getParameter("id") != null)){                    
                     action_elimina(request,response);      
-                }                
+                }   
+                else if(action.equals("elimina") && (request.getParameter("id") != null)){
+                    action_elimina_confirm_default(request, response);               
+                }
                 else if(action.equals("hub") && (request.getParameter("id") != null)){
                     action_default(request, response);                    
                 }
