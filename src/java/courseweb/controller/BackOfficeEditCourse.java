@@ -458,11 +458,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                request.setAttribute("corsi_laurea", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiLaureaCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("items", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiLaureaCorso(datalayer.getCorso(id,"ita"))); 
+                request.setAttribute("corso", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorso(id, "ita"));
                 result.activate("/eng/backoffice_add_degree_course.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                request.setAttribute("corsi_laurea", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiLaureaCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("items", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiLaureaCorso(datalayer.getCorso(id,"ita")));
+                request.setAttribute("corso", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorso(id, "ita"));                
                 result.activate("/ita/backoffice_add_degree_course.html.ftl", request, response);                
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -534,13 +536,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 request.setAttribute("id", id);
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
-                result.activate("/eng/backoffice_delete_course.html.ftl", request, response);
+                result.activate("/eng/backoffice_delete_degree_course.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
-                result.activate("/ita/backoffice_delete_course.html.ftl", request, response);
+                result.activate("/ita/backoffice_delete_degree_course.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");
                 action_error(request, response); 

@@ -22,7 +22,7 @@
     
     <div class="formcontainer">
         
-      <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
+      <form action="backofficeeditcourse?lang=${lang}&id=${id}&action=edit_degree_course" method="POST">
 
         <div class="buttoncontainer">               
             <input class="filterbutton" type="submit" name="aggiungi_corso_laurea" value="ADD"/>

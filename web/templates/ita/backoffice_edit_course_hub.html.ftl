@@ -16,13 +16,14 @@
 
 </div>
 
+
 <div class="filter">
     
-    <h1 class="title"> CORSI LAUREA ASSOCIATI </h1>
+    <h1 class="title"> CORSI LAUREA </h1>
     
     <div class="formcontainer">
         
-      <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
+      <form action="backofficeeditcourse?lang=${lang}&id=${id}&action=edit_degree_course" method="POST">
 
         <div class="buttoncontainer">               
             <input class="filterbutton" type="submit" name="aggiungi_corso_laurea" value="AGGIUNGI"/>
@@ -43,7 +44,7 @@
     
 <div class="filter-left">
     
-    <h1 class="title"> CORSI MUTUATI ASSOCIATI </h1>
+    <h1 class="title"> CORSI MUTUATI </h1>
     
     <div class="formcontainer">
         
@@ -66,7 +67,7 @@
 
 <div class="filter-right">
     
-    <h1 class="title"> CORSI INTEGRATI ASSOCIATI </h1>
+    <h1 class="title"> CORSI INTEGRATI </h1>
     
     <div class="formcontainer">
         
@@ -93,7 +94,7 @@
     
 <div class="filter-left">
     
-    <h1 class="title"> CORSI PROPEDEUTICI ASSOCIATI </h1>
+    <h1 class="title"> CORSI PROPEDEUTICI </h1>
     
     <div class="formcontainer">
         
@@ -116,7 +117,7 @@
 
 <div class="filter-right">
     
-    <h1 class="title"> DOCENTI ASSOCIATI </h1>
+    <h1 class="title"> DOCENTI </h1>
     
     <div class="formcontainer">
         
@@ -143,7 +144,7 @@
     
 <div class="filter-left">
     
-    <h1 class="title"> LIBRO DI TESTO</h1>
+    <h1 class="title"> LIBRI DI TESTO </h1>
     
     <div class="formcontainer">
         
@@ -166,7 +167,7 @@
 
 <div class="filter-right">
     
-    <h1 class="title"> MATERIALE</h1>
+    <h1 class="title"> MATERIALI </h1>
     
     <div class="formcontainer">
         
