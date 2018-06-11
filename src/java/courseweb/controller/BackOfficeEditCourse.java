@@ -6,7 +6,10 @@
 package courseweb.controller;
 
 import courseweb.data.model.Corso;
+import courseweb.data.model.Corso_Laurea;
 import courseweb.data.model.CourseWebDataLayer;
+import courseweb.data.model.Libro_Testo;
+import courseweb.data.model.Materiale;
 import courseweb.data.model.Utente;
 import framework.data.DataLayerException;
 import framework.result.FailureResult;
@@ -14,6 +17,7 @@ import framework.result.TemplateManagerException;
 import framework.result.TemplateResult;
 import framework.security.SecurityLayer;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -66,43 +70,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
         }
             
     }
-    
-    /* ACTION ELIMINA */
-    private void action_elimina_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
-        TemplateResult result = new TemplateResult(getServletContext()); 
-        
-        try {
-            
-            if(request.getParameter("id") == null) {
-                request.setAttribute("message","not a valid corso id");
-                action_error(request,response);
-                return;
-            }
-            
-            int id = Integer.parseInt(request.getParameter("id"));
-            
-            if(request.getAttribute("lang").equals("eng")){
-                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                request.setAttribute("id", id);
-                result.activate("/eng/backoffice_delete_course.html.ftl", request, response);
-            } else if(request.getAttribute("lang").equals("ita")){
-                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                request.setAttribute("id", id);
-                result.activate("/ita/backoffice_delete_course.html.ftl", request, response);
-            } else {
-                request.setAttribute("message", "Illegal language");
-                action_error(request, response); 
-            }
-            
-        } catch(NumberFormatException e){
-            System.out.println("sono qui exception default"); 
-            request.setAttribute("exception", e);
-            action_error(request, response);
-        }
-        
-    }
-    
     private void action_elimina(HttpServletRequest request, HttpServletResponse response){
         
         try {
@@ -141,20 +109,24 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 if(request.getParameter("item") != null)
                     datalayer.deleteCorsiCorsiPropedeutici(Integer.parseInt(request.getParameter("item")), id);
                 
-            else if(action.equals("delete_docente_associato"))
+            else if(action.equals("delete_docente"))
                 if(request.getParameter("item") != null)
                     datalayer.deleteCorsiDocenti(Integer.parseInt(request.getParameter("item")), id);
                 
-            else if(action.equals("delete_corso_libro_testo"))
+            else if(action.equals("delete_libro_testo"))
                 if(request.getParameter("item") != null)
                     datalayer.deleteCorsiLibriTesto(Integer.parseInt(request.getParameter("item")), id);
                 
-            else if(action.equals("delete_corso_materiale"))
+            else if(action.equals("delete_materiale"))
                 if(request.getParameter("item") != null)
                     datalayer.deleteCorsiMateriali(Integer.parseInt(request.getParameter("item")), id);
+            else{
+                request.setAttribute("message", "not a valid item");
+                action_error(request, response);
+                return;
+                }
             
-            
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
+        response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
             
         } catch(DataLayerException|IOException e){
             request.setAttribute("exception", e);
@@ -424,15 +396,82 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     /* ACTION CORSI LAUREA ASSOCIATI */
     
-    private void action_corsi_laurea_associati_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_corsi_laurea_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+        
+        TemplateResult result = new TemplateResult(getServletContext()); 
+         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("corsi_laurea", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiLaureaCorso(datalayer.getCorso(id,"ita")));                
+                result.activate("/eng/backoffice_add_degree_course.html.ftl", request, response);                
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("corsi_laurea", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiLaureaCorso(datalayer.getCorso(id,"ita")));                
+                result.activate("/ita/backoffice_add_degree_course.html.ftl", request, response);                
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response);                
+            }
+            
+        } catch(DataLayerException|NumberFormatException|TemplateManagerException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }
+    }
+    
+    private void action_corsi_laurea_aggiungi(HttpServletRequest request, HttpServletResponse response){
         
     }
     
-    private void action_corsi_laurea_associati_aggiungi(HttpServletRequest request, HttpServletResponse response){
-        
-    }
+    private void action_corsi_laurea_elimina_default(HttpServletRequest request, HttpServletResponse response){
     
-    private void action_corsi_laurea_associati_elimina_default(HttpServletRequest request, HttpServletResponse response){
+        TemplateResult result = new TemplateResult(getServletContext()); 
+        
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            int id = Integer.parseInt(request.getParameter("id"));         
+            String action = request.getParameter("action");
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            List<Corso_Laurea> items = datalayer.getCorsiLaureaCorso(datalayer.getCorso(id,"ita"));
+                      
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("items", items);
+                request.setAttribute("action", request.getParameter("action"));
+                result.activate("/eng/backoffice_delete_course.html.ftl", request, response);
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("items", items);
+                request.setAttribute("action", request.getParameter("action"));
+                result.activate("/ita/backoffice_delete_course.html.ftl", request, response);
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response); 
+            }
+            
+        } catch(NumberFormatException | DataLayerException | TemplateManagerException e){ 
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }
         
     }
     
@@ -440,80 +479,492 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     /* ACTION CORSI MUTUATI ASSOCIATI */
     
-    private void action_corsi_mutuati_associati_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_corsi_mutuati_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+        
+        TemplateResult result = new TemplateResult(getServletContext()); 
+         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("corsi_mutuati", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiMutuatiCorso(datalayer.getCorso(id,"ita")));                
+                result.activate("/eng/backoffice_add_same_as_course.html.ftl", request, response);                
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("corsi_mutuati", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiMutuatiCorso(datalayer.getCorso(id,"ita")));                
+                result.activate("/ita/backoffice_add_same_as_course.html.ftl", request, response);                
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response);                
+            }
+            
+        } catch(DataLayerException|NumberFormatException|TemplateManagerException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }        
+    }
+    
+    private void action_corsi_mutuati_aggiungi(HttpServletRequest request, HttpServletResponse response){
         
     }
     
-    private void action_corsi_mutuati_associati_aggiungi(HttpServletRequest request, HttpServletResponse response){
-        
-    }
+    private void action_corsi_mutuati_elimina_default(HttpServletRequest request, HttpServletResponse response){
     
-    private void action_corsi_mutuati_associati_elimina_default(HttpServletRequest request, HttpServletResponse response){
+        TemplateResult result = new TemplateResult(getServletContext()); 
         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            int id = Integer.parseInt(request.getParameter("id"));         
+            String action = request.getParameter("action");
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            List<Corso> items = datalayer.getCorsiMutuatiCorso(datalayer.getCorso(id,"ita"));
+                      
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("items", items);
+                request.setAttribute("action", request.getParameter("action"));
+                result.activate("/eng/backoffice_delete_same_as_course.html.ftl", request, response);
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("items", items);
+                request.setAttribute("action", request.getParameter("action"));
+                result.activate("/ita/backoffice_same_as_course.html.ftl", request, response);
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response); 
+            }
+            
+        } catch(NumberFormatException | DataLayerException | TemplateManagerException e){ 
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }               
     }
     
     /* END ACTION CORSI MUTUATI ASSOCIATI */
     
     /* ACTION CORSI PROPEDEUTICI ASSOCIATI */
     
-    private void action_corsi_propedeutici_associati_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_corsi_propedeutici_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+        
+        TemplateResult result = new TemplateResult(getServletContext()); 
+         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("corsi_propedeutici", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiPropedeuticiCorso(datalayer.getCorso(id,"ita")));                
+                result.activate("/eng/backoffice_add_propaedeutic_course.html.ftl", request, response);                
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("corsi_propedeutici", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiPropedeuticiCorso(datalayer.getCorso(id,"ita")));                
+                result.activate("/ita/backoffice_add_propaedeutic_course.html.ftl", request, response);                
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response);                
+            }
+            
+        } catch(DataLayerException|NumberFormatException|TemplateManagerException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }        
+    }
+    
+    private void action_corsi_propedeutici_aggiungi(HttpServletRequest request, HttpServletResponse response){
         
     }
     
-    private void action_corsi_propedeutici_associati_aggiungi(HttpServletRequest request, HttpServletResponse response){
-        
-    }
+    private void action_corsi_propedeutici_elimina_default(HttpServletRequest request, HttpServletResponse response){
     
-    private void action_corsi_propedeutici_associati_elimina_default(HttpServletRequest request, HttpServletResponse response){
+        TemplateResult result = new TemplateResult(getServletContext()); 
         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            int id = Integer.parseInt(request.getParameter("id"));         
+            String action = request.getParameter("action");
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            List<Corso> items = datalayer.getCorsiPropedeuticiCorso(datalayer.getCorso(id,"ita"));
+                      
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("items", items);
+                request.setAttribute("action", request.getParameter("action"));
+                result.activate("/eng/backoffice_delete_propaedeutic_course.html.ftl", request, response);
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("items", items);
+                request.setAttribute("action", request.getParameter("action"));
+                result.activate("/ita/backoffice_delete_propaedeutic_course.html.ftl", request, response);
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response); 
+            }
+            
+        } catch(NumberFormatException | DataLayerException | TemplateManagerException e){ 
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }              
     }
     
     /* END ACTION CORSI PROPEDEUTICI ASSOCIATI */
+
+    /* ACTION MODULI ASSOCIATI */
+    
+    private void action_moduli_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+        
+        TemplateResult result = new TemplateResult(getServletContext()); 
+         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("moduli", ((CourseWebDataLayer) request.getAttribute("datalayer")).getModuliCorso(datalayer.getCorso(id,"ita")));                
+                result.activate("/eng/backoffice_add_module.html.ftl", request, response);                
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("moduli", ((CourseWebDataLayer) request.getAttribute("datalayer")).getModuliCorso(datalayer.getCorso(id,"ita")));                
+                result.activate("/ita/backoffice_add_module.html.ftl", request, response);                
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response);                
+            }
+            
+        } catch(DataLayerException|NumberFormatException|TemplateManagerException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }                
+    }
+    
+    private void action_moduli_aggiungi(HttpServletRequest request, HttpServletResponse response){
+        
+    }
+    
+    private void action_moduli_elimina_default(HttpServletRequest request, HttpServletResponse response){
+    
+        TemplateResult result = new TemplateResult(getServletContext()); 
+        
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            int id = Integer.parseInt(request.getParameter("id"));         
+            String action = request.getParameter("action");
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            List<Corso> items = datalayer.getModuliCorso(datalayer.getCorso(id,"ita"));
+                      
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("items", items);
+                request.setAttribute("action", request.getParameter("action"));
+                result.activate("/eng/backoffice_delete_module.html.ftl", request, response);
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("items", items);
+                request.setAttribute("action", request.getParameter("action"));
+                result.activate("/ita/backoffice_delete_module.html.ftl", request, response);
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response); 
+            }
+            
+        } catch(NumberFormatException | DataLayerException | TemplateManagerException e){ 
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }        
+    }
+    
+    /* END ACTION MODULI ASSOCIATI */
     
     /* ACTION DOCENTI ASSOCIATI */
     
-    private void action_docenti_associati_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_docenti_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+        
+        TemplateResult result = new TemplateResult(getServletContext()); 
+         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("corsi_docenti", ((CourseWebDataLayer) request.getAttribute("datalayer")).getDocentiCorso(datalayer.getCorso(id,"ita")));                
+                result.activate("/eng/backoffice_add_teacher.html.ftl", request, response);                
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("corsi_docenti", ((CourseWebDataLayer) request.getAttribute("datalayer")).getDocentiCorso(datalayer.getCorso(id,"ita")));                
+                result.activate("/ita/backoffice_add_teacher.html.ftl", request, response);                
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response);                
+            }
+            
+        } catch(DataLayerException|NumberFormatException|TemplateManagerException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }                
+    }
+    
+    private void action_docenti_aggiungi(HttpServletRequest request, HttpServletResponse response){
         
     }
     
-    private void action_docenti_associati_aggiungi(HttpServletRequest request, HttpServletResponse response){
-        
-    }
+    private void action_docenti_elimina_default(HttpServletRequest request, HttpServletResponse response){
     
-    private void action_docenti_associati_elimina_default(HttpServletRequest request, HttpServletResponse response){
+        TemplateResult result = new TemplateResult(getServletContext()); 
         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            int id = Integer.parseInt(request.getParameter("id"));         
+            String action = request.getParameter("action");
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            List<Utente> items = datalayer.getDocentiCorso(datalayer.getCorso(id,"ita"));
+                      
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("items", items);
+                request.setAttribute("action", request.getParameter("action"));
+                result.activate("/eng/backoffice_delete_teacher.html.ftl", request, response);
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("items", items);
+                request.setAttribute("action", request.getParameter("action"));
+                result.activate("/ita/backoffice_delete_teacher.html.ftl", request, response);
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response); 
+            }
+            
+        } catch(NumberFormatException | DataLayerException | TemplateManagerException e){ 
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }               
     }
     
     /* END ACTION DOCENTI ASSOCIATI */
     
     /* ACTION LIBRI TESTO ASSOCIATI */
     
-    private void action_libri_testo_associati_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_libri_testo_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+        
+        TemplateResult result = new TemplateResult(getServletContext()); 
+         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("libri_testo", ((CourseWebDataLayer) request.getAttribute("datalayer")).getLibriTestoCorso(datalayer.getCorso(id,"ita")));                
+                result.activate("/eng/backoffice_add_textbook.html.ftl", request, response);                
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("libri_testo", ((CourseWebDataLayer) request.getAttribute("datalayer")).getLibriTestoCorso(datalayer.getCorso(id,"ita")));                
+                result.activate("/ita/backoffice_add_textbook.html.ftl", request, response);                
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response);                
+            }
+            
+        } catch(DataLayerException|NumberFormatException|TemplateManagerException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }                
+    }
+    
+    private void action_libri_testo_aggiungi(HttpServletRequest request, HttpServletResponse response){
         
     }
     
-    private void action_libri_testo_associati_aggiungi(HttpServletRequest request, HttpServletResponse response){
-        
-    }
+    private void action_libri_testo_elimina_default(HttpServletRequest request, HttpServletResponse response){
     
-    private void action_libri_testo_associati_elimina_default(HttpServletRequest request, HttpServletResponse response){
+        TemplateResult result = new TemplateResult(getServletContext()); 
         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            int id = Integer.parseInt(request.getParameter("id"));         
+            String action = request.getParameter("action");
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            List<Libro_Testo> items = datalayer.getLibriTestoCorso(datalayer.getCorso(id,"ita"));
+                      
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("items", items);
+                request.setAttribute("action", request.getParameter("action"));
+                result.activate("/eng/backoffice_delete_textbook.html.ftl", request, response);
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("items", items);
+                request.setAttribute("action", request.getParameter("action"));
+                result.activate("/ita/backoffice_delete_textbook.html.ftl", request, response);
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response); 
+            }
+            
+        } catch(NumberFormatException | DataLayerException | TemplateManagerException e){ 
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }                
     }
     
     /* END ACTION DOCENTI ASSOCIATI */
     
     /* ACTION MATERIALI ASSOCIATI */
     
-    private void action_materiali_associati_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_materiali_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+        
+        TemplateResult result = new TemplateResult(getServletContext()); 
+         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("materiali", ((CourseWebDataLayer) request.getAttribute("datalayer")).getMaterialiCorso(datalayer.getCorso(id,"ita")));                
+                result.activate("/eng/backoffice_add_material.html.ftl", request, response);                
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("materiali", ((CourseWebDataLayer) request.getAttribute("datalayer")).getMaterialiCorso(datalayer.getCorso(id,"ita")));                
+                result.activate("/ita/backoffice_add_material.html.ftl", request, response);                
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response);                
+            }
+            
+        } catch(DataLayerException|NumberFormatException|TemplateManagerException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }                
+    }
+    
+    private void action_materiali_aggiungi(HttpServletRequest request, HttpServletResponse response){
         
     }
     
-    private void action_materiali_associati_aggiungi(HttpServletRequest request, HttpServletResponse response){
-        
-    }
+    private void action_materiali_elimina_default(HttpServletRequest request, HttpServletResponse response){
     
-    private void action_materiali_associati_elimina_default(HttpServletRequest request, HttpServletResponse response){
+        TemplateResult result = new TemplateResult(getServletContext()); 
         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            int id = Integer.parseInt(request.getParameter("id"));         
+            String action = request.getParameter("action");
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            List<Materiale> items = datalayer.getMaterialiCorso(datalayer.getCorso(id,"ita"));
+                      
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("items", items);
+                request.setAttribute("action", request.getParameter("action"));
+                result.activate("/eng/backoffice_delete_material.html.ftl", request, response);
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("id", id);
+                request.setAttribute("items", items);
+                request.setAttribute("action", request.getParameter("action"));
+                result.activate("/ita/backoffice_delete_material.html.ftl", request, response);
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response); 
+            }
+            
+        } catch(NumberFormatException | DataLayerException | TemplateManagerException e){ 
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }               
     }
     
     /* END ACTION DOCENTI ASSOCIATI */
@@ -597,6 +1048,90 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 else if(action.equals("edit_course") && (request.getParameter("modifica_corso_action") != null) && (request.getParameter("id") != null)){                    
                     action_modifica_corso(request,response);  
                 }
+                else if((request.getParameter("aggiungi_corso_laurea") != null) && (request.getParameter("id") != null)){                    
+                    action_corsi_laurea_aggiungi_default(request,response);  
+                }
+                else if((request.getParameter("aggiungi_corso_laurea_action") != null) && (request.getParameter("id") != null)){                    
+                    action_corsi_laurea_aggiungi(request,response);  
+                }
+                else if((request.getParameter("elimina_corso_laurea") != null) && (request.getParameter("id") != null)){                    
+                    action_corsi_laurea_elimina_default(request,response);
+                }
+                else if((request.getParameter("elimina_corso_laurea_action") != null) && (request.getParameter("id") != null)){                    
+                    action_elimina(request,response);      
+                }
+                else if((request.getParameter("aggiungi_corso_mutuato") != null) && (request.getParameter("id") != null)){                    
+                    action_corsi_mutuati_aggiungi_default(request,response);  
+                }
+                else if((request.getParameter("aggiungi_corso_mutuato_action") != null) && (request.getParameter("id") != null)){                    
+                    action_corsi_mutuati_aggiungi(request,response);  
+                }
+                else if((request.getParameter("elimina_corso_mutuato") != null) && (request.getParameter("id") != null)){                    
+                    action_corsi_mutuati_elimina_default(request,response);
+                }
+                else if((request.getParameter("elimina_corso_mutuato_action") != null) && (request.getParameter("id") != null)){                    
+                    action_elimina(request,response);      
+                }
+                else if((request.getParameter("aggiungi_corso_propedeutico") != null) && (request.getParameter("id") != null)){                    
+                    action_corsi_propedeutici_aggiungi_default(request,response);  
+                }
+                else if((request.getParameter("aggiungi_corso_propedeutico_action") != null) && (request.getParameter("id") != null)){                    
+                    action_corsi_propedeutici_aggiungi(request,response);  
+                }
+                else if((request.getParameter("elimina_corso_propedeutico") != null) && (request.getParameter("id") != null)){                    
+                    action_corsi_propedeutici_elimina_default(request,response);
+                }
+                else if((request.getParameter("elimina_corso_propedeutico_action") != null) && (request.getParameter("id") != null)){                    
+                    action_elimina(request,response);      
+                }
+                else if((request.getParameter("aggiungi_modulo") != null) && (request.getParameter("id") != null)){                    
+                    action_corsi_mutuati_aggiungi_default(request,response);  
+                }
+                else if((request.getParameter("aggiungi_modulo_action") != null) && (request.getParameter("id") != null)){                    
+                    action_corsi_mutuati_aggiungi(request,response);  
+                }
+                else if((request.getParameter("elimina_modulo") != null) && (request.getParameter("id") != null)){                    
+                    action_corsi_mutuati_elimina_default(request,response);
+                }
+                else if((request.getParameter("elimina_modulo_action") != null) && (request.getParameter("id") != null)){                    
+                    action_elimina(request,response);      
+                }
+                else if((request.getParameter("aggiungi_docente") != null) && (request.getParameter("id") != null)){                    
+                    action_docenti_aggiungi_default(request,response);  
+                }
+                else if((request.getParameter("aggiungi_docente_action") != null) && (request.getParameter("id") != null)){                    
+                    action_docenti_aggiungi(request,response);  
+                }
+                else if((request.getParameter("elimina_docente") != null) && (request.getParameter("id") != null)){                    
+                    action_docenti_elimina_default(request,response);
+                }
+                else if((request.getParameter("elimina_docente_action") != null) && (request.getParameter("id") != null)){                    
+                    action_elimina(request,response);      
+                }
+                else if((request.getParameter("aggiungi_libri_testo") != null) && (request.getParameter("id") != null)){                    
+                    action_libri_testo_aggiungi_default(request,response);  
+                }
+                else if((request.getParameter("aggiungi_libri_testo_action") != null) && (request.getParameter("id") != null)){                    
+                    action_libri_testo_aggiungi(request,response);  
+                }
+                else if((request.getParameter("elimina_libri_testo") != null) && (request.getParameter("id") != null)){                    
+                    action_libri_testo_elimina_default(request,response);
+                }
+                else if((request.getParameter("elimina_libri_testo_action") != null) && (request.getParameter("id") != null)){                    
+                    action_elimina(request,response);      
+                }
+                else if((request.getParameter("aggiungi_materiali") != null) && (request.getParameter("id") != null)){                    
+                    action_materiali_aggiungi_default(request,response);  
+                }
+                else if((request.getParameter("aggiungi_materiali_action") != null) && (request.getParameter("id") != null)){                    
+                    action_materiali_aggiungi(request,response);  
+                }
+                else if((request.getParameter("elimina_materiali") != null) && (request.getParameter("id") != null)){                    
+                    action_materiali_elimina_default(request,response);
+                }
+                else if((request.getParameter("elimina_materiali_action") != null) && (request.getParameter("id") != null)){                    
+                    action_elimina(request,response);      
+                }                
                 else if(action.equals("hub") && (request.getParameter("id") != null)){
                     action_default(request, response);                    
                 }
