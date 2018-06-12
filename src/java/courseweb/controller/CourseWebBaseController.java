@@ -5,6 +5,7 @@ package courseweb.controller;
 
 import courseweb.data.impl.CourseWebDataLayerMySqlImpl;
 import courseweb.data.model.CourseWebDataLayer;
+import courseweb.data.model.Utente;
 import framework.result.FailureResult;
 import framework.security.SecurityLayer;
 
@@ -48,6 +49,33 @@ public abstract class CourseWebBaseController extends HttpServlet {
             
             //aggiustamento
             HttpSession s = SecurityLayer.checkSession(request);
+            
+            if(request.getParameter("action") != null){
+                if(request.getParameter("action").equals("logout"))
+                    if(s != null){
+                        s.invalidate();
+                        s = null;
+                    }
+            }
+            
+            if(s == null){
+                if(!request.getServletPath().contains("login")){
+                    response.sendRedirect(response.encodeURL(request.getContextPath() + "/login?lang=" + request.getAttribute("lang")));
+                }
+            } else if( (((Utente)s.getAttribute("utente")).getTipoUtente().equals("amministratore")) || (((Utente)s.getAttribute("utente")).getTipoUtente().equals("docente")) ){
+                if(request.getServletPath().contains("login")){
+                    response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+                }
+            } else if( ((Utente)s.getAttribute("utente")).getTipoUtente().equals("anonimo") ){
+                if(request.getServletPath().contains("login")){
+                    response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+                }
+            } else {
+                //error, invalidate session
+                s.invalidate();
+                s = null;
+            }
+            
             request.setAttribute("session", s);
             
             processRequest(request, response);

@@ -21,7 +21,6 @@ import framework.security.SecurityLayerException;
 import courseweb.data.model.Utente;
 import courseweb.data.model.CourseWebDataLayer;
 import courseweb.data.impl.UtenteImpl; 
-import java.io.Writer;
 
 import java.util.Locale;
 import java.util.UUID; 
@@ -183,8 +182,7 @@ public class Login extends CourseWebBaseController {
             CourseWebDataLayer datalayer = ((CourseWebDataLayer)request.getAttribute("datalayer")); 
             Utente guest = new UtenteImpl(datalayer); 
             guest.setEmail(UUID.randomUUID().toString().replace("-", ""));
-            guest.setTipoUtente("anonimo");
-            datalayer.storeUtenteById(guest);
+            guest.setTipoUtente("anonimo");        
             
             HttpSession session = SecurityLayer.createSession(request, guest.getEmail(), guest.getId()); 
             request.setAttribute("utente", guest);
@@ -199,7 +197,7 @@ public class Login extends CourseWebBaseController {
             response.sendRedirect(response.encodeURL(request.getContextPath() + "/searchcourses?lang=" + request.getAttribute("lang")));
                                                                         
             
-        } catch(DataLayerException|IOException ex){
+        } catch(IOException ex){
             request.setAttribute("exception", ex);
             action_error(request, response);
         }
