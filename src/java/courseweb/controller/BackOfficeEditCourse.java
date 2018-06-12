@@ -140,27 +140,27 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 if(request.getParameter("item") != null)
                     datalayer.deleteCorsiCorsiLaurea(Integer.parseInt(request.getParameter("item")), id);
                 
-            else if(action.equals("delete_corso_mutuato"))
+            else if(action.equals("elimina_corso_mutuato_action"))
                 if(request.getParameter("item") != null)
                     datalayer.deleteCorsiCorsiMutuati(Integer.parseInt(request.getParameter("item")), id);
                 
-            else if(action.equals("delete_corso_integrato"))
+            else if(action.equals("elimina_modulo_action"))
                 if(request.getParameter("item") != null)
                     datalayer.deleteCorsiModuli(Integer.parseInt(request.getParameter("item")), id);
                 
-            else if(action.equals("delete_corso_propedeutico"))
+            else if(action.equals("elimina_corso_propedeutico_action"))
                 if(request.getParameter("item") != null)
                     datalayer.deleteCorsiCorsiPropedeutici(Integer.parseInt(request.getParameter("item")), id);
                 
-            else if(action.equals("delete_docente"))
+            else if(action.equals("elimina_docente_action"))
                 if(request.getParameter("item") != null)
                     datalayer.deleteCorsiDocenti(Integer.parseInt(request.getParameter("item")), id);
                 
-            else if(action.equals("delete_libro_testo"))
+            else if(action.equals("elimina_libro_testo_action"))
                 if(request.getParameter("item") != null)
                     datalayer.deleteCorsiLibriTesto(Integer.parseInt(request.getParameter("item")), id);
                 
-            else if(action.equals("delete_materiale"))
+            else if(action.equals("elimina_materiale_action"))
                 if(request.getParameter("item") != null)
                     datalayer.deleteCorsiMateriali(Integer.parseInt(request.getParameter("item")), id);
             else{
@@ -592,13 +592,44 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
             
+            ArrayList<Corso> restemp = new ArrayList<Corso>();
+            ArrayList<Corso> res = new ArrayList<Corso>();
+            boolean add = false;
+            
+            List<Corso> corsi1 = datalayer.filterCorsiByLang("ita", datalayer.getCorsiAggiornati());
+            List<Corso> corsi2 = datalayer.getCorsiMutuatiCorso(datalayer.getCorso(id, "ita"));
+            for(Corso corso1 : corsi1){
+                if(corso1.getId() == id){
+                    continue;
+                }
+                add = true;
+                for(Corso corso2 : corsi2){
+                    if(corso1.getId() == corso2.getId()){
+                        add = false;
+                        break;
+                    }
+                }
+                if(add == true){
+                    restemp.add(corso1);
+                }
+            }
+            
+            /*
+            List<Corso_Laurea> corsiLaurea = datalayer.getCorsiLaureaCorso(datalayer.getCorso(id, "ita"));
+            for(Corso_Laurea corsoLaurea : corsiLaurea){
+                res.addAll(datalayer.filtraCorsi(restemp, "corso_corsi_laurea", corsoLaurea.getNome()));          
+            }
+            */
+            
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                request.setAttribute("corsi_mutuati", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiMutuatiCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                request.setAttribute("items", restemp);                
                 result.activate("/eng/backoffice_add_same_as_course.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                request.setAttribute("corsi_mutuati", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiMutuatiCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                request.setAttribute("items", restemp);                
                 result.activate("/ita/backoffice_add_same_as_course.html.ftl", request, response);                
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -663,7 +694,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 request.setAttribute("id", id);
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
-                result.activate("/ita/backoffice_same_as_course.html.ftl", request, response);
+                result.activate("/ita/backoffice_delete_same_as_course.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");
                 action_error(request, response); 
@@ -1289,6 +1320,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                     action_corsi_mutuati_elimina_default(request,response);
                 }
                 else if((request.getParameter("elimina_corso_mutuato_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                    request.setAttribute("delete_action", "elimina_corso_mutuato_action");
                     action_elimina_confirm_default(request,response);      
                 }
                 else if((request.getParameter("aggiungi_corso_propedeutico") != null) && (request.getParameter("id") != null)){                    
@@ -1301,6 +1333,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                     action_corsi_propedeutici_elimina_default(request,response);
                 }
                 else if((request.getParameter("elimina_corso_propedeutico_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                    request.setAttribute("delete_action", "elimina_corso_propedeutico_action");
                     action_elimina_confirm_default(request,response);      
                 }
                 else if((request.getParameter("aggiungi_modulo") != null) && (request.getParameter("id") != null)){                    
@@ -1313,6 +1346,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                     action_corsi_mutuati_elimina_default(request,response);
                 }
                 else if((request.getParameter("elimina_modulo_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                    request.setAttribute("delete_action", "elimina_modulo_action");
                     action_elimina_confirm_default(request,response);      
                 }
                 else if((request.getParameter("aggiungi_docente") != null) && (request.getParameter("id") != null)){                    
@@ -1325,6 +1359,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                     action_docenti_elimina_default(request,response);
                 }
                 else if((request.getParameter("elimina_docente_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                    request.setAttribute("delete_action", "elimina_docente_action");
                     action_elimina_confirm_default(request,response);      
                 }
                 else if((request.getParameter("aggiungi_libri_testo") != null) && (request.getParameter("id") != null)){                    
@@ -1336,7 +1371,8 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 else if((request.getParameter("elimina_libri_testo") != null) && (request.getParameter("id") != null)){                    
                     action_libri_testo_elimina_default(request,response);
                 }
-                else if((request.getParameter("elimina_libri_testo_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                else if((request.getParameter("elimina_libro_testo_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                    request.setAttribute("delete_action", "elimina_libro_testo_action");
                     action_elimina_confirm_default(request,response);      
                 }
                 else if((request.getParameter("aggiungi_materiali") != null) && (request.getParameter("id") != null)){                    
@@ -1348,7 +1384,8 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 else if((request.getParameter("elimina_materiali") != null) && (request.getParameter("id") != null)){                    
                     action_materiali_elimina_default(request,response);
                 }
-                else if((request.getParameter("elimina_materiali_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                else if((request.getParameter("elimina_materiale_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                    request.setAttribute("delete_action", "elimina_materiale_action");
                     action_elimina_confirm_default(request,response);      
                 }   
                 else if(action.equals("delete") && (request.getParameter("id") != null) && (request.getParameter("item") != null)){
