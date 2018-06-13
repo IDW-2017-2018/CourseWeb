@@ -164,13 +164,20 @@ public class BackOfficeCourse extends CourseWebBaseController {
         TemplateResult result = new TemplateResult(getServletContext()); 
         
         try {
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer)request.getAttribute("datalayer");
+            
+            String lang = (String) request.getAttribute("lang"); 
+            List<Corso> corsi_non_filtrati = datalayer.getCorsiAggiornati(); 
+            List<Corso> corsi_filtrati = datalayer.filterCorsiByLang(lang, corsi_non_filtrati); 
+            
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                request.setAttribute("corsi", ((CourseWebDataLayer)request.getAttribute("datalayer")).getCorsi());
+                request.setAttribute("corsi", corsi_filtrati);
                 result.activate("/eng/backoffice_filter_edit_course.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                request.setAttribute("corsi", ((CourseWebDataLayer)request.getAttribute("datalayer")).getCorsi());
+                request.setAttribute("corsi", corsi_filtrati);
                 result.activate("/ita/backoffice_filter_edit_course.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");

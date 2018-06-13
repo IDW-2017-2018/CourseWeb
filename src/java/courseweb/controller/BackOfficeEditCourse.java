@@ -71,7 +71,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
         }
             
     }
-    private void action_elimina_confirm_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_elimina_confirm_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException{
     
         TemplateResult result = new TemplateResult(getServletContext()); 
         
@@ -108,13 +108,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response); 
             }
             
-        } catch(NumberFormatException | TemplateManagerException e){ 
+        } catch(NumberFormatException e){ 
             request.setAttribute("exception", e);
             action_error(request, response);
         }                       
     }    
     
-    private void action_elimina(HttpServletRequest request, HttpServletResponse response){
+    private void action_elimina(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         try {
             
@@ -217,7 +217,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
         
     }
     
-    private void action_modifica_corso(HttpServletRequest request, HttpServletResponse response){
+    private void action_modifica_corso(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
                        
         if(request.getParameter("id") == null) {
             request.setAttribute("message","not a valid corso id");
@@ -303,6 +303,12 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             if(!nome.equals("")){
                 corso_ita.setNome(nome);
                 corso_eng.setNome(nome);
+                edited_ita = true;
+            }
+            
+            if(semestre != 0){
+                corso_ita.setSemestre(semestre);
+                corso_eng.setSemestre(semestre);
                 edited_ita = true;
             }
             
@@ -439,7 +445,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     /* ACTION CORSI LAUREA ASSOCIATI */
     
-    private void action_corsi_laurea_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_corsi_laurea_aggiungi_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         TemplateResult result = new TemplateResult(getServletContext()); 
          
@@ -488,13 +494,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response);                
             }
             
-        } catch(DataLayerException|NumberFormatException|TemplateManagerException e){
+        } catch(DataLayerException|NumberFormatException e){
             request.setAttribute("exception", e);
             action_error(request, response);
         }
     }
     
-    private void action_corsi_laurea_aggiungi(HttpServletRequest request, HttpServletResponse response){
+    private void action_corsi_laurea_aggiungi(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         try{
             if(request.getParameter("id") == null) {
@@ -532,7 +538,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
         }        
     }
     
-    private void action_corsi_laurea_elimina_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_corsi_laurea_elimina_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
     
         TemplateResult result = new TemplateResult(getServletContext()); 
         
@@ -545,7 +551,6 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             }
             
             int id = Integer.parseInt(request.getParameter("id"));         
-            String action = request.getParameter("action");
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             List<Corso_Laurea> items = datalayer.getCorsiLaureaCorso(datalayer.getCorso(id,"ita"));
                       
@@ -566,7 +571,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response); 
             }
             
-        } catch(NumberFormatException | DataLayerException | TemplateManagerException e){ 
+        } catch(NumberFormatException | DataLayerException e){ 
             request.setAttribute("exception", e);
             action_error(request, response);
         }
@@ -577,7 +582,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     /* ACTION CORSI MUTUATI ASSOCIATI */
     
-    private void action_corsi_mutuati_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_corsi_mutuati_aggiungi_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         TemplateResult result = new TemplateResult(getServletContext()); 
          
@@ -592,6 +597,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
             
+            /*
             ArrayList<Corso> restemp = new ArrayList<Corso>();
             ArrayList<Corso> res = new ArrayList<Corso>();
             boolean add = false;
@@ -613,13 +619,40 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                     restemp.add(corso1);
                 }
             }
-            
+            */
             /*
             List<Corso_Laurea> corsiLaurea = datalayer.getCorsiLaureaCorso(datalayer.getCorso(id, "ita"));
             for(Corso_Laurea corsoLaurea : corsiLaurea){
                 res.addAll(datalayer.filtraCorsi(restemp, "corso_corsi_laurea", corsoLaurea.getNome()));          
             }
             */
+            List<Corso> corsi1 = datalayer.filterCorsiByLang("ita", datalayer.getCorsiAggiornati());
+            List<Corso> corsi2 = datalayer.getCorsiMutuatiCorso(datalayer.getCorso(id, "ita"));
+            Corso currentcourse = datalayer.getCorso(id, "ita");
+            List<Corso> restemp = new ArrayList<>();
+            boolean add = false;
+            
+            for(Corso corso1 : corsi1){
+                if(corso1.getId() == id)
+                    continue;
+                add = false;
+                for(Corso corso2 : corsi2){
+                    if(corso1.getId() == corso2.getId()){
+                        add = false;
+                        break;
+                    }
+                    for(Corso_Laurea corsolaureacorso1 : currentcourse.getCorsiLaureaCorso())
+                        if(corso1.getCorsiLaureaCorso().contains(corsolaureacorso1)){
+                            add = true;
+                            break;
+                        }
+                    
+                }
+                if(add == true){
+                    restemp.add(corso1);
+                }
+            }
+            
             
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
@@ -636,13 +669,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response);                
             }
             
-        } catch(DataLayerException|NumberFormatException|TemplateManagerException e){
+        } catch(DataLayerException|NumberFormatException e){
             request.setAttribute("exception", e);
             action_error(request, response);
         }        
     }
     
-    private void action_corsi_mutuati_aggiungi(HttpServletRequest request, HttpServletResponse response){
+    private void action_corsi_mutuati_aggiungi(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         try{
             if(request.getParameter("id") == null) {
@@ -666,7 +699,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
         }                
     }
     
-    private void action_corsi_mutuati_elimina_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_corsi_mutuati_elimina_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
     
         TemplateResult result = new TemplateResult(getServletContext()); 
         
@@ -700,7 +733,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response); 
             }
             
-        } catch(NumberFormatException | DataLayerException | TemplateManagerException e){ 
+        } catch(NumberFormatException | DataLayerException e){ 
             request.setAttribute("exception", e);
             action_error(request, response);
         }               
@@ -710,7 +743,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     /* ACTION CORSI PROPEDEUTICI ASSOCIATI */
     
-    private void action_corsi_propedeutici_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_corsi_propedeutici_aggiungi_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         TemplateResult result = new TemplateResult(getServletContext()); 
          
@@ -738,13 +771,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response);                
             }
             
-        } catch(DataLayerException|NumberFormatException|TemplateManagerException e){
+        } catch(DataLayerException|NumberFormatException e){
             request.setAttribute("exception", e);
             action_error(request, response);
         }        
     }
     
-    private void action_corsi_propedeutici_aggiungi(HttpServletRequest request, HttpServletResponse response){
+    private void action_corsi_propedeutici_aggiungi(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         try{
             if(request.getParameter("id") == null) {
@@ -768,7 +801,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
         }                       
     }
     
-    private void action_corsi_propedeutici_elimina_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_corsi_propedeutici_elimina_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
     
         TemplateResult result = new TemplateResult(getServletContext()); 
         
@@ -802,7 +835,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response); 
             }
             
-        } catch(NumberFormatException | DataLayerException | TemplateManagerException e){ 
+        } catch(NumberFormatException | DataLayerException e){ 
             request.setAttribute("exception", e);
             action_error(request, response);
         }              
@@ -812,7 +845,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
 
     /* ACTION MODULI ASSOCIATI */
     
-    private void action_moduli_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_moduli_aggiungi_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         TemplateResult result = new TemplateResult(getServletContext()); 
          
@@ -840,13 +873,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response);                
             }
             
-        } catch(DataLayerException|NumberFormatException|TemplateManagerException e){
+        } catch(DataLayerException|NumberFormatException e){
             request.setAttribute("exception", e);
             action_error(request, response);
         }                
     }
     
-    private void action_moduli_aggiungi(HttpServletRequest request, HttpServletResponse response){
+    private void action_moduli_aggiungi(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         try{
             if(request.getParameter("id") == null) {
@@ -870,7 +903,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
         }                       
     }
     
-    private void action_moduli_elimina_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_moduli_elimina_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
     
         TemplateResult result = new TemplateResult(getServletContext()); 
         
@@ -904,7 +937,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response); 
             }
             
-        } catch(NumberFormatException | DataLayerException | TemplateManagerException e){ 
+        } catch(NumberFormatException | DataLayerException e){ 
             request.setAttribute("exception", e);
             action_error(request, response);
         }        
@@ -914,7 +947,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     /* ACTION DOCENTI ASSOCIATI */
     
-    private void action_docenti_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_docenti_aggiungi_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         TemplateResult result = new TemplateResult(getServletContext()); 
          
@@ -942,13 +975,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response);                
             }
             
-        } catch(DataLayerException|NumberFormatException|TemplateManagerException e){
+        } catch(DataLayerException|NumberFormatException e){
             request.setAttribute("exception", e);
             action_error(request, response);
         }                
     }
     
-    private void action_docenti_aggiungi(HttpServletRequest request, HttpServletResponse response){
+    private void action_docenti_aggiungi(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         try{
             if(request.getParameter("id") == null) {
@@ -972,7 +1005,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
         }                       
     }
     
-    private void action_docenti_elimina_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_docenti_elimina_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
     
         TemplateResult result = new TemplateResult(getServletContext()); 
         
@@ -1006,7 +1039,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response); 
             }
             
-        } catch(NumberFormatException | DataLayerException | TemplateManagerException e){ 
+        } catch(NumberFormatException | DataLayerException e){ 
             request.setAttribute("exception", e);
             action_error(request, response);
         }               
@@ -1016,7 +1049,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     /* ACTION LIBRI TESTO ASSOCIATI */
     
-    private void action_libri_testo_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_libri_testo_aggiungi_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         TemplateResult result = new TemplateResult(getServletContext()); 
          
@@ -1044,13 +1077,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response);                
             }
             
-        } catch(DataLayerException|NumberFormatException|TemplateManagerException e){
+        } catch(DataLayerException|NumberFormatException e){
             request.setAttribute("exception", e);
             action_error(request, response);
         }                
     }
     
-    private void action_libri_testo_aggiungi(HttpServletRequest request, HttpServletResponse response){
+    private void action_libri_testo_aggiungi(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         try{
             if(request.getParameter("id") == null) {
@@ -1074,7 +1107,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
         }                       
     }
     
-    private void action_libri_testo_elimina_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_libri_testo_elimina_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
     
         TemplateResult result = new TemplateResult(getServletContext()); 
         
@@ -1108,7 +1141,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response); 
             }
             
-        } catch(NumberFormatException | DataLayerException | TemplateManagerException e){ 
+        } catch(NumberFormatException | DataLayerException e){ 
             request.setAttribute("exception", e);
             action_error(request, response);
         }                
@@ -1118,7 +1151,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     
     /* ACTION MATERIALI ASSOCIATI */
     
-    private void action_materiali_aggiungi_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_materiali_aggiungi_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         TemplateResult result = new TemplateResult(getServletContext()); 
          
@@ -1146,13 +1179,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response);                
             }
             
-        } catch(DataLayerException|NumberFormatException|TemplateManagerException e){
+        } catch(DataLayerException|NumberFormatException e){
             request.setAttribute("exception", e);
             action_error(request, response);
         }                
     }
     
-    private void action_materiali_aggiungi(HttpServletRequest request, HttpServletResponse response){
+    private void action_materiali_aggiungi(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         try{
             if(request.getParameter("id") == null) {
@@ -1176,7 +1209,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
         }                       
     }
     
-    private void action_materiali_elimina_default(HttpServletRequest request, HttpServletResponse response){
+    private void action_materiali_elimina_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
     
         TemplateResult result = new TemplateResult(getServletContext()); 
         
@@ -1210,7 +1243,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 action_error(request, response); 
             }
             
-        } catch(NumberFormatException | DataLayerException | TemplateManagerException e){ 
+        } catch(NumberFormatException | DataLayerException e){ 
             request.setAttribute("exception", e);
             action_error(request, response);
         }               
@@ -1337,13 +1370,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                     action_elimina_confirm_default(request,response);      
                 }
                 else if((request.getParameter("aggiungi_modulo") != null) && (request.getParameter("id") != null)){                    
-                    action_corsi_mutuati_aggiungi_default(request,response);  
+                    action_moduli_aggiungi_default(request,response);  
                 }
                 else if((request.getParameter("aggiungi_modulo_action") != null) && (request.getParameter("id") != null)){                    
-                    action_corsi_mutuati_aggiungi(request,response);  
+                    action_moduli_aggiungi(request,response);  
                 }
                 else if((request.getParameter("elimina_modulo") != null) && (request.getParameter("id") != null)){                    
-                    action_corsi_mutuati_elimina_default(request,response);
+                    action_moduli_elimina_default(request,response);
                 }
                 else if((request.getParameter("elimina_modulo_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
                     request.setAttribute("delete_action", "elimina_modulo_action");

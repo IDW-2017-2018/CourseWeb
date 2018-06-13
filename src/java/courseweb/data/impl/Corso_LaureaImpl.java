@@ -55,4 +55,12 @@ public class Corso_LaureaImpl implements Corso_Laurea {
     public boolean isDirty(){
         return this.dirty; 
     }
+    
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Corso_Laurea)
+            return (this.id == ((Corso_Laurea)o).getId());
+        
+        return false;
+    }
 }

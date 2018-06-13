@@ -68,7 +68,7 @@ public abstract class CourseWebBaseController extends HttpServlet {
                 }
             } else if( ((Utente)s.getAttribute("utente")).getTipoUtente().equals("anonimo") ){
                 if(request.getServletPath().contains("login")){
-                    response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+                    response.sendRedirect(response.encodeURL(request.getContextPath() + "/searchcourses?lang=" + request.getAttribute("lang")));
                 }
             } else {
                 //error, invalidate session
