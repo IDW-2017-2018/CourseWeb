@@ -48,7 +48,7 @@
     
     <div class="formcontainer">
         
-      <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
+      <form action="backofficeeditcourse?lang=${lang}&id=${id}&action=edit_same_as_course" method="POST">
 
         <div class="buttoncontainer">               
             <input class="filterbutton" type="submit" name="aggiungi_corso_mutuato" value="AGGIUNGI"/>
@@ -67,18 +67,18 @@
 
 <div class="filter-right">
     
-    <h1 class="title"> CORSI INTEGRATI </h1>
+    <h1 class="title"> MODULI </h1>
     
     <div class="formcontainer">
         
-      <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
+      <form action="backofficeeditcourse?lang=${lang}&id=${id}&action=edit_module" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="aggiungi_corso_associato" value="AGGIUNGI"/>
+            <input class="filterbutton" type="submit" name="aggiungi_modulo" value="AGGIUNGI"/>
         </div>
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="elimina_corso_associato" value="ELIMINA"/>
+            <input class="filterbutton" type="submit" name="elimina_modulo" value="ELIMINA"/>
         </div>
 
       </form>
@@ -98,7 +98,7 @@
     
     <div class="formcontainer">
         
-      <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
+      <form action="backofficeeditcourse?lang=${lang}&id=${id}&action=edit_propaedeutic_course" method="POST">
 
         <div class="buttoncontainer">               
             <input class="filterbutton" type="submit" name="aggiungi_corso_propedeutico" value="AGGIUNGI"/>
@@ -121,7 +121,7 @@
     
     <div class="formcontainer">
         
-      <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
+      <form action="backofficeeditcourse?lang=${lang}&id=${id}&action=edit_teacher" method="POST">
 
         <div class="buttoncontainer">               
             <input class="filterbutton" type="submit" name="aggiungi_docente" value="AGGIUNGI"/>
@@ -148,7 +148,7 @@
     
     <div class="formcontainer">
         
-      <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
+      <form action="backofficeeditcourse?lang=${lang}&id=${id}&action=edit_text_book" method="POST">
 
         <div class="buttoncontainer">               
             <input class="filterbutton" type="submit" name="aggiungi_libro_testo" value="AGGIUNGI"/>
@@ -171,7 +171,7 @@
     
     <div class="formcontainer">
         
-      <form action="backofficeeditcourse?lang=${lang}&id=${id}" method="POST">
+      <form action="backofficeeditcourse?lang=${lang}&id=${id}&action=edit_material" method="POST">
 
         <div class="buttoncontainer">               
             <input class="filterbutton" type="submit" name="aggiungi_materiale" value="AGGIUNGI"/>

@@ -5,7 +5,7 @@
     
     <div class="formcontainer">
         
-      <form action="backofficeeditcourse?lang=${lang}&id={corso.id}&action=edit_degree_course" method="POST">
+      <form action="backofficeeditcourse?lang=${lang}&id=${corso.id}&action=edit_degree_course" method="POST">
 
             <div class="fieldcontainerleft">
 
@@ -27,8 +27,8 @@
 				</#list>
                 </select>
 
-                <label class="label" for="num_cfu">CFU</label>
-                <input class="field" type="text" id="num_cfu" name="num_cfu"/>
+                <label class="label" for="numero_cfu">CFU</label>
+                <input class="field" type="text" id="numero_cfu" name="numero_cfu"/>
 
                 <label class="label" for="tipo_cfu">Tipo CFU</label>
                 <select class="field" name="tipo_cfu">

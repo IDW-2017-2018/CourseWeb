@@ -1,14 +1,14 @@
 
 <div class="filter">
     
-    <h1 class="title">Are you sure you want to delete this item ?</h1>
+    <h1 class="title">ARE YOU SURE YOU WANT TO DELETE THIS ITEM ?</h1>
     
     <div class="formcontainer">
         
-      <form action="backofficeeditcourse?id=${id}&lang=${lang}&action=delete" method="POST">
+      <form action="backofficeeditcourse?id=${id}&lang=${lang}&item=${item}&action=delete&name=${delete_action}" method="POST">
 
         <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="${delete_action}" value="DELETE"/>
+            <input class="filterbutton" type="submit" value="DELETE"/>
         </div>
 
       </form>

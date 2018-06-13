@@ -23,7 +23,7 @@
         <tr class="trresult-list">
 
             <td class="tdresult-list" >${item.nome}</td>
-            <td class="tdresult-list"><a href="backofficeeditcourse?id=${id}&lang=${lang}&item=${item.id}&action=delete&elimina_corso_laurea_action=elimina_corso_laurea_action" class="linkresultmod">ELIMINA</a></td>
+            <td class="tdresult-list"><a href="backofficeeditcourse?id=${id}&lang=${lang}&item=${item.id}&elimina_corso_laurea_action=true&action=delete_check" class="linkresultmod">ELIMINA</a></td>
             
         </tr>
 
