@@ -1131,11 +1131,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                request.setAttribute("libri_testo", ((CourseWebDataLayer) request.getAttribute("datalayer")).getLibriTestoCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("items", ((CourseWebDataLayer) request.getAttribute("datalayer")).getLibriTestoCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("corso", datalayer.getCorso(id,"ita"));
                 result.activate("/eng/backoffice_add_textbook.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                request.setAttribute("libri_testo", ((CourseWebDataLayer) request.getAttribute("datalayer")).getLibriTestoCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("items", ((CourseWebDataLayer) request.getAttribute("datalayer")).getLibriTestoCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("corso", datalayer.getCorso(id,"ita"));                
                 result.activate("/ita/backoffice_add_textbook.html.ftl", request, response);                
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -1174,6 +1176,44 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
         }                       
     }
     
+    private void action_libri_testo_nuovo_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
+        
+        TemplateResult result = new TemplateResult(getServletContext()); 
+         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("corso", datalayer.getCorso(id,"ita"));
+                result.activate("/eng/backoffice_new_textbook.html.ftl", request, response);                
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("corso", datalayer.getCorso(id,"ita"));                
+                result.activate("/ita/backoffice_new_textbook.html.ftl", request, response);                
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response);                
+            }
+            
+        } catch(DataLayerException|NumberFormatException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }                
+    }
+    
+    private void action_libri_testo_nuovo_action(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
+    
+    }   
+          
     private void action_libri_testo_elimina_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
     
         TemplateResult result = new TemplateResult(getServletContext()); 
@@ -1235,11 +1275,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                request.setAttribute("materiali", ((CourseWebDataLayer) request.getAttribute("datalayer")).getMaterialiCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("items", ((CourseWebDataLayer) request.getAttribute("datalayer")).getMaterialiCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("corso", datalayer.getCorso(id,"ita"));                
                 result.activate("/eng/backoffice_add_material.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                request.setAttribute("materiali", ((CourseWebDataLayer) request.getAttribute("datalayer")).getMaterialiCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("items", ((CourseWebDataLayer) request.getAttribute("datalayer")).getMaterialiCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("corso", datalayer.getCorso(id,"ita"));                
                 result.activate("/ita/backoffice_add_material.html.ftl", request, response);                
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -1277,6 +1319,44 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             action_error(request, response);
         }                       
     }
+
+    private void action_materiali_nuovo_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
+        
+        TemplateResult result = new TemplateResult(getServletContext()); 
+         
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("corso", datalayer.getCorso(id,"ita"));
+                result.activate("/eng/backoffice_new_material.html.ftl", request, response);                
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("corso", datalayer.getCorso(id,"ita"));                
+                result.activate("/ita/backoffice_new_material.html.ftl", request, response);                
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response);                
+            }
+            
+        } catch(DataLayerException|NumberFormatException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }    
+    }
+    
+    private void action_materiali_nuovo_action(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
+    
+    }    
     
     private void action_materiali_elimina_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
     
@@ -1464,26 +1544,38 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                     request.setAttribute("delete_action", "elimina_docente_action");
                     action_elimina_confirm_default(request,response);      
                 }
-                else if((request.getParameter("aggiungi_libri_testo") != null) && (request.getParameter("id") != null)){                    
+                else if((request.getParameter("aggiungi_libro_testo") != null) && (request.getParameter("id") != null)){                    
                     action_libri_testo_aggiungi_default(request,response);  
                 }
-                else if((request.getParameter("aggiungi_libri_testo_action") != null) && (request.getParameter("id") != null)){                    
+                else if((request.getParameter("aggiungi_libro_testo_action") != null) && (request.getParameter("id") != null)){                    
                     action_libri_testo_aggiungi(request,response);  
                 }
-                else if((request.getParameter("elimina_libri_testo") != null) && (request.getParameter("id") != null)){                    
+                else if((request.getParameter("nuovo_libro_testo") != null) && (request.getParameter("id") != null)){
+                    action_libri_testo_nuovo_default(request,response);
+                }
+                else if((request.getParameter("nuovo_libro_testo_action") != null) && (request.getParameter("id") != null)){
+                    action_libri_testo_nuovo_action(request,response);
+                }
+                else if((request.getParameter("elimina_libro_testo") != null) && (request.getParameter("id") != null)){                    
                     action_libri_testo_elimina_default(request,response);
                 }
                 else if((request.getParameter("elimina_libro_testo_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
                     request.setAttribute("delete_action", "elimina_libro_testo_action");
                     action_elimina_confirm_default(request,response);      
                 }
-                else if((request.getParameter("aggiungi_materiali") != null) && (request.getParameter("id") != null)){                    
+                else if((request.getParameter("aggiungi_materiale") != null) && (request.getParameter("id") != null)){                    
                     action_materiali_aggiungi_default(request,response);  
                 }
-                else if((request.getParameter("aggiungi_materiali_action") != null) && (request.getParameter("id") != null)){                    
+                else if((request.getParameter("aggiungi_materiale_action") != null) && (request.getParameter("id") != null)){                    
                     action_materiali_aggiungi(request,response);  
                 }
-                else if((request.getParameter("elimina_materiali") != null) && (request.getParameter("id") != null)){                    
+                else if((request.getParameter("nuovo_materiale") != null) && (request.getParameter("id") != null)){
+                    action_materiali_nuovo_default(request,response);
+                }
+                else if((request.getParameter("nuovo_materiale_action") != null) && (request.getParameter("id") != null)){
+                    action_materiali_nuovo_action(request,response);
+                }                
+                else if((request.getParameter("elimina_materiale") != null) && (request.getParameter("id") != null)){                    
                     action_materiali_elimina_default(request,response);
                 }
                 else if((request.getParameter("elimina_materiale_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
