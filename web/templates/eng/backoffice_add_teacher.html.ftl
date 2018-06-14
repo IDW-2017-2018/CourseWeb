@@ -5,7 +5,7 @@
     
     <div class="formcontainer">
         
-      <form action="backofficeeditcourse?lang=${lang}&id={corso.id}&action=edit_teacher" method="POST">
+      <form action="backofficeeditcourse?lang=${lang}&id=${corso.id}&action=edit_teacher" method="POST">
 
             <div class="fieldcontainerleft">
 
@@ -21,7 +21,7 @@
                 <select class="field" name="utente_nome">
                 <#list items>
                     <#items as item>
-                    <option value="${item.id}">${item.nome}</option>
+                    <option value="${item.id}">${item.nome}&nbsp;${item.cognome}</option>
                     </#items>
                 <#else>
 				</#list>

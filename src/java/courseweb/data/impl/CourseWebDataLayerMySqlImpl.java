@@ -862,12 +862,10 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 while(rs.next()){
                     
                     Corso corso_ita = getCorso(rs.getInt("corsi.id"), "ita");
-                    Corso corso_eng = getCorso(rs.getInt("corsi.id"), "eng");
                     
                     if(corso_ita != null)
                         result.add(corso_ita);
-                    if(corso_eng != null)
-                        result.add(corso_eng);
+                    
                 }
                 
             } 
@@ -891,12 +889,10 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 
                 while(rs.next()){
                     Corso corso_ita = getCorso(rs.getInt("corsi.id"), "ita");
-                    Corso corso_eng = getCorso(rs.getInt("corsi.id"), "eng");
                     
                     if(corso_ita != null)
                         result.add(corso_ita);
-                    if(corso_eng != null)
-                        result.add(corso_eng);
+                    
                 }
             } 
         }
@@ -918,13 +914,11 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             try(ResultSet rs = sModuliCorso.executeQuery()) {          
                 
                 while(rs.next()){
-                    Corso corso_ita = getCorso(rs.getInt("corsi.id"), "ita");
-                    Corso corso_eng = getCorso(rs.getInt("corsi.id"), "eng");
+                    Corso corso_ita = getCorso(rs.getInt("corsi.id"), "ita");                    
                     
                     if(corso_ita != null)
                         result.add(corso_ita);
-                    if(corso_eng != null)
-                        result.add(corso_eng);
+                    
                 }
             } 
         }
@@ -1531,7 +1525,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     }
     
     @Override
-    public void deleteCorsiModuli(int modulo_key, int corso_integrato_key) throws DataLayerException {
+    public void deleteCorsiModuli(int corso_integrato_key, int modulo_key) throws DataLayerException {
         
         int key = 0;
         
@@ -1558,7 +1552,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             }
           
         } catch(SQLException e){
-            throw new DataLayerException("Unable to store in relation CorsiModuli", e);
+            throw new DataLayerException("Unable to delete in relation CorsiModuli", e);
         }
         
     }
@@ -1591,7 +1585,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             }
             
         } catch(SQLException e){
-            throw new DataLayerException("Unable to store in relation CorsiCorsiMutuati", e);
+            throw new DataLayerException("Unable to delete in relation CorsiCorsiMutuati", e);
         }
         
     }
@@ -1624,13 +1618,13 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             }
             
         } catch(SQLException e){
-            throw new DataLayerException("Unable to store in relation CorsiCorsiPropedeutici", e);
+            throw new DataLayerException("Unable to delete in relation CorsiCorsiPropedeutici", e);
         }
         
     }
     
     @Override
-    public void deleteCorsiCorsiLaurea(int corso_laurea_key, int corso_key) throws DataLayerException {
+    public void deleteCorsiCorsiLaurea(int corso_key, int corso_laurea_key) throws DataLayerException {
         
         int key = 0;
         
@@ -1657,7 +1651,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             }
             
         } catch(SQLException e){
-            throw new DataLayerException("Unable to store in relation CorsiCorsiLaurea", e);
+            throw new DataLayerException("Unable to delete in relation CorsiCorsiLaurea", e);
         }
         
     }
@@ -1690,7 +1684,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             }
                                  
         } catch(SQLException e){
-            throw new DataLayerException("Unable to store in relation CorsiDocenti", e);
+            throw new DataLayerException("Unable to delete in relation CorsiDocenti", e);
         }
         
     }
@@ -1723,7 +1717,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             }
                                  
         } catch(SQLException e){
-            throw new DataLayerException("Unable to store in relation CorsiMateriali", e);
+            throw new DataLayerException("Unable to delete in relation CorsiMateriali", e);
         }
         
     }
@@ -1756,7 +1750,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             }
                                  
         } catch(SQLException e){
-            throw new DataLayerException("Unable to store in relation CorsiMateriali", e);
+            throw new DataLayerException("Unable to delete in relation CorsiMateriali", e);
         }
         
     }

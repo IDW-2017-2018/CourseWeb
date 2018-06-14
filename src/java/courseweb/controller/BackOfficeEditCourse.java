@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe BackOfficeEditCourse
  */
 package courseweb.controller;
 
@@ -135,39 +133,47 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             String action = request.getParameter("name");
             
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
-            
-            if(action.equals("elimina_corso_laurea_action"))
-                if(request.getParameter("item") != null)
-                    datalayer.deleteCorsiCorsiLaurea(Integer.parseInt(request.getParameter("item")), id);
-                
-            else if(action.equals("elimina_corso_mutuato_action"))
-                if(request.getParameter("item") != null)
-                    datalayer.deleteCorsiCorsiMutuati(Integer.parseInt(request.getParameter("item")), id);
-                
-            else if(action.equals("elimina_modulo_action"))
-                if(request.getParameter("item") != null)
-                    datalayer.deleteCorsiModuli(Integer.parseInt(request.getParameter("item")), id);
-                
-            else if(action.equals("elimina_corso_propedeutico_action"))
-                if(request.getParameter("item") != null)
-                    datalayer.deleteCorsiCorsiPropedeutici(Integer.parseInt(request.getParameter("item")), id);
-                
-            else if(action.equals("elimina_docente_action"))
-                if(request.getParameter("item") != null)
-                    datalayer.deleteCorsiDocenti(Integer.parseInt(request.getParameter("item")), id);
-                
-            else if(action.equals("elimina_libro_testo_action"))
-                if(request.getParameter("item") != null)
-                    datalayer.deleteCorsiLibriTesto(Integer.parseInt(request.getParameter("item")), id);
-                
-            else if(action.equals("elimina_materiale_action"))
-                if(request.getParameter("item") != null)
-                    datalayer.deleteCorsiMateriali(Integer.parseInt(request.getParameter("item")), id);
-            else{
+                        
+            if(action.equals("elimina_corso_laurea_action")){
+                if(request.getParameter("item") != null){   
+                    datalayer.deleteCorsiCorsiLaurea(id, Integer.parseInt(request.getParameter("item")));
+                }
+            }    
+            else if(action.equals("elimina_corso_mutuato_action")){
+                if(request.getParameter("item") != null){
+                    datalayer.deleteCorsiCorsiMutuati(id, Integer.parseInt(request.getParameter("item")));
+                }
+            }        
+            else if(action.equals("elimina_modulo_action")){
+                if(request.getParameter("item") != null){
+                    datalayer.deleteCorsiModuli(id, Integer.parseInt(request.getParameter("item")));
+                }
+            }    
+            else if(action.equals("elimina_corso_propedeutico_action")){
+                if(request.getParameter("item") != null){
+                    datalayer.deleteCorsiCorsiPropedeutici(id, Integer.parseInt(request.getParameter("item")));
+                }
+            }    
+            else if(action.equals("elimina_docente_action")){
+                if(request.getParameter("item") != null){
+                    datalayer.deleteCorsiDocenti(id, Integer.parseInt(request.getParameter("item")));
+                }
+            }    
+            else if(action.equals("elimina_libro_testo_action")){
+                if(request.getParameter("item") != null){
+                    datalayer.deleteCorsiLibriTesto(id, Integer.parseInt(request.getParameter("item")));
+                }
+            }    
+            else if(action.equals("elimina_materiale_action")){
+                if(request.getParameter("item") != null){
+                    datalayer.deleteCorsiMateriali(id, Integer.parseInt(request.getParameter("item")));
+                }
+            }
+            else {
                 request.setAttribute("message", "not a valid item");
                 action_error(request, response);
                 return;
-                }
+            }
             
         response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
             
@@ -597,59 +603,32 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
             
-            /*
-            ArrayList<Corso> restemp = new ArrayList<Corso>();
-            ArrayList<Corso> res = new ArrayList<Corso>();
-            boolean add = false;
-            
-            List<Corso> corsi1 = datalayer.filterCorsiByLang("ita", datalayer.getCorsiAggiornati());
-            List<Corso> corsi2 = datalayer.getCorsiMutuatiCorso(datalayer.getCorso(id, "ita"));
-            for(Corso corso1 : corsi1){
-                if(corso1.getId() == id){
-                    continue;
-                }
-                add = true;
-                for(Corso corso2 : corsi2){
-                    if(corso1.getId() == corso2.getId()){
-                        add = false;
-                        break;
-                    }
-                }
-                if(add == true){
-                    restemp.add(corso1);
-                }
-            }
-            */
-            /*
-            List<Corso_Laurea> corsiLaurea = datalayer.getCorsiLaureaCorso(datalayer.getCorso(id, "ita"));
-            for(Corso_Laurea corsoLaurea : corsiLaurea){
-                res.addAll(datalayer.filtraCorsi(restemp, "corso_corsi_laurea", corsoLaurea.getNome()));          
-            }
-            */
             List<Corso> corsi1 = datalayer.filterCorsiByLang("ita", datalayer.getCorsiAggiornati());
             List<Corso> corsi2 = datalayer.getCorsiMutuatiCorso(datalayer.getCorso(id, "ita"));
             Corso currentcourse = datalayer.getCorso(id, "ita");
-            List<Corso> restemp = new ArrayList<>();
+            List<Corso> res = new ArrayList<>();
             boolean add = false;
             
             for(Corso corso1 : corsi1){
                 if(corso1.getId() == id)
                     continue;
                 add = false;
+                
+                for(Corso_Laurea corsolaureacorso1 : currentcourse.getCorsiLaureaCorso())
+                    if(corso1.getCorsiLaureaCorso().contains(corsolaureacorso1)){
+                        add = true;
+                        break;
+                    }
+                
                 for(Corso corso2 : corsi2){
                     if(corso1.getId() == corso2.getId()){
                         add = false;
                         break;
                     }
-                    for(Corso_Laurea corsolaureacorso1 : currentcourse.getCorsiLaureaCorso())
-                        if(corso1.getCorsiLaureaCorso().contains(corsolaureacorso1)){
-                            add = true;
-                            break;
-                        }
-                    
+                                       
                 }
                 if(add == true){
-                    restemp.add(corso1);
+                    res.add(corso1);
                 }
             }
             
@@ -657,12 +636,12 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 request.setAttribute("corso", datalayer.getCorso(id, "ita"));
-                request.setAttribute("items", restemp);                
+                request.setAttribute("items", res);                
                 result.activate("/eng/backoffice_add_same_as_course.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 request.setAttribute("corso", datalayer.getCorso(id, "ita"));
-                request.setAttribute("items", restemp);                
+                request.setAttribute("items", res);                
                 result.activate("/ita/backoffice_add_same_as_course.html.ftl", request, response);                
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -690,7 +669,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             String id_corso_mutuato = request.getParameter("corsi_mutuati");
             datalayer.storeCorsiCorsiMutuati(id, Integer.parseInt(id_corso_mutuato));
             
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
                         
         }
         catch(DataLayerException|IOException e){
@@ -758,13 +737,44 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
             
+            List<Corso> corsi1 = datalayer.filterCorsiByLang("ita", datalayer.getCorsiAggiornati());
+            List<Corso> corsi2 = datalayer.getCorsiPropedeuticiCorso(datalayer.getCorso(id, "ita"));
+            Corso currentcourse = datalayer.getCorso(id, "ita");
+            List<Corso> res = new ArrayList<>();
+            boolean add = false;
+            
+            for(Corso corso1 : corsi1){
+                if(corso1.getId() == id)
+                    continue;
+                add = false;
+                
+                for(Corso_Laurea corsolaureacorso1 : currentcourse.getCorsiLaureaCorso())
+                    if(corso1.getCorsiLaureaCorso().contains(corsolaureacorso1)){
+                        add = true;
+                        break;
+                    }
+                
+                for(Corso corso2 : corsi2){
+                    if(corso1.getId() == corso2.getId()){
+                        add = false;
+                        break;
+                    }
+                                       
+                }
+                if(add == true){
+                    res.add(corso1);
+                }
+            }
+            
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                request.setAttribute("corsi_propedeutici", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiPropedeuticiCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                request.setAttribute("items", res);                
                 result.activate("/eng/backoffice_add_propaedeutic_course.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                request.setAttribute("corsi_propedeutici", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiPropedeuticiCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                request.setAttribute("items", res);                
                 result.activate("/ita/backoffice_add_propaedeutic_course.html.ftl", request, response);                
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -789,10 +799,10 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
 
-            String id_corso_propedeutico = request.getParameter("corsi_propedeutici");
+            String id_corso_propedeutico = request.getParameter("corso_nome");
             datalayer.storeCorsiCorsiPropedeutici(id, Integer.parseInt(id_corso_propedeutico));
             
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
                         
         }
         catch(DataLayerException|IOException e){
@@ -860,13 +870,44 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
             
+            List<Corso> corsi1 = datalayer.filterCorsiByLang("ita", datalayer.getCorsiAggiornati());
+            List<Corso> corsi2 = datalayer.getModuliCorso(datalayer.getCorso(id, "ita"));
+            Corso currentcourse = datalayer.getCorso(id, "ita");
+            List<Corso> res = new ArrayList<>();
+            boolean add = false;
+            
+            for(Corso corso1 : corsi1){
+                if(corso1.getId() == id)
+                    continue;
+                add = false;
+                
+                for(Corso_Laurea corsolaureacorso1 : currentcourse.getCorsiLaureaCorso())
+                    if(corso1.getCorsiLaureaCorso().contains(corsolaureacorso1)){
+                        add = true;
+                        break;
+                    }
+                
+                for(Corso corso2 : corsi2){
+                    if(corso1.getId() == corso2.getId()){
+                        add = false;
+                        break;
+                    }
+                                       
+                }
+                if(add == true){
+                    res.add(corso1);
+                }
+            }
+            
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                request.setAttribute("moduli", ((CourseWebDataLayer) request.getAttribute("datalayer")).getModuliCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                request.setAttribute("items", res);                
                 result.activate("/eng/backoffice_add_module.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                request.setAttribute("moduli", ((CourseWebDataLayer) request.getAttribute("datalayer")).getModuliCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                request.setAttribute("items", res);                
                 result.activate("/ita/backoffice_add_module.html.ftl", request, response);                
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -891,10 +932,10 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
 
-            String id_modulo = request.getParameter("moduli");
-            datalayer.storeCorsiModuli(id, Integer.parseInt(id_modulo));
+            String id_modulo = request.getParameter("corso_nome");
+            datalayer.storeCorsiModuli(Integer.parseInt(id_modulo), id);
             
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
                         
         }
         catch(DataLayerException|IOException e){
@@ -916,7 +957,6 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             }
             
             int id = Integer.parseInt(request.getParameter("id"));         
-            String action = request.getParameter("action");
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             List<Corso> items = datalayer.getModuliCorso(datalayer.getCorso(id,"ita"));
                       
@@ -962,13 +1002,39 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
             
+            List<Utente> docenti1 = datalayer.getUtenti();
+            List<Utente> docenti2 = datalayer.getDocentiCorso(datalayer.getCorso(id, "ita"));
+            List<Utente> res = new ArrayList<>();
+            boolean add = false;
+            
+            for(Utente docente1 : docenti1){
+                
+                if(docente1.getTipoUtente().equals("amministratore") || docente1.getTipoUtente().equals("anonimo"))
+                    continue;
+                
+                add = true;
+             
+                for(Utente docente2 : docenti2){
+                    if(docente1.getId() == docente2.getId()){
+                        add = false;
+                        break;
+                    }
+                                       
+                }
+                if(add == true){
+                    res.add(docente1);
+                }
+            }
+            
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                request.setAttribute("corsi_docenti", ((CourseWebDataLayer) request.getAttribute("datalayer")).getDocentiCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                request.setAttribute("items", res);                
                 result.activate("/eng/backoffice_add_teacher.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                request.setAttribute("corsi_docenti", ((CourseWebDataLayer) request.getAttribute("datalayer")).getDocentiCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                request.setAttribute("items", res);                
                 result.activate("/ita/backoffice_add_teacher.html.ftl", request, response);                
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -993,10 +1059,10 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
 
-            String id_docente = request.getParameter("corsi_docenti");
+            String id_docente = request.getParameter("utente_nome");
             datalayer.storeCorsiDocenti(id, Integer.parseInt(id_docente));
             
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
                         
         }
         catch(DataLayerException|IOException e){
@@ -1018,7 +1084,6 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             }
             
             int id = Integer.parseInt(request.getParameter("id"));         
-            String action = request.getParameter("action");
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             List<Utente> items = datalayer.getDocentiCorso(datalayer.getCorso(id,"ita"));
                       
@@ -1092,13 +1157,15 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 return;
             }
             
+            //UPLOAD FILE E STORE IN DB
+            
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
 
             String id_libro_testo = request.getParameter("libri_testo");
             datalayer.storeCorsiLibriTesto(id, Integer.parseInt(id_libro_testo));
             
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
                         
         }
         catch(DataLayerException|IOException e){
@@ -1194,13 +1261,15 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 return;
             }
             
+            //UPLOAD FILE E STORE IN DB
+            
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
 
             String id_materiale = request.getParameter("materiali");
             datalayer.storeCorsiMateriali(id, Integer.parseInt(id_materiale));
             
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
                         
         }
         catch(DataLayerException|IOException e){
