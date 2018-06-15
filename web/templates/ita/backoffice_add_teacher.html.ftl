@@ -5,7 +5,7 @@
     
     <div class="formcontainer">
         
-      <form action="backofficeeditcourse?lang=${lang}&id=${corso.id}&action=edit_teacher" method="POST">
+      <form action="backofficeeditcourse?lang=${lang}&id=${corso.id}&action=add_teacher" method="POST">
 
             <div class="fieldcontainerleft">
 
