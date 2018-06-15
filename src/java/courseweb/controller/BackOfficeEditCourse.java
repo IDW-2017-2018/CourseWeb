@@ -3,6 +3,8 @@
  */
 package courseweb.controller;
 
+import courseweb.data.impl.Libro_TestoImpl;
+import courseweb.data.impl.MaterialeImpl;
 import courseweb.data.model.Corso;
 import courseweb.data.model.Corso_Laurea;
 import courseweb.data.model.CourseWebDataLayer;
@@ -14,13 +16,19 @@ import framework.result.FailureResult;
 import framework.result.TemplateManagerException;
 import framework.result.TemplateResult;
 import framework.security.SecurityLayer;
+import framework.security.SecurityLayerException;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -1211,7 +1219,44 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     }
     
     private void action_libri_testo_nuovo_action(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
-    
+        
+        try{
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            //STORE IN DB
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            Libro_Testo libro_testo = new Libro_TestoImpl(datalayer);
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            String titolo_libro = request.getParameter("titolo_libro");
+            String autore_libro = request.getParameter("autore_libro");
+            String volume_libro = request.getParameter("volume_libro");
+            String anno_libro = request.getParameter("anno_libro");
+            String editore_libro = request.getParameter("editore_libro");
+            String link_libro = request.getParameter("link_libro");
+            
+            libro_testo.setTitolo(titolo_libro);
+            libro_testo.setAutore(autore_libro);
+            libro_testo.setVolume(volume_libro);
+            libro_testo.setAnno(anno_libro);
+            libro_testo.setEditore(editore_libro);
+            libro_testo.setLink(link_libro);
+            
+            datalayer.storeLibroTesto(libro_testo);
+            
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
+                        
+        }
+        catch(DataLayerException|IOException e){
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }    
+        
     }   
           
     private void action_libri_testo_elimina_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
@@ -1355,7 +1400,58 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     }
     
     private void action_materiali_nuovo_action(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
-    
+        
+        try {
+            
+            if(request.getParameter("id") == null) {
+                request.setAttribute("message","not a valid corso id");
+                action_error(request,response);
+                return;
+            }
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            String nome_file = request.getParameter("file_name");
+            String descrizione_file = request.getParameter("file_descrizione");
+            
+            Part file_to_upload = request.getPart("filetoupload");
+            File uploaded_file = File.createTempFile("upload_", "", new File(getServletContext().getInitParameter("uploads.directory")));
+            
+            Materiale materiale = new MaterialeImpl(datalayer);
+            
+            try (InputStream is = file_to_upload.getInputStream();
+                OutputStream os = new FileOutputStream(uploaded_file)){
+            byte[] buffer = new byte[1024];
+            int read;
+                while ((read = is.read(buffer)) > 0) {
+                    os.write(buffer, 0, read);
+                }
+                is.reset();
+                if(!SecurityLayer.md5File(is).equals(SecurityLayer.md5File(uploaded_file))){    
+                    request.setAttribute("message", "Upload file failed");
+                    action_error(request, response);
+                    return;
+                }
+              
+            }
+            //write complete
+            
+            materiale.setNome(nome_file);
+            materiale.setDimensione(file_to_upload.getSize());
+            materiale.setDescrizione(descrizione_file);
+            materiale.setPercorso(uploaded_file.getName());
+            
+            //upload to db
+            datalayer.storeMateriale(materiale);
+            
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
+             
+        } catch(IOException|ServletException|DataLayerException|SecurityLayerException e){
+            e.printStackTrace();
+            request.setAttribute("exception", e);
+            action_error(request, response);
+        }
     }    
     
     private void action_materiali_elimina_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
