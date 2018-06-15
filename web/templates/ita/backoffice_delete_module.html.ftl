@@ -30,7 +30,7 @@
             <td class="tdresult-list" >${item.nome}</td>
             <td class="tdresult-list" >${item.SSD}</td>
 
-            <td class="tdresult-list"><a href="backofficeeditcourse?id=${id}&lang=${lang}&item=${item.id}&elimina_modulo_action=true&action=delete_check" class="linkresultmod">ELIMINA</a></td>
+            <td class="tdresult-list"><a href="backofficeeditcourse?id=${id}&lang=${lang}&item=${item.id}&name=elimina_modulo_action&action=delete_check" class="linkresultmod">ELIMINA</a></td>
         </tr>
 
         </#items>

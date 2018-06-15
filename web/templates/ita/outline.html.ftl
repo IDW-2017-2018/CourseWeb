@@ -47,7 +47,15 @@
 
     <ul class="lang_bar">
         
-        <#if id?? && action??>
+        <#if id?? && action?? && item?? && name??>
+            <li><a href="${page}?lang=ita&id=${id}&action=${action}&item=${item}&name=${name}">ITALIANO</a></li>
+            <li><a href="${page}?lang=eng&id=${id}&action=${action}&item=${item}&name=${name}">INGLESE</a></li>
+
+        <#elseif id?? && action?? && item??>
+            <li><a href="${page}?lang=ita&id=${id}&action=${action}&item=${item}">ITALIANO</a></li>
+            <li><a href="${page}?lang=eng&id=${id}&action=${action}&item=${item}">INGLESE</a></li>
+
+        <#elseif id?? && action??>
             <li><a href="${page}?lang=ita&id=${id}&action=${action}">ITALIANO</a></li>
             <li><a href="${page}?lang=eng&id=${id}&action=${action}">INGLESE</a></li>
 
@@ -58,6 +66,14 @@
         <#elseif action??>
             <li><a href="${page}?lang=ita&action=${action}">ITALIANO</a></li>
             <li><a href="${page}?lang=eng&action=${action}">INGLESE</a></li>
+        
+        <#elseif item??>
+            <li><a href="${page}?lang=ita&item=${item}">ITALIANO</a></li>
+            <li><a href="${page}?lang=eng&item=${item}">INGLESE</a></li>
+
+        <#elseif name??>
+            <li><a href="${page}?lang=ita&name=${name}">ITALIANO</a></li>
+            <li><a href="${page}?lang=eng&name=${name}">INGLESE</a></li>
 
         <#else>
             <li><a href="${page}?lang=ita">ITALIANO</a></li>

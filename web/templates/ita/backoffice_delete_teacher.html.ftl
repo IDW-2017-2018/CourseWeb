@@ -25,7 +25,7 @@
 
             <td class="tdresult-list" >${item.nome}</td>
             <td class="tdresult-list" >${item.cognome}</td>
-            <td class="tdresult-list"><a href="backofficeeditcourse?id=${id}&lang=${lang}&item=${item.id}&elimina_docente_action=true&action=delete_check" class="linkresultmod">ELIMINA</a></td>
+            <td class="tdresult-list"><a href="backofficeeditcourse?id=${id}&lang=${lang}&item=${item.id}&name=elimina_docente_action&action=delete_check" class="linkresultmod">ELIMINA</a></td>
         </tr>
 
         </#items>
