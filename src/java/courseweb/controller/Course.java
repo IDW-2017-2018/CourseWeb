@@ -5,12 +5,17 @@ package courseweb.controller;
 
 import courseweb.data.model.Corso;
 import courseweb.data.model.CourseWebDataLayer;
+import courseweb.data.model.Materiale;
 import framework.data.DataLayerException;
 import framework.result.FailureResult;
+import framework.result.StreamResult;
 import framework.result.TemplateManagerException;
 import framework.result.TemplateResult;
 import framework.security.SecurityLayer;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -104,6 +109,34 @@ public class Course extends CourseWebBaseController {
         
     }
     
+    private void action_download(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
+        try {
+            
+            if(request.getParameter("materiale_id") == null) {
+                request.setAttribute("message","not a valid materiale id");
+                action_error(request,response);
+                return;
+            }
+            
+            int materiale_id = Integer.parseInt(request.getParameter("materiale_id"));  
+            
+            StreamResult result = new StreamResult(getServletContext());
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+           
+            Materiale materiale = datalayer.getMateriale(materiale_id);
+            
+            try (InputStream is = new FileInputStream(getServletContext().getInitParameter("uploads.directory") + File.separatorChar + materiale.getPercorso())){
+                //request.setAttribute("contentType", rs.getString("type"));
+                result.activate(is, materiale.getDimensione(), materiale.getNome(), request, response);
+            }
+            
+        } catch(IOException|DataLayerException e){
+            e.printStackTrace();
+            request.setAttribute("exception", e); 
+            action_error(request, response);
+        }
+    }
+    
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         
@@ -154,9 +187,12 @@ public class Course extends CourseWebBaseController {
                 request.setAttribute("style", "course");
                 request.setAttribute("id", request.getParameter("id"));
                 
-                action_default(request, response); 
-                
-                
+                if(request.getParameter("download") != null){
+                    action_download(request, response);
+                } else {
+                    action_default(request, response); 
+                }
+                           
             } catch(TemplateManagerException ex){
                 request.setAttribute("exception", ex);
                 action_error(request, response);
