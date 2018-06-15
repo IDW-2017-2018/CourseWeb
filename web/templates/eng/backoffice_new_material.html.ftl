@@ -5,12 +5,15 @@
 
     <div class="formcontainer">
 
-      <form action="backofficeeditcourse?lang=${lang}&id=${corso.id}&action=edit_material" method="POST">
+      <form action="backofficeeditcourse?lang=${lang}&id=${corso.id}&action=new_material" method="POST" enctype="multipart/form-data">
 
             <div class="fieldcontainerleft">
 
                 <label class="label" for="materiale_nome">Name</label>
                 <input class="field" type="text" id="materiale_nome" name="materiale_nome"/>
+
+                <label class="label" for="materiale_file">File</label>
+                <input class="field" type="file" id="materiale_file" name="materiale_file"/>
 
             </div>
 

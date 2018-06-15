@@ -1137,14 +1137,35 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
             
+            List<Libro_Testo> libri1 = datalayer.getLibriTesto();
+            List<Libro_Testo> libri2 = datalayer.getLibriTestoCorso(datalayer.getCorso(id, "ita"));
+            List<Libro_Testo> res = new ArrayList<>();
+            boolean add = false;
+            
+            for(Libro_Testo libro1 : libri1){
+                
+                add = true;
+             
+                for(Libro_Testo libro2 : libri2){
+                    if(libro1.getId() == libro2.getId()){
+                        add = false;
+                        break;
+                    }
+                                       
+                }
+                if(add == true){
+                    res.add(libro1);
+                }
+            }
+            
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                request.setAttribute("items", ((CourseWebDataLayer) request.getAttribute("datalayer")).getLibriTestoCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("items", res);                
                 request.setAttribute("corso", datalayer.getCorso(id,"ita"));
                 result.activate("/eng/backoffice_add_textbook.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                request.setAttribute("items", ((CourseWebDataLayer) request.getAttribute("datalayer")).getLibriTestoCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("items", res);                
                 request.setAttribute("corso", datalayer.getCorso(id,"ita"));                
                 result.activate("/ita/backoffice_add_textbook.html.ftl", request, response);                
             } else {
@@ -1172,7 +1193,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
 
-            String id_libro_testo = request.getParameter("libri_testo");
+            String id_libro_testo = request.getParameter("libro_testo_titolo");
             datalayer.storeCorsiLibriTesto(id, Integer.parseInt(id_libro_testo));
             
             response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
@@ -1233,12 +1254,12 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             Libro_Testo libro_testo = new Libro_TestoImpl(datalayer);
             int id = Integer.parseInt(request.getParameter("id"));
 
-            String titolo_libro = request.getParameter("titolo_libro");
-            String autore_libro = request.getParameter("autore_libro");
-            String volume_libro = request.getParameter("volume_libro");
-            String anno_libro = request.getParameter("anno_libro");
-            String editore_libro = request.getParameter("editore_libro");
-            String link_libro = request.getParameter("link_libro");
+            String titolo_libro = request.getParameter("libro_testo_titolo");
+            String autore_libro = request.getParameter("libro_testo_autore");
+            String volume_libro = request.getParameter("libro_testo_volume");
+            String anno_libro = request.getParameter("libro_testo_anno");
+            String editore_libro = request.getParameter("libro_testo_editore");
+            String link_libro = request.getParameter("libro_testo_link");
             
             libro_testo.setTitolo(titolo_libro);
             libro_testo.setAutore(autore_libro);
@@ -1318,14 +1339,35 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
             
+            List<Materiale> materiali1 = datalayer.getMateriali();
+            List<Materiale> materiali2 = datalayer.getMaterialiCorso(datalayer.getCorso(id, "ita"));
+            List<Materiale> res = new ArrayList<>();
+            boolean add = false;
+            
+            for(Materiale materiale1 : materiali1){
+                
+                add = true;
+             
+                for(Materiale materiale2 : materiali2){
+                    if(materiale1.getId() == materiale2.getId()){
+                        add = false;
+                        break;
+                    }
+                                       
+                }
+                if(add == true){
+                    res.add(materiale1);
+                }
+            }
+            
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                request.setAttribute("items", ((CourseWebDataLayer) request.getAttribute("datalayer")).getMaterialiCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("items", res);                
                 request.setAttribute("corso", datalayer.getCorso(id,"ita"));                
                 result.activate("/eng/backoffice_add_material.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                request.setAttribute("items", ((CourseWebDataLayer) request.getAttribute("datalayer")).getMaterialiCorso(datalayer.getCorso(id,"ita")));                
+                request.setAttribute("items", res);                
                 request.setAttribute("corso", datalayer.getCorso(id,"ita"));                
                 result.activate("/ita/backoffice_add_material.html.ftl", request, response);                
             } else {
@@ -1353,7 +1395,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
 
-            String id_materiale = request.getParameter("materiali");
+            String id_materiale = request.getParameter("materiale_nome");
             datalayer.storeCorsiMateriali(id, Integer.parseInt(id_materiale));
             
             response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
@@ -1412,11 +1454,19 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             int id = Integer.parseInt(request.getParameter("id"));
             
-            String nome_file = request.getParameter("file_name");
-            String descrizione_file = request.getParameter("file_descrizione");
+            String nome_file = request.getParameter("materiale_nome");
+            String descrizione_file = request.getParameter("materiale_descrizione");
             
-            Part file_to_upload = request.getPart("filetoupload");
-            File uploaded_file = File.createTempFile("upload_", "", new File(getServletContext().getInitParameter("uploads.directory")));
+            Part file_to_upload = request.getPart("materiale_file");
+            
+            String ext = "";
+
+            int i = file_to_upload.getSubmittedFileName().lastIndexOf('.');
+            if (i >= 0) {
+                ext = file_to_upload.getSubmittedFileName().substring(i+1);
+            }
+            
+            File uploaded_file = File.createTempFile("upload_", "." + ext, new File(getServletContext().getInitParameter("uploads.directory")));
             
             Materiale materiale = new MaterialeImpl(datalayer);
             
@@ -1427,8 +1477,8 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 while ((read = is.read(buffer)) > 0) {
                     os.write(buffer, 0, read);
                 }
-                is.reset();
-                if(!SecurityLayer.md5File(is).equals(SecurityLayer.md5File(uploaded_file))){    
+                InputStream is2 = file_to_upload.getInputStream();
+                if(!SecurityLayer.md5File(is2).equals(SecurityLayer.md5File(uploaded_file))){    
                     request.setAttribute("message", "Upload file failed");
                     action_error(request, response);
                     return;

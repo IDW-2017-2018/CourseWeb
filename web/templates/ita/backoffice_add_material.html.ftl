@@ -31,8 +31,12 @@
 
 
         <div class="buttoncontainer">
-            <input class="filterbutton" type="submit" name="aggiungi_materiale" value="AGGIUNGI"/>
+            <input class="filterbutton" type="submit" name="aggiungi_materiale_action" value="AGGIUNGI"/>
         </div>
+      
+      </form>
+
+      <form action="backofficeeditcourse?lang=${lang}&id=${corso.id}&action=new_material" method="POST">
 
         <h1 class="title">AGGIUNGI NUOVO MATERIALE</h1>
 

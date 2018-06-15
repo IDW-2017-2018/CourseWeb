@@ -5,15 +5,15 @@
 
     <div class="formcontainer">
 
-      <form action="backofficeeditcourse?lang=${lang}&id=${corso.id}&action=edit_textbook" method="POST">
+      <form action="backofficeeditcourse?lang=${lang}&id=${corso.id}&action=new_textbook" method="POST">
 
             <div class="fieldcontainerleft">
 
                 <label class="label" for="libro_testo_autore">Author</label>
-                <input class="field" type="text" id="libro_testo_autore" name="libro_testo_autore/>
+                <input class="field" type="text" id="libro_testo_autore" name="libro_testo_autore"/>
 
                 <label class="label" for="libro_testo_titolo">Title</label>
-                <input class="field" type="text" id="libro_testo_titolo" name="libro_testo_titolo/>
+                <input class="field" type="text" id="libro_testo_titolo" name="libro_testo_titolo"/>
 
                 <label class="label" for="libro_testo_volume">Volume</label>
                 <input class="field" type="text" id="libro_testo_volume" name="libro_testo_volume"/>
