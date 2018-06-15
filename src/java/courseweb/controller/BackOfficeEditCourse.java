@@ -1473,121 +1473,148 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                     return;
                 }
                 
-                if(action.equals("edit_course") && !(request.getParameter("modifica_corso_action") != null) && (request.getParameter("id") != null)){
+                String defaultname = "false";
+                if(request.getParameter("name") == null){
+                    request.setAttribute("name", defaultname);
+                } else {
+                    request.setAttribute("name", request.getParameter("name"));
+                }
+                
+                if(action.equals("delete") && !(request.getAttribute("name").equals("false")) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){
+                    action_elimina(request, response);               
+                }
+                
+                
+                else if(action.equals("edit_course") && !(request.getParameter("modifica_corso_action") != null) && (request.getParameter("id") != null)){
                     action_modifica_corso_default(request,response);  
                 }
                 else if(action.equals("edit_course") && (request.getParameter("modifica_corso_action") != null) && (request.getParameter("id") != null)){                    
                     action_modifica_corso(request,response);  
                 }
-                else if((request.getParameter("aggiungi_corso_laurea") != null) && (request.getParameter("id") != null)){                    
+                
+                
+                else if(action.equals("add_degree_course") && !(request.getParameter("aggiungi_corso_laurea_action") != null) && (request.getParameter("id") != null)){                    
                     action_corsi_laurea_aggiungi_default(request,response);  
                 }
-                else if((request.getParameter("aggiungi_corso_laurea_action") != null) && (request.getParameter("id") != null)){                    
+                else if(action.equals("add_degree_course") && (request.getParameter("aggiungi_corso_laurea_action") != null) && (request.getParameter("id") != null)){                    
                     action_corsi_laurea_aggiungi(request,response);  
                 }
-                else if((request.getParameter("elimina_corso_laurea") != null) && (request.getParameter("id") != null)){                    
+                else if(action.equals("delete_degree_course") && (request.getParameter("id") != null)){                    
                     action_corsi_laurea_elimina_default(request,response);
                 }
-                else if((request.getParameter("elimina_corso_laurea_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                else if((request.getAttribute("name").equals("elimina_corso_laurea_action")) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
                     request.setAttribute("delete_action", "elimina_corso_laurea_action");
                     action_elimina_confirm_default(request,response);      
                 }
-                else if((request.getParameter("aggiungi_corso_mutuato") != null) && (request.getParameter("id") != null)){                    
+                
+                
+                else if(action.equals("add_same_as_course") && !(request.getParameter("aggiungi_corso_mutuato_action") != null) && (request.getParameter("id") != null)){                    
                     action_corsi_mutuati_aggiungi_default(request,response);  
                 }
-                else if((request.getParameter("aggiungi_corso_mutuato_action") != null) && (request.getParameter("id") != null)){                    
+                else if(action.equals("add_same_as_course") && (request.getParameter("aggiungi_corso_mutuato_action") != null) && (request.getParameter("id") != null)){                    
                     action_corsi_mutuati_aggiungi(request,response);  
                 }
-                else if((request.getParameter("elimina_corso_mutuato") != null) && (request.getParameter("id") != null)){                    
+                else if(action.equals("delete_same_as_course") && (request.getParameter("id") != null)){                    
                     action_corsi_mutuati_elimina_default(request,response);
                 }
-                else if((request.getParameter("elimina_corso_mutuato_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                else if((request.getAttribute("name").equals("elimina_corso_mutuato_action")) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
                     request.setAttribute("delete_action", "elimina_corso_mutuato_action");
                     action_elimina_confirm_default(request,response);      
                 }
-                else if((request.getParameter("aggiungi_corso_propedeutico") != null) && (request.getParameter("id") != null)){                    
+                
+                
+                else if(action.equals("add_propaedeutic_course") && !(request.getParameter("aggiungi_corso_propedeutico_action") != null) && (request.getParameter("id") != null)){                    
                     action_corsi_propedeutici_aggiungi_default(request,response);  
                 }
-                else if((request.getParameter("aggiungi_corso_propedeutico_action") != null) && (request.getParameter("id") != null)){                    
+                else if(action.equals("add_propaedeutic_course") && (request.getParameter("aggiungi_corso_propedeutico_action") != null) && (request.getParameter("id") != null)){                    
                     action_corsi_propedeutici_aggiungi(request,response);  
                 }
-                else if((request.getParameter("elimina_corso_propedeutico") != null) && (request.getParameter("id") != null)){                    
+                else if(action.equals("delete_propaedeutic_course") && (request.getParameter("id") != null)){                    
                     action_corsi_propedeutici_elimina_default(request,response);
                 }
-                else if((request.getParameter("elimina_corso_propedeutico_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                else if((request.getAttribute("name").equals("elimina_corso_propedeutico_action")) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
                     request.setAttribute("delete_action", "elimina_corso_propedeutico_action");
                     action_elimina_confirm_default(request,response);      
                 }
-                else if((request.getParameter("aggiungi_modulo") != null) && (request.getParameter("id") != null)){                    
+                
+                
+                else if(action.equals("add_module") && !(request.getParameter("aggiungi_modulo_action") != null) && (request.getParameter("id") != null)){                    
                     action_moduli_aggiungi_default(request,response);  
                 }
-                else if((request.getParameter("aggiungi_modulo_action") != null) && (request.getParameter("id") != null)){                    
+                else if(action.equals("add_module") && (request.getParameter("aggiungi_modulo_action") != null) && (request.getParameter("id") != null)){                    
                     action_moduli_aggiungi(request,response);  
                 }
-                else if((request.getParameter("elimina_modulo") != null) && (request.getParameter("id") != null)){                    
+                else if(action.equals("delete_module") && (request.getParameter("id") != null)){                    
                     action_moduli_elimina_default(request,response);
                 }
-                else if((request.getParameter("elimina_modulo_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                else if((request.getAttribute("name").equals("elimina_modulo_action")) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
                     request.setAttribute("delete_action", "elimina_modulo_action");
                     action_elimina_confirm_default(request,response);      
                 }
-                else if((request.getParameter("aggiungi_docente") != null) && (request.getParameter("id") != null)){                    
+                
+                
+                else if(action.equals("add_teacher") && !(request.getParameter("aggiungi_docente_action") != null) && (request.getParameter("id") != null)){                    
                     action_docenti_aggiungi_default(request,response);  
                 }
-                else if((request.getParameter("aggiungi_docente_action") != null) && (request.getParameter("id") != null)){                    
+                else if(action.equals("add_teacher") && (request.getParameter("aggiungi_docente_action") != null) && (request.getParameter("id") != null)){                    
                     action_docenti_aggiungi(request,response);  
                 }
-                else if((request.getParameter("elimina_docente") != null) && (request.getParameter("id") != null)){                    
+                else if(action.equals("delete_teacher") && (request.getParameter("id") != null)){                    
                     action_docenti_elimina_default(request,response);
                 }
-                else if((request.getParameter("elimina_docente_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                else if((request.getAttribute("name").equals("elimina_docente_action")) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
                     request.setAttribute("delete_action", "elimina_docente_action");
                     action_elimina_confirm_default(request,response);      
                 }
-                else if((request.getParameter("aggiungi_libro_testo") != null) && (request.getParameter("id") != null)){                    
+                
+                
+                else if(action.equals("add_textbook") && !(request.getParameter("aggiungi_libro_testo_action") != null) && (request.getParameter("id") != null)){                    
                     action_libri_testo_aggiungi_default(request,response);  
                 }
-                else if((request.getParameter("aggiungi_libro_testo_action") != null) && (request.getParameter("id") != null)){                    
+                else if(action.equals("add_textbook") && (request.getParameter("aggiungi_libro_testo_action") != null) && (request.getParameter("id") != null)){                    
                     action_libri_testo_aggiungi(request,response);  
                 }
-                else if((request.getParameter("nuovo_libro_testo") != null) && (request.getParameter("id") != null)){
+                else if(action.equals("new_textbook") && !(request.getParameter("nuovo_libro_testo_action") != null) && (request.getParameter("id") != null)){
                     action_libri_testo_nuovo_default(request,response);
                 }
-                else if((request.getParameter("nuovo_libro_testo_action") != null) && (request.getParameter("id") != null)){
+                else if(action.equals("new_textbook") && (request.getParameter("nuovo_libro_testo_action") != null) && (request.getParameter("id") != null)){
                     action_libri_testo_nuovo_action(request,response);
                 }
-                else if((request.getParameter("elimina_libro_testo") != null) && (request.getParameter("id") != null)){                    
+                else if(action.equals("delete_textbook") && (request.getParameter("id") != null)){                    
                     action_libri_testo_elimina_default(request,response);
                 }
-                else if((request.getParameter("elimina_libro_testo_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                else if((request.getAttribute("name").equals("elimina_libro_testo_action")) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
                     request.setAttribute("delete_action", "elimina_libro_testo_action");
                     action_elimina_confirm_default(request,response);      
                 }
-                else if((request.getParameter("aggiungi_materiale") != null) && (request.getParameter("id") != null)){                    
+                
+                
+                else if(action.equals("add_material") && !(request.getParameter("aggiungi_materiale_action") != null) && (request.getParameter("id") != null)){                    
                     action_materiali_aggiungi_default(request,response);  
                 }
-                else if((request.getParameter("aggiungi_materiale_action") != null) && (request.getParameter("id") != null)){                    
+                else if(action.equals("add_material") && (request.getParameter("aggiungi_materiale_action") != null) && (request.getParameter("id") != null)){                    
                     action_materiali_aggiungi(request,response);  
                 }
-                else if((request.getParameter("nuovo_materiale") != null) && (request.getParameter("id") != null)){
+                else if(action.equals("new_material") && !(request.getParameter("nuovo_materiale_action") != null) && (request.getParameter("id") != null)){
                     action_materiali_nuovo_default(request,response);
                 }
-                else if((request.getParameter("nuovo_materiale_action") != null) && (request.getParameter("id") != null)){
+                else if(action.equals("new_material") && (request.getParameter("nuovo_materiale_action") != null) && (request.getParameter("id") != null)){
                     action_materiali_nuovo_action(request,response);
                 }                
-                else if((request.getParameter("elimina_materiale") != null) && (request.getParameter("id") != null)){                    
+                else if(action.equals("delete_material") && (request.getParameter("id") != null)){                    
                     action_materiali_elimina_default(request,response);
                 }
-                else if((request.getParameter("elimina_materiale_action") != null) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
+                else if((request.getAttribute("name").equals("elimina_materiale_action")) && (request.getParameter("id") != null) && (request.getParameter("item") != null)){                    
                     request.setAttribute("delete_action", "elimina_materiale_action");
                     action_elimina_confirm_default(request,response);      
-                }   
-                else if(action.equals("delete") && (request.getParameter("id") != null) && (request.getParameter("item") != null)){
-                    action_elimina(request, response);               
                 }
+                
+                
                 else if(action.equals("hub") && (request.getParameter("id") != null)){
                     action_default(request, response);                    
                 }
+                
+                
                 else {
                     request.setAttribute("message", "Illegal action -- else");
                     action_error(request, response);                    
