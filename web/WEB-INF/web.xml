@@ -29,6 +29,10 @@
         <param-name>view.encoding</param-name>
         <param-value>ISO-8859-1</param-value>
     </context-param>
+    <context-param>
+        <param-name>uploads.directory</param-name>
+        <param-value>C:/CourseWeb</param-value>
+    </context-param>
     <!-- DATA PARAMS -->
     <context-param>
         <param-name>view.data.authors</param-name>
@@ -102,6 +106,12 @@
     <servlet>
         <servlet-name>BackOfficeEditCourse</servlet-name>
         <servlet-class>courseweb.controller.BackOfficeEditCourse</servlet-class>
+        <multipart-config>
+            <max-file-size>20848820</max-file-size>
+            <!-- max size of accepted uploadd (DEF: unlimited!) -->
+            <max-request-size>418018841</max-request-size>
+            <!-- max size of multipart requests (may contain more files or data) (DEF: ulimited!) -->
+        </multipart-config>
     </servlet>
     <servlet-mapping>
         <servlet-name>BackOfficeEditCourse</servlet-name>

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -247,8 +248,48 @@ public class SecurityLayer {
         return result;
     }
     
+    // fa l'hash di un file in input
+    protected static String hashFile(InputStream inputFile, String hashAlgorithm) throws SecurityLayerException {
+        String result = null;
+        if (inputFile == null || hashAlgorithm == null){
+            throw new NullPointerException("Cannot hash, null encountered");
+        }
+        
+        try {
+            
+            // oggetto messagedigest per l'algoritmo hashAlgorithm
+            MessageDigest digest = MessageDigest.getInstance(hashAlgorithm);
+            // leggo il file
+            byte[] byteArray = new byte[1024];
+            int read = 0;
+            while ((read = inputFile.read(byteArray)) != -1) {
+                digest.update(byteArray, 0, read);
+            }
+            inputFile.close();
+            // converto messaggio digest in base 16
+            BigInteger hashInteger = new BigInteger(1, digest.digest());
+            result = hashInteger.toString(16);
+            
+        } catch(FileNotFoundException ex1) {
+            throw new SecurityLayerException("File not found", ex1);
+        
+        } catch(NoSuchAlgorithmException ex2) {
+            throw new SecurityLayerException("Invalid hash algorithm", ex2);
+        
+        } catch(IOException ex3) {
+            throw new SecurityLayerException(ex3);
+        }
+        
+        return result;
+    }
+    
     // versione pubblica che verrà utilizzata dal controller per fare l'md5 di un file
     public static String md5File(File file) throws SecurityLayerException {
         return hashFile(file, "MD5");
+    }
+    
+    // versione pubblica che verrà utilizzata dal controller per fare l'md5 di un file
+    public static String md5File(InputStream is) throws SecurityLayerException {
+        return hashFile(is, "MD5");
     }
 }

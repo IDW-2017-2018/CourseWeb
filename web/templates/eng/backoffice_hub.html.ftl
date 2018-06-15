@@ -35,7 +35,7 @@
 
 </div>
 
-
+<#if (session.getAttribute('utente').tipoUtente == "amministratore")>
 <div class="helper">
     
     <div class="helpertext">
@@ -71,3 +71,5 @@
     </div>
 
 </div>
+<#else>
+</#if>

@@ -14,12 +14,12 @@ public interface Materiale {
     int getId(); 
     String getNome(); 
     String getDescrizione(); 
-    String getDimensione(); 
+    long getDimensione(); 
     String getPercorso(); 
    
     void setNome(String nome); 
     void setDescrizione(String descrizione); 
-    void setDimensione(String dimensione); 
+    void setDimensione(long dimensione); 
     void setPercorso(String percorso);
     
     void copyFrom(Materiale materiale) throws DataLayerException;

@@ -337,7 +337,7 @@ public class BackOfficeUser extends CourseWebBaseController {
                     action_error(request,response);
                     return;
                 }
-                if(!(((Utente)s.getAttribute("utente")).getTipoUtente().equals("amministratore")||((Utente)s.getAttribute("utente")).getTipoUtente().equals("docente"))){
+                if(!(((Utente)s.getAttribute("utente")).getTipoUtente().equals("amministratore"))){
                   request.setAttribute("message", "not permitted");
                   action_error(request,response);
                   return;

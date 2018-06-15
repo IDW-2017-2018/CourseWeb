@@ -275,7 +275,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             m.setId(rs.getInt("id"));
             m.setNome(rs.getString("nome"));
             m.setDescrizione(rs.getString("descrizione"));
-            m.setDimensione(rs.getString("dimensione"));
+            m.setDimensione(rs.getLong("dimensione"));
             m.setPercorso(rs.getString("percorso"));
             
             return m; 
@@ -1214,7 +1214,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 }
             uMateriale.setString(1, materiale.getNome());
             uMateriale.setString(2, materiale.getDescrizione());
-            uMateriale.setString(3, materiale.getDimensione());
+            uMateriale.setLong(3, materiale.getDimensione());
             uMateriale.setString(4, materiale.getPercorso());
             uMateriale.setInt(5, materiale.getId());
             uMateriale.executeUpdate();
@@ -1222,7 +1222,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             else { //insert
                 iMateriale.setString(1, materiale.getNome());
                 iMateriale.setString(2, materiale.getDescrizione());
-                iMateriale.setString(3, materiale.getDimensione());
+                iMateriale.setLong(3, materiale.getDimensione());
                 iMateriale.setString(4, materiale.getPercorso());
                 
                 if(iMateriale.executeUpdate() == 1) {

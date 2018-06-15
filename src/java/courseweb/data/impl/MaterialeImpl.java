@@ -16,7 +16,7 @@ public class MaterialeImpl implements Materiale {
     private int id; 
     private String nome; 
     private String descrizione; 
-    private String dimensione; 
+    private long dimensione; 
     private String percorso;
     private CourseWebDataLayer ownerDataLayer;
     protected boolean dirty;
@@ -27,7 +27,7 @@ public class MaterialeImpl implements Materiale {
         this.id = 0;
         this.nome = "";
         this.descrizione = "";
-        this.dimensione = "";
+        this.dimensione = 0;
         this.percorso = "";
         this.dirty = false;
         
@@ -49,7 +49,7 @@ public class MaterialeImpl implements Materiale {
     }
     
     @Override
-    public String getDimensione(){
+    public long getDimensione(){
         return this.dimensione;
     }
     
@@ -76,7 +76,7 @@ public class MaterialeImpl implements Materiale {
     }
     
     @Override
-    public void setDimensione(String dimensione) {    
+    public void setDimensione(long dimensione) {    
         this.dimensione = dimensione;   
         this.dirty = true;
     }
