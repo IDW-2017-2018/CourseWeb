@@ -25,10 +25,10 @@
 
         <tr class="trresult-list">
 
-            <td class="tdresult-list" >${item.codice}</td>
-            <td class="tdresult-list" >${item.anno}</td>
-            <td class="tdresult-list" >${item.nome}</td>
-            <td class="tdresult-list" >${item.SSD}</td>
+            <td class="tdresult-list" >${strip_slashes(item.codice)}</td>
+            <td class="tdresult-list" >${strip_slashes(item.anno)}</td>
+            <td class="tdresult-list" >${strip_slashes(item.nome)}</td>
+            <td class="tdresult-list" >${strip_slashes(item.SSD)}</td>
             <td class="tdresult-list"><a href="backofficeeditcourse?id=${id}&lang=${lang}&item=${item.id}&name=elimina_corso_mutuato_action&action=delete_check" class="linkresultmod">DELETE</a></td>
             
         </tr>

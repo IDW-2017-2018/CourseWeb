@@ -10,16 +10,16 @@
         <div class="fieldcontainercentral">
 
             <label class="label" for="corso_codice">Codice</label>
-            <input class="field" type="text" id="corso_codice" name="corso_codice" placeholder="${corso_ita.codice}"/>
+            <input class="field" type="text" id="corso_codice" name="corso_codice" placeholder="${strip_slashes(corso_ita.codice)}"/>
 
             <label class="label" for="corso_anno">Anno</label>
             <input class="field" type="text" id="corso_anno" name="corso_anno" placeholder="${corso_ita.anno}"/>
 
             <label class="label" for="corso_nome">Nome</label>
-            <input class="field" type="text" id="corso_nome" name="corso_nome" placeholder="${corso_ita.nome}"/>
+            <input class="field" type="text" id="corso_nome" name="corso_nome" placeholder="${strip_slashes(corso_ita.nome)}"/>
     
             <label class="label" for="corso_ssd">SSD</label>
-            <input class="field" type="text" id="corso_ssd" name="corso_ssd" placeholder="${corso_ita.SSD}"/>
+            <input class="field" type="text" id="corso_ssd" name="corso_ssd" placeholder="${strip_slashes(corso_ita.SSD)}"/>
 
             <label class="label" for="corso_semestre">Semestre</label>
             <select class="field" name="corso_semestre">
@@ -34,13 +34,13 @@
             </select>
 
             <label class="label" for="corso_link_homepage">Link Homepage</label>
-            <input class="field" type="text" id="corso_link_homepage" name="corso_link_homepage" placeholder="${corso_ita.linkHomepageCorso}"/>
+            <input class="field" type="text" id="corso_link_homepage" name="corso_link_homepage" placeholder="${strip_slashes(corso_ita.linkHomepageCorso)}"/>
 
             <label class="label" for="corso_link_risorse">Link Risorse</label>
-            <input class="field" type="text" id="corso_link_risorse" name="corso_link_risorse" placeholder="${corso_ita.linkRisorseEsterne}"/>
+            <input class="field" type="text" id="corso_link_risorse" name="corso_link_risorse" placeholder="${strip_slashes(corso_ita.linkRisorseEsterne)}"/>
 
             <label class="label" for="corso_link_forum">Link Forum</label>
-            <input class="field" type="text" id="corso_link_forum" name="corso_link_forum" placeholder="${corso_ita.linkForum}"/>
+            <input class="field" type="text" id="corso_link_forum" name="corso_link_forum" placeholder="${strip_slashes(corso_ita.linkForum)}"/>
         
         </div>
 
@@ -49,25 +49,25 @@
                 <h1 class="title">INFO CORSO ITALIANO</h1>
                 
                 <label class="label" for="corso_prerequisiti">Prerequisiti</label>
-                <textarea class="field" type="text" id="corso_prerequisiti" name="corso_prerequisiti" placeholder="${corso_ita.prerequisiti}"></textarea>
+                <textarea class="field" type="text" id="corso_prerequisiti" name="corso_prerequisiti" placeholder="${strip_slashes(corso_ita.prerequisiti)}"></textarea>
 
                 <label class="label" for="corso_obiettivi">Obiettivi</label>
-                <textarea class="field" type="text" id="corso_obiettivi" name="corso_obiettivi" placeholder="${corso_ita.obiettivi}"></textarea>
+                <textarea class="field" type="text" id="corso_obiettivi" name="corso_obiettivi" placeholder="${strip_slashes(corso_ita.obiettivi)}"></textarea>
                 
                 <label class="label" for="corso_mod_esame">Modalit&agrave; Esame</label>
-                <textarea class="field" type="text" id="corso_mod_esame" name="corso_mod_esame" placeholder="${corso_ita.modEsame}"></textarea>
+                <textarea class="field" type="text" id="corso_mod_esame" name="corso_mod_esame" placeholder="${strip_slashes(corso_ita.modEsame)}"></textarea>
 
                 <label class="label" for="corso_mod_insegnamento">Modalit&agrave; Insegnamento</label>
-                <textarea class="field" type="text" id="corso_mod_insegnamento" name="corso_mod_insegnamento" placeholder="${corso_ita.modInsegnamento}"></textarea>
+                <textarea class="field" type="text" id="corso_mod_insegnamento" name="corso_mod_insegnamento" placeholder="${strip_slashes(corso_ita.modInsegnamento)}"></textarea>
                 
                 <label class="label" for="corso_descrittori_dublino">Descrittori Dublino</label>
-                <textarea class="field" type="text" id="corso_descrittori_dublino" name="corso_descrittori_dublino" placeholder="${corso_ita.descrittoriDublino}"></textarea>
+                <textarea class="field" type="text" id="corso_descrittori_dublino" name="corso_descrittori_dublino" placeholder="${strip_slashes(corso_ita.descrittoriDublino)}"></textarea>
 
                 <label class="label" for="corso_sillabo">Sillabo</label>
-                <textarea class="field" type="text" id="corso_sillabo" name="corso_sillabo" placeholder="${corso_ita.sillabo}"></textarea>
+                <textarea class="field" type="text" id="corso_sillabo" name="corso_sillabo" placeholder="${strip_slashes(corso_ita.sillabo)}"></textarea>
 
                 <label class="label" for="corso_note">Note</label>
-                <textarea class="field" type="text" id="corso_note" name="corso_note" placeholder="${corso_ita.note}"></textarea>
+                <textarea class="field" type="text" id="corso_note" name="corso_note" placeholder="${strip_slashes(corso_ita.note)}"></textarea>
                 
             </div>
 
@@ -77,25 +77,25 @@
                 <h1 class="title">INFO CORSO INGLESE</h1>
 
                 <label class="label" for="corso_prerequisiti">Prerequisiti</label>
-                <textarea class="field" type="text" id="corso_prerequisiti" name="corso_prerequisiti_eng" placeholder="${corso_eng.prerequisiti}"></textarea>
+                <textarea class="field" type="text" id="corso_prerequisiti" name="corso_prerequisiti_eng" placeholder="${strip_slashes(corso_eng.prerequisiti)}"></textarea>
 
                 <label class="label" for="corso_obiettivi">Obiettivi</label>
-                <textarea class="field" type="text" id="corso_obiettivi" name="corso_obiettivi_eng" placeholder="${corso_eng.obiettivi}"></textarea>
+                <textarea class="field" type="text" id="corso_obiettivi" name="corso_obiettivi_eng" placeholder="${strip_slashes(corso_eng.obiettivi)}"></textarea>
                 
                 <label class="label" for="corso_mod_esame">Modalit&agrave; Esame</label>
-                <textarea class="field" type="text" id="corso_mod_esame" name="corso_mod_esame_eng" placeholder="${corso_eng.modEsame}"></textarea>
+                <textarea class="field" type="text" id="corso_mod_esame" name="corso_mod_esame_eng" placeholder="${strip_slashes(corso_eng.modEsame)}"></textarea>
 
                 <label class="label" for="corso_mod_insegnamento">Modalit&agrave; Insegnamento</label>
-                <textarea class="field" type="text" id="corso_mod_insegnamento" name="corso_mod_insegnamento_eng" placeholder="${corso_eng.modInsegnamento}"></textarea>
+                <textarea class="field" type="text" id="corso_mod_insegnamento" name="corso_mod_insegnamento_eng" placeholder="${strip_slashes(corso_eng.modInsegnamento)}"></textarea>
                 
                 <label class="label" for="corso_descrittori_dublino">Descrittori Dublino</label>
-                <textarea class="field" type="text" id="corso_descrittori_dublino" name="corso_descrittori_dublino_eng" placeholder="${corso_eng.descrittoriDublino}"></textarea>
+                <textarea class="field" type="text" id="corso_descrittori_dublino" name="corso_descrittori_dublino_eng" placeholder="${strip_slashes(corso_eng.descrittoriDublino)}"></textarea>
 
                 <label class="label" for="corso_sillabo">Sillabo</label>
-                <textarea class="field" type="text" id="corso_sillabo" name="corso_sillabo_eng" placeholder="${corso_eng.sillabo}"></textarea>
+                <textarea class="field" type="text" id="corso_sillabo" name="corso_sillabo_eng" placeholder="${strip_slashes(corso_eng.sillabo)}"></textarea>
 
                 <label class="label" for="corso_note">Note</label>
-                <textarea class="field" type="text" id="corso_note" name="corso_note_eng" placeholder="${corso_eng.note}"></textarea>
+                <textarea class="field" type="text" id="corso_note" name="corso_note_eng" placeholder="${strip_slashes(corso_eng.note)}"></textarea>
                 
             </div>
 

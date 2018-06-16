@@ -7,6 +7,7 @@ import courseweb.data.impl.CourseWebDataLayerMySqlImpl;
 import courseweb.data.model.CourseWebDataLayer;
 import courseweb.data.model.Utente;
 import framework.result.FailureResult;
+import framework.result.SplitSlashesFmkExt;
 import framework.security.SecurityLayer;
 
 import java.io.IOException;
@@ -77,6 +78,8 @@ public abstract class CourseWebBaseController extends HttpServlet {
             }
             
             request.setAttribute("session", s);
+            
+            request.setAttribute("strip_slashes", new SplitSlashesFmkExt());
             
             processRequest(request, response);
             

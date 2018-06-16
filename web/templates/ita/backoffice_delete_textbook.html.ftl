@@ -25,10 +25,10 @@
 
         <tr class="trresult-list">
 
-            <td class="tdresult-list" >${item.autore}</td>
-            <td class="tdresult-list" >${item.titolo}</td>
-            <td class="tdresult-list" >${item.volume}</td>
-            <td class="tdresult-list" >${item.anno}</td>
+            <td class="tdresult-list" >${strip_slashes(item.autore)}</td>
+            <td class="tdresult-list" >${strip_slashes(item.titolo)}</td>
+            <td class="tdresult-list" >${strip_slashes(item.volume)}</td>
+            <td class="tdresult-list" >${strip_slashes(item.anno)}</td>
             <td class="tdresult-list"><a href="backofficeeditcourse?id=${id}&lang=${lang}&item=${item.id}&name=elimina_libro_testo_action&action=delete_check" class="linkresultmod">ELIMINA</a></td>
 
         </tr>

@@ -79,10 +79,10 @@
 
         <tr class="trresult-list">
 
-            <td class="tdresult-list" colspan="2">${corso.codice}</td>
-            <td class="tdresult-list">${corso.nome}</td>
-            <td class="tdresult-list">${corso.SSD}</td>
-            <td class="tdresult-list">${corso.anno}</td>
+            <td class="tdresult-list" colspan="2">${strip_slashes(corso.codice)}</td>
+            <td class="tdresult-list">${strip_slashes(corso.nome)}</td>
+            <td class="tdresult-list">${strip_slashes(corso.SSD)}</td>
+            <td class="tdresult-list">${strip_slashes(corso.anno)}</td>
             <td class="tdresult-list"><a href="backofficecourse?lang=${lang}&action=edit_course&id=${corso.id}" class="linkresultmod">EDIT</a></td>
             
         </tr>

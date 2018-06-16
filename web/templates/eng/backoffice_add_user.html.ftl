@@ -30,9 +30,8 @@
                 <input class="field" type="text" id="utente_cognome" name="utente_cognome" required="required"/>
                 
                 <label class="label" for="utente_tipo_utente">User Type</label>
-                <select class="field" name="utente_tipo_utente">
+                <select class="field" name="utente_tipo_utente" disabled="disabled">
                     <option value="docente">Teacher</option>
-                    <option value="amministratore">Admin</option>
                 </select>
                 
             </div>

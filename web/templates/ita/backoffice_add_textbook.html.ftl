@@ -10,7 +10,7 @@
             <div class="fieldcontainerleft">
 
                 <label class="label" for="corso_nome">Corso</label>
-                <input class="field" type="text" id="corso_nome" name="corso_nome" placeholder="${corso.nome}" disabled="disabled" />
+                <input class="field" type="text" id="corso_nome" name="corso_nome" placeholder="${strip_slashes(corso.nome)}" disabled="disabled" />
 
             </div>
 
@@ -21,7 +21,7 @@
                 <select class="field" name="libro_testo_titolo">
                   <#list items>
                       <#items as item>
-                      <option value="${item.id}">${item.titolo}</option>
+                      <option value="${item.id}">${strip_slashes(item.titolo)}</option>
                       </#items>
                   <#else>
                   </#list>
