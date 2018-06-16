@@ -15,6 +15,7 @@ import framework.security.SecurityLayer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -88,6 +89,14 @@ public class BackOfficeCourse extends CourseWebBaseController {
             descrittoriDublinoEng = SecurityLayer.addSlashes(descrittoriDublinoEng);
             sillaboEng = SecurityLayer.addSlashes(sillaboEng);
             noteEng = SecurityLayer.addSlashes(noteEng);
+            
+            String pattern_string = "[0-9]{4}[/][0-9]{4}";
+            Pattern pattern = Pattern.compile(pattern_string);
+            if (!pattern.matcher(anno).matches()) {
+                request.setAttribute("message", "Invalid data");
+                action_error(request, response);
+                return;
+            }
             
             CourseWebDataLayer datalayer = ((CourseWebDataLayer) request.getAttribute("datalayer"));
 
