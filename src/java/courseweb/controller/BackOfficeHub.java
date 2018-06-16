@@ -3,7 +3,9 @@
  */
 package courseweb.controller;
 
+import courseweb.data.model.CourseWebDataLayer;
 import courseweb.data.model.Utente;
+import framework.data.DataLayerException;
 import framework.result.FailureResult;
 import framework.result.TemplateManagerException;
 import framework.result.TemplateResult;
@@ -115,7 +117,35 @@ public class BackOfficeHub extends CourseWebBaseController {
         } 
 
     }    
-          
+    
+        private void action_hub_log(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
+        
+        TemplateResult result = new TemplateResult(getServletContext()); 
+        
+        CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+        
+        try {
+            if(request.getAttribute("lang").equals("eng")){
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("items", datalayer.getLogMessage());
+                result.activate("/eng/log.html.ftl", request, response);
+            } else if(request.getAttribute("lang").equals("ita")){
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("items", datalayer.getLogMessage());               
+                result.activate("/ita/log.html.ftl", request, response);
+            } else {
+                request.setAttribute("message", "Illegal language");
+                action_error(request, response); 
+            }
+        }
+        catch (DataLayerException exc){
+            exc.printStackTrace();
+            request.setAttribute("exception",exc);
+            action_error(request,response);
+        }
+              
+    }
+      
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         
@@ -186,6 +216,9 @@ public class BackOfficeHub extends CourseWebBaseController {
                 }
                 else if(request.getParameter("hub_modifica_utente") != null){
                   action_hub_modifica_utente(request,response); 
+                }
+                else if(request.getParameter("hub_log") != null){
+                  action_hub_log(request,response);
                 }
                 else
                     action_default(request, response);                                 

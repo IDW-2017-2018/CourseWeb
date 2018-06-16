@@ -72,7 +72,7 @@ public class BackOfficeUser extends CourseWebBaseController {
             utente.setTipoUtente(tipoUtente);
             
             datalayer.storeUtenteByEmail(utente);
-            
+            datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha aggiunto il docente " + email);
             response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
                         
         }
@@ -142,9 +142,10 @@ public class BackOfficeUser extends CourseWebBaseController {
                 edited = true;
             }
             
-            if(edited == true)
+            if(edited == true){
                 datalayer.storeUtenteById(utente);
-            
+                datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha modificato l'utente " + email);            
+            }
             response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
                        
         }
