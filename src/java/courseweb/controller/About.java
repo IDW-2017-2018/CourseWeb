@@ -1,5 +1,5 @@
 /*
- * Classe Help
+ * Classe About
  */
 package courseweb.controller;
 
@@ -14,54 +14,53 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author valen
+ * @author Riccardo
  */
-public class Help extends CourseWebBaseController {
+public class About extends CourseWebBaseController {
     
-    private void action_error(HttpServletRequest request, HttpServletResponse response) {        
-     
-        if(request.getAttribute("exception") != null) {
-            (new FailureResult(getServletContext())).activate((Exception) request.getAttribute("exception"), request, response);
+    private void action_error(HttpServletRequest request, HttpServletResponse response){
+        if(request.getAttribute("exception") != null){
+            (new FailureResult(getServletContext())).activate((Exception)request.getAttribute("exception"), request, response);
         } else {
-            (new FailureResult(getServletContext())).activate((String) request.getAttribute("message"), request, response);
+            (new FailureResult(getServletContext())).activate((String)request.getAttribute("message"), request, response);
         }
-        
     }
     
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
+        TemplateResult result = new TemplateResult(getServletContext()); 
         
-        TemplateResult result = new TemplateResult(getServletContext());
-        if(request.getAttribute("lang").equals("eng")) {
+        if(request.getAttribute("lang").equals("eng")){
             
             if(request.getAttribute("session") != null)
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
             else
                 request.setAttribute("navbar_tpl", "/eng/not_logged_navbar.html.ftl");
             
-            result.activate("/eng/help.html.ftl", request, response);
-        } else if(request.getAttribute("lang").equals("ita")) {
+            result.activate("/eng/about.html.ftl", request, response);
+        } else if(request.getAttribute("lang").equals("ita")){
             
             if(request.getAttribute("session") != null)
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
             else
                 request.setAttribute("navbar_tpl", "/ita/not_logged_navbar.html.ftl");
             
-            result.activate("/ita/help.html.ftl", request, response);
+            result.activate("/ita/about.html.ftl", request, response);
         } else {
             request.setAttribute("message", "Illegal language");
-            action_error(request, response);
+            action_error(request, response); 
         }
-    
+        
     }
     
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         
-        boolean secure = SecurityLayer.checkHttps(request);
+        boolean secure = SecurityLayer.checkHttps(request); 
         
         if(!secure){
             SecurityLayer.redirectToHttps(request, response);
         } else {
+            
             String lang;
             
             try {
@@ -89,21 +88,23 @@ public class Help extends CourseWebBaseController {
                     
                 }
                 
-                request.setAttribute("page", "help");
-                request.setAttribute("style", "help");               
-                action_default(request, response);
+                request.setAttribute("page", "about");
+                request.setAttribute("style", "about");
+                
+                action_default(request, response); 
                 
             } catch(TemplateManagerException ex){
                 request.setAttribute("exception", ex);
                 action_error(request, response);
             }
+            
         }
         
     }
     
     @Override
     public String getServletInfo() {
-        return "Help servlet";
+        return "About servlet";
 
     }
     

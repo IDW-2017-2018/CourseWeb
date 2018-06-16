@@ -59,7 +59,7 @@ public abstract class CourseWebBaseController extends HttpServlet {
             }
             
             if(s == null){
-                if(!request.getServletPath().contains("login")){
+                if( (!request.getServletPath().contains("login")) && (!request.getServletPath().contains("help")) && (!request.getServletPath().contains("about")) && (!request.getServletPath().contains("contacts")) ){
                     response.sendRedirect(response.encodeURL(request.getContextPath() + "/login?lang=" + request.getAttribute("lang")));
                 }
             } else if( (((Utente)s.getAttribute("utente")).getTipoUtente().equals("amministratore")) || (((Utente)s.getAttribute("utente")).getTipoUtente().equals("docente")) ){

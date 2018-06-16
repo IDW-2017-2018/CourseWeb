@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Giu 15, 2018 alle 17:21
+-- Creato il: Giu 16, 2018 alle 15:15
 -- Versione del server: 5.7.19
 -- Versione PHP: 5.6.31
 
@@ -245,6 +245,20 @@ CREATE TABLE IF NOT EXISTS `libri_testo` (
   `anno` text NOT NULL,
   `editore` text NOT NULL,
   `link` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `log`
+--
+
+DROP TABLE IF EXISTS `log`;
+CREATE TABLE IF NOT EXISTS `log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `messaggio` text NOT NULL,
+  `timestamp` timestamp NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

@@ -72,6 +72,14 @@
         <url-pattern>/contacts</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>About</servlet-name>
+        <servlet-class>courseweb.controller.About</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>About</servlet-name>
+        <url-pattern>/about</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>Course</servlet-name>
         <servlet-class>courseweb.controller.Course</servlet-class>
     </servlet>

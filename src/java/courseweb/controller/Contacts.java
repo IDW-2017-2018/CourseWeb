@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe Contacts
  */
 package courseweb.controller;
 
@@ -32,10 +30,20 @@ public class Contacts extends CourseWebBaseController {
         TemplateResult result = new TemplateResult(getServletContext()); 
         
         if(request.getAttribute("lang").equals("eng")){
-            request.setAttribute("navbar_tpl", "/eng/not_logged_navbar.html.ftl");
+            
+            if(request.getAttribute("session") != null)
+                request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+            else
+                request.setAttribute("navbar_tpl", "/eng/not_logged_navbar.html.ftl");
+            
             result.activate("/eng/contacts.html.ftl", request, response);
         } else if(request.getAttribute("lang").equals("ita")){
-            request.setAttribute("navbar_tpl", "/ita/not_logged_navbar.html.ftl");
+            
+            if(request.getAttribute("session") != null)
+                request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+            else
+                request.setAttribute("navbar_tpl", "/ita/not_logged_navbar.html.ftl");
+            
             result.activate("/ita/contacts.html.ftl", request, response);
         } else {
             request.setAttribute("message", "Illegal language");
