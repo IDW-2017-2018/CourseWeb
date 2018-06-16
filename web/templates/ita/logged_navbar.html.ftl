@@ -8,7 +8,7 @@
 	<li class="menu_item"><a href="backofficehub?lang=${lang}">BACKOFFICE</a></li>
 	</#if>
 
-	<#if (session.getAttribute('utente').tipoUtente != "anonimo") && corso?? && page==backoffice>
+	<#if (session.getAttribute('utente').tipoUtente != "anonimo") && corso?? && page == "backoffice">
 	<li class="menu_item"><a href="backofficehub?lang=${lang}">HUB DEL CORSO</a></li>
 	</#if>
 

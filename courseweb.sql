@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Giu 16, 2018 alle 15:15
+-- Creato il: Giu 16, 2018 alle 16:27
 -- Versione del server: 5.7.19
 -- Versione PHP: 5.6.31
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `corsi` (
   `link_risorse` text NOT NULL,
   `link_forum` text NOT NULL,
   PRIMARY KEY (`id`,`codice`,`anno`)
-) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `corsi`
@@ -210,13 +210,14 @@ CREATE TABLE IF NOT EXISTS `info_corsi` (
   `lang` text NOT NULL,
   `id_corso` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `info_corsi`
 --
 
 INSERT INTO `info_corsi` (`id`, `prerequisiti`, `obiettivi`, `mod_esame`, `mod_insegnamento`, `descrittori_dublino`, `sillabo`, `note`, `lang`, `id_corso`) VALUES
+(79, ' ', ' ', ' ', ' ', '', ' ', ' ', 'ita', 42),
 (78, ' ', ' ', ' ', ' ', '', ' ', ' ', 'eng', 41),
 (77, ' ', ' ', ' ', ' ', '', ' ', ' ', 'ita', 41),
 (76, ' ', ' ', ' ', ' ', '', ' ', ' ', 'eng', 40),
@@ -228,7 +229,8 @@ INSERT INTO `info_corsi` (`id`, `prerequisiti`, `obiettivi`, `mod_esame`, `mod_i
 (70, ' ', ' ', ' ', ' ', '', ' ', ' ', 'eng', 37),
 (69, ' ', ' ', ' ', ' ', '', ' ', ' ', 'ita', 37),
 (68, ' AAAAAAAAAAAAAAAAAAAAAA', ' AAAAAAAAAAAAAAAAA', ' AAAAAAAAAA', ' AAAAAAAAAAAA', 'AAAAAAAAAAAAAAAAAAAAA', ' AAAAAAAAAAAAAAAAAAA', ' AAAAAAAAAAAAAAAAAA', 'eng', 36),
-(67, ' aaaaaaaaaa', ' aaaaaaaaaaaaaaaa', ' aaaaaaaaaaaaaaaaaaaaaaa', ' aaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', ' aaaaaaaaaaaaaaaaaaaaaaa', ' aaaaaaaaaaaaaaaaa', 'ita', 36);
+(67, ' aaaaaaaaaa', ' aaaaaaaaaaaaaaaa', ' aaaaaaaaaaaaaaaaaaaaaaa', ' aaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', ' aaaaaaaaaaaaaaaaaaaaaaa', ' aaaaaaaaaaaaaaaaa', 'ita', 36),
+(80, ' ', ' ', ' ', ' ', '', ' ', ' ', 'eng', 42);
 
 -- --------------------------------------------------------
 
@@ -258,7 +260,7 @@ DROP TABLE IF EXISTS `log`;
 CREATE TABLE IF NOT EXISTS `log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `messaggio` text NOT NULL,
-  `timestamp` timestamp NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
