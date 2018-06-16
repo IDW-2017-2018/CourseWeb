@@ -11,6 +11,8 @@
     <#if (session.getAttribute('utente').tipoUtente != "anonimo") && corso?? && page==backoffice>
     <li class="menu_item"><a href="backofficehub?lang=${lang}">COURSE HUB</a></li>
     </#if>
+
+    <li class="menu_item"><a href="help?lang=${lang}">HELP</a></li>
     
         <#if (session.getAttribute('utente').nome != "")>
             <li class="profile_item"><p>${session.getAttribute('utente').nome}</p></li>
