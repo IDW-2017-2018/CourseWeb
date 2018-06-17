@@ -1,3 +1,4 @@
+<#if (session.getAttribute('utente').tipoUtente == "amministratore")>
 <div class="filter">
     
     <h1 class="title">FILTRI</h1>
@@ -51,7 +52,7 @@
     </div>
 
 </div>
-
+</#if>
 
 <#list corsi>
 

@@ -186,7 +186,8 @@ public class BackOfficeCourse extends CourseWebBaseController {
             String lang = (String) request.getAttribute("lang"); 
             List<Corso> corsi_filtrati = datalayer.filterCorsiByLang(lang, corsi_non_filtrati);
             if(request.getAttribute("session") != null){
-                if(((Utente)request.getAttribute("utente")).getTipoUtente().equals("docente")){
+                HttpSession session = (HttpSession) request.getAttribute("session");
+                if(((Utente)session.getAttribute("utente")).getTipoUtente().equals("docente")){
                 String cognome = ((Utente)request.getAttribute("utente")).getCognome();
                 corsi_filtrati = datalayer.filtraCorsi(corsi_filtrati, "corso_docente", cognome);
                 }

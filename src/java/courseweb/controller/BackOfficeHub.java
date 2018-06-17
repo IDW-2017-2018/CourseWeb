@@ -57,7 +57,7 @@ public class BackOfficeHub extends CourseWebBaseController {
         
         try {
             if(request.getAttribute("session") != null){
-                if(((Utente)request.getAttribute("utente")).getTipoUtente().equals("amministratore")) {
+                if(((Utente)session.getAttribute("utente")).getTipoUtente().equals("amministratore")) {
                     response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficecourse?action=add_course&lang=" + request.getAttribute("lang")));
                 }
                 else{
