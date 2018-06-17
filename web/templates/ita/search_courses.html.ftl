@@ -34,6 +34,7 @@
 			
             <label class="label" for="corso_docente">Docenti</label>
             <select class="field" name="corso_docente">
+			    <option value="---">---</option>
             <#list docenti>
             	<#items as docente>
 			    <option value="${docente.cognome}">${docente.cognome}</option>
@@ -51,6 +52,7 @@
 	
             <label class="label" for="corso_corsi_laurea">Corsi di Laurea</label>
 	        <select class="field" name="corso_corsi_laurea">
+			    <option value="---">---</option>
 	        <#list corsilaurea>
 	        	<#items as corsolaurea>
 				<option value="${corsolaurea.nome}">${corsolaurea.nome}</option>

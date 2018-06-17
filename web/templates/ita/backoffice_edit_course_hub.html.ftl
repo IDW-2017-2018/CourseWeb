@@ -1,6 +1,5 @@
 
-<h1 class="coursename">${corso.nome}</h1>
-<h1 class="coursename">${corso.anno}</h1>
+<h1 class="coursename">${corso.nome}<br>${corso.anno}</h1>
 
 <div class="filter">
 

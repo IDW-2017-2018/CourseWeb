@@ -12,9 +12,6 @@
             <label class="label" for="corso_codice">Code</label>
             <input class="field" type="text" id="corso_codice" name="corso_codice" placeholder="${strip_slashes(corso_ita.codice)}"/>
 
-            <label class="label" for="corso_anno">Year</label>
-            <input class="field" type="text" id="corso_anno" name="corso_anno" placeholder="${corso_ita.anno}"/>
-
             <label class="label" for="corso_nome">Name</label>
             <input class="field" type="text" id="corso_nome" name="corso_nome" placeholder="${strip_slashes(corso_ita.nome)}"/>
     
