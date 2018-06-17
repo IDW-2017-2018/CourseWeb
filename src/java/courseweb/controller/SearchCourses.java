@@ -3,7 +3,7 @@
  */
 package courseweb.controller;
 
-import courseweb.data.impl.CorsoComparatorByNome;
+import courseweb.utils.CorsoComparatorByNome;
 import courseweb.data.model.Corso;
 import courseweb.data.model.CourseWebDataLayer;
 import framework.result.FailureResult;
@@ -138,11 +138,13 @@ public class SearchCourses extends CourseWebBaseController {
         //carica la pagina
         if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                corsi_filtrati.sort(new CorsoComparatorByNome());
                 request.setAttribute("corsi", corsi_filtrati);
                 result.activate("/eng/search_courses.html.ftl", request, response);  
 
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                corsi_filtrati.sort(new CorsoComparatorByNome());
                 request.setAttribute("corsi", corsi_filtrati);
                 result.activate("/ita/search_courses.html.ftl", request, response); 
 

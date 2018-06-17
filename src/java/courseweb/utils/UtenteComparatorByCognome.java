@@ -1,7 +1,7 @@
 /*
  * Class UtenteComparatorByCognome
  */
-package courseweb.data.impl;
+package courseweb.utils;
 
 import courseweb.data.model.Utente;
 import java.util.Comparator;

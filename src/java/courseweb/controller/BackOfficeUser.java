@@ -3,6 +3,7 @@
  */
 package courseweb.controller;
 
+import courseweb.utils.UtenteComparatorByCognome;
 import courseweb.data.impl.UtenteImpl;
 import courseweb.data.model.CourseWebDataLayer;
 import courseweb.data.model.Utente;
@@ -42,6 +43,7 @@ public class BackOfficeUser extends CourseWebBaseController {
             String ripetiPassword = request.getParameter("utente_ripeti_password");
             String nome = request.getParameter("utente_nome");
             String cognome = request.getParameter("utente_cognome");
+            String tipo_utente = request.getParameter("utente_tipo_utente");
             
             email = SecurityLayer.addSlashes(email);
             password = SecurityLayer.addSlashes(password);
@@ -68,7 +70,7 @@ public class BackOfficeUser extends CourseWebBaseController {
             utente.setPassword(SecurityLayer.md5String(password));
             utente.setNome(nome);
             utente.setCognome(cognome);
-            utente.setTipoUtente("docente");
+            utente.setTipoUtente(tipo_utente);
             
             datalayer.storeUtenteByEmail(utente);
             datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha aggiunto il docente " + email);
@@ -99,6 +101,7 @@ public class BackOfficeUser extends CourseWebBaseController {
             String ripetiPassword = request.getParameter("utente_ripeti_password");
             String nome = request.getParameter("utente_nome");
             String cognome = request.getParameter("utente_cognome");
+            String tipo_utente = request.getParameter("utente_tipo_utente");
             
             email = SecurityLayer.addSlashes(email);
             password = SecurityLayer.addSlashes(password);
@@ -141,6 +144,11 @@ public class BackOfficeUser extends CourseWebBaseController {
                 edited = true;
             }
             
+            if(utente.getTipoUtente().equals(tipo_utente)){
+                utente.setTipoUtente(tipo_utente);
+                edited = true;
+            }
+            
             if(edited == true){
                 datalayer.storeUtenteById(utente);
                 datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha modificato l'utente " + email);            
@@ -179,7 +187,7 @@ public class BackOfficeUser extends CourseWebBaseController {
         String utente_nome = request.getParameter("utente_nome");
         String utente_cognome = request.getParameter("utente_cognome");
         String utente_email = request.getParameter("utente_email");
-        String utente_tipo = "docente";
+        String utente_tipo = request.getParameter("utente_tipo_utente");
         
         try {
             
@@ -209,10 +217,12 @@ public class BackOfficeUser extends CourseWebBaseController {
         
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                utenti.sort(new UtenteComparatorByCognome());
                 request.setAttribute("utenti", utenti); 
                 result.activate("/eng/backoffice_filter_edit_user.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                utenti.sort(new UtenteComparatorByCognome());
                 request.setAttribute("utenti", utenti); 
                 result.activate("/ita/backoffice_filter_edit_user.html.ftl", request, response);
             } else {
@@ -227,14 +237,18 @@ public class BackOfficeUser extends CourseWebBaseController {
         TemplateResult result = new TemplateResult(getServletContext()); 
       
         try {
+            
+            List<Utente> utenti = ((CourseWebDataLayer) request.getAttribute("datalayer")).getDocenti();
            
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                request.setAttribute("utenti", ((CourseWebDataLayer) request.getAttribute("datalayer")).getDocenti()); 
+                utenti.sort(new UtenteComparatorByCognome());
+                request.setAttribute("utenti", utenti); 
                 result.activate("/eng/backoffice_filter_edit_user.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                request.setAttribute("utenti", ((CourseWebDataLayer) request.getAttribute("datalayer")).getDocenti()); 
+                utenti.sort(new UtenteComparatorByCognome());
+                request.setAttribute("utenti", utenti); 
                 result.activate("/ita/backoffice_filter_edit_user.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");

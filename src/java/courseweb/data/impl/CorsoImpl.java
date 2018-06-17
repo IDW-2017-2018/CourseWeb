@@ -16,7 +16,7 @@ import java.util.Iterator;
 /*
  * @author Flavio
  */
-public class CorsoImpl implements Corso, Comparable<Corso> {
+public class CorsoImpl implements Corso {
     
     private int id;
     private String nome;
@@ -364,6 +364,9 @@ public class CorsoImpl implements Corso, Comparable<Corso> {
         this.showTeachers = "";
         
         Iterator it = this.docenti.iterator();
+        if(it.hasNext()){
+            it.next();
+        }
         for(Utente docente : this.docenti){
             if(it.hasNext()){
                 this.showTeachers += docente.getCognome() + ", ";

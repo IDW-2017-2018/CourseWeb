@@ -1,7 +1,7 @@
 /*
  * Class CorsoComparatorByNome
  */
-package courseweb.data.impl;
+package courseweb.utils;
 
 import courseweb.data.model.Corso;
 import java.util.Comparator;
