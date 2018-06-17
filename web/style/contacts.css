@@ -64,9 +64,21 @@
 .card-button:hover {
 
     background-color: #01d475;
-    cursor: pointer;
-    color: black;
     border-color: #01d475;
+
+}
+
+.card-mailto {
+
+    text-decoration: none;
+    color: white;
+    outline: none;
+
+}
+
+.card-button:hover a{
+
+    color: black;
 
 }
 

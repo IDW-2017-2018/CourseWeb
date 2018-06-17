@@ -4,13 +4,14 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="6"><h1 class="title">BASIC DATA</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">BASIC DATA</h1></th>
 
     </tr>
 
     <tr class="trresult">
 
         <th class="thresult" colspan="2">NAME</th>
+        <th class="thresult">YEAR</th>
         <th class="thresult">CODE</th>
         <th class="thresult">SSD</th>
         <th class="thresult">LANGUAGE</th>
@@ -21,6 +22,7 @@
     <tr class="trresult">
 
         <td class="tdresult" colspan="2">${strip_slashes(corso.nome)}</td>
+        <td class="tdresult">${strip_slashes(corso.anno)}</td>
         <td class="tdresult">${strip_slashes(corso.codice)}</td>
         <td class="tdresult">${strip_slashes(corso.SSD)}</td>
         <td class="tdresult">${strip_slashes(corso.lingua)}</td>
@@ -32,7 +34,7 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="6"><h1 class="title">PAGE VERSIONS</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">PAGE VERSIONS</h1></th>
 
     </tr>
 
@@ -40,7 +42,7 @@
 
     <tr class="trresult-list">
 
-        <td class="tdresult" colspan="6"><a class="linkresult" href="course?lang=${lang}&id=${corso_anno.id}">${corso_anno.anno}</a></td>
+        <td class="tdresult" colspan="7"><a class="linkresult" href="course?lang=${lang}&id=${corso_anno.id}">${corso_anno.anno}</a></td>
 
     </tr>
 
@@ -54,7 +56,7 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="6"><h1 class="title">PROFESSORS</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">PROFESSORS</h1></th>
 
     </tr>
 
@@ -62,7 +64,7 @@
 
     <tr class="trresult-list">
 
-        <td class="tdresult-list" colspan="6">${strip_slashes(docente.nome)}&nbsp;${strip_slashes(docente.cognome)}</td>
+        <td class="tdresult-list" colspan="7">${strip_slashes(docente.nome)}&nbsp;${strip_slashes(docente.cognome)}</td>
 
     </tr>
 
@@ -74,67 +76,67 @@
     
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="6"><h1 class="title">INFO COURSE</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">INFO COURSE</h1></th>
 
     </tr>
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="6">PREREQUISITES</th>
+        <th class="thresult" colspan="7">PREREQUISITES</th>
 
     </tr>
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${strip_slashes(corso.prerequisiti)}</td>
+        <td class="tdresult" colspan="7">${strip_slashes(corso.prerequisiti)}</td>
 
     </tr>
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="6">ACHIVES</th>
+        <th class="thresult" colspan="7">ACHIVES</th>
 
     </tr>
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${strip_slashes(corso.obiettivi)}</td>
+        <td class="tdresult" colspan="7">${strip_slashes(corso.obiettivi)}</td>
 
     </tr>
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="6">MOD EXAM</th>
+        <th class="thresult" colspan="7">MOD EXAM</th>
 
     </tr>
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${strip_slashes(corso.modEsame)}</td>
+        <td class="tdresult" colspan="7">${strip_slashes(corso.modEsame)}</td>
 
     </tr>
 
      <tr class="trresult">
 
-        <th class="thresult" colspan="6">MOD TEACH</th>
+        <th class="thresult" colspan="7">MOD TEACH</th>
 
     </tr>
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${strip_slashes(corso.modInsegnamento)}</td>
+        <td class="tdresult" colspan="7">${strip_slashes(corso.modInsegnamento)}</td>
 
     </tr>
 
      <tr class="trresult">
 
-        <th class="thresult" colspan="6">SILLABO ENG</th>
+        <th class="thresult" colspan="7">SILLABO ENG</th>
 
     </tr>
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${strip_slashes(corso.sillabo)}</td>
+        <td class="tdresult" colspan="7">${strip_slashes(corso.sillabo)}</td>
 
     </tr>
 
@@ -142,13 +144,13 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="6"><h1 class="title">DEGREE COURSES</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">DEGREE COURSES</h1></th>
 
     </tr>
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="4">NAME</th>
+        <th class="thresult" colspan="5">NAME</th>
         <th class="thresult">CFU</th>
         <th class="thresult">CFU TYPE</th>
 
@@ -158,7 +160,7 @@
 
      <tr class="trresult-list">
 
-        <td class="tdresult-list" colspan="4">${strip_slashes(corso_laurea.nome)}</td>
+        <td class="tdresult-list" colspan="5">${strip_slashes(corso_laurea.nome)}</td>
         <td class="tdresult-list">${corso_laurea.numero_cfu}</td>
         <td class="tdresult-list">${corso_laurea.tipo_cfu}</td>
 
@@ -172,13 +174,13 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="6"><h1 class="title">DUBLINO'S DESCRIPTORS</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">DUBLINO'S DESCRIPTORS</h1></th>
 
     </tr>
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${strip_slashes(corso.descrittoriDublino)}</td>
+        <td class="tdresult" colspan="7">${strip_slashes(corso.descrittoriDublino)}</td>
 
     </tr>
 
@@ -187,14 +189,14 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="6"><h1 class="title">BOOKS</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">BOOKS</h1></th>
 
     </tr>
 
     <tr class="trresult">
 
         <th class="thresult">AUTOR</th>
-        <th class="thresult">TITLEth>
+        <th class="thresult" colspan="2">TITLEth>
         <th class="thresult">VOLUME</th>
         <th class="thresult">YEAR</th>
         <th class="thresult">EDITOR</th>
@@ -207,7 +209,7 @@
      <tr class="trresult-list">
 
         <td class="tdresult-list">${strip_slashes(libro.autore)}</td>
-        <td class="tdresult-list">${strip_slashes(libro.titolo)}</td>
+        <td class="tdresult-list" colspan="2">${strip_slashes(libro.titolo)}</td>
         <td class="tdresult-list">${strip_slashes(libro.volume)}</td>
         <td class="tdresult-list">${libro.anno}</td>
         <td class="tdresult-list">${strip_slashes(libro.editore)}</td>
@@ -223,7 +225,7 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="6"><h1 class="title">RELATIONSHIPS</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">RELATIONSHIPS</h1></th>
 
     </tr>
 
@@ -231,7 +233,7 @@
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="6">PROPEDEUTICS COURSES</th>
+        <th class="thresult" colspan="7">PROPEDEUTICS COURSES</th>
 
     </tr>
     
@@ -239,7 +241,7 @@
 
      <tr class="trresult">
 
-        <td class="tdresult" colspan="6"><a class="linkresult" href="course?lang=${lang}&id=${corso_propedeutico.id}">${strip_slashes(corso_propedeutico.nome)}</a></td>
+        <td class="tdresult" colspan="7"><a class="linkresult" href="course?lang=${lang}&id=${corso_propedeutico.id}">${strip_slashes(corso_propedeutico.nome)}</a></td>
 
     </tr>
 
@@ -253,7 +255,7 @@
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="6">MUTUATS COURSES</th>
+        <th class="thresult" colspan="7">MUTUATS COURSES</th>
 
     </tr>
     
@@ -261,7 +263,7 @@
 
      <tr class="trresult">
 
-        <td class="tdresult" colspan="6"><a class="linkresult" href="course?lang=${lang}&id=${corso_mutuato.id}">${strip_slashes(corso_mutuato.nome)}</a></td>
+        <td class="tdresult" colspan="7"><a class="linkresult" href="course?lang=${lang}&id=${corso_mutuato.id}">${strip_slashes(corso_mutuato.nome)}</a></td>
 
     </tr>
 
@@ -275,7 +277,7 @@
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="6">MODULS</th>
+        <th class="thresult" colspan="7">MODULS</th>
 
     </tr>
     
@@ -283,7 +285,7 @@
 
      <tr class="trresult">
 
-        <td class="tdresult" colspan="6"><a class="linkresult" href="course?lang=${lang}&id=${modulo.id}">${strip_slashes(modulo.nome)}</a></td>
+        <td class="tdresult" colspan="7"><a class="linkresult" href="course?lang=${lang}&id=${modulo.id}">${strip_slashes(modulo.nome)}</a></td>
 
     </tr>
 
@@ -295,13 +297,13 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="6"><h1 class="title">EXTERNAL LINKS</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">EXTERNAL LINKS</h1></th>
 
     </tr>
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="2">HOMEPAGE</th>
+        <th class="thresult" colspan="3">HOMEPAGE</th>
         <th class="thresult" colspan="2">EXTERNAL RESOURCES</th>
         <th class="thresult" colspan="2">FORUM / eLEARNING ENG</th>
 
@@ -309,7 +311,7 @@
 
      <tr class="trresult">
 
-        <td class="tdresult" colspan="2"><a class="linkresult" href="">${strip_slashes(corso.linkHomepageCorso)}</a></td>
+        <td class="tdresult" colspan="3"><a class="linkresult" href="">${strip_slashes(corso.linkHomepageCorso)}</a></td>
         <td class="tdresult" colspan="2"><a class="linkresult" href="">${strip_slashes(corso.linkRisorseEsterne)}</a></td>
         <td class="tdresult" colspan="2"><a class="linkresult" href="">${strip_slashes(corso.linkForum)}</a></td>
 
@@ -317,13 +319,13 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="6"><h1 class="title">NOTES</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">NOTES</h1></th>
 
     </tr>
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${strip_slashes(corso.note)}</td>
+        <td class="tdresult" colspan="7">${strip_slashes(corso.note)}</td>
 
     </tr>
 
@@ -331,13 +333,13 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="6"><h1 class="title">MATERIALS</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">MATERIALS</h1></th>
 
     </tr>
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="3">NAME</th>
+        <th class="thresult" colspan="4">NAME</th>
         <th class="thresult" colspan="2">DESCRIPTION</th>
         <th class="thresult">DIMENSION</th>
 
@@ -347,7 +349,7 @@
 
      <tr class="trresult-list">
 
-        <td class="tdresult-list" colspan="3"><a class="linkresult" href="">${strip_slashes(materiale.nome)}</a></td>
+        <td class="tdresult-list" colspan="4"><a class="linkresult" href="">${strip_slashes(materiale.nome)}</a></td>
         <td class="tdresult-list" colspan="2">${strip_slashes(materiale.descrizione)}</td>
         <td class="tdresult-list">${materiale.dimensione}</td>
 

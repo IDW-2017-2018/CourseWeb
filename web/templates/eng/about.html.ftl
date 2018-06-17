@@ -40,7 +40,7 @@
         <!--
     
         function myMap() {
-          var myCenter = new google.maps.LatLng(51.508742,-0.120850);
+          var myCenter = new google.maps.LatLng(42.3689107,13.3494623);
           var mapCanvas = document.getElementById("map");
           var mapOptions = {center: myCenter, zoom: 12};
           var map = new google.maps.Map(mapCanvas, mapOptions);
@@ -51,4 +51,4 @@
         //-->
     </script>
     
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>

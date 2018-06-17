@@ -51,6 +51,13 @@ public class CorsoImpl implements Corso, Comparable<Corso> {
     
     private String showTeachers;
     
+    public String courseTeachers() throws DataLayerException{
+    
+        this.getDocentiCorso();
+        return showTeachers;
+    
+    }
+    
     public CorsoImpl(CourseWebDataLayer ownerDataLayer) {
         this.ownerDataLayer = ownerDataLayer;
         this.id = 0;
@@ -182,6 +189,9 @@ public class CorsoImpl implements Corso, Comparable<Corso> {
             this.docenti = ownerDataLayer.getDocentiCorso(this);
             
             Iterator it = this.docenti.iterator();
+            if(it.hasNext()){
+                it.next();
+            }
             for(Utente docente : this.docenti){
                 if(it.hasNext()){
                     this.showTeachers += docente.getCognome() + ", ";

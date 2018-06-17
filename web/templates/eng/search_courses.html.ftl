@@ -79,7 +79,7 @@
 			<tr class="trresult">
 				<td class="tdresult">${strip_slashes(corso.codice)}</td>
 				<td class="tdresult"><a class="linkresult" href="course?lang=${lang}&id=${corso.id}">${strip_slashes(corso.nome)}</a></td>
-				<td class="tdresult">${strip_slashes(corso.showTeachers)}</td>
+				<td class="tdresult">${strip_slashes(corso.courseTeachers())}</td>
 				<td class="tdresult">${strip_slashes(corso.lingua)}</td>
 				<td class="tdresult">${strip_slashes(corso.semestre)}</td>
 				<td class="tdresult">${strip_slashes(corso.SSD)}</td>

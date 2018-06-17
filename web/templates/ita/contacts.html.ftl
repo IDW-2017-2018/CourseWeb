@@ -9,7 +9,7 @@
       <p class="card-text"><em>Universit&agrave; degli Studi dell'Aquila</em></p>
       <p class="card-text"><b>valentino.digiosaffatte<br>@student.univaq.it</b></p>
   </div>
-  <button class="card-button">CONTATTA</button>
+  <button class="card-button"><a class="card-mailto" href="mailto:valentino.digiosaffatte@student.univaq.it">CONTATTA</a></button>
 </div>
 
 <div class="card">
@@ -20,7 +20,7 @@
       <p class="card-text"><em>Universit&agrave; degli Studi dell'Aquila</em></p>
       <p class="card-text"><b>riccardoarmando.diprinzio<br>@student.univaq.it</b></p>
   </div>
-  <button class="card-button">CONTATTA</button>
+  <button class="card-button"><a class="card-mailto" href="mailto:riccardoarmando.diprinzio@student.univaq.it">CONTATTA</a></button>
 </div>
 
 <div class="card">
@@ -31,7 +31,7 @@
       <p class="card-text"><em>Universit&agrave; degli Studi dell'Aquila</em></p>
       <p class="card-text"><b>flavio.furia<br>@student.univaq.it</b></p>
   </div>
-  <button class="card-button">CONTATTA</button>
+  <button class="card-button"><a class="card-mailto" href="mailto:flavio.furia@student.univaq.it">CONTATTA</a></button>
 </div>
 
 </div>
