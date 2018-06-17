@@ -99,7 +99,15 @@ public class BackOfficeCourse extends CourseWebBaseController {
             }
             
             CourseWebDataLayer datalayer = ((CourseWebDataLayer) request.getAttribute("datalayer"));
-
+            List<Corso> corso_versioni = datalayer.getCorsoByNomeVersioni(nome);
+            for(Corso corso:corso_versioni){
+                if(corso.getAnno().equals(anno)){
+                request.setAttribute("message", "course for the chosen year already exists");
+                action_error(request, response);
+                return;   
+                }
+            }
+            
             Corso corso = new CorsoImpl(datalayer);
             corso.setCodice(codice);
             corso.setAnno(anno);
