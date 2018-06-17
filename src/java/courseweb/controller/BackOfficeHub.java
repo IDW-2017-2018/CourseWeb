@@ -56,9 +56,16 @@ public class BackOfficeHub extends CourseWebBaseController {
         
         
         try {
-            
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficecourse?action=add_course&lang=" + request.getAttribute("lang")));
-            
+            if(request.getAttribute("session") != null){
+                if(((Utente)request.getAttribute("utente")).getTipoUtente().equals("amministratore")) {
+                    response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficecourse?action=add_course&lang=" + request.getAttribute("lang")));
+                }
+                else{
+                    request.setAttribute("message", "not permitted");
+                    action_error(request, response);
+                    return;
+                }
+            }
         } catch(IOException e){
             request.setAttribute("exception", e);
             action_error(request, response); 

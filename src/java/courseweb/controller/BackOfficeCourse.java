@@ -155,7 +155,13 @@ public class BackOfficeCourse extends CourseWebBaseController {
     private void action_aggiungi_corso_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         TemplateResult result = new TemplateResult(getServletContext()); 
-        
+        if(request.getAttribute("session") != null){
+            if(((Utente)request.getAttribute("utente")).getTipoUtente().equals("docente")){
+                request.setAttribute("message", "not permitted");
+                action_error(request, response);
+                return;
+            }
+        }
             
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
@@ -174,14 +180,17 @@ public class BackOfficeCourse extends CourseWebBaseController {
         
         TemplateResult result = new TemplateResult(getServletContext()); 
         
-        try {
-            
+        try {            
             CourseWebDataLayer datalayer = (CourseWebDataLayer)request.getAttribute("datalayer");
-            
+            List<Corso> corsi_non_filtrati = datalayer.getCorsiAggiornati();           
             String lang = (String) request.getAttribute("lang"); 
-            List<Corso> corsi_non_filtrati = datalayer.getCorsiAggiornati(); 
-            List<Corso> corsi_filtrati = datalayer.filterCorsiByLang(lang, corsi_non_filtrati); 
-            
+            List<Corso> corsi_filtrati = datalayer.filterCorsiByLang(lang, corsi_non_filtrati);
+            if(request.getAttribute("session") != null){
+                if(((Utente)request.getAttribute("utente")).getTipoUtente().equals("docente")){
+                String cognome = ((Utente)request.getAttribute("utente")).getCognome();
+                corsi_filtrati = datalayer.filtraCorsi(corsi_filtrati, "corso_docente", cognome);
+                }
+            }
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 corsi_filtrati.sort(new CorsoComparatorByNome());
