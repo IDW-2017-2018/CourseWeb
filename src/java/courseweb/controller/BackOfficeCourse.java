@@ -16,7 +16,6 @@ import framework.security.SecurityLayer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -247,7 +246,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_ssd", corso_ssd); 
             } 
             
-            if (!corso_docente.equals("")){
+            if (!corso_docente.equals("---")){
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_docente", corso_docente); 
             } 
             
@@ -255,7 +254,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_lingua", corso_lingua); 
             } 
             
-            if (!corso_corsi_laurea.equals("")){
+            if (!corso_corsi_laurea.equals("---")){
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_corsi_laurea", corso_corsi_laurea); 
             } 
             

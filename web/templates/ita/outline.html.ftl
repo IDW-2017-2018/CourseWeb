@@ -46,15 +46,27 @@
     <!-- ########## LANG BAR ########## -->
 
     <ul class="lang_bar">
+
+    	<#if id?? && action?? && item?? && name?? && hub_log?? >
+            <li><a href="backofficehub?lang=ita&id=${id}&action=${action}&item=${item}&name=${name}&hub_log=true">ITALIANO</a></li>
+            <li><a href="backofficehub?lang=eng&id=${id}&action=${action}&item=${item}&name=${name}&hub_log=true">INGLESE</a></li>
         
-        <#if id?? && action?? && item?? && name??>
+        <#elseif id?? && action?? && item?? && name??>
             <li><a href="${page}?lang=ita&id=${id}&action=${action}&item=${item}&name=${name}">ITALIANO</a></li>
             <li><a href="${page}?lang=eng&id=${id}&action=${action}&item=${item}&name=${name}">INGLESE</a></li>
+
+		<#elseif id?? && action?? && item?? && hub_log??>
+            <li><a href="backofficehub?lang=eng&id=${id}&action=${action}&item=${item}&hub_log=true">ITALIANO</a></li>
+            <li><a href="backofficehub?lang=ita&id=${id}&action=${action}&item=${item}&hub_log=true">INGLESE</a></li>
 
         <#elseif id?? && action?? && item??>
             <li><a href="${page}?lang=ita&id=${id}&action=${action}&item=${item}">ITALIANO</a></li>
             <li><a href="${page}?lang=eng&id=${id}&action=${action}&item=${item}">INGLESE</a></li>
 
+        <#elseif id?? && action?? && hub_log??>
+        <li><a href="backofficehub?lang=ita&id=${id}&action=${action}&hub_log=true">ITALIANO</a></li>
+        <li><a href="backofficehub?lang=eng&id=${id}&action=${action}&hub_log=true">INGLESE</a></li>
+            	
         <#elseif id?? && action??>
             <li><a href="${page}?lang=ita&id=${id}&action=${action}">ITALIANO</a></li>
             <li><a href="${page}?lang=eng&id=${id}&action=${action}">INGLESE</a></li>
@@ -74,6 +86,10 @@
         <#elseif name??>
             <li><a href="${page}?lang=ita&name=${name}">ITALIANO</a></li>
             <li><a href="${page}?lang=eng&name=${name}">INGLESE</a></li>
+
+       	<#elseif hub_log??>
+        <li><a href="backofficehub?lang=ita&hub_log=true">ITALIANO</a></li>
+        <li><a href="backofficehub?lang=eng&hub_log=true">INGLESE</a></li>
 
         <#else>
             <li><a href="${page}?lang=ita">ITALIANO</a></li>

@@ -9,7 +9,7 @@ import framework.data.DataLayerException;
  *
  * @author valen
  */
-public interface Materiale {
+public interface Materiale extends Comparable<Materiale> {
     
     int getId(); 
     String getNome(); 

@@ -9,7 +9,7 @@ import framework.data.DataLayerException;
  *
  * @author valen
  */
-public interface Libro_Testo {
+public interface Libro_Testo extends Comparable<Libro_Testo> {
     
     int getId(); 
     String getAutore(); 

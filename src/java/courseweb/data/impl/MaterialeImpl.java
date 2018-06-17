@@ -107,6 +107,10 @@ public class MaterialeImpl implements Materiale {
         percorso = materiale.getPercorso();
         dirty = true;
         
+    }    
+
+    @Override
+    public int compareTo(Materiale o){
+        return this.nome.compareTo(o.getNome());
     }
-    
 }

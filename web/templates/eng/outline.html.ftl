@@ -46,14 +46,27 @@
     <!-- ########## LANG BAR ########## -->
 
     <ul class="lang_bar">
+
+        <#if id?? && action?? && item?? && name?? && hub_log?? >
+            <li><a href="backofficehub?lang=ita&id=${id}&action=${action}&item=${item}&name=${name}&hub_log=true">ITALIAN</a></li>
+            <li><a href="backofficehub?lang=eng&id=${id}&action=${action}&item=${item}&name=${name}&hub_log=true">ENGLISH</a></li>
             
-        <#if id?? && action?? && item?? && name??>
+        <#elseif id?? && action?? && item?? && name??>
             <li><a href="${page}?lang=ita&id=${id}&action=${action}&item=${item}&name=${name}">ITALIAN</a></li>
             <li><a href="${page}?lang=eng&id=${id}&action=${action}&item=${item}&name=${name}">ENGLISH</a></li>
 
+
+        <#elseif id?? && action?? && item?? && hub_log??>
+            <li><a href="backofficehub?lang=eng&id=${id}&action=${action}&item=${item}&hub_log=true">ENGLISH</a></li>
+            <li><a href="backofficehub?lang=ita&id=${id}&action=${action}&item=${item}&hub_log=true">ITALIAN</a></li>
+    
         <#elseif id?? && action?? && item??>
             <li><a href="${page}?lang=ita&id=${id}&action=${action}&item=${item}">ITALIAN</a></li>
             <li><a href="${page}?lang=eng&id=${id}&action=${action}&item=${item}">ENGLISH</a></li>
+
+        <#elseif id?? && action?? && hub_log??>
+        <li><a href="backofficehub?lang=ita&id=${id}&action=${action}&hub_log=true">ITALIAN</a></li>
+        <li><a href="backofficehub?lang=eng&id=${id}&action=${action}&hub_log=true">ENGLISH</a></li>
 
         <#elseif id?? && action??>
             <li><a href="${page}?lang=ita&id=${id}&action=${action}">ITALIAN</a></li>
@@ -74,6 +87,10 @@
         <#elseif name??>
             <li><a href="${page}?lang=ita&name=${name}">ITALIAN</a></li>
             <li><a href="${page}?lang=eng&name=${name}">ENGLISH</a></li>
+
+        <#elseif hub_log??>
+        <li><a href="backofficehub?lang=ita&hub_log=true">ITALIAN</a></li>
+        <li><a href="backofficehub?lang=eng&hub_log=true">ENGLISH</a></li>
 
         <#else>
             <li><a href="${page}?lang=ita">ITALIAN</a></li>

@@ -5,14 +5,13 @@ package courseweb.data.impl;
 
 import courseweb.data.model.CourseWebDataLayer; 
 import courseweb.data.model.Libro_Testo;
-import courseweb.data.model.Materiale;
 import framework.data.DataLayerException;
 
 /**
  *
  * @author valen
  */
-public class Libro_TestoImpl implements Libro_Testo{
+public class Libro_TestoImpl implements Libro_Testo {
     
     private int id; 
     private String autore; 
@@ -137,4 +136,8 @@ public class Libro_TestoImpl implements Libro_Testo{
         
     }
     
+    @Override
+    public int compareTo(Libro_Testo o){
+        return this.titolo.compareTo(o.getTitolo());
+    }
 }

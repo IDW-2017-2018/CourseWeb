@@ -11,6 +11,11 @@ import courseweb.data.model.CourseWebDataLayer;
 import courseweb.data.model.Libro_Testo;
 import courseweb.data.model.Materiale;
 import courseweb.data.model.Utente;
+import courseweb.utils.CorsoComparatorByNome;
+import courseweb.utils.Corso_LaureaComparatorByNome;
+import courseweb.utils.Libro_TestoComparatorByTitolo;
+import courseweb.utils.MaterialeComparatorByNome;
+import courseweb.utils.UtenteComparatorByCognome;
 import framework.data.DataLayerException;
 import framework.result.FailureResult;
 import framework.result.TemplateManagerException;
@@ -24,7 +29,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -500,11 +504,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                res.sort(new Corso_LaureaComparatorByNome());
                 request.setAttribute("items", res); 
                 request.setAttribute("corso", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorso(id, "ita"));
                 result.activate("/eng/backoffice_add_degree_course.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                res.sort(new Corso_LaureaComparatorByNome());
                 request.setAttribute("items", res);
                 request.setAttribute("corso", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorso(id, "ita"));                
                 result.activate("/ita/backoffice_add_degree_course.html.ftl", request, response);                
@@ -576,12 +582,14 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
+                items.sort(new Corso_LaureaComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
                 result.activate("/eng/backoffice_delete_degree_course.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
+                items.sort(new Corso_LaureaComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
                 result.activate("/ita/backoffice_delete_degree_course.html.ftl", request, response);
@@ -649,11 +657,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                res.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", res);                
                 result.activate("/eng/backoffice_add_same_as_course.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                res.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", res);                
                 result.activate("/ita/backoffice_add_same_as_course.html.ftl", request, response);                
             } else {
@@ -711,12 +721,14 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
+                items.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
                 result.activate("/eng/backoffice_delete_same_as_course.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
+                items.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
                 result.activate("/ita/backoffice_delete_same_as_course.html.ftl", request, response);
@@ -782,11 +794,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                res.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", res);                
                 result.activate("/eng/backoffice_add_propaedeutic_course.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                res.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", res);                
                 result.activate("/ita/backoffice_add_propaedeutic_course.html.ftl", request, response);                
             } else {
@@ -844,12 +858,14 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
+                items.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
                 result.activate("/eng/backoffice_delete_propaedeutic_course.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
+                items.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
                 result.activate("/ita/backoffice_delete_propaedeutic_course.html.ftl", request, response);
@@ -915,11 +931,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                res.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", res);                
                 result.activate("/eng/backoffice_add_module.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                res.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", res);                
                 result.activate("/ita/backoffice_add_module.html.ftl", request, response);                
             } else {
@@ -976,12 +994,14 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
+                items.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
                 result.activate("/eng/backoffice_delete_module.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
+                items.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
                 result.activate("/ita/backoffice_delete_module.html.ftl", request, response);
@@ -1042,11 +1062,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                res.sort(new UtenteComparatorByCognome());
                 request.setAttribute("items", res);                
                 result.activate("/eng/backoffice_add_teacher.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 request.setAttribute("corso", datalayer.getCorso(id, "ita"));
+                res.sort(new UtenteComparatorByCognome());
                 request.setAttribute("items", res);                
                 result.activate("/ita/backoffice_add_teacher.html.ftl", request, response);                
             } else {
@@ -1103,12 +1125,14 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
+                items.sort(new UtenteComparatorByCognome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
                 result.activate("/eng/backoffice_delete_teacher.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
+                items.sort(new UtenteComparatorByCognome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
                 result.activate("/ita/backoffice_delete_teacher.html.ftl", request, response);
@@ -1165,11 +1189,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                res.sort(new Libro_TestoComparatorByTitolo());
                 request.setAttribute("items", res);                
                 request.setAttribute("corso", datalayer.getCorso(id,"ita"));
                 result.activate("/eng/backoffice_add_textbook.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                res.sort(new Libro_TestoComparatorByTitolo());
                 request.setAttribute("items", res);                
                 request.setAttribute("corso", datalayer.getCorso(id,"ita"));                
                 result.activate("/ita/backoffice_add_textbook.html.ftl", request, response);                
@@ -1306,12 +1332,14 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
+                items.sort(new Libro_TestoComparatorByTitolo());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
                 result.activate("/eng/backoffice_delete_textbook.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
+                items.sort(new Libro_TestoComparatorByTitolo());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
                 result.activate("/ita/backoffice_delete_textbook.html.ftl", request, response);
@@ -1368,11 +1396,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                res.sort(new MaterialeComparatorByNome());
                 request.setAttribute("items", res);                
                 request.setAttribute("corso", datalayer.getCorso(id,"ita"));                
                 result.activate("/eng/backoffice_add_material.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                res.sort(new MaterialeComparatorByNome());
                 request.setAttribute("items", res);                
                 request.setAttribute("corso", datalayer.getCorso(id,"ita"));                
                 result.activate("/ita/backoffice_add_material.html.ftl", request, response);                
@@ -1531,12 +1561,14 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
+                items.sort(new MaterialeComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
                 result.activate("/eng/backoffice_delete_material.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 request.setAttribute("id", id);
+                items.sort(new MaterialeComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
                 result.activate("/ita/backoffice_delete_material.html.ftl", request, response);

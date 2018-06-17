@@ -5,12 +5,14 @@ package courseweb.controller;
 
 import courseweb.data.model.CourseWebDataLayer;
 import courseweb.data.model.Utente;
+import courseweb.utils.LogComparatorByDate;
 import framework.data.DataLayerException;
 import framework.result.FailureResult;
 import framework.result.TemplateManagerException;
 import framework.result.TemplateResult;
 import framework.security.SecurityLayer;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -131,14 +133,22 @@ public class BackOfficeHub extends CourseWebBaseController {
         
         CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
         
+        
         try {
+            
+            List<String> items = datalayer.getLogMessage();
+            
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                request.setAttribute("items", datalayer.getLogMessage());
+                items.sort(new LogComparatorByDate());
+                request.setAttribute("hub_log", "true");
+                request.setAttribute("items", items);
                 result.activate("/eng/log.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                request.setAttribute("items", datalayer.getLogMessage());               
+                items.sort(new LogComparatorByDate());
+                request.setAttribute("hub_log", "true");
+                request.setAttribute("items", items);               
                 result.activate("/ita/log.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");

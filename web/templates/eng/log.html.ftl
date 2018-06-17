@@ -21,7 +21,7 @@
 
             <tr class="trresult-list">
 
-                <td class="tdresult-list" colspan="2">${item}</td>
+                <td class="tdresult-list" colspan="2">${strip_slashes(item)}</td>
                 
             </tr>
 
