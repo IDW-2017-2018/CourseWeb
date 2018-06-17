@@ -256,7 +256,6 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             boolean edited_eng = false; 
             
             String codice = request.getParameter("corso_codice");
-            String anno = request.getParameter("corso_anno");
             String nome = request.getParameter("corso_nome");
             String ssd = request.getParameter("corso_ssd");
             int semestre = Integer.parseInt(request.getParameter("corso_semestre"));
@@ -283,7 +282,6 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             
             
             codice = SecurityLayer.addSlashes(codice);
-            anno = SecurityLayer.addSlashes(anno);
             nome = SecurityLayer.addSlashes(nome);
             ssd = SecurityLayer.addSlashes(ssd);
             lingua = SecurityLayer.addSlashes(lingua);
@@ -306,14 +304,6 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             descrittoriDublinoEng = SecurityLayer.addSlashes(descrittoriDublinoEng);
             sillaboEng = SecurityLayer.addSlashes(sillaboEng);
             noteEng = SecurityLayer.addSlashes(noteEng);
-            
-            String pattern_string = "[0-9]{4}[/][0-9]{4}";
-            Pattern pattern = Pattern.compile(pattern_string);
-            if (!pattern.matcher(anno).matches()) {
-                request.setAttribute("message", "Invalid data");
-                action_error(request, response);
-                return;
-            }
                      
             CourseWebDataLayer datalayer = ((CourseWebDataLayer) request.getAttribute("datalayer"));
             
@@ -325,13 +315,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 corso_eng.setCodice(codice);
                 edited_ita = true;
             }
-            
-            if(!anno.equals("")){
-                corso_ita.setAnno(anno);
-                corso_eng.setAnno(anno);
-                edited_ita = true;
-            }
-            
+           
             if(!nome.equals("")){
                 corso_ita.setNome(nome);
                 corso_eng.setNome(nome);

@@ -91,14 +91,6 @@ public class BackOfficeCourse extends CourseWebBaseController {
             sillaboEng = SecurityLayer.addSlashes(sillaboEng);
             noteEng = SecurityLayer.addSlashes(noteEng);
             
-            String pattern_string = "[0-9]{4}[/][0-9]{4}";
-            Pattern pattern = Pattern.compile(pattern_string);
-            if (!pattern.matcher(anno).matches()) {
-                request.setAttribute("message", "Invalid data");
-                action_error(request, response);
-                return;
-            }
-            
             CourseWebDataLayer datalayer = ((CourseWebDataLayer) request.getAttribute("datalayer"));
             List<Corso> corso_versioni = datalayer.getCorsoByNomeVersioni(nome);
             for(Corso corso:corso_versioni){
