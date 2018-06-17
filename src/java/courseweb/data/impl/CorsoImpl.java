@@ -16,7 +16,7 @@ import java.util.Iterator;
 /*
  * @author Flavio
  */
-public class CorsoImpl implements Corso {
+public class CorsoImpl implements Corso, Comparable<Corso> {
     
     private int id;
     private String nome;
@@ -456,5 +456,10 @@ public class CorsoImpl implements Corso {
     @Override 
     public String toString(){
         return this.getCodice() + " - " + this.getNome();   
+    }
+    
+    @Override
+    public int compareTo(Corso o){
+        return this.nome.compareTo(o.getNome());
     }
 }

@@ -11,7 +11,7 @@ import framework.data.DataLayerException;
  *
  * @author valen
  */
-public class UtenteImpl implements Utente{
+public class UtenteImpl implements Utente, Comparable<Utente>{
     
     private int id; 
     private String email; 
@@ -119,6 +119,11 @@ public class UtenteImpl implements Utente{
     @Override
     public boolean isDirty(){
         return this.dirty; 
+    }
+    
+    @Override
+    public int compareTo(Utente o){
+        return this.cognome.compareTo(o.getCognome());
     }
     
 }
