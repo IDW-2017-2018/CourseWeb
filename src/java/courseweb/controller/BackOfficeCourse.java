@@ -188,7 +188,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
             if(request.getAttribute("session") != null){
                 HttpSession session = (HttpSession) request.getAttribute("session");
                 if(((Utente)session.getAttribute("utente")).getTipoUtente().equals("docente")){
-                String cognome = ((Utente)request.getAttribute("utente")).getCognome();
+                String cognome = ((Utente)session.getAttribute("utente")).getCognome();
                 corsi_filtrati = datalayer.filtraCorsi(corsi_filtrati, "corso_docente", cognome);
                 }
             }

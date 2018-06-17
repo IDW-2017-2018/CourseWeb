@@ -1870,7 +1870,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 for(int i=0; i<corsi.size(); i++){
                     List<Utente> docenti = corsi.get(i).getDocentiCorso();
                     for(int j=0; j<docenti.size();j++){
-                        if(docenti.get(j).getNome().equals(filtro)) {
+                        if(docenti.get(j).getCognome().equals(filtro)) {
                             result.add(corsi.get(i));
                             break;
                         }
