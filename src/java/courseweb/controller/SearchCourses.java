@@ -46,17 +46,21 @@ public class SearchCourses extends CourseWebBaseController {
             String lang = (String) request.getAttribute("lang"); 
             List<Corso> corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiAggiornati(); 
             List<Corso> corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(lang, corsi_non_filtrati); 
-            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 corsi_filtrati.sort(new CorsoComparatorByNome());
                 request.setAttribute("corsi", corsi_filtrati);
+                request.setAttribute("docenti", datalayer.getDocenti());
+                request.setAttribute("corsilaurea", datalayer.getCorsiLaurea());
                 result.activate("/eng/search_courses.html.ftl", request, response);  
 
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 corsi_filtrati.sort(new CorsoComparatorByNome());
                 request.setAttribute("corsi", corsi_filtrati);
+                request.setAttribute("docenti", datalayer.getDocenti());
+                request.setAttribute("corsilaurea", datalayer.getCorsiLaurea());                
                 result.activate("/ita/search_courses.html.ftl", request, response); 
 
             } else {
@@ -126,26 +130,23 @@ public class SearchCourses extends CourseWebBaseController {
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_corsi_laurea", corso_corsi_laurea); 
             } 
             
-        }
-        catch(DataLayerException exc){
-            request.setAttribute("exception", exc); 
-            action_error(request, response);
-            exc.printStackTrace();
-        }
-        
-        TemplateResult result = new TemplateResult(getServletContext());
-        
+                    TemplateResult result = new TemplateResult(getServletContext());
+        CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
         //carica la pagina
         if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 corsi_filtrati.sort(new CorsoComparatorByNome());
                 request.setAttribute("corsi", corsi_filtrati);
+                request.setAttribute("docenti", datalayer.getDocenti());
+                request.setAttribute("corsilaurea", datalayer.getCorsiLaurea());                
                 result.activate("/eng/search_courses.html.ftl", request, response);  
 
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 corsi_filtrati.sort(new CorsoComparatorByNome());
                 request.setAttribute("corsi", corsi_filtrati);
+                request.setAttribute("docenti", datalayer.getDocenti());
+                request.setAttribute("corsilaurea", datalayer.getCorsiLaurea());                
                 result.activate("/ita/search_courses.html.ftl", request, response); 
 
             } else {
@@ -153,7 +154,14 @@ public class SearchCourses extends CourseWebBaseController {
                 action_error(request, response);
 
             }
-        
+            
+        }
+        catch(DataLayerException exc){
+            request.setAttribute("exception", exc); 
+            action_error(request, response);
+            exc.printStackTrace();
+        }
+               
     }
     
     @Override
