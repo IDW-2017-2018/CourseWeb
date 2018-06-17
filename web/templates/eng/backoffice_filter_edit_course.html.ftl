@@ -69,6 +69,7 @@
 
             <th class="thresult">CODE</th>
             <th class="thresult" colspan="2">NAME</th>
+            <th class="thresult">TEACHERS</th>
             <th class="thresult">SSD</th>
             <th class="thresult">YEAR</th>
             <th class="thresult">EDIT</th>
@@ -81,6 +82,7 @@
 
             <td class="tdresult-list" colspan="2">${strip_slashes(corso.codice)}</td>
             <td class="tdresult-list">${strip_slashes(corso.nome)}</td>
+            <td class="tdresult-list">${strip_slashes(corso.showTeachers)}</td>
             <td class="tdresult-list">${strip_slashes(corso.SSD)}</td>
             <td class="tdresult-list">${strip_slashes(corso.anno)}</td>
             <td class="tdresult-list"><a href="backofficecourse?lang=${lang}&action=edit_course&id=${corso.id}" class="linkresultmod">EDIT</a></td>

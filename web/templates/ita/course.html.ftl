@@ -20,11 +20,11 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="2">${corso.nome}</td>
-        <td class="tdresult">${corso.codice}</td>
-        <td class="tdresult">${corso.SSD}</td>
-        <td class="tdresult">${corso.lingua}</td>
-        <td class="tdresult">${corso.semestre}</td>
+        <td class="tdresult" colspan="2">${strip_slashes(corso.nome)}</td>
+        <td class="tdresult">${strip_slashes(corso.codice)}</td>
+        <td class="tdresult">${strip_slashes(corso.SSD)}</td>
+        <td class="tdresult">${strip_slashes(corso.lingua)}</td>
+        <td class="tdresult">${strip_slashes(corso.semestre)}</td>
 
     </tr>
 
@@ -62,7 +62,7 @@
 
     <tr class="trresult-list">
 
-        <td class="tdresult-list" colspan="6">${docente.nome}&nbsp;${docente.cognome}</td>
+        <td class="tdresult-list" colspan="6">${strip_slashes(docente.nome)}&nbsp;${strip_slashes(docente.cognome)}</td>
 
     </tr>
 
@@ -86,7 +86,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${corso.prerequisiti}</td>
+        <td class="tdresult" colspan="6">${strip_slashes(corso.prerequisiti)}</td>
 
     </tr>
 
@@ -98,7 +98,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${corso.obiettivi}</td>
+        <td class="tdresult" colspan="6">${strip_slashes(corso.obiettivi)}</td>
 
     </tr>
 
@@ -110,7 +110,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${corso.modEsame}</td>
+        <td class="tdresult" colspan="6">${strip_slashes(corso.modEsame)}</td>
 
     </tr>
 
@@ -122,7 +122,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${corso.modInsegnamento}</td>
+        <td class="tdresult" colspan="6">${strip_slashes(corso.modInsegnamento)}</td>
 
     </tr>
 
@@ -134,7 +134,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${corso.sillabo}</td>
+        <td class="tdresult" colspan="6">${strip_slashes(corso.sillabo)}</td>
 
     </tr>
 
@@ -158,7 +158,7 @@
 
      <tr class="trresult-list">
 
-        <td class="tdresult-list" colspan="4">${corso_laurea.nome}</td>
+        <td class="tdresult-list" colspan="4">${strip_slashes(corso_laurea.nome)}</td>
         <td class="tdresult-list">${corso_laurea.numero_cfu}</td>
         <td class="tdresult-list">${corso_laurea.tipo_cfu}</td>
 
@@ -178,7 +178,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${corso.descrittoriDublino}</td>
+        <td class="tdresult" colspan="6">${strip_slashes(corso.descrittoriDublino)}</td>
 
     </tr>
 
@@ -206,12 +206,12 @@
 
      <tr class="trresult-list">
 
-        <td class="tdresult-list">${libro.autore}</td>
-        <td class="tdresult-list">${libro.titolo}</td>
-        <td class="tdresult-list">${libro.volume}</td>
+        <td class="tdresult-list">${strip_slashes(libro.autore)}</td>
+        <td class="tdresult-list">${strip_slashes(libro.titolo)}</td>
+        <td class="tdresult-list">${strip_slashes(libro.volume)}</td>
         <td class="tdresult-list">${libro.anno}</td>
-        <td class="tdresult-list">${libro.editore}</td>
-        <td class="tdresult-list"><a class="linkresult" href="">${libro.link}</a></td>
+        <td class="tdresult-list">${strip_slashes(libro.editore)}</td>
+        <td class="tdresult-list"><a class="linkresult" href="">${strip_slashes(libro.link)}</a></td>
 
     </tr>
 
@@ -239,7 +239,7 @@
 
      <tr class="trresult">
 
-        <td class="tdresult" colspan="6"><a class="linkresult" href="course?lang=${lang}&id=${corso_propedeutico.id}">${corso_propedeutico.nome}</a></td>
+        <td class="tdresult" colspan="6"><a class="linkresult" href="course?lang=${lang}&id=${corso_propedeutico.id}">${strip_slashes(corso_propedeutico.nome)}</a></td>
 
     </tr>
 
@@ -261,7 +261,7 @@
 
      <tr class="trresult">
 
-        <td class="tdresult" colspan="6"><a class="linkresult" href="course?lang=${lang}&id=${corso_mutuato.id}">${corso_mutuato.nome}</a></td>
+        <td class="tdresult" colspan="6"><a class="linkresult" href="course?lang=${lang}&id=${corso_mutuato.id}">${strip_slashes(corso_mutuato.nome)}</a></td>
 
     </tr>
 
@@ -283,7 +283,7 @@
 
      <tr class="trresult">
 
-        <td class="tdresult" colspan="6"><a class="linkresult" href="course?lang=${lang}&id=${modulo.id}">${modulo.nome}</a></td>
+        <td class="tdresult" colspan="6"><a class="linkresult" href="course?lang=${lang}&id=${modulo.id}">${strip_slashes(modulo.nome)}</a></td>
 
     </tr>
 
@@ -309,9 +309,9 @@
 
      <tr class="trresult">
 
-        <td class="tdresult" colspan="2"><a class="linkresult" href="">${corso.linkHomepageCorso}</a></td>
-        <td class="tdresult" colspan="2"><a class="linkresult" href="">${corso.linkRisorseEsterne}</a></td>
-        <td class="tdresult" colspan="2"><a class="linkresult" href="">${corso.linkForum}</a></td>
+        <td class="tdresult" colspan="2"><a class="linkresult" href="">${strip_slashes(corso.linkHomepageCorso)}</a></td>
+        <td class="tdresult" colspan="2"><a class="linkresult" href="">${strip_slashes(corso.linkRisorseEsterne)}</a></td>
+        <td class="tdresult" colspan="2"><a class="linkresult" href="">${strip_slashes(corso.linkForum)}</a></td>
 
     </tr>
 
@@ -323,7 +323,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="6">${corso.note}</td>
+        <td class="tdresult" colspan="6">${strip_slashes(corso.note)}</td>
 
     </tr>
 
@@ -347,8 +347,8 @@
 
      <tr class="trresult-list">
 
-        <td class="tdresult-list" colspan="3"><a class="linkresult" href="">${materiale.nome}</a></td>
-        <td class="tdresult-list" colspan="2">${materiale.descrizione}</td>
+        <td class="tdresult-list" colspan="3"><a class="linkresult" href="">${strip_slashes(materiale.nome)}</a></td>
+        <td class="tdresult-list" colspan="2">${strip_slashes(materiale.descrizione)}</td>
         <td class="tdresult-list">${materiale.dimensione}</td>
 
     </tr>

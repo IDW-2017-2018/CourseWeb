@@ -8,14 +8,22 @@
 	<li class="menu_item"><a href="backofficehub?lang=${lang}">BACKOFFICE</a></li>
 	</#if>
 
-    <#if (session.getAttribute('utente').tipoUtente != "anonimo") && corso?? && page == "backoffice">
-    <li class="menu_item"><a href="backofficehub?lang=${lang}">COURSE HUB</a></li>
+    <#if (session.getAttribute('utente').tipoUtente != "anonimo") && (page == "backofficeeditcourse") && (corso?? || id??) >
+        
+        <#if corso??>
+            <li class="menu_item"><a href="backofficecourse?lang=${lang}&action=edit_course&id=${corso.id}">EDIT COURSE HUB</a></li>
+            <li class="menu_item"><a href="course?lang=${lang}&id=${corso.id}" target="_blank">COURSE SUMMARY</a></li>
+        <#else>
+            <li class="menu_item"><a href="backofficecourse?lang=${lang}&action=edit_course&id=${id}">EDIT COURSE HUB</a></li>
+            <li class="menu_item"><a href="course?lang=${lang}&id=${id}" target="_blank">COURSE SUMMARY</a></li>
+        </#if>
+
     </#if>
 
     <li class="menu_item"><a href="help?lang=${lang}">HELP</a></li>
     
         <#if (session.getAttribute('utente').nome != "")>
-            <li class="profile_item"><p>${session.getAttribute('utente').nome}</p></li>
+            <li class="profile_item"><p>${strip_slashes(session.getAttribute('utente').nome)}</p></li>
         <#else>
             <li class="profile_item"><p>guest</p></li>
         </#if>

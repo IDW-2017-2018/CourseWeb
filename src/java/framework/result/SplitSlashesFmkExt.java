@@ -22,8 +22,12 @@ public class SplitSlashesFmkExt implements TemplateMethodModelEx {
         
         //la lista contiene i parametri passati alla funzione nel template
         if(!list.isEmpty()) {
-            return SecurityLayer.stripSlashes(list.get(0).toString());
-            
+            if(list.get(0) != null){
+                return SecurityLayer.stripSlashes(list.get(0).toString());
+            }
+            else {
+                return "";
+            }
         } else {
             //è possibile ritornare qualsiasi tipo che sia gestibile da freemarker
             return "";

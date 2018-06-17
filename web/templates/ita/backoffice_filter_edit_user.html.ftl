@@ -27,9 +27,8 @@
             <input class="field" type="text" id="utente_email" name="utente_email"/>
     
             <label class="label" for="utente_tipo_utente">Tipo Utente</label>
-            <select class="field" name="utente_tipo_utente">
+            <select class="field" name="utente_tipo_utente" disabled="disabled">
                 <option value="docente">Docente</option>
-                <option value="amministratore">Amministratore</option>
             </select>
                    
 

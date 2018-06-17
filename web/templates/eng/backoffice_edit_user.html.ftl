@@ -9,7 +9,7 @@
             <div class="fieldcontainerleft">
 
                 <label class="label" for="utente_email">Email</label>
-                <input class="field" type="text" id="utente_email" name="utente_email" placeholder="${utente.email}"/>
+                <input class="field" type="text" id="utente_email" name="utente_email" placeholder="${strip_slashes(utente.email)}"/>
 
                 <label class="label" for="utente_password">Password</label>
                 <input class="field" type="text" id="utente_password" name="utente_password" placeholder="${utente.password}"/>
@@ -23,10 +23,10 @@
             <div class="fieldcontainerright">
                 
                 <label class="label" for="utente_nome">Name</label>
-                <input class="field" type="text" id="utente_nome" name="utente_nome" placeholder="${utente.nome}"/>
+                <input class="field" type="text" id="utente_nome" name="utente_nome" placeholder="${strip_slashes(utente.nome)}"/>
 
                 <label class="label" for="utente_cognome">Surname</label>
-                <input class="field" type="text" id="utente_cognome" name="utente_cognome" placeholder="${utente.cognome}"/>
+                <input class="field" type="text" id="utente_cognome" name="utente_cognome" placeholder="${strip_slashes(utente.cognome)}"/>
 
             </div>
 

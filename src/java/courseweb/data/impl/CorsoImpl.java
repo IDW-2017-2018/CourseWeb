@@ -11,6 +11,7 @@ import courseweb.data.model.Materiale;
 import framework.data.DataLayerException;
 import java.util.List;
 import courseweb.data.model.Libro_Testo;
+import java.util.Iterator;
 
 /*
  * @author Flavio
@@ -48,6 +49,8 @@ public class CorsoImpl implements Corso {
     private CourseWebDataLayer ownerDataLayer;
     protected boolean dirty; 
     
+    private String showTeachers;
+    
     public CorsoImpl(CourseWebDataLayer ownerDataLayer) {
         this.ownerDataLayer = ownerDataLayer;
         this.id = 0;
@@ -78,6 +81,8 @@ public class CorsoImpl implements Corso {
         this.materiali = null; 
         
         this.dirty = false; 
+        
+        this.showTeachers = "";
     }
     
     @Override
@@ -173,7 +178,19 @@ public class CorsoImpl implements Corso {
     @Override
     public List<Utente> getDocentiCorso() throws DataLayerException{
         if(this.docenti == null){
+            this.showTeachers = "";
             this.docenti = ownerDataLayer.getDocentiCorso(this);
+            
+            Iterator it = this.docenti.iterator();
+            for(Utente docente : this.docenti){
+                if(it.hasNext()){
+                    this.showTeachers += docente.getCognome() + ", ";
+                    it.next();
+                }
+                else {
+                    this.showTeachers += docente.getCognome();
+                }
+            }
         }
         return this.docenti;
     }
@@ -334,6 +351,19 @@ public class CorsoImpl implements Corso {
     @Override
     public void setDocenti(List<Utente> docenti){
         this.docenti = docenti; 
+        this.showTeachers = "";
+        
+        Iterator it = this.docenti.iterator();
+        for(Utente docente : this.docenti){
+            if(it.hasNext()){
+                this.showTeachers += docente.getCognome() + ", ";
+                it.next();
+            }
+            else {
+                this.showTeachers += docente.getCognome();
+            }
+        }
+        
         this.dirty = true;
     }
     
