@@ -1,0 +1,66 @@
+
+.map-container {
+    
+    width: 85%; 
+    margin: 100px auto;
+
+}
+
+.noscript-map-container {
+    
+    width: 85%; 
+    margin: 100px auto;
+
+}
+
+.map-item {
+
+    width:100%; 
+    height:500px;
+
+
+}
+
+.noscript-map-item {
+    
+    width: 100%; 
+
+}
+
+.noscript-img {
+
+    width: 100%;
+    margin: 0 auto;
+
+}
+
+.about-text-box {
+
+    width: 85%; 
+    margin: 100px auto; 
+    background-color: black;
+
+}
+
+.about-img-box {
+
+    margin:auto; 
+    width: 350px; 
+    padding: 0px;
+
+}
+
+.about-img {
+
+    margin-top:50px; 
+    margin-bottom: 0px; 
+    width: 100%;
+
+}
+
+.about-text {
+
+    color: white; 
+    padding: 50px 100px;
+
+}

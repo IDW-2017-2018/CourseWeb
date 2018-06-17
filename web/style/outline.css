@@ -73,6 +73,13 @@ ul.navbar li.profile_item {
 
 }
 
+ul.navbar li.logout_item {
+    
+    float: right;
+    color: white;
+
+}
+
 .profile_icon {
     
     float: right;
@@ -109,7 +116,13 @@ ul.navbar li a:hover {
 
     }
 
-    ul.navbar li.profile_item {
+    ul.navbar li.logout_item {
+
+        float: none;
+
+    }
+    
+    ul.navbar .profile_item {
 
         display: none;
 

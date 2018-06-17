@@ -1,0 +1,88 @@
+/*############################################# CONTACTS */
+
+.card-container {
+    
+    /*border: 2px solid red;*/
+    margin: 100px auto !important;
+    display: flex;
+    padding: 0px !important;
+    width: 800px;
+
+}
+
+.card {
+    
+    background-color: lightgrey;
+    max-width: 250px;
+    text-align: center;
+    margin: auto;
+
+}
+
+.card-img {
+
+    width: 100%; 
+    display: block;
+
+}
+
+.card-text-box {
+
+    border: 2px solid black;
+
+}
+
+.card-title {
+
+    color: grey;
+    font-size: 18px;
+
+}
+
+.card-text {
+
+    color: grey;
+
+}
+
+.card-button {
+
+    background-color: black;
+    border: 2px solid black;
+    outline: 0;
+    display: inline-block;
+    padding: 13px;
+    color: white;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+
+.card-button:hover {
+
+    background-color: #01d475;
+    cursor: pointer;
+    color: black;
+    border-color: #01d475;
+
+}
+
+@media screen and (max-width: 850px) {
+  
+    .card-container  {
+    
+        display: block;
+        width: 95%;
+
+    }
+
+    .card {
+    
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+}

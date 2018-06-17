@@ -22,6 +22,10 @@
 
 	<li class="menu_item"><a href="help?lang=${lang}">AIUTO</a></li>
 	
+	<#if (session.getAttribute('utente').tipoUtente == "amministratore")>
+		<li class="menu_item"><a href="backofficehub?lang=${lang}&hub_log=true">LOG</a></li>
+	</#if>
+
         <#if (session.getAttribute('utente').nome != "")>
             <li class="profile_item"><p>${strip_slashes(session.getAttribute('utente').nome)}</p></li>
         <#else>
@@ -30,6 +34,6 @@
             
     <img class="profile_icon" src="images/footer_icons/white_svg/user-circle.svg" alt="user-circle"/>
 	
-	<li class="profile_item"><a href="login?lang=${lang}&action=logout">LOGOUT</a></li>
+	<li class="logout_item"><a href="login?lang=${lang}&action=logout">LOGOUT</a></li>
 
 </ul>
