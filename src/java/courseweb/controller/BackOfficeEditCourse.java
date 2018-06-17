@@ -61,18 +61,20 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                request.setAttribute("id", id); 
+                request.setAttribute("id", id);
+                request.setAttribute("corso", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorso(id, "ita"));
                 result.activate("/eng/backoffice_edit_course_hub.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                request.setAttribute("id", id); 
+                request.setAttribute("id", id);
+                request.setAttribute("corso", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorso(id, "ita"));                
                 result.activate("/ita/backoffice_edit_course_hub.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");
                 action_error(request, response); 
             }
             
-        } catch(NumberFormatException e){
+        } catch(NumberFormatException | DataLayerException e){
             request.setAttribute("exception", e);
             action_error(request, response);
         }
