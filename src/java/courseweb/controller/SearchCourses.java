@@ -5,7 +5,11 @@ package courseweb.controller;
 
 import courseweb.utils.CorsoComparatorByNome;
 import courseweb.data.model.Corso;
+import courseweb.data.model.Corso_Laurea;
 import courseweb.data.model.CourseWebDataLayer;
+import courseweb.data.model.Utente;
+import courseweb.utils.Corso_LaureaComparatorByNome;
+import courseweb.utils.UtenteComparatorByCognome;
 import framework.result.FailureResult;
 import framework.result.TemplateManagerException;
 import framework.result.TemplateResult;
@@ -49,16 +53,32 @@ public class SearchCourses extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                
                 corsi_filtrati.sort(new CorsoComparatorByNome());
                 request.setAttribute("corsi", corsi_filtrati);
-                request.setAttribute("docenti", datalayer.getDocenti());
-                request.setAttribute("corsilaurea", datalayer.getCorsiLaurea());
+   
+                List<Utente> docenti = datalayer.getDocenti();
+                docenti.sort(new UtenteComparatorByCognome());
+                
+                List<Corso_Laurea> corsi_laurea = datalayer.getCorsiLaurea();
+                corsi_laurea.sort(new Corso_LaureaComparatorByNome());
+                
+                request.setAttribute("docenti", docenti);
+                request.setAttribute("corsilaurea", corsi_laurea);
                 result.activate("/eng/search_courses.html.ftl", request, response);  
 
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                
                 corsi_filtrati.sort(new CorsoComparatorByNome());
                 request.setAttribute("corsi", corsi_filtrati);
+   
+                List<Utente> docenti = datalayer.getDocenti();
+                docenti.sort(new UtenteComparatorByCognome());
+                
+                List<Corso_Laurea> corsi_laurea = datalayer.getCorsiLaurea();
+                corsi_laurea.sort(new Corso_LaureaComparatorByNome());
+                
                 request.setAttribute("docenti", datalayer.getDocenti());
                 request.setAttribute("corsilaurea", datalayer.getCorsiLaurea());                
                 result.activate("/ita/search_courses.html.ftl", request, response); 
@@ -118,7 +138,7 @@ public class SearchCourses extends CourseWebBaseController {
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_semestre", corso_semestre); 
             } 
             
-            if (!corso_docente.equals("")){
+            if (!corso_docente.equals("---")){
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_docente", corso_docente); 
             } 
             
@@ -126,17 +146,24 @@ public class SearchCourses extends CourseWebBaseController {
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_lingua", corso_lingua); 
             } 
             
-            if (!corso_corsi_laurea.equals("")){
+            if (!corso_corsi_laurea.equals("---")){
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_corsi_laurea", corso_corsi_laurea); 
             } 
             
-                    TemplateResult result = new TemplateResult(getServletContext());
+        TemplateResult result = new TemplateResult(getServletContext());
         CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
         //carica la pagina
         if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 corsi_filtrati.sort(new CorsoComparatorByNome());
                 request.setAttribute("corsi", corsi_filtrati);
+                
+                List<Utente> docenti = datalayer.getDocenti();
+                docenti.sort(new UtenteComparatorByCognome());
+                
+                List<Corso_Laurea> corsi_laurea = datalayer.getCorsiLaurea();
+                corsi_laurea.sort(new Corso_LaureaComparatorByNome());
+                
                 request.setAttribute("docenti", datalayer.getDocenti());
                 request.setAttribute("corsilaurea", datalayer.getCorsiLaurea());                
                 result.activate("/eng/search_courses.html.ftl", request, response);  
@@ -145,6 +172,13 @@ public class SearchCourses extends CourseWebBaseController {
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 corsi_filtrati.sort(new CorsoComparatorByNome());
                 request.setAttribute("corsi", corsi_filtrati);
+                
+                List<Utente> docenti = datalayer.getDocenti();
+                docenti.sort(new UtenteComparatorByCognome());
+                
+                List<Corso_Laurea> corsi_laurea = datalayer.getCorsiLaurea();
+                corsi_laurea.sort(new Corso_LaureaComparatorByNome());
+                
                 request.setAttribute("docenti", datalayer.getDocenti());
                 request.setAttribute("corsilaurea", datalayer.getCorsiLaurea());                
                 result.activate("/ita/search_courses.html.ftl", request, response); 

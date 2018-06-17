@@ -63,4 +63,9 @@ public class Corso_LaureaImpl implements Corso_Laurea {
         
         return false;
     }
+    
+    @Override
+    public int compareTo(Corso_Laurea o){
+        return this.nome.compareTo(o.getNome());
+    }    
 }

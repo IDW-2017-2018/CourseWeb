@@ -7,7 +7,7 @@ package courseweb.data.model;
  *
  * @author Riccardo
  */
-public interface Corso_Laurea {
+public interface Corso_Laurea extends Comparable<Corso_Laurea> {
     
     int getId(); 
     String getNome(); 
