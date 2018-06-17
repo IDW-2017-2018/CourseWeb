@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -1007,19 +1008,19 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 if(!utente.isDirty()) {
                     return;
                 }
-            uUtenteById.setString(1, utente.getEmail());
+            uUtenteById.setString(1, utente.getEmail().trim());
             uUtenteById.setString(2, utente.getPassword());
-            uUtenteById.setString(3, utente.getNome());
-            uUtenteById.setString(4, utente.getCognome());
+            uUtenteById.setString(3, utente.getNome().trim());
+            uUtenteById.setString(4, utente.getCognome().trim());
             uUtenteById.setInt(5, utente.getId());
             uUtenteById.executeUpdate();
             }
             else { //insert
-                iUtente.setString(1, utente.getEmail());
+                iUtente.setString(1, utente.getEmail().trim());
                 iUtente.setString(2, utente.getPassword());
-                iUtente.setString(3, utente.getTipoUtente());
-                iUtente.setString(4, utente.getNome());
-                iUtente.setString(5, utente.getCognome());
+                iUtente.setString(3, utente.getTipoUtente().trim());
+                iUtente.setString(4, utente.getNome().trim());
+                iUtente.setString(5, utente.getCognome().trim());
                 
                 if(iUtente.executeUpdate() == 1) {
                     
@@ -1052,19 +1053,19 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 if(!utente.isDirty()) {
                     return;
                 }
-            uUtenteByEmail.setString(1, utente.getEmail());
+            uUtenteByEmail.setString(1, utente.getEmail().trim());
             uUtenteByEmail.setString(2, utente.getPassword());
-            uUtenteByEmail.setString(3, utente.getNome());
-            uUtenteByEmail.setString(4, utente.getCognome());
-            uUtenteByEmail.setString(5, utente.getEmail());
+            uUtenteByEmail.setString(3, utente.getNome().trim());
+            uUtenteByEmail.setString(4, utente.getCognome().trim());
+            uUtenteByEmail.setString(5, utente.getEmail().trim());
             uUtenteByEmail.executeUpdate();
             }
             else { //insert
-                iUtente.setString(1, utente.getEmail());
+                iUtente.setString(1, utente.getEmail().trim());
                 iUtente.setString(2, utente.getPassword());
-                iUtente.setString(3, utente.getTipoUtente());
-                iUtente.setString(4, utente.getNome());
-                iUtente.setString(5, utente.getCognome());
+                iUtente.setString(3, utente.getTipoUtente().trim());
+                iUtente.setString(4, utente.getNome().trim());
+                iUtente.setString(5, utente.getCognome().trim());
                 
                 if(iUtente.executeUpdate() == 1) {
                     
@@ -1099,8 +1100,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 }
             
             //update su corsi
-            uCorsoById.setString(1, corso.getCodice());                          
-            uCorsoById.setString(2, corso.getSSD());
+            uCorsoById.setString(1, corso.getCodice().trim());                          
+            uCorsoById.setString(2, corso.getSSD().trim());
             uCorsoById.setInt(3, corso.getSemestre());
             uCorsoById.setString(4, corso.getLingua());
             uCorsoById.setString(5, corso.getLinkHomepageCorso());
@@ -1139,10 +1140,10 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             uInfoCorsiById.executeUpdate();
             }
             else { //insert
-                iCorso.setString(1, corso.getCodice());
+                iCorso.setString(1, corso.getCodice().trim());
                 iCorso.setString(2, corso.getAnno());
                 iCorso.setString(3, corso.getNome());
-                iCorso.setString(4, corso.getSSD());
+                iCorso.setString(4, corso.getSSD().trim());
                 iCorso.setInt(5, corso.getSemestre());
                 iCorso.setString(6, corso.getLingua());
                 iCorso.setString(7, corso.getLinkHomepageCorso());
@@ -1910,7 +1911,9 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 break;
             case "utente_cognome":
                 for(int i=0; i<utenti.size(); i++){
-                    if(utenti.get(i).getCognome().equals(filtro)) result.add(utenti.get(i));
+                    if(utenti.get(i).getCognome().equals(filtro)){
+                        result.add(utenti.get(i));
+                    }
                 }
                 break;
             case "utente_tipo_utente":
@@ -1979,11 +1982,12 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     @Override
     public List<String> getLogMessage() throws DataLayerException{
         List<String> result = new ArrayList();
-        
+        String date = "";
         try{
             try(ResultSet rs = sLogMessage.executeQuery()){
                 while(rs.next()){
-                    result.add(rs.getTimestamp("timestamp").toString() + " - " + rs.getString("messaggio"));
+                    date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(rs.getTimestamp("timestamp"));
+                    result.add(date + " - " + rs.getString("messaggio"));
                 }
             }
         }
