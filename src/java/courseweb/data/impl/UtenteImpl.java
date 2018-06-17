@@ -11,7 +11,7 @@ import framework.data.DataLayerException;
  *
  * @author valen
  */
-public class UtenteImpl implements Utente, Comparable<Utente>{
+public class UtenteImpl implements Utente {
     
     private int id; 
     private String email; 

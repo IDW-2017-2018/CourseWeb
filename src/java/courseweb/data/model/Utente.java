@@ -9,7 +9,7 @@ import framework.data.DataLayerException;
  *
  * @author Riccardo
  */
-public interface Utente {
+public interface Utente extends Comparable<Utente> {
     
     int getId(); 
     String getEmail(); 

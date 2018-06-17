@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Flavio
  */
-public interface Corso {
+public interface Corso extends Comparable<Corso> {
     
     int getId();
     String getNome();
