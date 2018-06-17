@@ -32,8 +32,15 @@
 			<div class="fieldcontainerright">
 				
 			
-            <label class="label" for="corso_docente">Docente</label>
-            <input class="field" type="text" id="corso_docente" name="corso_docente"/>
+            <label class="label" for="corso_docente">Docenti</label>
+            <select class="field" name="corso_docente">
+            <#list docenti>
+            	<#items as docente>
+			    <option value="${docente.cognome}">${docente.cognome}</option>
+				</#items>
+			<#else>
+			</#list>
+		    </select>
 			
             <label class="label" for="corso_lingua">Lingua</label>
             <select class="field" name="corso_lingua" >
@@ -43,7 +50,14 @@
 		    </select>
 	
             <label class="label" for="corso_corsi_laurea">Corsi di Laurea</label>
-            <input class="field" type="text" id="corso_corsi_laurea" name="corso_corsi_laurea"/>
+	        <select class="field" name="corso_corsi_laurea">
+	        <#list corsilaurea>
+	        	<#items as corsolaurea>
+				<option value="${corsolaurea.nome}">${corsolaurea.nome}</option>
+				</#items>
+			<#else>
+			</#list>
+			</select>
 							
 			</div>
 

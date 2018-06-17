@@ -1,3 +1,7 @@
+
+<h1 class="coursename">${corso.nome}</h1>
+<h1 class="coursename">${corso.anno}</h1>
+
 <div class="filter">
 
     <h1 class="title"> CORSO </h1>

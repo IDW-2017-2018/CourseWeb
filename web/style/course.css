@@ -1,6 +1,18 @@
 
 /* ########## COURSE CSS ########## */
 
+.coursename {
+
+    font-size: 50px; 
+    font-weight: bold; 
+    color: grey; 
+    text-align: center; 
+    margin: 100px auto; 
+    margin-bottom: -50px; 
+    text-transform: uppercase;
+
+}
+
 .title { 
 
 	color: white;

@@ -27,6 +27,12 @@
 
                 <label class="label" for="utente_cognome">Surname</label>
                 <input class="field" type="text" id="utente_cognome" name="utente_cognome" placeholder="${strip_slashes(utente.cognome)}"/>
+                
+                <label class="label" for="utente_tipo_utente">User Type</label>
+                <select class="field" name="utente_tipo_utente">
+                    <option value="docente">Teacher</option>
+                    <option value="amministratore">Admin</option>
+                </select>
 
             </div>
 

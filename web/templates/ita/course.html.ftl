@@ -1,3 +1,7 @@
+
+<h1 class="coursename">${corso.nome}</h1>
+<h1 class="coursename">${corso.anno}</h1>
+
 <div class="tablecontainer">
     
     <table class="tableresult">
