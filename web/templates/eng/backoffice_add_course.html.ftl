@@ -50,7 +50,7 @@
             <select class="field" name="corso_docente" required="required">
             <#list docenti>
                 <#items as docente>
-                <option value="${docente.id}">${docente.cognome}</option>
+                <option value="${docente.id}">${strip_slashes(docente.cognome)}</option>
                 </#items>
             <#else>
             </#list>

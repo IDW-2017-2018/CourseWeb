@@ -46,7 +46,7 @@
                 <option value="---">---</option>
             <#list docenti>
                 <#items as docente>
-                <option value="${docente.id}">${docente.cognome}</option>
+                <option value="${docente.id}">${strip_slashes(docente.cognome)}</option>
                 </#items>
             <#else>
             </#list>
@@ -64,7 +64,7 @@
                 <option value="---">---</option>
             <#list corsilaurea>
                 <#items as corsolaurea>
-                <option value="${corsolaurea.nome}">${corsolaurea.nome}</option>
+                <option value="${corsolaurea.nome}">${strip_slashes(corsolaurea.nome)}</option>
                 </#items>
             <#else>
             </#list>
