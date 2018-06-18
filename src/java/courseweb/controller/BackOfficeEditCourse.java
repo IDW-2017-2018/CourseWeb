@@ -246,7 +246,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
     }
     
     private void action_modifica_corso(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
-                       
+                 
         if(request.getParameter("id") == null) {
             request.setAttribute("message","not a valid corso id");
             action_error(request,response);
@@ -254,7 +254,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
         }
         
         try {
-            
+           
             int id = Integer.parseInt(request.getParameter("id")); 
             boolean edited_ita = false; 
             boolean edited_eng = false; 
@@ -308,7 +308,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             descrittoriDublinoEng = SecurityLayer.addSlashes(descrittoriDublinoEng);
             sillaboEng = SecurityLayer.addSlashes(sillaboEng);
             noteEng = SecurityLayer.addSlashes(noteEng);
-                     
+            
             CourseWebDataLayer datalayer = ((CourseWebDataLayer) request.getAttribute("datalayer"));
             
             Corso corso_ita = datalayer.getCorso(id, "ita");
