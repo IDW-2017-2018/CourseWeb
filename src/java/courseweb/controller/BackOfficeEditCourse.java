@@ -326,7 +326,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 edited_ita = true;
             }
             
-            if(semestre != 0){
+            if(semestre != corso_ita.getSemestre()){
                 corso_ita.setSemestre(semestre);
                 corso_eng.setSemestre(semestre);
                 edited_ita = true;
