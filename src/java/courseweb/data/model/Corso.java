@@ -70,5 +70,7 @@ public interface Corso extends Comparable<Corso> {
     
     void copyFrom(Corso corso) throws DataLayerException;
     void setDirty(boolean dirty); 
-    boolean isDirty();    
+    boolean isDirty();   
+    
+    boolean isFilled();
 }

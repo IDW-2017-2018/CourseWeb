@@ -47,17 +47,21 @@ public class Course extends CourseWebBaseController {
             Corso corso_eng = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorso(Integer.parseInt(id_corso), "eng");
             Corso corso; 
             
-            //in base a lingua scelta corso visualizzato in italiano o in inglese
-            if(corso_ita != null && request.getAttribute("lang").equals("ita"))
+            boolean corso_ita_is_filled = corso_ita.isFilled();
+            boolean corso_eng_is_filled = corso_eng.isFilled();
+                    
+            //in base a lingua scelta corso visualizzato in italiano o in inglese considerando anche la vuotezza dell'oggetto
+            if(corso_ita_is_filled && request.getAttribute("lang").equals("ita"))
                 corso = corso_ita;
-            else if(corso_ita == null && request.getAttribute("lang").equals("ita"))
+            else if((!corso_ita_is_filled) && request.getAttribute("lang").equals("ita"))
                 corso = corso_eng;
-            else if(corso_eng != null && request.getAttribute("lang").equals("eng"))
+            else if(corso_eng_is_filled && request.getAttribute("lang").equals("eng"))
                 corso = corso_eng;
-            else if(corso_eng == null && request.getAttribute("lang").equals("eng"))
+            else if((!corso_eng_is_filled) && request.getAttribute("lang").equals("eng"))
                 corso = corso_ita;
             else 
                 corso = corso_eng;
+            
             
             
             if(request.getAttribute("lang").equals("eng")){
@@ -126,7 +130,14 @@ public class Course extends CourseWebBaseController {
             Materiale materiale = datalayer.getMateriale(materiale_id);
             
             try (InputStream is = new FileInputStream(getServletContext().getInitParameter("uploads.directory") + File.separatorChar + materiale.getPercorso())){
-                //request.setAttribute("contentType", rs.getString("type"));
+                
+                String ext = "";
+                int i = materiale.getPercorso().lastIndexOf('.');
+                if (i >= 0) {
+                    ext = materiale.getPercorso().substring(i+1);
+                }
+                
+                request.setAttribute("contentType", (ext.equals("")) ? null : ext);
                 result.activate(is, materiale.getDimensione(), materiale.getNome(), request, response);
             }
             

@@ -58,6 +58,14 @@ public class CorsoImpl implements Corso {
     
     }
     
+    @Override
+    public boolean isFilled(){
+        return ( (!this.prerequisiti.equals("")) || (!this.obiettivi.equals("")) || 
+                (!this.mod_esame.equals("")) || (!this.insegnamento.equals("")) || (!this.sillabo.equals("")) || (!this.link_homepage_corso.equals("")) || 
+                (!this.link_risorse_esterne.equals("")) || (!this.link_forum.equals("")) || (!this.anno.equals("")) || (!this.note.equals("")) ||
+                (!this.descrittori_dublino.equals("")) );
+    }
+    
     public CorsoImpl(CourseWebDataLayer ownerDataLayer) {
         this.ownerDataLayer = ownerDataLayer;
         this.id = 0;
