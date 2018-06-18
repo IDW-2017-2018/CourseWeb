@@ -585,6 +585,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 items.sort(new Corso_LaureaComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
                 result.activate("/eng/backoffice_delete_degree_course.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
@@ -592,6 +593,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 items.sort(new Corso_LaureaComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
                 result.activate("/ita/backoffice_delete_degree_course.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -724,6 +726,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 items.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
                 result.activate("/eng/backoffice_delete_same_as_course.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
@@ -731,6 +734,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 items.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
                 result.activate("/ita/backoffice_delete_same_as_course.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -861,6 +865,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 items.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
                 result.activate("/eng/backoffice_delete_propaedeutic_course.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
@@ -868,6 +873,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 items.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
                 result.activate("/ita/backoffice_delete_propaedeutic_course.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -997,6 +1003,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 items.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
                 result.activate("/eng/backoffice_delete_module.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
@@ -1004,6 +1011,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 items.sort(new CorsoComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
                 result.activate("/ita/backoffice_delete_module.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -1128,6 +1136,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 items.sort(new UtenteComparatorByCognome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
                 result.activate("/eng/backoffice_delete_teacher.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
@@ -1135,6 +1144,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 items.sort(new UtenteComparatorByCognome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
                 result.activate("/ita/backoffice_delete_teacher.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -1335,6 +1345,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 items.sort(new Libro_TestoComparatorByTitolo());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
                 result.activate("/eng/backoffice_delete_textbook.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
@@ -1342,6 +1353,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 items.sort(new Libro_TestoComparatorByTitolo());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
                 result.activate("/ita/backoffice_delete_textbook.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -1564,6 +1576,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 items.sort(new MaterialeComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
                 result.activate("/eng/backoffice_delete_material.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
@@ -1571,6 +1584,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 items.sort(new MaterialeComparatorByNome());
                 request.setAttribute("items", items);
                 request.setAttribute("action", request.getParameter("action"));
+                request.setAttribute("corso", datalayer.getCorso(id, "ita"));
                 result.activate("/ita/backoffice_delete_material.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");

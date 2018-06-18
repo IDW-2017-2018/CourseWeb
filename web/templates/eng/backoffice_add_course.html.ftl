@@ -22,26 +22,26 @@
 
         <div class="fieldcontainercentral">
 
-            <label class="label" for="corso_codice">Code</label>
+            <label class="label" for="corso_codice">Code [required field]</label>
             <input class="field" type="text" id="corso_codice" name="corso_codice" required="required"/>
 
-            <label class="label" for="corso_anno">Year</label>
+            <label class="label" for="corso_anno">Year [required field]</label>
             <input class="field" type="text" id="corso_anno" name="corso_anno" disabled="disabled" placeholder="${anno}"/>
 
-            <label class="label" for="corso_nome">Name</label>
+            <label class="label" for="corso_nome">Name [required field]</label>
             <input class="field" type="text" id="corso_nome" name="corso_nome" required="required"/>
     
-            <label class="label" for="corso_ssd">SSD</label>
+            <label class="label" for="corso_ssd">SSD [required field]</label>
             <input class="field" type="text" id="corso_ssd" name="corso_ssd" required="required"/>
 
-            <label class="label" for="corso_semestre">Semester</label>
+            <label class="label" for="corso_semestre">Semester [required field]</label>
             <select class="field" name="corso_semestre">
                 <option value="1">1</option>
                 <option value="2">2</option>
             </select>
 
-            <label class="label" for="corso_lingua">Language</label>
-            <select class="field" name="corso_lingua"">
+            <label class="label" for="corso_lingua">Language [required field]</label>
+            <select class="field" name="corso_lingua">
                 <option value="italiano">Italian</option>
                 <option value="inglese">English</option>
             </select>
