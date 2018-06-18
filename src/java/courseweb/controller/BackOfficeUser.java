@@ -151,7 +151,8 @@ public class BackOfficeUser extends CourseWebBaseController {
             
             if(edited == true){
                 datalayer.storeUtenteById(utente);
-                datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha modificato l'utente " + email);            
+                datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha modificato l'utente " + email); 
+                if(((Utente)((HttpSession)request.getAttribute("session")).getAttribute("utente")).getId() == utente.getId())
                 ((HttpSession) request.getAttribute("session")).setAttribute("utente", utente);
             }
             response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));

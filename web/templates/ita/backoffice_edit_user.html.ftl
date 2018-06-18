@@ -26,10 +26,10 @@
                 <input class="field" type="text" id="utente_email" name="utente_email" placeholder="${strip_slashes(utente.email)}"/>
 
                 <label class="label" for="utente_password">Password</label>
-                <input class="field" type="text" id="utente_password" name="utente_password" placeholder="${utente.password}"/>
+                <input class="field" type="password" id="utente_password" name="utente_password" />
 
                 <label class="label" for="utente_ripeti_password">Ripeti Password</label>
-                <input class="field" type="text" id="utente_ripeti_password" name="utente_ripeti_password"/>
+                <input class="field" type="password" id="utente_ripeti_password" name="utente_ripeti_password"/>
 
             </div>
 
