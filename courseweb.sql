@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Giu 16, 2018 alle 16:27
--- Versione del server: 5.7.19
--- Versione PHP: 5.6.31
+-- Creato il: Giu 18, 2018 alle 22:22
+-- Versione del server: 5.7.21
+-- Versione PHP: 5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -41,19 +41,7 @@ CREATE TABLE IF NOT EXISTS `corsi` (
   `link_risorse` text NOT NULL,
   `link_forum` text NOT NULL,
   PRIMARY KEY (`id`,`codice`,`anno`)
-) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
-
---
--- Dump dei dati per la tabella `corsi`
---
-
-INSERT INTO `corsi` (`id`, `codice`, `anno`, `nome`, `SSD`, `semestre`, `lingua`, `link_homepage`, `link_risorse`, `link_forum`) VALUES
-(41, 'DT0004', '2017/2018', 'LINGUA INGLESE B1', 'MAT/05', 1, 'inglese', '', '', ''),
-(40, 'DT0002', '2016/2017', 'ANALISI MATEMATICA', 'MAT/05', 1, 'italiano', '', '', ''),
-(39, 'DT0002', '2017/2018', 'ANALISI MATEMATICA', 'MAT/05', 1, 'italiano', 'bbbbbbbbbbbbbbb', 'dsdsavdsavdsavdsa', 'fvdvfdabfsafsafsabfavfdsbfdsbfs'),
-(38, 'F0132', '2017/2018', 'ALGORITMI E STRUTTURE DATI CON LABORATORIO', 'INF/01', 2, 'italiano', '', '', ''),
-(37, 'F0131', '2017/2018', 'ALGORITMI E STRUTTURE DATI', 'INF/01', 1, 'italiano', 'AAA', 'AAAAAA', 'AAAAAAAAA'),
-(36, 'F0130', '2017/2018', 'ALGORITMI E STRUTTURE DATI CON LABORATORIO', 'INF/01', 1, 'italiano', 'AAA', 'AAAA', 'AAAAAA');
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -69,15 +57,7 @@ CREATE TABLE IF NOT EXISTS `corsi_corsi_laurea` (
   `numero_cfu` int(11) NOT NULL,
   `tipo_cfu` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
-
---
--- Dump dei dati per la tabella `corsi_corsi_laurea`
---
-
-INSERT INTO `corsi_corsi_laurea` (`id`, `id_corso_laurea`, `id_corso`, `numero_cfu`, `tipo_cfu`) VALUES
-(9, 1, 39, 9, 'A'),
-(6, 1, 41, 3, 'D');
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -91,14 +71,7 @@ CREATE TABLE IF NOT EXISTS `corsi_corsi_mutuati` (
   `id_corso` int(11) NOT NULL,
   `id_corso_mutuato` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Dump dei dati per la tabella `corsi_corsi_mutuati`
---
-
-INSERT INTO `corsi_corsi_mutuati` (`id`, `id_corso`, `id_corso_mutuato`) VALUES
-(3, 39, 41);
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -112,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `corsi_corsi_propedeutici` (
   `id_corso` int(11) NOT NULL,
   `id_corso_propedeutico` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -126,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `corsi_docenti` (
   `id_corso` int(11) NOT NULL,
   `id_docente` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -139,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `corsi_laurea` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `corsi_laurea`
@@ -147,7 +120,11 @@ CREATE TABLE IF NOT EXISTS `corsi_laurea` (
 
 INSERT INTO `corsi_laurea` (`id`, `nome`) VALUES
 (1, 'Informatica'),
-(2, 'Matematica');
+(2, 'Matematica'),
+(3, 'Chimica'),
+(4, 'Biologia'),
+(5, 'Ingegneria Informatica'),
+(6, 'Ingegneria Elettronica');
 
 -- --------------------------------------------------------
 
@@ -189,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `corsi_moduli` (
   `id_corso_integrato` int(11) NOT NULL,
   `id_modulo` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -210,27 +187,7 @@ CREATE TABLE IF NOT EXISTS `info_corsi` (
   `lang` text NOT NULL,
   `id_corso` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
-
---
--- Dump dei dati per la tabella `info_corsi`
---
-
-INSERT INTO `info_corsi` (`id`, `prerequisiti`, `obiettivi`, `mod_esame`, `mod_insegnamento`, `descrittori_dublino`, `sillabo`, `note`, `lang`, `id_corso`) VALUES
-(79, ' ', ' ', ' ', ' ', '', ' ', ' ', 'ita', 42),
-(78, ' ', ' ', ' ', ' ', '', ' ', ' ', 'eng', 41),
-(77, ' ', ' ', ' ', ' ', '', ' ', ' ', 'ita', 41),
-(76, ' ', ' ', ' ', ' ', '', ' ', ' ', 'eng', 40),
-(75, ' ', ' ', ' ', ' ', '', ' ', ' ', 'ita', 40),
-(74, ' ', ' AA', ' ', ' ', '', ' ', ' ', 'eng', 39),
-(73, ' ', ' ', ' ', ' ', '', ' ', ' ', 'ita', 39),
-(72, ' ', ' ', ' ', ' ', '', ' ', ' ', 'eng', 38),
-(71, ' AA', ' ', ' ', ' ', '', ' ', ' ', 'ita', 38),
-(70, ' ', ' ', ' ', ' ', '', ' ', ' ', 'eng', 37),
-(69, ' ', ' ', ' ', ' ', '', ' ', ' ', 'ita', 37),
-(68, ' AAAAAAAAAAAAAAAAAAAAAA', ' AAAAAAAAAAAAAAAAA', ' AAAAAAAAAA', ' AAAAAAAAAAAA', 'AAAAAAAAAAAAAAAAAAAAA', ' AAAAAAAAAAAAAAAAAAA', ' AAAAAAAAAAAAAAAAAA', 'eng', 36),
-(67, ' aaaaaaaaaa', ' aaaaaaaaaaaaaaaa', ' aaaaaaaaaaaaaaaaaaaaaaa', ' aaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', ' aaaaaaaaaaaaaaaaaaaaaaa', ' aaaaaaaaaaaaaaaaa', 'ita', 36),
-(80, ' ', ' ', ' ', ' ', '', ' ', ' ', 'eng', 42);
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -262,7 +219,33 @@ CREATE TABLE IF NOT EXISTS `log` (
   `messaggio` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `log`
+--
+
+INSERT INTO `log` (`id`, `messaggio`, `timestamp`) VALUES
+(1, 'L\'utente flavio@admin.it ha aggiunto il docente riccardo@admin.it', '2018-06-18 21:51:01'),
+(2, 'L\'utente flavio@admin.it ha aggiunto il docente valentino@admin.it', '2018-06-18 21:51:26'),
+(3, 'L\'utente flavio@admin.it ha aggiunto il docente dellapenna@docente.it', '2018-06-18 21:52:05'),
+(4, 'L\'utente flavio@admin.it ha aggiunto il docente engel@docente.it', '2018-06-18 21:52:23'),
+(5, 'L\'utente flavio@admin.it ha aggiunto il docente proietti@docente.it', '2018-06-18 21:53:21'),
+(6, 'L\'utente flavio@admin.it ha modificato l\'utente ', '2018-06-18 21:54:06'),
+(7, 'L\'utente flavio@admin.it ha modificato l\'utente ', '2018-06-18 21:59:26'),
+(8, 'L\'utente flavio@admin.it ha modificato l\'utente ', '2018-06-18 21:59:37'),
+(9, 'L\'utente flavio@admin.it ha aggiunto il docente vellante@docente.it', '2018-06-18 22:00:10'),
+(10, 'L\'utente flavio@admin.it ha modificato l\'utente ', '2018-06-18 22:00:20'),
+(11, 'L\'utente flavio@admin.it ha modificato l\'utente vellante@docente.com', '2018-06-18 22:00:34'),
+(12, 'L\'utente flavio@admin.it ha aggiunto il docente pierantonio@docente.it', '2018-06-18 22:01:11'),
+(13, 'L\'utente flavio@admin.it ha aggiunto il docente scoppola@docente.it', '2018-06-18 22:01:49'),
+(14, 'L\'utente flavio@admin.it ha aggiunto il docente tozzi@docente.it', '2018-06-18 22:02:06'),
+(15, 'L\'utente flavio@admin.it ha modificato l\'utente ', '2018-06-18 22:03:53'),
+(16, 'L\'utente flavio@admin.it ha modificato l\'utente ', '2018-06-18 22:04:17'),
+(17, 'L\'utente riccardo@admin.it ha modificato l\'utente ', '2018-06-18 22:04:32'),
+(18, 'L\'utente flavio@admin.it ha modificato l\'utente ', '2018-06-18 22:05:13'),
+(19, 'L\'utente flavio@admin.it ha modificato l\'utente ', '2018-06-18 22:06:44'),
+(20, 'L\'utente flavio@admin.it ha modificato l\'utente ', '2018-06-18 22:07:58');
 
 -- --------------------------------------------------------
 
@@ -295,15 +278,23 @@ CREATE TABLE IF NOT EXISTS `utenti` (
   `nome` text NOT NULL,
   `cognome` text NOT NULL,
   PRIMARY KEY (`id`,`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `utenti`
 --
 
 INSERT INTO `utenti` (`id`, `email`, `password`, `tipo_utente`, `nome`, `cognome`) VALUES
-(1, 'a@a', 'cc175b9c0f1b6a831c399e269772661', 'amministratore', 'a', 'a		'),
-(2, 'b@b', '92eb5ffee6ae2fec3ad71c777531578f', 'docente', 'b', 'b		');
+(1, 'flavio@admin.it', 'f76405ac130dac085b2a6249073b213b', 'amministratore', 'Flavio', 'Furia'),
+(3, 'riccardo@admin.it', '9667aacee4c11ab5cb1aee39cb183599', 'amministratore', 'Riccardo', 'Di Prinzio'),
+(4, 'valentino@admin.it', '50b483d799f6b531772078e9cd0fa509', 'amministratore', 'Valentino', 'Di Giosaffatte'),
+(5, 'dellapenna@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Giuseppe', 'Della Penna'),
+(6, 'engel@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Klaus', 'Engel'),
+(7, 'proietti@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Guido', 'Proietti'),
+(8, 'vellante@docente.com', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Massimo', 'Vellante'),
+(9, 'pierantonio@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Alfonso', 'Pierantonio'),
+(10, 'scoppola@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Carlo Maria', 'Scoppola'),
+(11, 'tozzi@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Anna', 'Tozzi');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
