@@ -33,14 +33,14 @@
 
             <label class="label" for="corso_semestre">Semestre</label>
             <select class="field" name="corso_semestre">
-                <option selected="selected" disabled="disabled" value="${corso_ita.semestre}">${corso_ita.semestre}</option>
+                <option selected="selected" value="${corso_ita.semestre}">${corso_ita.semestre}</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
             </select>
 
             <label class="label" for="corso_lingua">Lingua</label>
             <select class="field" name="corso_lingua">
-                <option selected="selected" disabled="disabled" value="${corso_ita.lingua}">${corso_ita.lingua}</option>
+                <option selected="selected" value="${corso_ita.lingua}">${corso_ita.lingua}</option>
                 <option value="italiano">Italiano</option>
                 <option value="inglese">Inglese</option>
             </select>
