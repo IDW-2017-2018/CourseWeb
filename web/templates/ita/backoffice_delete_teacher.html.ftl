@@ -36,4 +36,6 @@
 
 <#else>
 
+    <h1 class="no_results">NESSUN RISULTATO</h1>
+
 </#list>

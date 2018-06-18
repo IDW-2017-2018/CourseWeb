@@ -27,19 +27,35 @@
             <div class="fieldcontainerright">
                 
             
-            <label class="label" for="corso_docente">Docente</label>
-            <input class="field" type="text" id="corso_docente" name="corso_docente"/>
+            <label class="label" for="corso_docente">Docenti</label>
+            <select class="field" name="corso_docente">
+                <option value="---">---</option>
+            <#list docenti>
+                <#items as docente>
+                <option value="${docente.cognome}">${docente.cognome}</option>
+                </#items>
+            <#else>
+            </#list>
+            </select>
     
-            <label class="label" for="corso_corsi_laurea">Corsi di Laurea</label>
-            <input class="field" type="text" id="corso_corsi_laurea" name="corso_corsi_laurea"/>
-                   
             <label class="label" for="corso_lingua">Lingua</label>
-                <select class="field" name="corso_lingua">
-                    <option value="---">---</option>
-                    <option value="italiano">Italiano</option>
-                    <option value="inglese">Inglese</option>
-                </select>
-
+            <select class="field" name="corso_lingua">
+                <option value="---">---</option>
+                <option value="italiano">Italiano</option>
+                <option value="inglese">Inglese</option>
+            </select>
+            
+            <label class="label" for="corso_corsi_laurea">Corsi di Laurea</label>
+            <select class="field" name="corso_corsi_laurea">
+                <option value="---">---</option>
+            <#list corsilaurea>
+                <#items as corsolaurea>
+                <option value="${corsolaurea.nome}">${corsolaurea.nome}</option>
+                </#items>
+            <#else>
+            </#list>
+            </select>
+            
             </div>
 
 
@@ -97,5 +113,7 @@
 </div>
 
 <#else>
+    
+    <h1 class="no_results">NESSUN RISULTATO</h1>
 
 </#list>

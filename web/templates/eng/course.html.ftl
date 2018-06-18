@@ -342,7 +342,8 @@
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="4">NAME</th>
+        <th class="thresult">DOWNLOAD</th>
+        <th class="thresult" colspan="3">NAME</th>
         <th class="thresult" colspan="2">DESCRIPTION</th>
         <th class="thresult">DIMENSION</th>
 
@@ -352,7 +353,8 @@
 
      <tr class="trresult-list">
 
-        <td class="tdresult-list" colspan="4"><a class="linkresult" href="">${strip_slashes(materiale.nome)}</a></td>
+        <td class="tdresult-list"><a class="linkresult" href="course?lang=${lang}&id=${corso.id}&materiale_id=${materiale.id}&download=true">DOWNLOAD</a></td>
+        <td class="tdresult-list" colspan="3">${strip_slashes(materiale.nome)}</td>
         <td class="tdresult-list" colspan="2">${strip_slashes(materiale.descrizione)}</td>
         <td class="tdresult-list">${materiale.dimensione}</td>
 

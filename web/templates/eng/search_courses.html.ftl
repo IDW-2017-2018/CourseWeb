@@ -44,7 +44,7 @@
 		    </select>
 			
             <label class="label" for="corso_lingua">Language</label>
-            <select class="field" name="corso_lingua" >
+            <select class="field" name="corso_lingua">
 			    <option value="---">---</option>
 			    <option value="italiano">Italian</option>
 			    <option value="inglese">English</option>

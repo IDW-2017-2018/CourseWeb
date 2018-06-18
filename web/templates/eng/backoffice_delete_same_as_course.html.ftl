@@ -41,5 +41,7 @@
 
 <#else>
 
+    <h1 class="no_results">NO RESULT</h1>
+
 </#list>
 

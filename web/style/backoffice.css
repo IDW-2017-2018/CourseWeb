@@ -13,6 +13,18 @@
 
 }
 
+.no_results {
+
+    text-align: center;
+    font-family: Arial, Verdana, sans-serif;
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
 textarea {
 
     resize: vertical;
