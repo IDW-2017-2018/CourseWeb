@@ -44,7 +44,6 @@
                 
                 <label class="label" for="utente_tipo_utente">User Type</label>
                 <select class="field" name="utente_tipo_utente">
-                    <option selected="selected" disabled="disabled">${utente.tipoUtente}</option>
                     <option value="docente">Teacher</option>
                     <option value="amministratore">Admin</option>
                 </select>
