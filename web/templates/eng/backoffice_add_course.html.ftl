@@ -46,6 +46,16 @@
                 <option value="inglese">English</option>
             </select>
 
+            <label class="label" for="corso_docente">Teacher [required field]</label>
+            <select class="field" name="corso_docente" required="required">
+            <#list docenti>
+                <#items as docente>
+                <option value="${docente.id}">${docente.cognome}</option>
+                </#items>
+            <#else>
+            </#list>
+            </select>
+
             <label class="label" for="corso_link_homepage">Homepage Link</label>
             <input class="field" type="text" id="corso_link_homepage" name="corso_link_homepage"/>
 

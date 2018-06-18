@@ -46,7 +46,7 @@
                 <option value="---">---</option>
             <#list docenti>
                 <#items as docente>
-                <option value="${docente.cognome}">${docente.cognome}</option>
+                <option value="${docente.id}">${docente.cognome}</option>
                 </#items>
             <#else>
             </#list>
