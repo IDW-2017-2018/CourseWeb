@@ -20,10 +20,11 @@
     <div class="formcontainer">
         
       <form action="backofficehub?lang=${lang}" method="POST">
-
-        <div class="buttoncontainer">               
-            <input class="filterbutton" type="submit" name="hub_aggiungi_corso" value="ADD"/>
-        </div>
+        <#if (session.getAttribute('utente').tipoUtente == "amministratore")>
+            <div class="buttoncontainer">               
+                <input class="filterbutton" type="submit" name="hub_aggiungi_corso" value="ADD"/>
+            </div>
+        </#if>
 
         <div class="buttoncontainer">               
             <input class="filterbutton" type="submit" name="hub_modifica_corso" value="EDIT"/>

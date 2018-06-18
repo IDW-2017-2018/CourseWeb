@@ -155,7 +155,8 @@ public class BackOfficeCourse extends CourseWebBaseController {
         
         TemplateResult result = new TemplateResult(getServletContext()); 
         if(request.getAttribute("session") != null){
-            if(((Utente)request.getAttribute("utente")).getTipoUtente().equals("docente")){
+            HttpSession session = (HttpSession) request.getAttribute("session");
+            if(((Utente)session.getAttribute("utente")).getTipoUtente().equals("docente")){
                 request.setAttribute("message", "not permitted");
                 action_error(request, response);
                 return;
