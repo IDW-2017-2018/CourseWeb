@@ -15,6 +15,7 @@ import framework.result.TemplateManagerException;
 import framework.result.TemplateResult;
 import framework.security.SecurityLayer;
 import java.io.IOException;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -40,7 +41,8 @@ public class BackOfficeCourse extends CourseWebBaseController {
             
         try{
             String codice = request.getParameter("corso_codice");
-            String anno = request.getParameter("corso_anno");
+            int year = Year.now().getValue();
+            String anno = (year-1) + "/" + year;
             String nome = request.getParameter("corso_nome");
             String ssd = request.getParameter("corso_ssd");
             int semestre = Integer.parseInt(request.getParameter("corso_semestre"));
@@ -64,8 +66,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
             String descrittoriDublinoEng = request.getParameter("corso_descrittori_dublino_eng");
             String sillaboEng = request.getParameter("corso_sillabo_eng");
             String noteEng = request.getParameter("corso_note_eng");
-            
-            
+                        
             codice = SecurityLayer.addSlashes(codice);
             anno = SecurityLayer.addSlashes(anno);
             nome = SecurityLayer.addSlashes(nome);
@@ -113,7 +114,36 @@ public class BackOfficeCourse extends CourseWebBaseController {
             corso.setLinkForum(linkForum);
             
             datalayer.storeCorso(corso);
-                                 
+            
+            if (((prerequisiti.equals("")) && (obiettivi.equals("")) && (modEsame.equals("")) && 
+               (modInsegnamento.equals("")) && (sillabo.equals("")) && (note.equals("")) &&
+               (descrittoriDublino.equals("")) && (prerequisitiEng.equals("")) && (obiettiviEng.equals("")) && 
+               (modEsameEng.equals("")) && (modInsegnamentoEng.equals("")) && (descrittoriDublinoEng.equals("")) && 
+               (sillaboEng.equals("")) && (noteEng.equals("")))){
+               List<Corso> aggiornato = datalayer.getCorsiByNomeAggiornati(nome);
+
+                corso.setPrerequisiti(aggiornato.get(0).getPrerequisiti());
+                corso.setObiettivi(aggiornato.get(0).getObiettivi());
+                corso.setModEsame(aggiornato.get(0).getModEsame());
+                corso.setModInsegnamento(aggiornato.get(0).getModInsegnamento());
+                corso.setDescrittoriDublino(aggiornato.get(0).getDescrittoriDublino());
+                corso.setSillabo(aggiornato.get(0).getSillabo());
+                corso.setNote(aggiornato.get(0).getNote());
+                corso.setLang(aggiornato.get(0).getLang());
+                datalayer.storeInfoCorso(corso);
+                
+                corso.setPrerequisiti(aggiornato.get(1).getPrerequisiti());
+                corso.setObiettivi(aggiornato.get(1).getObiettivi());
+                corso.setModEsame(aggiornato.get(1).getModEsame());
+                corso.setModInsegnamento(aggiornato.get(1).getModInsegnamento());
+                corso.setDescrittoriDublino(aggiornato.get(1).getDescrittoriDublino());
+                corso.setSillabo(aggiornato.get(1).getSillabo());
+                corso.setNote(aggiornato.get(1).getNote());
+                corso.setLang(aggiornato.get(1).getLang());
+                datalayer.storeInfoCorso(corso);                
+                
+            }
+            
             if(!(prerequisiti.equals("")&&obiettivi.equals("")&&modEsame.equals("")&&modInsegnamento.equals("")&&descrittoriDublino.equals("")&&sillabo.equals("")&&note.equals(""))){
                 corso.setPrerequisiti(prerequisiti);
                 corso.setObiettivi(obiettivi);
@@ -163,12 +193,15 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 return;
             }
         }
-            
+            int year = Year.now().getValue();
+            String anno = (year-1) + "/" + year;
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
+                request.setAttribute("anno", anno);
                 result.activate("/eng/backoffice_add_course.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
+                request.setAttribute("anno", anno);
                 result.activate("/ita/backoffice_add_course.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");
