@@ -111,10 +111,17 @@ public class BackOfficeCourse extends CourseWebBaseController {
             corso.setSSD(ssd);
             corso.setSemestre(semestre);
             corso.setLingua(lingua);
+            
+            if(linkHomepage.equals("") && linkRisorse.equals("") && linkForum.equals("")){
+                List<Corso> updated = datalayer.getCorsiByNomeAggiornati(nome);
+                corso.setLinkHomepageCorso(updated.get(0).getLinkHomepageCorso());
+                corso.setLinkRisorseEsterne(updated.get(0).getLinkRisorseEsterne());
+                corso.setLinkForum(updated.get(0).getLinkForum());
+            } else {
             corso.setLinkHomepageCorso(linkHomepage);
             corso.setLinkRisorseEsterne(linkRisorse);
             corso.setLinkForum(linkForum);
-            
+            }
             datalayer.storeCorso(corso);
             
             if (((prerequisiti.equals("")) && (obiettivi.equals("")) && (modEsame.equals("")) && 
