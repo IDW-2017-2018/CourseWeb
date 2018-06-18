@@ -13,7 +13,7 @@
 </div>
 
 
-<div class="filterhelper">
+<div class="filter">
     
     <h1 class="title">COURSES</h1>
     
@@ -51,7 +51,7 @@
 
 </div>
 
-<div class="filterhelper">
+<div class="filter">
     
     <h1 class="title">USERS</h1>
     

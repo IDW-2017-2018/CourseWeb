@@ -161,17 +161,6 @@ hr {
     
 }
 
-.filterhelper { 
-
-    border-radius: 10px;
-    background-color: black;
-    padding: 50px 0px;
-    margin: 100px auto;
-    margin-top: 20px;
-    width: 85%;
-    max-width: 1500px;
-
-}
 
 .helper { 
 
@@ -181,6 +170,7 @@ hr {
     margin-bottom: 20px;
     width: 85%;
     max-width: 1500px;
+    margin-bottom: -80px;
 
 }
 

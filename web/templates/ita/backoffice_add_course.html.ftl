@@ -1,3 +1,17 @@
+<div class="helper">
+    
+    <div class="helpertext">
+        
+        <p><b>TITOLO</b></p>
+
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <hr>
+        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        
+    </div>
+
+</div>
+
 <div class="filter">
     
     <h1 class="title">AGGIUNGI CORSO</h1>
@@ -12,26 +26,7 @@
             <input class="field" type="text" id="corso_codice" name="corso_codice" required="required"/>
 
             <label class="label" for="corso_anno">Anno</label>
-            <select class="field" name="corso_anno" required="required">
-                <option value="2000/2001">2000/2001</option>             
-                <option value="2001/2002">2001/2002</option>             
-                <option value="2002/2003">2002/2003</option>             
-                <option value="2003/2004">2003/2004</option>             
-                <option value="2004/2005">2004/2005</option>             
-                <option value="2005/2006">2005/2006</option>             
-                <option value="2006/2007">2006/2007</option>             
-                <option value="2007/2008">2007/2008</option>             
-                <option value="2008/2009">2008/2009</option>             
-                <option value="2009/2010">2009/2010</option>             
-                <option value="2010/2011">2010/2011</option>             
-                <option value="2011/2012">2011/2012</option>             
-                <option value="2012/2013">2012/2013</option>             
-                <option value="2013/2014">2013/2014</option>             
-                <option value="2014/2015">2014/2015</option>             
-                <option value="2015/2016">2015/2016</option>             
-                <option value="2016/2017">2016/2017</option>             
-                <option value="2017/2018">2017/2018</option>             
-            </select>
+            <input class="field" type="text" id="corso_anno" name="corso_anno" disabled="disabled" placeholder="${anno}"/>
 
             <label class="label" for="corso_nome">Nome</label>
             <input class="field" type="text" id="corso_nome" name="corso_nome" required="required"/>
@@ -40,7 +35,7 @@
             <input class="field" type="text" id="corso_ssd" name="corso_ssd" required="required"/>
 
             <label class="label" for="corso_semestre">Semestre</label>
-            <select class="field" name="corso_semestre"">
+            <select class="field" name="corso_semestre">
                 <option value="1">1</option>
                 <option value="2">2</option>
             </select>
