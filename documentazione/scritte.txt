@@ -1,0 +1,12 @@
+Help:
+
+- backoffice
+solo ai professori e agli amministratori è concesso di accedere a questa area
+
+- search courses
+
+- course
+
+About:
+
+catalogo di corsi universitari online, semplificato ma risponedente dei principali requisiti di trasparenza e completezza necessarri per questo tipo di sito.
