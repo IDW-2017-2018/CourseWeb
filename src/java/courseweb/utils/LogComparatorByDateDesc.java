@@ -1,5 +1,5 @@
 /*
- * Class LogComparatorByDate
+ * Class LogComparatorByDateDesc
  */
 package courseweb.utils;
 
@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Riccardo
  */
-public class LogComparatorByDate implements Comparator<String> {
+public class LogComparatorByDateDesc implements Comparator<String> {
     @Override
     public int compare(String o1, String o2) {
         String date_o1 = o1.substring(0, o1.indexOf("- "));

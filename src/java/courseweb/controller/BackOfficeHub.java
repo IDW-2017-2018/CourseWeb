@@ -5,7 +5,7 @@ package courseweb.controller;
 
 import courseweb.data.model.CourseWebDataLayer;
 import courseweb.data.model.Utente;
-import courseweb.utils.LogComparatorByDate;
+import courseweb.utils.LogComparatorByDateDesc;
 import framework.data.DataLayerException;
 import framework.result.FailureResult;
 import framework.result.TemplateManagerException;
@@ -140,13 +140,13 @@ public class BackOfficeHub extends CourseWebBaseController {
             
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
-                items.sort(new LogComparatorByDate());
+                items.sort(new LogComparatorByDateDesc());
                 request.setAttribute("hub_log", "true");
                 request.setAttribute("items", items);
                 result.activate("/eng/log.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
-                items.sort(new LogComparatorByDate());
+                items.sort(new LogComparatorByDateDesc());
                 request.setAttribute("hub_log", "true");
                 request.setAttribute("items", items);               
                 result.activate("/ita/log.html.ftl", request, response);

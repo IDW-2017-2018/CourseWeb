@@ -6,6 +6,7 @@ package courseweb.controller;
 import courseweb.data.model.Corso;
 import courseweb.data.model.CourseWebDataLayer;
 import courseweb.data.model.Materiale;
+import courseweb.utils.CorsoComparatorByDateDesc;
 import framework.data.DataLayerException;
 import framework.result.FailureResult;
 import framework.result.StreamResult;
@@ -70,7 +71,9 @@ public class Course extends CourseWebBaseController {
              
                 request.setAttribute("corso", corso);               
                 List<Corso> VersioniCorsoSecondoLingua = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsoByNomeVersioni(corso.getNome());
-                request.setAttribute("corso_anni", ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(corso.getLang(), VersioniCorsoSecondoLingua));                
+                List<Corso> corsi = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(corso.getLang(), VersioniCorsoSecondoLingua);
+                corsi.sort(new CorsoComparatorByDateDesc());
+                request.setAttribute("corso_anni", corsi);                
                 request.setAttribute("docenti", corso.getDocentiCorso());               
                 request.setAttribute("corsi_laurea", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiLaureaANDCFU(corso));                
                 request.setAttribute("libri_testo", corso.getLibriTestoCorso());
@@ -87,7 +90,9 @@ public class Course extends CourseWebBaseController {
                 
                 request.setAttribute("corso", corso);               
                 List<Corso> VersioniCorsoSecondoLingua = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsoByNomeVersioni(corso.getNome());
-                request.setAttribute("corso_anni", ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(corso.getLang(), VersioniCorsoSecondoLingua));               
+                List<Corso> corsi = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(corso.getLang(), VersioniCorsoSecondoLingua);
+                corsi.sort(new CorsoComparatorByDateDesc());
+                request.setAttribute("corso_anni", corsi);               
                 request.setAttribute("docenti", corso.getDocentiCorso());               
                 request.setAttribute("corsi_laurea", ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiLaureaANDCFU(corso));               
                 request.setAttribute("libri_testo", corso.getLibriTestoCorso());
