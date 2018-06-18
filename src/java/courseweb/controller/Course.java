@@ -138,7 +138,7 @@ public class Course extends CourseWebBaseController {
                 }
                 
                 request.setAttribute("contentType", (ext.equals("")) ? null : ext);
-                result.activate(is, materiale.getDimensione(), materiale.getNome(), request, response);
+                result.activate(is, materiale.getDimensione(), materiale.getNome() + "." + ext, request, response);
             }
             
         } catch(IOException|DataLayerException e){
