@@ -473,6 +473,8 @@ public class CorsoImpl implements Corso {
     
     @Override
     public int compareTo(Corso o){
-        return this.nome.compareTo(o.getNome());
+        int comparison = this.nome.compareTo(o.getNome());
+        
+        return ( (comparison == 0) ? (this.anno.compareTo(o.getAnno())) : comparison );
     }
 }

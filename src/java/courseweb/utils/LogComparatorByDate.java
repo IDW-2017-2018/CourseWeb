@@ -30,7 +30,7 @@ public class LogComparatorByDate implements Comparator<String> {
         }
         
         if((date1 != null) && (date2 != null))
-            return date1.compareTo(date2);
+            return date2.compareTo(date1);
         else
             throw new RuntimeException("Cannot sort log by Date");
         
