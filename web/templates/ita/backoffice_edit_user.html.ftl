@@ -44,6 +44,7 @@
                 
                 <label class="label" for="utente_tipo_utente">Tipo Utente</label>
                 <select class="field" name="utente_tipo_utente">
+                    <option value="${utente.tipoUtente}">${utente.tipoUtente}</option>
                     <option value="docente">Docente</option>
                     <option value="amministratore">Amministratore</option>
                 </select>
