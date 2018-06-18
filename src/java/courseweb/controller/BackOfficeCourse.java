@@ -9,6 +9,8 @@ import courseweb.data.model.Corso;
 import courseweb.data.model.Corso_Laurea;
 import courseweb.data.model.CourseWebDataLayer;
 import courseweb.data.model.Utente;
+import courseweb.utils.Corso_LaureaComparatorByNome;
+import courseweb.utils.UtenteComparatorByCognome;
 import framework.data.DataLayerException;
 import framework.result.FailureResult;
 import framework.result.TemplateManagerException;
@@ -232,15 +234,25 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 corsi_filtrati.sort(new CorsoComparatorByNome());
                 request.setAttribute("corsi", corsi_filtrati);
+                
+                corsilaurea.sort(new Corso_LaureaComparatorByNome());
                 request.setAttribute("corsilaurea", corsilaurea);
+                
+                docenti.sort(new UtenteComparatorByCognome());
                 request.setAttribute("docenti", docenti);
+                
                 result.activate("/eng/backoffice_filter_edit_course.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 corsi_filtrati.sort(new CorsoComparatorByNome());
                 request.setAttribute("corsi", corsi_filtrati);
+                
+                corsilaurea.sort(new Corso_LaureaComparatorByNome());
                 request.setAttribute("corsilaurea", corsilaurea);
+                
+                docenti.sort(new UtenteComparatorByCognome());
                 request.setAttribute("docenti", docenti);
+                
                 result.activate("/ita/backoffice_filter_edit_course.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");
@@ -306,7 +318,11 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 corsi_filtrati.sort(new CorsoComparatorByNome());
                 request.setAttribute("corsi", corsi_filtrati);
+                
+                corsilaurea.sort(new Corso_LaureaComparatorByNome());
                 request.setAttribute("corsilaurea", corsilaurea);
+                
+                docenti.sort(new UtenteComparatorByCognome());
                 request.setAttribute("docenti", docenti);
                 result.activate("/eng/backoffice_filter_edit_course.html.ftl", request, response);  
 
@@ -314,7 +330,11 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 corsi_filtrati.sort(new CorsoComparatorByNome());
                 request.setAttribute("corsi", corsi_filtrati);
+                
+                corsilaurea.sort(new Corso_LaureaComparatorByNome());
                 request.setAttribute("corsilaurea", corsilaurea);
+                
+                docenti.sort(new UtenteComparatorByCognome());
                 request.setAttribute("docenti", docenti);
                 result.activate("/ita/backoffice_filter_edit_course.html.ftl", request, response); 
 
