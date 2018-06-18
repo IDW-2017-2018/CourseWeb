@@ -26,17 +26,9 @@
     <!-- ########## TITLE BAR ########## -->
 
     <div class="title_bar">
-        
-        <#if id??>
-            <a href="${page}?lang=${lang}&id=${id}">
-                <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
-            </a>
-        <#else>
-            <a href="${page}?lang=${lang}">
-                <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
-            </a>
-        </#if>
-
+        <a>
+            <img class="logo_img" src="images/logo_imgs/logoDEF.svg" alt="Logo"/>
+        </a>
     </div>
 
     <#include navbar_tpl>
