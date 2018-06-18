@@ -593,21 +593,12 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                     }
                  
                 } 
-                //prosegui ricerca
-                
+    
             }
-            result.add(item);
-            for(int k = i + 1; k < corsi.size(); k++){
-                Corso a = corsi.get(k); 
-                if(a.getNome().equals(item.getNome()))
-                    corsi.remove(a); 
-            }
-                
-                 
-        }
-        
-        return result;      
-        
+            if(!result.contains(item))
+            result.add(item);          
+        }       
+        return result;             
     }
     
     @Override
@@ -635,58 +626,21 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 //prosegui ricerca
                             
             }
-            result.add(item);
-            for(int k = i + 1; k < corsi.size(); k++){
-                Corso a = corsi.get(k); 
-                if(a.getNome().equals(item.getNome()))
-                    corsi.remove(a); 
+            if(!result.contains(item))
+            result.add(item); 
             }
-           
-        }
-        
-        return result;      
-        
+               
+        return result;            
     }
     
     @Override
-    public List<Corso> filterCorsiByLang(String lang, List<Corso> lista_corsi){
-       
-        List<Corso> result = new ArrayList<Corso>(); 
-        
+    public List<Corso> filterCorsiByLang(String lang, List<Corso> lista_corsi){       
+        List<Corso> result = new ArrayList<Corso>();        
         if(lang == null)
-            return result; 
-        
+            return result;         
         for(int i = 0; i < lista_corsi.size(); i++){
-            Corso item = lista_corsi.get(i); 
-           
-            for(int j = i + 1; j < (lista_corsi.size() - 1); j++){
-                Corso now = lista_corsi.get(j);
-                
-                if( (now.getCodice().equals(item.getCodice())) && (now.getAnno().equals(item.getAnno())) ){
-                    
-                    String lang_corso_1 = item.getLang(); 
-                    String lang_corso_2 = now.getLang(); 
-                    
-                    if(lang.equals(lang_corso_2)){
-                        //scegliamo il corso in accordo alla lingua, cambiamo se l'item scelto precedentemente
-                        //non ha la lingua esatta
-                        item = now; 
-                    }
-                 
-                } else {
-                    //prosegui ricerca
-                }
-                
-            }
-            
-            result.add(item); 
-            for(int k = i + 1; k < lista_corsi.size(); k++){
-                Corso a = lista_corsi.get(k); 
-                if(a.getNome().equals(item.getNome()))
-                    lista_corsi.remove(a); 
-            }
-        }
-        
+            if(lista_corsi.get(i).getLang().equals(lang)) result.add(lista_corsi.get(i)); 
+        }        
         return result; 
     }
     

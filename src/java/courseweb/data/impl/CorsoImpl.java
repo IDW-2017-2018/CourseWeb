@@ -484,4 +484,13 @@ public class CorsoImpl implements Corso {
         
         return ( (comparison == 0) ? (this.anno.compareTo(o.getAnno())) : comparison );
     }
+    
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Corso){
+            return this.nome.equals(((Corso) o).getNome());
+        } else {
+            return false;
+        }
+    }
 }

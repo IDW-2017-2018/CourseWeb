@@ -239,16 +239,21 @@ public class BackOfficeCourse extends CourseWebBaseController {
         
         try {            
             CourseWebDataLayer datalayer = (CourseWebDataLayer)request.getAttribute("datalayer");
-            List<Corso> corsi_non_filtrati = datalayer.getCorsiAggiornati();           
+            List<Corso> corsi_filtrati = null;
+            List<Corso> corsi_non_filtrati = datalayer.getCorsi();      
             String lang = (String) request.getAttribute("lang"); 
-            List<Corso> corsi_filtrati = datalayer.filterCorsiByLang(lang, corsi_non_filtrati);
+            HttpSession session = (HttpSession) request.getAttribute("session");
             if(request.getAttribute("session") != null){
-                HttpSession session = (HttpSession) request.getAttribute("session");
                 if(((Utente)session.getAttribute("utente")).getTipoUtente().equals("docente")){
+                corsi_non_filtrati = datalayer.getCorsiAggiornati();    
                 String cognome = ((Utente)session.getAttribute("utente")).getCognome();
-                corsi_filtrati = datalayer.filtraCorsi(corsi_filtrati, "corso_docente", cognome);                
+                corsi_filtrati = datalayer.filtraCorsi(corsi_non_filtrati, "corso_docente", cognome);
+                corsi_filtrati = datalayer.filterCorsiByLang(lang, corsi_filtrati);
                 }
-            }
+            else{
+                corsi_filtrati = datalayer.filterCorsiByLang(lang, corsi_non_filtrati);
+                }
+            }    
             List<Corso_Laurea> corsilaurea = datalayer.getCorsiLaurea();
             List<Utente> docenti = datalayer.getDocenti();
             if(request.getAttribute("lang").equals("eng")){
@@ -295,23 +300,15 @@ public class BackOfficeCourse extends CourseWebBaseController {
        String corso_docente = request.getParameter("corso_docente");
        String corso_lingua = request.getParameter("corso_lingua");
        String corso_corsi_laurea = request.getParameter("corso_corsi_laurea");
-       //ricaricare la pagina con la nuova List di corsi
-                  
        try {
-           String lang = (String) request.getAttribute("lang");
-                               
+           String lang = (String) request.getAttribute("lang");                               
            if(!corso_nome.equals("")){
-               corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiByNomeAggiornati(corso_nome); 
-           }
-           else {
-               corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiAggiornati();
-           }
-                                            
-           corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(lang, corsi_non_filtrati); 
-            // abbiamo lista dei corsi aggiornati e filtrati in base alla lingua e al nome, se è stato inserito
-            
-            // codice , SSD , semestre , docente , lingua , corsi di laurea
-                                   
+                corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsoByNome(corso_nome);
+           }else{
+                corsi_non_filtrati=((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsi();
+                }
+                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(lang, corsi_non_filtrati);        
+                                                  
             if (!corso_codice.equals("")){
                 corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_codice", corso_codice); 
             } 
@@ -321,7 +318,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
             } 
             
             if (!corso_docente.equals("---")){
-                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_docente", corso_docente); 
+                corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filtraCorsi(corsi_filtrati, "corso_docente", ((CourseWebDataLayer) request.getAttribute("datalayer")).getUtente(Integer.parseInt(corso_docente)).getCognome());
             } 
             
             if (!corso_lingua.equals("---")){

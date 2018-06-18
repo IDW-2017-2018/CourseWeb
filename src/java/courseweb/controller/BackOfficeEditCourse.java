@@ -1301,11 +1301,15 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             String anno_libro = request.getParameter("libro_testo_anno");
             String editore_libro = request.getParameter("libro_testo_editore");
             String link_libro = request.getParameter("libro_testo_link");
-            
             if( titolo_libro.equals("") && autore_libro.equals("") && volume_libro.equals("") &&
                     anno_libro.equals("") && editore_libro.equals("") && link_libro.equals("") ){
                 request.setAttribute("message", "empty fields");
                 action_error(request, response);   
+                return;
+            }
+            if(titolo_libro.equals("") && autore_libro.equals("")){
+                request.setAttribute("message", "insert title and author");
+                action_error(request, response);
                 return;
             }
             
@@ -1315,6 +1319,12 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             libro_testo.setAnno(anno_libro);
             libro_testo.setEditore(editore_libro);
             libro_testo.setLink(link_libro);
+            if(datalayer.getLibriTesto().contains(libro_testo)){
+                request.setAttribute("message", "title already exists");
+                action_error(request, response);
+                return;
+            }
+
             
             datalayer.storeLibroTesto(libro_testo);
             datalayer.storeCorsiLibriTesto(id, libro_testo.getId());
@@ -1510,6 +1520,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             int id = Integer.parseInt(request.getParameter("id"));
             
             String nome_file = request.getParameter("materiale_nome");
+            Materiale materiale = new MaterialeImpl(datalayer);            
+            materiale.setNome(nome_file);
+            if(datalayer.getMateriali().contains(materiale)){
+                request.setAttribute("message", "name already exists");
+                action_error(request, response);
+                return;
+            }
             String descrizione_file = request.getParameter("materiale_descrizione");
             Part file_to_upload = request.getPart("materiale_file");
             
@@ -1526,10 +1543,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 ext = file_to_upload.getSubmittedFileName().substring(i+1);
             }
             
-            File uploaded_file = File.createTempFile("upload_", "." + ext, new File(getServletContext().getInitParameter("uploads.directory")));
-            
-            Materiale materiale = new MaterialeImpl(datalayer);
-            
+            File uploaded_file = File.createTempFile("upload_", "." + ext, new File(getServletContext().getInitParameter("uploads.directory")));            
             try (InputStream is = file_to_upload.getInputStream();
                 OutputStream os = new FileOutputStream(uploaded_file)){
             byte[] buffer = new byte[1024];
@@ -1547,7 +1561,6 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             }
             //write complete
             
-            materiale.setNome(nome_file);
             materiale.setDimensione(file_to_upload.getSize());
             materiale.setDescrizione(descrizione_file);
             materiale.setPercorso(uploaded_file.getName());

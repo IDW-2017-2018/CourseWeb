@@ -137,6 +137,13 @@ public class Libro_TestoImpl implements Libro_Testo {
     }
     
     @Override
+    public boolean equals(Object o){
+        if(o instanceof Libro_Testo){
+            return this.titolo.equals(((Libro_Testo) o).getTitolo());
+        } else return false;
+    }
+    
+    @Override
     public int compareTo(Libro_Testo o){
         return this.titolo.compareTo(o.getTitolo());
     }

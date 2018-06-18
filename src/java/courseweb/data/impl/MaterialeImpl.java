@@ -110,6 +110,13 @@ public class MaterialeImpl implements Materiale {
     }    
 
     @Override
+    public boolean equals(Object o){
+        if(o instanceof Materiale){
+            return this.nome.equals(((Materiale) o).getNome());
+        } else return false;
+    }
+    
+    @Override
     public int compareTo(Materiale o){
         return this.nome.compareTo(o.getNome());
     }
