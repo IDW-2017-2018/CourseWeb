@@ -81,7 +81,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sUtenteById = connection.prepareStatement("SELECT * FROM utenti WHERE id=?");
             sUtenteByEmail = connection.prepareStatement("SELECT * FROM utenti WHERE email=?");
             sUtenteByEmailLike = connection.prepareStatement("SELECT * FROM utenti WHERE utenti.email LIKE ?");
-            uUtenteById = connection.prepareStatement("UPDATE utenti SET email=?, password=?, nome=?, cognome=? WHERE id=?");
+            uUtenteById = connection.prepareStatement("UPDATE utenti SET email=?, password=?, nome=?, cognome=?, tipo_utente=? WHERE id=?");
             uUtenteByEmail = connection.prepareStatement("UPDATE utenti SET email=?, password=?, nome=?, cognome=? WHERE email=?");
             iUtente = connection.prepareStatement("INSERT INTO utenti (email,password,tipo_utente,nome,cognome) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             
@@ -1012,7 +1012,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             uUtenteById.setString(2, utente.getPassword());
             uUtenteById.setString(3, utente.getNome().trim());
             uUtenteById.setString(4, utente.getCognome().trim());
-            uUtenteById.setInt(5, utente.getId());
+            uUtenteById.setString(5, utente.getTipoUtente());
+            uUtenteById.setInt(6, utente.getId());
             uUtenteById.executeUpdate();
             }
             else { //insert
@@ -1034,6 +1035,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             }
             if(key > 0) {
                 utente.copyFrom(getUtente(key));
+                
             }
             utente.setDirty(false);
         }
@@ -1066,7 +1068,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 iUtente.setString(3, utente.getTipoUtente().trim());
                 iUtente.setString(4, utente.getNome().trim());
                 iUtente.setString(5, utente.getCognome().trim());
-                
+            
                 if(iUtente.executeUpdate() == 1) {
                     
                     try(ResultSet keys = iUtente.getGeneratedKeys()) {

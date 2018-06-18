@@ -101,23 +101,23 @@ public class BackOfficeUser extends CourseWebBaseController {
             String ripetiPassword = request.getParameter("utente_ripeti_password");
             String nome = request.getParameter("utente_nome");
             String cognome = request.getParameter("utente_cognome");
-            String tipo_utente = request.getParameter("utente_tipo_utente");
+            String tipo_utente = request.getParameter("utente_tipo_utente");         
             
             email = SecurityLayer.addSlashes(email);
             password = SecurityLayer.addSlashes(password);
             ripetiPassword = SecurityLayer.addSlashes(ripetiPassword);
             nome = SecurityLayer.addSlashes(nome);
-            cognome = SecurityLayer.addSlashes(cognome);
-         
-            if(email.equals("") && password.equals("") && ripetiPassword.equals("") && nome.equals("") && cognome.equals("")){
-                request.setAttribute("message","empty fields");
-                action_error(request,response);
-                return;
-            }
+            cognome = SecurityLayer.addSlashes(cognome);         
             
             CourseWebDataLayer datalayer = ((CourseWebDataLayer) request.getAttribute("datalayer"));
             
             Utente utente = datalayer.getUtente(id);
+            
+            if(email.equals("") && password.equals("") && ripetiPassword.equals("") && nome.equals("") && cognome.equals("") && tipo_utente.equals(utente.getTipoUtente())){
+                request.setAttribute("message","nothing changed");
+                action_error(request,response);
+                return;
+            }
             
             if(!email.equals("")){
                 utente.setEmail(email);
@@ -144,7 +144,7 @@ public class BackOfficeUser extends CourseWebBaseController {
                 edited = true;
             }
             
-            if(utente.getTipoUtente().equals(tipo_utente)){
+            if(!(utente.getTipoUtente().equals(tipo_utente))){
                 utente.setTipoUtente(tipo_utente);
                 edited = true;
             }
@@ -152,6 +152,7 @@ public class BackOfficeUser extends CourseWebBaseController {
             if(edited == true){
                 datalayer.storeUtenteById(utente);
                 datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha modificato l'utente " + email);            
+                ((HttpSession) request.getAttribute("session")).setAttribute("utente", utente);
             }
             response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
                        

@@ -42,6 +42,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
     private void action_aggiungi_corso(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
             
         try{
+            boolean primoanno = false;
             String codice = request.getParameter("corso_codice");
             int year = Year.now().getValue();
             String anno = (year-1) + "/" + year;
@@ -49,6 +50,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
             String ssd = request.getParameter("corso_ssd");
             int semestre = Integer.parseInt(request.getParameter("corso_semestre"));
             String lingua = request.getParameter("corso_lingua");
+            int docente = Integer.parseInt(request.getParameter("corso_docente"));
             String linkHomepage = request.getParameter("corso_link_homepage");
             String linkRisorse = request.getParameter("corso_link_risorse");
             String linkForum = request.getParameter("corso_link_forum");
@@ -111,9 +113,9 @@ public class BackOfficeCourse extends CourseWebBaseController {
             corso.setSSD(ssd);
             corso.setSemestre(semestre);
             corso.setLingua(lingua);
+            List<Corso> updated = datalayer.getCorsiByNomeAggiornati(nome);
             
-            if(linkHomepage.equals("") && linkRisorse.equals("") && linkForum.equals("")){
-                List<Corso> updated = datalayer.getCorsiByNomeAggiornati(nome);
+            if(linkHomepage.equals("") && linkRisorse.equals("") && linkForum.equals("") && !updated.isEmpty()){
                 corso.setLinkHomepageCorso(updated.get(0).getLinkHomepageCorso());
                 corso.setLinkRisorseEsterne(updated.get(0).getLinkRisorseEsterne());
                 corso.setLinkForum(updated.get(0).getLinkForum());
@@ -123,6 +125,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
             corso.setLinkForum(linkForum);
             }
             datalayer.storeCorso(corso);
+            datalayer.storeCorsiDocenti(corso.getId(), docente);
             
             if (((prerequisiti.equals("")) && (obiettivi.equals("")) && (modEsame.equals("")) && 
                (modInsegnamento.equals("")) && (sillabo.equals("")) && (note.equals("")) &&
@@ -130,7 +133,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
                (modEsameEng.equals("")) && (modInsegnamentoEng.equals("")) && (descrittoriDublinoEng.equals("")) && 
                (sillaboEng.equals("")) && (noteEng.equals("")))){
                List<Corso> aggiornato = datalayer.getCorsiByNomeAggiornati(nome);
-
+               if(!aggiornato.isEmpty()){
                 corso.setPrerequisiti(aggiornato.get(0).getPrerequisiti());
                 corso.setObiettivi(aggiornato.get(0).getObiettivi());
                 corso.setModEsame(aggiornato.get(0).getModEsame());
@@ -150,10 +153,11 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 corso.setNote(aggiornato.get(1).getNote());
                 corso.setLang(aggiornato.get(1).getLang());
                 datalayer.storeInfoCorso(corso);                
-                
+               }  
+               else primoanno = true;
             }
             
-            if(!(prerequisiti.equals("")&&obiettivi.equals("")&&modEsame.equals("")&&modInsegnamento.equals("")&&descrittoriDublino.equals("")&&sillabo.equals("")&&note.equals(""))){
+            if(!(prerequisiti.equals("")&&obiettivi.equals("")&&modEsame.equals("")&&modInsegnamento.equals("")&&descrittoriDublino.equals("")&&sillabo.equals("")&&note.equals("")) || primoanno){
                 corso.setPrerequisiti(prerequisiti);
                 corso.setObiettivi(obiettivi);
                 corso.setModEsame(modEsame);
@@ -182,6 +186,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
             }
             
             datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha aggiunto il corso " + nome);
+            datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha aggiunto un docente al corso " + nome);
             response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
                         
         }
@@ -202,21 +207,30 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 return;
             }
         }
+        try{
+            List<Utente> docenti = ((CourseWebDataLayer) request.getAttribute("datalayer")).getDocenti();
+            docenti.sort(new UtenteComparatorByCognome());
             int year = Year.now().getValue();
             String anno = (year-1) + "/" + year;
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 request.setAttribute("anno", anno);
+                request.setAttribute("docenti", docenti);
                 result.activate("/eng/backoffice_add_course.html.ftl", request, response);
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 request.setAttribute("anno", anno);
+                request.setAttribute("docenti", docenti);
                 result.activate("/ita/backoffice_add_course.html.ftl", request, response);
             } else {
                 request.setAttribute("message", "Illegal language");
                 action_error(request, response); 
             }
               
+    } catch (DataLayerException e){
+        request.setAttribute("exception",e);
+        action_error(request, response);
+    }
     }
     
     private void action_filter_modifica_corso_default(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
