@@ -1302,6 +1302,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             String editore_libro = request.getParameter("libro_testo_editore");
             String link_libro = request.getParameter("libro_testo_link");
             
+            if( titolo_libro.equals("") && autore_libro.equals("") && volume_libro.equals("") &&
+                    anno_libro.equals("") && editore_libro.equals("") && link_libro.equals("") ){
+                request.setAttribute("message", "empty fields");
+                action_error(request, response);   
+                return;
+            }
+            
             libro_testo.setTitolo(titolo_libro);
             libro_testo.setAutore(autore_libro);
             libro_testo.setVolume(volume_libro);
@@ -1504,8 +1511,13 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             
             String nome_file = request.getParameter("materiale_nome");
             String descrizione_file = request.getParameter("materiale_descrizione");
-            
             Part file_to_upload = request.getPart("materiale_file");
+            
+            if( nome_file.equals("") && descrizione_file.equals("") && (file_to_upload.getSize() == 0) ){
+                request.setAttribute("message", "empty fields");
+                action_error(request, response);   
+                return;
+            }
             
             String ext = "";
 
