@@ -96,8 +96,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             
             sMaterialeById = connection.prepareStatement("SELECT * FROM materiali WHERE id=?");
             sMateriali = connection.prepareStatement("SELECT * FROM materiali");
-            iMateriale = connection.prepareStatement("INSERT INTO materiali (nome, descrizione, dimensione, percorso) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            uMateriale = connection.prepareStatement("UPDATE materiali SET nome=?, descrizione=?, dimensione=?, percorso=? WHERE id=?");
+            iMateriale = connection.prepareStatement("INSERT INTO materiali (nome, descrizione, dimensione, percorso, id_utente) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uMateriale = connection.prepareStatement("UPDATE materiali SET nome=?, descrizione=?, dimensione=?, percorso=?, id_utente=? WHERE id=?");
             
             //query complesse
             sDocenti = connection.prepareStatement("SELECT * FROM utenti WHERE tipo_utente='docente'");
@@ -278,6 +278,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             m.setDescrizione(rs.getString("descrizione"));
             m.setDimensione(rs.getLong("dimensione"));
             m.setPercorso(rs.getString("percorso"));
+            m.setUtenteId(rs.getInt("id_utente"));
             
             return m; 
             
@@ -1160,7 +1161,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     }
     
     @Override
-    public void storeMateriale(Materiale materiale) throws DataLayerException {
+    public void storeMateriale(Materiale materiale, int utente_key) throws DataLayerException {
     
         int key = materiale.getId();
         try {
@@ -1173,7 +1174,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             uMateriale.setString(2, materiale.getDescrizione());
             uMateriale.setLong(3, materiale.getDimensione());
             uMateriale.setString(4, materiale.getPercorso());
-            uMateriale.setInt(5, materiale.getId());
+            uMateriale.setInt(5, utente_key);
+            uMateriale.setInt(6, materiale.getId());
             uMateriale.executeUpdate();
             }
             else { //insert
@@ -1181,6 +1183,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 iMateriale.setString(2, materiale.getDescrizione());
                 iMateriale.setLong(3, materiale.getDimensione());
                 iMateriale.setString(4, materiale.getPercorso());
+                iMateriale.setInt(5, utente_key);               
                 
                 if(iMateriale.executeUpdate() == 1) {
                     

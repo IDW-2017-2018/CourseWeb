@@ -36,7 +36,7 @@
                 <select class="field" name="materiale_nome">
                   <#list items>
                       <#items as item>
-                      <option value="${item.id}">${strip_slashes(item.nome)}</option>
+                      <option value="${item.id}">${strip_slashes(item.nome)} - ${datalayer.getUtente(item.utenteId).getNome()}&nbsp;${datalayer.getUtente(item.utenteId).getCognome()}</option>
                       </#items>
                   <#else>
                   </#list>

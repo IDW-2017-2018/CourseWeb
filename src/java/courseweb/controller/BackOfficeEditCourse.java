@@ -1422,11 +1422,11 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                     res.add(materiale1);
                 }
             }
-            
+            request.setAttribute("datalayer", datalayer);
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");
                 res.sort(new MaterialeComparatorByNome());
-                request.setAttribute("items", res);                
+                request.setAttribute("items", res);
                 request.setAttribute("corso", datalayer.getCorso(id,"ita"));                
                 result.activate("/eng/backoffice_add_material.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
@@ -1566,7 +1566,7 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             materiale.setPercorso(uploaded_file.getName());
             
             //upload to db
-            datalayer.storeMateriale(materiale);
+            datalayer.storeMateriale(materiale, ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getId());
             datalayer.storeCorsiMateriali(id, materiale.getId());
             datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha aggiunto un nuovo materiale e lo ha associato al corso " + datalayer.getCorso(id,"ita").getNome());                                    
             response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));

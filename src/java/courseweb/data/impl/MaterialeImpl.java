@@ -18,8 +18,10 @@ public class MaterialeImpl implements Materiale {
     private String descrizione; 
     private long dimensione; 
     private String percorso;
+    private int utente_id;
     private CourseWebDataLayer ownerDataLayer;
     protected boolean dirty;
+    
    
     public MaterialeImpl(CourseWebDataLayer ownerDataLayer){
         
@@ -29,6 +31,7 @@ public class MaterialeImpl implements Materiale {
         this.descrizione = "";
         this.dimensione = 0;
         this.percorso = "";
+        this.utente_id = 0;
         this.dirty = false;
         
     }
@@ -56,6 +59,11 @@ public class MaterialeImpl implements Materiale {
     @Override
     public String getPercorso(){
         return this.percorso;
+    }
+    
+    @Override
+    public int getUtenteId(){
+        return this.utente_id;
     }
     
     protected void setId(int id) {   
@@ -88,6 +96,12 @@ public class MaterialeImpl implements Materiale {
     }
     
     @Override
+    public void setUtenteId(int utente_key){
+        this.utente_id = utente_key;
+        this.dirty=true;
+    }
+    
+    @Override
     public void setDirty(boolean dirty){
         this.dirty = dirty; 
     }
@@ -105,6 +119,7 @@ public class MaterialeImpl implements Materiale {
         descrizione = materiale.getDescrizione();
         dimensione = materiale.getDimensione();
         percorso = materiale.getPercorso();
+        utente_id = materiale.getUtenteId();
         dirty = true;
         
     }    
