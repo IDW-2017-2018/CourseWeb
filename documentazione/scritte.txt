@@ -1,12 +1,92 @@
-Help:
+------ Help:
 
 - backoffice
-solo ai professori e agli amministratori è concesso di accedere a questa area
+Solo ai docenti e agli amministratori è concesso di accedere a questa area.
+Gli amministratori saranno gli unici a poter creare i corsi e assegnare loro i titolari. Inoltre l'amministratore ha il permesso di creare nuovi utenti (che siano docenti, oppure amministratori) e di modificarli, nessun utente ha il permesso di eliminare corsi o altri utenti, per farlo è necessario contattare i manutentori del sito che provvederanno a soddisfare la richiesta.
+I docenti possono inserire e modificare tutte le informazioni inerenti ai soli corsi loro assegnati e relative all'anno accademico corrente, mentre gli amministratori possono intervenire su tutti i corsi e su qualsiasi versione di essi.
+Tutte le operazioni di modifica e di creazione compiute in quest'area vengono salvate in un log accessibile degli utenti amministratori in una pagina ad essa dedicata.
 
 - search courses
+Quest'area è accessibile a tutti gli utenti (amministratori, docenti e anonimi). La pagina contiene un'area contentente filtri che permettono di aiutare l'utente nella ricerca del corso e una lista contenente i corsi che rispondono ai parametri di ricerca o tutti i corsi. Gli unici corsi ricercabili sono i corsi relativi all'ultimo anno accademico disponibile.
+Alla scelta del corso desiderato si aprirà la pagina del corso.
 
 - course
+La pagina del corso contiene tutte le informazioni disponibili relative al corso ricercato. Da questa pagina è anche possibile accedere alle versioni precedenti del corso e inoltre scaricare il materiale ad esso associato.
 
-About:
+------ About:
 
-catalogo di corsi universitari online, semplificato ma risponedente dei principali requisiti di trasparenza e completezza necessarri per questo tipo di sito.
+Catalogo di corsi universitari online, semplificato ma rispondente dei principali requisiti di trasparenza e completezza necessari per questo tipo di sito.
+Il sito supporta la pubblicazione bilingue (italiano e inglese) dei contenuti, in assenza del contenuto in una lingua, verrà utilizzata l'altra a disposizione.
+
+------ BackOffice:
+
+- Hub: 
+-- Corsi: Nella sezione relativa ai corsi l'amministratore può aggiungere un nuovo corso oppure modificare corsi già esistenti.
+Ai docenti è permesso solamente modificare i corsi dell'anno accademico corrente loro assegnati.
+
+---- Aggiungi corso:
+Pagina relativa all'aggiunta di un nuovo corso. Codice, nome, SSD, lingua e l'inserimento di un docente risulta obbligatorio ai fini della creazione del corso i restanti campi sono compilabili a discrezione dell'amministratore.
+Il campo anno corrisponde all'anno accademico corrente.
+E'opportuno e fortemente consigliato organizzare i descrittori di Dublino secondo lo standard previsto: Knowledge, Application, Evaluation, Communication, Lifelong learning skills
+Sempre a discrezione dell'utente è possibile inserire le informazioni in italiano e in inglese al fine di garantire l'internazionalizzazione del sito.
+
+---- Modifica corso (filtro):
+Pagina relativa alla ricerca, mediante appositi filtri, del corso da modificare.
+Agli amministratori è concesso ricercare tutti i corsi di qualsiasi anno accademico.
+Ai docenti è concesso ricercare solamente l'ultima versione dei corsi loro assegnati.
+
+---- Modifica corso hub: 
+Pagina relativa alla modifica di un corso esistente. 
+Da questa pagina è possibile modificare le informazioni relative al corso e aggiungere ed eliminare le relazioni ad esso associate (corsi laurea, corsi mutuati, moduli, corsi propedeutici, docenti, libri testo e materiali)
+
+---- Modifica corso:
+Da questa pagina è possibile modificare le informazioni del corso scelto.
+Se si sceglie di modificare i descrittori di Dublino, è opportuno e fortemente consigliato organizzarli secondo lo standard previsto: Knowledge, Application, Evaluation, Communication, Lifelong learning skills
+Sempre a discrezione dell'utente è possibile inserire le informazioni in italiano e in inglese al fine di garantire l'internazionalizzazione del sito.
+
+---- Aggiungi corso laurea: 
+Da questa pagina è possibile aggiungere una relazione con un corso di laurea esistente. 
+
+---- Elimina corso laurea: 
+Da questa pagina è possibile eliminare una relazione con un corso mutuato esistente a patto che esso abbia tra i propri corsi di laurea, uno dei corsi di laurea associati al corso modificato . 
+
+---- Aggiungi corso mutuato: 
+Da questa pagina è possibile aggiungere una relazione con un corso mutuato esistente. 
+
+---- Elimina corso mutuato: 
+Da questa pagina è possibile eliminare una relazione con un corso mutuato esistente a patto che esso abbia tra i propri corsi di laurea, uno dei corsi di laurea associati al corso modificato . 
+
+---- Aggiungi modulo: 
+Da questa pagina è possibile aggiungere una relazione con un modulo esistente. 
+
+---- Elimina modulo: 
+Da questa pagina è possibile eliminare una relazione con un modulo esistente a patto che esso abbia tra i propri corsi di laurea, uno dei corsi di laurea associati al corso modificato . 
+
+---- Aggiungi docenti: 
+Da questa pagina è possibile aggiungere un utente docente associato con al corso. 
+
+---- Elimina docenti: 
+Da questa pagina è possibile eliminare un docente associato al corso. 
+
+---- Aggiungi libro testo esistente: 
+Da questa pagina è possibile aggiungere una relazione con un libro di testo esistente. 
+
+---- Aggiungi libro testo nuovo: 
+Da questa pagina è possibile aggiungere una relazione con un libro di testo nuovo.
+
+---- Elimina libro testo: 
+Da questa pagina è possibile eliminare una relazione con un libro di testo esistente.
+L'eliminazione cancellerà solo la relazione del libro di testo in questione con il corso, non eliminerà il libro di testo dal sistema (poichè esso potrebbe essere utile ad un altro corso che sta utilizzando lo stesso libro di testo).
+Per fare ciò è necessario contattare i manutentori del sito che provvederanno a soddisfare la suddetta richiesta.
+
+---- Aggiungi materiale esistente: 
+Da questa pagina è possibile aggiungere una relazione con un materiale esistente. 
+
+---- Aggiungi materiale nuovo: 
+Da questa pagina è possibile aggiungere una relazione con un materiale esistente. 
+
+---- Elimina materiale: 
+Da questa pagina è possibile eliminare una relazione con un materiale esistente.
+L'eliminazione cancellerà solo la relazione del materiale in questione con il corso, non eliminerà il materiale dal sistema (poichè esso potrebbe essere utile ad un altro corso che sta utilizzando lo stesso materiale). L'eliminazione della relazione cancellerà anche il materiale stesso se esso non è utilizzato da altri corsi.
+
+-- Utenti: L'amministratore è l'unico utente che può accedere alla sezione relativa agli utenti. Può aggiungere un nuovo utente oppure modificare utenti già esistenti.
