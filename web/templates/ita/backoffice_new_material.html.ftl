@@ -23,10 +23,10 @@
             <div class="fieldcontainerleft">
 
                 <label class="label" for="materiale_nome">Nome</label>
-                <input class="field" type="text" id="materiale_nome" name="materiale_nome"/>
+                <input class="field" type="text" id="materiale_nome" name="materiale_nome" required="required"/>
                 
                 <label class="label" for="materiale_file">File</label>
-                <input class="field" type="file" id="materiale_file" name="materiale_file"/>
+                <input class="field" type="file" id="materiale_file" name="materiale_file" required="required"/>
 
             </div>
 
@@ -34,7 +34,7 @@
             <div class="fieldcontainerright">
 
                 <label class="label" for="materiale_descrizione">Descrizione</label>
-                <input class="field" type="text" id="materiale_descrizione" name="materiale_descrizione"/>
+                <input class="field" type="text" id="materiale_descrizione" name="materiale_descrizione" required="required"/>
 
             </div>
 
