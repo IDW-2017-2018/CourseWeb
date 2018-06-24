@@ -95,7 +95,35 @@ public class BackOfficeCourse extends CourseWebBaseController {
             descrittoriDublinoEng = SecurityLayer.addSlashes(descrittoriDublinoEng);
             sillaboEng = SecurityLayer.addSlashes(sillaboEng);
             noteEng = SecurityLayer.addSlashes(noteEng);
+
+            prerequisitiEng = SecurityLayer.addSlashes(prerequisitiEng);
+            obiettiviEng = SecurityLayer.addSlashes(obiettiviEng);
+            modEsameEng = SecurityLayer.addSlashes(modEsameEng);
+            modInsegnamentoEng = SecurityLayer.addSlashes(modInsegnamentoEng);
+            descrittoriDublinoEng = SecurityLayer.addSlashes(descrittoriDublinoEng);
+            sillaboEng = SecurityLayer.addSlashes(sillaboEng);
+            noteEng = SecurityLayer.addSlashes(noteEng);
+           
+            linkHomepage = linkHomepage.trim();
+            linkRisorse = linkRisorse.trim();
+            linkForum = linkForum.trim();
             
+            prerequisitiEng = prerequisitiEng.trim();
+            obiettiviEng = obiettiviEng.trim();
+            modEsameEng = modEsameEng.trim();
+            modInsegnamentoEng = modInsegnamentoEng.trim();
+            descrittoriDublinoEng = descrittoriDublinoEng.trim();
+            sillaboEng = sillaboEng.trim();
+            noteEng = noteEng.trim();
+            
+            prerequisiti = prerequisiti.trim();
+            obiettivi = obiettivi.trim();
+            modEsame = modEsame.trim();
+            modInsegnamento = modInsegnamento.trim();
+            descrittoriDublino = descrittoriDublino.trim();
+            sillabo = sillabo.trim();
+            note = note.trim();            
+                       
             CourseWebDataLayer datalayer = ((CourseWebDataLayer) request.getAttribute("datalayer"));
             List<Corso> corso_versioni = datalayer.getCorsoByNomeVersioni(nome);
             for(Corso corso:corso_versioni){
