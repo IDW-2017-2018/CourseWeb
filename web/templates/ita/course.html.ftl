@@ -103,7 +103,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="7">${strip_slashes(corso.obiettivi)}</td>
+        <td class="tdresult" colspan="7"><p>${strip_slashes(corso.obiettivi)}</p></td>
 
     </tr>
 
