@@ -91,7 +91,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="7">${strip_slashes(corso.prerequisiti)}</td>
+        <td class="tdresult" colspan="7"><pre>${strip_slashes(corso.prerequisiti)}</pre></td>
 
     </tr>
 
@@ -103,7 +103,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="7">${strip_slashes(corso.obiettivi)}</td>
+        <td class="tdresult" colspan="7"><pre>${strip_slashes(corso.obiettivi)}</pre></td>
 
     </tr>
 
@@ -115,7 +115,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="7">${strip_slashes(corso.modEsame)}</td>
+        <td class="tdresult" colspan="7"><pre>${strip_slashes(corso.modEsame)}</pre></td>
 
     </tr>
 
@@ -127,7 +127,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="7">${strip_slashes(corso.modInsegnamento)}</td>
+        <td class="tdresult" colspan="7"><pre>${strip_slashes(corso.modInsegnamento)}</pre></td>
 
     </tr>
 
@@ -139,7 +139,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="7">${strip_slashes(corso.sillabo)}</td>
+        <td class="tdresult" colspan="7"><pre>${strip_slashes(corso.sillabo)}</pre></td>
 
     </tr>
 
@@ -183,7 +183,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="7">${strip_slashes(corso.descrittoriDublino)}</td>
+        <td class="tdresult" colspan="7"><pre>${strip_slashes(corso.descrittoriDublino)}</pre></td>
 
     </tr>
 
@@ -328,7 +328,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="7">${strip_slashes(corso.note)}</td>
+        <td class="tdresult" colspan="7"><pre>${strip_slashes(corso.note)}</pre></td>
 
     </tr>
 

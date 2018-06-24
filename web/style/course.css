@@ -1,6 +1,12 @@
 
 /* ########## COURSE CSS ########## */
 
+pre {
+
+    font-family: Arial, Verdana, sans-serif;
+
+}
+
 .coursename {
 
     font-size: 50px; 
