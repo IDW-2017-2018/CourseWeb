@@ -34,10 +34,12 @@ public interface CourseWebDataLayer extends DataLayer {
     List<Corso> getCorsoByCodice(String corso_codice) throws DataLayerException;
     List<Corso> getCorsoByAnno(String corso_anno) throws DataLayerException;
     List<Corso> getCorsoByNome (String corso_nome) throws DataLayerException;
+    List<Corso> getCorsoByNomeNonLike(String corso_nome) throws DataLayerException;
     List<Corso> getCorsoByNomeVersioni (String corso_nome) throws DataLayerException;
     List<Corso> getCorsi() throws DataLayerException;
     List<Corso> getCorsiAggiornati() throws DataLayerException; 
     List<Corso> getCorsiByNomeAggiornati(String corso_nome) throws DataLayerException;
+    List<Corso> getCorsiByNomeAggiornatiNonLike(String corso_nome) throws DataLayerException;
     
     List<Corso> filterCorsiByLang(String lang, List<Corso> lista_corsi); 
     

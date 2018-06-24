@@ -140,21 +140,19 @@ public class BackOfficeCourse extends CourseWebBaseController {
             corso.setSSD(ssd);
             corso.setSemestre(semestre);
             corso.setLingua(lingua);
-            List<Corso> updated = datalayer.getCorsiByNomeAggiornati(nome);
-            List<Corso> aggiornato = datalayer.getCorsiByNomeAggiornati(nome);
+            
+            List<Corso> aggiornato = datalayer.getCorsiByNomeAggiornatiNonLike(nome);
             if(aggiornato.isEmpty()) primoanno = true;
             
-            if(linkHomepage.equals("") && linkRisorse.equals("") && linkForum.equals("") && !updated.isEmpty()){
-                corso.setLinkHomepageCorso(updated.get(0).getLinkHomepageCorso());
-                corso.setLinkRisorseEsterne(updated.get(0).getLinkRisorseEsterne());
-                corso.setLinkForum(updated.get(0).getLinkForum());
+            if(linkHomepage.equals("") && linkRisorse.equals("") && linkForum.equals("") && !aggiornato.isEmpty()){
+                corso.setLinkHomepageCorso(aggiornato.get(0).getLinkHomepageCorso());
+                corso.setLinkRisorseEsterne(aggiornato.get(0).getLinkRisorseEsterne());
+                corso.setLinkForum(aggiornato.get(0).getLinkForum());
             } else {
-            corso.setLinkHomepageCorso(linkHomepage);
-            corso.setLinkRisorseEsterne(linkRisorse);
-            corso.setLinkForum(linkForum);
+                corso.setLinkHomepageCorso(linkHomepage);
+                corso.setLinkRisorseEsterne(linkRisorse);
+                corso.setLinkForum(linkForum);
             }
-            datalayer.storeCorso(corso);
-            datalayer.storeCorsiDocenti(corso.getId(), docente);
             
             if(primoanno){
                 if (((prerequisiti.equals("")) && (obiettivi.equals("")) && (modEsame.equals("")) && 
@@ -166,6 +164,9 @@ public class BackOfficeCourse extends CourseWebBaseController {
                    action_error(request,response);
                    return;
                 }else{
+                    datalayer.storeCorso(corso);
+                    datalayer.storeCorsiDocenti(corso.getId(), docente);
+                    
                 corso.setPrerequisiti(prerequisiti);
                 corso.setObiettivi(obiettivi);
                 corso.setModEsame(modEsame);
@@ -187,6 +188,10 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 datalayer.storeInfoCorso(corso);                                    
                 }
             }else{
+                
+                datalayer.storeCorso(corso);
+                datalayer.storeCorsiDocenti(corso.getId(), docente);
+                
                 if(((prerequisiti.equals("")) && (obiettivi.equals("")) && (modEsame.equals("")) && 
                (modInsegnamento.equals("")) && (sillabo.equals("")) && (note.equals("")) &&
                (descrittoriDublino.equals("")) && (prerequisitiEng.equals("")) && (obiettiviEng.equals("")) && 

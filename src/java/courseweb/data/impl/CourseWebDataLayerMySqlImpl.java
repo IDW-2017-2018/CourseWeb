@@ -26,7 +26,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     
     //TODO : filterByLang rivedere cicli
     
-    private PreparedStatement sCorso, sCorsoByIdLang, sCorsoByCodice, sCorsoByAnno, sCorsoByNome, sCorsoByNomeVersioni, sCorsoByCodiceAnnoLang, uCorsoById, iCorso;
+    private PreparedStatement sCorso, sCorsoByIdLang, sCorsoByCodice, sCorsoByAnno, sCorsoByNome, sCorsoByNomeNonLike, sCorsoByNomeVersioni, sCorsoByCodiceAnnoLang, uCorsoById, iCorso;
     private PreparedStatement sInfoCorsiByIdCorsoLang, uInfoCorsiById, iInfoCorso;
     private PreparedStatement sUtente, sUtenteById, sUtenteByEmail, uUtenteById, uUtenteByEmail, iUtente, sUtenteByEmailLike;
     private PreparedStatement sCorsoLaurea, sCorsoLaureaById, sCorsoLaureaByNome;
@@ -65,6 +65,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsoByCodice = connection.prepareStatement("SELECT * FROM corsi INNER JOIN info_corsi ON (corsi.id = info_corsi.id_corso) WHERE corsi.codice=?");
             sCorsoByAnno = connection.prepareStatement("SELECT * FROM corsi INNER JOIN info_corsi ON (corsi.id = info_corsi.id_corso) WHERE corsi.anno=?");
             sCorsoByNome = connection.prepareStatement("SELECT * FROM corsi INNER JOIN info_corsi ON (corsi.id = info_corsi.id_corso) WHERE corsi.nome LIKE ?");
+            sCorsoByNomeNonLike = connection.prepareStatement("SELECT * FROM corsi INNER JOIN info_corsi ON (corsi.id = info_corsi.id_corso) WHERE corsi.nome=?");
             sCorsoByNomeVersioni = connection.prepareStatement("SELECT * FROM corsi INNER JOIN info_corsi ON (corsi.id = info_corsi.id_corso) WHERE corsi.nome=?");
             sCorsoByCodiceAnnoLang = connection.prepareStatement("SELECT * FROM corsi INNER JOIN info_corsi ON (corsi.id = info_corsi.id_corso) WHERE corsi.codice=? AND corsi.anno=? AND info_corsi.lang=?");
             
@@ -535,6 +536,24 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     }
     
     @Override
+    public List<Corso> getCorsoByNomeNonLike(String corso_nome) throws DataLayerException{
+        List<Corso> result = new ArrayList();
+          
+        try{
+            sCorsoByNomeNonLike.setString(1, corso_nome);
+            try(ResultSet rs = sCorsoByNomeNonLike.executeQuery()) {
+                while(rs.next()){
+                    result.add(getCorso(rs.getInt("corsi.id"), rs.getString("info_corsi.lang")));
+                }
+            }
+        }
+        catch(SQLException exc){
+            throw new DataLayerException("Unable to load Corso by nome", exc); 
+        }
+        return result;
+    }
+    
+    @Override
     public List<Corso> getCorsoByNomeVersioni(String corso_nome) throws DataLayerException {
         List<Corso> result = new ArrayList();
           
@@ -605,6 +624,38 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     @Override
     public List<Corso> getCorsiByNomeAggiornati(String corso_nome) throws DataLayerException {
         List<Corso> corsi = getCorsoByNome(corso_nome);                      
+        List<Corso> result = new ArrayList<Corso>(); 
+        
+        for(int i = 0; i < corsi.size(); i++){
+            Corso item = corsi.get(i); 
+           
+            for(int j = i + 1; j < (corsi.size() - 1); j++){
+                Corso now = corsi.get(j);
+                
+                if(now.getNome().equals(item.getNome())){
+                    //assunzione campo anno tipo "2016/2017" stringa
+                   
+                    String anno_1 = item.getAnno().substring(0, item.getAnno().lastIndexOf("/")); //2016
+                    String anno_2 = now.getAnno().substring(0, now.getAnno().lastIndexOf("/"));
+                    
+                    if(anno_2.compareTo(anno_1) > 0){
+                        item = now; 
+                    }
+                 
+                }                
+                //prosegui ricerca
+                            
+            }
+            if(!result.contains(item))
+            result.add(item); 
+            }
+               
+        return result;            
+    }
+    
+    @Override
+    public List<Corso> getCorsiByNomeAggiornatiNonLike(String corso_nome) throws DataLayerException {
+        List<Corso> corsi = getCorsoByNomeNonLike(corso_nome);                      
         List<Corso> result = new ArrayList<Corso>(); 
         
         for(int i = 0; i < corsi.size(); i++){
@@ -1726,6 +1777,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsoByCodice.close();
             sCorsoByAnno.close();
             sCorsoByNome.close();
+            sCorsoByNomeNonLike.close();
             sCorsoByNomeVersioni.close();
             sCorsoByCodiceAnnoLang.close();
             uCorsoById.close();
