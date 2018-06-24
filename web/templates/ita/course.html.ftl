@@ -91,7 +91,7 @@
 
     <tr class="trresult">
 
-        <td class="tdresult" colspan="7">${strip_slashes(corso.prerequisiti)}</td>
+        <td class="tdresult" colspan="7"><pre>${strip_slashes(corso.prerequisiti)}</pre></td>
 
     </tr>
 
