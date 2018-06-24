@@ -96,6 +96,8 @@ public class BackOfficeCourse extends CourseWebBaseController {
             sillaboEng = SecurityLayer.addSlashes(sillaboEng);
             noteEng = SecurityLayer.addSlashes(noteEng);
             
+            prerequisiti = prerequisiti.replaceAll("\n", "<br/>");
+            
             CourseWebDataLayer datalayer = ((CourseWebDataLayer) request.getAttribute("datalayer"));
             List<Corso> corso_versioni = datalayer.getCorsoByNomeVersioni(nome);
             for(Corso corso:corso_versioni){
