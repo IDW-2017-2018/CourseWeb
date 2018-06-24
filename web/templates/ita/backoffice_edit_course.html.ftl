@@ -61,7 +61,7 @@
                 <h1 class="title">INFO CORSO ITALIANO</h1>
                 
                 <label class="label" for="corso_prerequisiti">Prerequisiti</label>
-                <textarea class="field" type="text" id="corso_prerequisiti" name="corso_prerequisiti" placeholder="${strip_slashes(corso_ita.prerequisiti)}"></textarea>
+                <textarea class="field" type="text" id="corso_prerequisiti" name="corso_prerequisiti" style="white-space: pre-wrap;">${strip_slashes(corso_ita.prerequisiti)}</textarea>
 
                 <label class="label" for="corso_obiettivi">Obiettivi</label>
                 <textarea class="field" type="text" id="corso_obiettivi" name="corso_obiettivi" placeholder="${strip_slashes(corso_ita.obiettivi)}"></textarea>
