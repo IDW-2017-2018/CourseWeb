@@ -132,8 +132,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 action_error(request, response);
                 return;   
                 }
-            }
-            
+            }           
             Corso corso = new CorsoImpl(datalayer);
             corso.setCodice(codice);
             corso.setAnno(anno);
@@ -142,6 +141,8 @@ public class BackOfficeCourse extends CourseWebBaseController {
             corso.setSemestre(semestre);
             corso.setLingua(lingua);
             List<Corso> updated = datalayer.getCorsiByNomeAggiornati(nome);
+            List<Corso> aggiornato = datalayer.getCorsiByNomeAggiornati(nome);
+            if(aggiornato.isEmpty()) primoanno = true;
             
             if(linkHomepage.equals("") && linkRisorse.equals("") && linkForum.equals("") && !updated.isEmpty()){
                 corso.setLinkHomepageCorso(updated.get(0).getLinkHomepageCorso());
@@ -155,13 +156,42 @@ public class BackOfficeCourse extends CourseWebBaseController {
             datalayer.storeCorso(corso);
             datalayer.storeCorsiDocenti(corso.getId(), docente);
             
-            if (((prerequisiti.equals("")) && (obiettivi.equals("")) && (modEsame.equals("")) && 
+            if(primoanno){
+                if (((prerequisiti.equals("")) && (obiettivi.equals("")) && (modEsame.equals("")) && 
                (modInsegnamento.equals("")) && (sillabo.equals("")) && (note.equals("")) &&
                (descrittoriDublino.equals("")) && (prerequisitiEng.equals("")) && (obiettiviEng.equals("")) && 
                (modEsameEng.equals("")) && (modInsegnamentoEng.equals("")) && (descrittoriDublinoEng.equals("")) && 
                (sillaboEng.equals("")) && (noteEng.equals("")))){
-               List<Corso> aggiornato = datalayer.getCorsiByNomeAggiornati(nome);
-               if(!aggiornato.isEmpty()){
+                   request.setAttribute("message","no older version of this course exists: empty fields forbidden");
+                   action_error(request,response);
+                   return;
+                }else{
+                corso.setPrerequisiti(prerequisiti);
+                corso.setObiettivi(obiettivi);
+                corso.setModEsame(modEsame);
+                corso.setModInsegnamento(modInsegnamento);
+                corso.setDescrittoriDublino(descrittoriDublino);
+                corso.setSillabo(sillabo);
+                corso.setNote(note);
+                corso.setLang("ita");                
+                datalayer.storeInfoCorso(corso);                
+
+                corso.setPrerequisiti(prerequisitiEng);
+                corso.setObiettivi(obiettiviEng);
+                corso.setModEsame(modEsameEng);
+                corso.setModInsegnamento(modInsegnamentoEng);
+                corso.setDescrittoriDublino(descrittoriDublinoEng);
+                corso.setSillabo(sillaboEng);
+                corso.setNote(noteEng);
+                corso.setLang("eng");                
+                datalayer.storeInfoCorso(corso);                                    
+                }
+            }else{
+                if(((prerequisiti.equals("")) && (obiettivi.equals("")) && (modEsame.equals("")) && 
+               (modInsegnamento.equals("")) && (sillabo.equals("")) && (note.equals("")) &&
+               (descrittoriDublino.equals("")) && (prerequisitiEng.equals("")) && (obiettiviEng.equals("")) && 
+               (modEsameEng.equals("")) && (modInsegnamentoEng.equals("")) && (descrittoriDublinoEng.equals("")) && 
+               (sillaboEng.equals("")) && (noteEng.equals("")))){
                 corso.setPrerequisiti(aggiornato.get(0).getPrerequisiti());
                 corso.setObiettivi(aggiornato.get(0).getObiettivi());
                 corso.setModEsame(aggiornato.get(0).getModEsame());
@@ -180,12 +210,8 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 corso.setSillabo(aggiornato.get(1).getSillabo());
                 corso.setNote(aggiornato.get(1).getNote());
                 corso.setLang(aggiornato.get(1).getLang());
-                datalayer.storeInfoCorso(corso);                
-               }  
-               else primoanno = true;
-            }
-            
-            if(!(prerequisiti.equals("")&&obiettivi.equals("")&&modEsame.equals("")&&modInsegnamento.equals("")&&descrittoriDublino.equals("")&&sillabo.equals("")&&note.equals("")) || primoanno){
+                datalayer.storeInfoCorso(corso);                              
+                }else{
                 corso.setPrerequisiti(prerequisiti);
                 corso.setObiettivi(obiettivi);
                 corso.setModEsame(modEsame);
@@ -193,13 +219,9 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 corso.setDescrittoriDublino(descrittoriDublino);
                 corso.setSillabo(sillabo);
                 corso.setNote(note);
-                corso.setLang("ita");
-                
-                datalayer.storeInfoCorso(corso);
-                
-            }
-            
-            if(!(prerequisitiEng.equals("")&&obiettiviEng.equals("")&&modEsameEng.equals("")&&modInsegnamentoEng.equals("")&&descrittoriDublinoEng.equals("")&&sillaboEng.equals("")&&noteEng.equals(""))){
+                corso.setLang("ita");                
+                datalayer.storeInfoCorso(corso);                
+
                 corso.setPrerequisiti(prerequisitiEng);
                 corso.setObiettivi(obiettiviEng);
                 corso.setModEsame(modEsameEng);
@@ -207,11 +229,10 @@ public class BackOfficeCourse extends CourseWebBaseController {
                 corso.setDescrittoriDublino(descrittoriDublinoEng);
                 corso.setSillabo(sillaboEng);
                 corso.setNote(noteEng);
-                corso.setLang("eng");
-                
-                datalayer.storeInfoCorso(corso);
-                
-            }
+                corso.setLang("eng");                
+                datalayer.storeInfoCorso(corso);                                                  
+                }
+            }    
             
             datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha aggiunto il corso " + nome);
             datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha aggiunto un docente al corso " + nome);
