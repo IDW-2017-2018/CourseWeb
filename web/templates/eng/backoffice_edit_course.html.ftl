@@ -61,25 +61,25 @@
                 <h1 class="title">ITALIAN COURSE INFO</h1>
                 
                 <label class="label" for="corso_prerequisiti">Prerequisites</label>
-                <textarea class="field" type="text" id="corso_prerequisiti" name="corso_prerequisiti" placeholder="${strip_slashes(corso_ita.prerequisiti)}"></textarea>
+                <textarea class="field" type="text" id="corso_prerequisiti" name="corso_prerequisiti">${strip_slashes(corso_ita.prerequisiti)}</textarea>
 
                 <label class="label" for="corso_obiettivi">Course Objectives</label>
-                <textarea class="field" type="text" id="corso_obiettivi" name="corso_obiettivi" placeholder="${strip_slashes(corso_ita.obiettivi)}"></textarea>
+                <textarea class="field" type="text" id="corso_obiettivi" name="corso_obiettivi">${strip_slashes(corso_ita.obiettivi)}</textarea>
                 
                 <label class="label" for="corso_mod_esame">Assessment Methods and Criteria</label>
-                <textarea class="field" type="text" id="corso_mod_esame" name="corso_mod_esame" placeholder="${strip_slashes(corso_ita.modEsame)}"></textarea>
+                <textarea class="field" type="text" id="corso_mod_esame" name="corso_mod_esame">${strip_slashes(corso_ita.modEsame)}</textarea>
 
                 <label class="label" for="corso_mod_insegnamento">Teaching Methods</label>
-                <textarea class="field" type="text" id="corso_mod_insegnamento" name="corso_mod_insegnamento" placeholder="${strip_slashes(corso_ita.modInsegnamento)}"></textarea>
+                <textarea class="field" type="text" id="corso_mod_insegnamento" name="corso_mod_insegnamento">${strip_slashes(corso_ita.modInsegnamento)}</textarea>
                 
                 <label class="label" for="corso_descrittori_dublino">Dublin Descriptors</label>
-                <textarea class="field" type="text" id="corso_descrittori_dublino" name="corso_descrittori_dublino" placeholder="${strip_slashes(corso_ita.descrittoriDublino)}"></textarea>
+                <textarea class="field" type="text" id="corso_descrittori_dublino" name="corso_descrittori_dublino">${strip_slashes(corso_ita.descrittoriDublino)}</textarea>
 
                 <label class="label" for="corso_sillabo">Course Content</label>
-                <textarea class="field" type="text" id="corso_sillabo" name="corso_sillabo" placeholder="${strip_slashes(corso_ita.sillabo)}"></textarea>
+                <textarea class="field" type="text" id="corso_sillabo" name="corso_sillabo">${strip_slashes(corso_ita.sillabo)}</textarea>
 
                 <label class="label" for="corso_note">Notes</label>
-                <textarea class="field" type="text" id="corso_note" name="corso_note" placeholder="${strip_slashes(corso_ita.note)}"></textarea>
+                <textarea class="field" type="text" id="corso_note" name="corso_note">${strip_slashes(corso_ita.note)}</textarea>
                 
             </div>
 
@@ -89,25 +89,25 @@
                 <h1 class="title">ENGLISH COURSE INFO</h1>
 
                 <label class="label" for="corso_prerequisiti">Prerequisites</label>
-                <textarea class="field" type="text" id="corso_prerequisiti" name="corso_prerequisiti_eng" placeholder="${strip_slashes(corso_eng.prerequisiti)}"></textarea>
+                <textarea class="field" type="text" id="corso_prerequisiti" name="corso_prerequisiti_eng">${strip_slashes(corso_eng.prerequisiti)}</textarea>
 
                 <label class="label" for="corso_obiettivi">Course Objectives</label>
-                <textarea class="field" type="text" id="corso_obiettivi" name="corso_obiettivi_eng" placeholder="${strip_slashes(corso_eng.obiettivi)}"></textarea>
+                <textarea class="field" type="text" id="corso_obiettivi" name="corso_obiettivi_eng">${strip_slashes(corso_eng.obiettivi)}</textarea>
                 
                 <label class="label" for="corso_mod_esame">Assessment Methods and Criteria</label>
-                <textarea class="field" type="text" id="corso_mod_esame" name="corso_mod_esame_eng" placeholder="${strip_slashes(corso_eng.modEsame)}"></textarea>
+                <textarea class="field" type="text" id="corso_mod_esame" name="corso_mod_esame_eng">${strip_slashes(corso_eng.modEsame)}</textarea>
 
                 <label class="label" for="corso_mod_insegnamento">Teaching Methods</label>
-                <textarea class="field" type="text" id="corso_mod_insegnamento" name="corso_mod_insegnamento_eng" placeholder="${strip_slashes(corso_eng.modInsegnamento)}"></textarea>
+                <textarea class="field" type="text" id="corso_mod_insegnamento" name="corso_mod_insegnamento_eng">${strip_slashes(corso_eng.modInsegnamento)}</textarea>
                 
                 <label class="label" for="corso_descrittori_dublino">Dublin Descriptors</label>
-                <textarea class="field" type="text" id="corso_descrittori_dublino" name="corso_descrittori_dublino_eng" placeholder="${strip_slashes(corso_eng.descrittoriDublino)}"></textarea>
+                <textarea class="field" type="text" id="corso_descrittori_dublino" name="corso_descrittori_dublino_eng">${strip_slashes(corso_eng.descrittoriDublino)}</textarea>
 
                 <label class="label" for="corso_sillabo">Course Content</label>
-                <textarea class="field" type="text" id="corso_sillabo" name="corso_sillabo_eng" placeholder="${strip_slashes(corso_eng.sillabo)}"></textarea>
+                <textarea class="field" type="text" id="corso_sillabo" name="corso_sillabo_eng">${strip_slashes(corso_eng.sillabo)}</textarea>
 
                 <label class="label" for="corso_note">Notes</label>
-                <textarea class="field" type="text" id="corso_note" name="corso_note_eng" placeholder="${strip_slashes(corso_eng.note)}"></textarea>
+                <textarea class="field" type="text" id="corso_note" name="corso_note_eng">${strip_slashes(corso_eng.note)}</textarea>
                 
             </div>
 
