@@ -130,6 +130,10 @@
         <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
     </#if>
 
+    <#if page == "help">
+        <script type="text/javascript" src="js/help.js"></script>
+    </#if>
+
     <#if style == "backoffice">
         <script type="text/javascript">
             //<![CDATA[
