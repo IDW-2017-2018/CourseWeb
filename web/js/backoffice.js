@@ -1,10 +1,10 @@
-var querySuccess = "${querySuccess}"
-var BackPressedAlert = "${BackPressedAlert}";
+//<![CDATA[
+
+//var from outline querySuccess, BackPressedAlert
 
 window.onload = createToast();
 
 function createToast() {
-
 	if(querySuccess == "true"){
 		//toast success
 
@@ -12,25 +12,36 @@ function createToast() {
 		//toast not success
 
 	} else {
+        //void
 		//no actions
 	}
-
 }
 
-window.addEventListener('popstate', function(event) {
-    // The popstate event is fired each time when the current history entry changes.
-    if(BackPressedAlert != ""){
-    	var r = confirm("You pressed a Back button! Are you sure?!");
-    	if (r == true) {
-        // Call Back button programmatically as per user confirmation.
-        history.back();
-        // Uncomment below line to redirect to the previous page instead.
-        // window.location = document.referrer // Note: IE11 is not supporting this.
+
+
+function retrieveDescrMateriale(){
+
+    var str = 'get_phones';
+
+    if (window.XMLHttpRequest) {
+    // code for modern browsers
+    // IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
     } else {
-        // Stay on the current page.
-        history.pushState(null, null, window.location.pathname);
+    // code for old IE browsers
+    // IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    history.pushState(null, null, window.location.pathname);
-    }
-}, false);
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+           
+            console.log(response);
+            //document.getElementById("resultParagraph").innerHTML
+        }
+    };
+    xmlhttp.open("GET","script/script.php?task="+str,true);
+    xmlhttp.send();
+}
+
+//]]>

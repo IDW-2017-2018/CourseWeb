@@ -124,6 +124,32 @@
         <p class="copyright_text">2017 &#47; 2018 &copy; CourseWeb</p>
     
     </div>
+
+    <#if page == "about">
+        <script type="text/javascript" src="js/map.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+    </#if>
+
+    <#if style == "backoffice">
+        <script type="text/javascript">
+            //<![CDATA[
+
+            <#if querySuccess??>
+                var querySuccess = "${querySuccess}";
+            <#else>
+                var querySuccess = "";
+            </#if>
+
+            <#if BackPressedAlert??>
+                var BackPressedAlert = "${BackPressedAlert}";
+            <#else>
+                var BackPressedAlert = "";
+            </#if>
+
+            //]]>
+        </script>
+        <script type="text/javascript" src="js/backoffice.js"></script>
+    </#if>
     
 </body>
 </html>
