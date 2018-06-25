@@ -42,6 +42,9 @@
                   </#list>
                 </select>
 
+                <label class="label" for="materiale_descrizione">Description</label>
+                <textarea class="field" type="text" id="materiale_descrizione" name="materiale_descrizione"></textarea>
+
             </div>
 
 
