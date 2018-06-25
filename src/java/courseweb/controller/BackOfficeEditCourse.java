@@ -1446,6 +1446,34 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
         }                
     }
     
+    private void action_caricamento_materiale_descrizione(HttpServletRequest request, HttpServletResponse response){
+        
+        try{
+            
+            if(request.getParameter("id") == null) {
+                response.getWriter().write("error");
+                return;
+            }
+            
+            int id_materiale = Integer.parseInt(request.getParameter("id"));
+            
+            CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
+            String descrizione = datalayer.getMateriale(id_materiale).getDescrizione();
+            
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(descrizione);
+            
+        } catch(DataLayerException|NumberFormatException|IOException e1){
+            try {
+                response.getWriter().write("error");
+            } catch(IOException e2){
+                //
+            }
+            
+        }
+    }
+    
     private void action_materiali_aggiungi(HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         
         try{
@@ -1839,6 +1867,11 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 }
                 
                 
+                else if(action.equals("get_materiale_descrizione")){
+                    action_caricamento_materiale_descrizione(request, response);                    
+                }
+                
+           
                 else {
                     request.setAttribute("message", "Illegal action -- else");
                     action_error(request, response);                    

@@ -2,7 +2,12 @@
 
 //var from outline querySuccess, BackPressedAlert
 
-window.onload = createToast();
+window.onload = onLoadDocument();
+
+function onLoadDocument(){
+	createToast();
+	prepareMaterialeDescr();
+}
 
 function createToast() {
 	if(querySuccess == "true"){
@@ -18,10 +23,27 @@ function createToast() {
 }
 
 
+function prepareMaterialeDescr(){
+	var materiali_select = document.getElementById("materiale_select");
 
-function retrieveDescrMateriale(){
+	materiali_select.onchange = function(){
+	var id = materiali_select.value;
 
-    var str = 'get_phones';
+	//
+	//DEBUG
+	//
+	alert(id);
+	return;
+
+	retrieveDescrMateriale(id);
+};
+
+}
+
+
+function retrieveDescrMateriale(id){
+
+    var action = 'get_materiale_descrizione';
 
     if (window.XMLHttpRequest) {
     // code for modern browsers
@@ -36,11 +58,12 @@ function retrieveDescrMateriale(){
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
            
-            console.log(response);
+			//stampa in log           
+            console.log(this.responseText);
             //document.getElementById("resultParagraph").innerHTML
         }
     };
-    xmlhttp.open("GET","script/script.php?task="+str,true);
+    xmlhttp.open("GET","backofficeeditcourse?action="+ action + "&id=" + id,true);
     xmlhttp.send();
 }
 
