@@ -29,12 +29,18 @@ function prepareMaterialeDescr(){
 	if(materiali_select == null)
 		return;
 
-	materiali_select.onchange = function(){
+	if(materiali_select.value == null)
+		return;
+
+
 	var id = materiali_select.value;
-
 	retrieveDescrMateriale(id);
-};
 
+	materiali_select.onchange = function(){
+		var id = materiali_select.value;
+
+		retrieveDescrMateriale(id);
+	};
 }
 
 
