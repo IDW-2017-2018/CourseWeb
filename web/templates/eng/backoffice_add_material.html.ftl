@@ -33,7 +33,7 @@
             <div class="fieldcontainerright">
 
                 <label class="label" for="materiale_nome">Material</label>
-                <select class="field" name="materiale_nome">
+                <select class="field" name="materiale_nome" id="materiale_select">
                   <#list items>
                       <#items as item>
                       <option value="${item.id}">${strip_slashes(item.nome)} - ${datalayer.getUtente(item.utenteId).getNome()}&nbsp;${datalayer.getUtente(item.utenteId).getCognome()}</option>
@@ -43,7 +43,7 @@
                 </select>
 
                 <label class="label" for="materiale_descrizione">Description</label>
-                <textarea class="field" type="text" id="materiale_descrizione" name="materiale_descrizione"></textarea>
+                <textarea class="field" type="text" id="materiale_descrizione" name="materiale_descrizione" readonly="readonly"></textarea>
 
             </div>
 

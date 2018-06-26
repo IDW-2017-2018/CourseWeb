@@ -26,14 +26,11 @@ function createToast() {
 function prepareMaterialeDescr(){
 	var materiali_select = document.getElementById("materiale_select");
 
+	if(materiali_select == null)
+		return;
+
 	materiali_select.onchange = function(){
 	var id = materiali_select.value;
-
-	//
-	//DEBUG
-	//
-	alert(id);
-	return;
 
 	retrieveDescrMateriale(id);
 };
@@ -59,8 +56,8 @@ function retrieveDescrMateriale(id){
         if (this.readyState == 4 && this.status == 200) {
            
 			//stampa in log           
-            console.log(this.responseText);
-            //document.getElementById("resultParagraph").innerHTML
+            console.log("res: " + this.responseText);
+            document.getElementById("materiale_descrizione").innerHTML = this.responseText;
         }
     };
     xmlhttp.open("GET","backofficeeditcourse?action="+ action + "&id=" + id,true);
