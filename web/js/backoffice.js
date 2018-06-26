@@ -1,5 +1,4 @@
 //<![CDATA[
-
 window.onload = onLoadDocument();
 
 function onLoadDocument(){
