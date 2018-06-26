@@ -84,7 +84,12 @@
                 <textarea class="field" type"text" id="corso_mod_insegna    mento" name="corso_mod_insegnamento"> </textarea>
                 
                 <label class="label" for="corso_descrittori_dublino">Descrittori Dublino</label>
-                <textarea class="field" type"text" id="corso_descrittori_dublino" name="corso_descrittori_dublino" placeholder="KNOWLEDGE / APPLICATION / EVALUATION / COMUNICATION / LIFELONG LEARNING SKILLS"></textarea>
+                <textarea class="field" type"text" id="corso_descrittori_dublino" name="corso_descrittori_dublino">KNOWLEDGE: 
+APPLICATION: 
+EVALUATION: 
+COMUNICATION: 
+LIFELONG LEARNING SKILLS:           
+</textarea>
 
                 <label class="label" for="corso_sillabo">Sillabo</label>
                 <textarea class="field" type"text" id="corso_sillabo" name="corso_sillabo"> </textarea>
@@ -112,7 +117,12 @@
                 <textarea class="field" type"text" id="corso_mod_insegnamento_eng" name="corso_mod_insegnamento_eng"> </textarea>
                 
                 <label class="label" for="corso_descrittori_dublino_eng">Descrittori Dublino</label>
-                <textarea class="field" type"text" id="corso_descrittori_dublino_eng" name="corso_descrittori_dublino_eng" placeholder="KNOWLEDGE / APPLICATION / EVALUATION / COMUNICATION / LIFELONG LEARNING SKILLS"></textarea>
+                <textarea class="field" type"text" id="corso_descrittori_dublino_eng" name="corso_descrittori_dublino_eng">KNOWLEDGE: 
+APPLICATION: 
+EVALUATION: 
+COMUNICATION: 
+LIFELONG LEARNING SKILLS: 
+</textarea>
 
                 <label class="label" for="corso_sillabo_eng">Sillabo</label>
                 <textarea class="field" type"text" id="corso_sillabo_eng" name="corso_sillabo_eng"> </textarea>
