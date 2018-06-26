@@ -1,7 +1,5 @@
 //<![CDATA[
 
-//var from outline querySuccess, BackPressedAlert
-
 window.onload = onLoadDocument();
 
 function onLoadDocument(){
@@ -10,12 +8,22 @@ function onLoadDocument(){
 }
 
 function createToast() {
-	if(querySuccess == "true"){
+
+	var query = window.location.search.substring(1);
+	var qs = parse_query_string(query);
+	
+	var success = qs.querysuccess;
+
+	if(success == "true"){
 		//toast success
-
-	} else if(querySuccess == "false"){
+		var x = document.getElementById("snackbar");
+		x.innerHTML = "Success";
+		showToast();
+	} else if(success == "false"){
 		//toast not success
-
+		var x = document.getElementById("snackbar");
+		x.innerHTML = "Error";
+		showToast();
 	} else {
         //void
 		//no actions
@@ -68,6 +76,48 @@ function retrieveDescrMateriale(id){
     };
     xmlhttp.open("GET","backofficeeditcourse?action="+ action + "&id=" + id,true);
     xmlhttp.send();
+}
+
+
+function showToast() {
+    // Get the snackbar DIV
+    var x = document.getElementById("snackbar");
+
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+/*
+*
+* QUERY STRING PARSER
+*
+*/
+function parse_query_string(query) {
+  var vars = query.split("&");
+  var query_string = {};
+
+  for (var i = 0; i < vars.length; i++) {
+
+    var pair = vars[i].split("=");
+    var key = decodeURIComponent(pair[0]);
+    var value = decodeURIComponent(pair[1]);
+    // If first entry with this name
+    if (typeof query_string[key] === "undefined") {
+      query_string[key] = decodeURIComponent(value);
+      // If second entry with this name
+    } else if (typeof query_string[key] === "string") {
+      var arr = [query_string[key], decodeURIComponent(value)];
+      query_string[key] = arr;
+      // If third or later entry with this name
+    } else {
+      query_string[key].push(decodeURIComponent(value));
+    }
+
+  }
+  return query_string;
 }
 
 //]]>

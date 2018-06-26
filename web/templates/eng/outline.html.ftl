@@ -135,23 +135,6 @@
     </#if>
 
     <#if style == "backoffice">
-        <script type="text/javascript">
-            //<![CDATA[
-
-            <#if querySuccess??>
-                var querySuccess = "${querySuccess}";
-            <#else>
-                var querySuccess = "";
-            </#if>
-
-            <#if BackPressedAlert??>
-                var BackPressedAlert = "${BackPressedAlert}";
-            <#else>
-                var BackPressedAlert = "";
-            </#if>
-
-            //]]>
-        </script>
         <script type="text/javascript" src="js/backoffice.js"></script>
     </#if>
     

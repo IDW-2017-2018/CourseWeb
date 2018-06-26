@@ -74,3 +74,7 @@
 </div>
 <#else>
 </#if>
+
+<!-- snackbar -->
+<div id="snackbar"></div>
+

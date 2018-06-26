@@ -234,3 +234,6 @@
 </div>
 
 </div>
+
+<!-- snackbar -->
+<div id="snackbar"></div>

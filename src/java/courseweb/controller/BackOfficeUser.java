@@ -74,7 +74,7 @@ public class BackOfficeUser extends CourseWebBaseController {
             
             datalayer.storeUtenteByEmail(utente);
             datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha aggiunto il docente " + email);
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang") + "&querysuccess=true"));
                         
         }
         catch(SecurityLayerException|DataLayerException|IOException e){
@@ -155,7 +155,7 @@ public class BackOfficeUser extends CourseWebBaseController {
                 if(((Utente)((HttpSession)request.getAttribute("session")).getAttribute("utente")).getId() == utente.getId())
                 ((HttpSession) request.getAttribute("session")).setAttribute("utente", utente);
             }
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang")));
+            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficehub?lang=" + request.getAttribute("lang") + "&querysuccess=true"));
                        
         }
         catch(SecurityLayerException|DataLayerException|NumberFormatException|IOException e){
