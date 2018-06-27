@@ -84,12 +84,7 @@
                 <textarea class="field" type"text" id="corso_mod_insegna    mento" name="corso_mod_insegnamento"> </textarea>
                 
                 <label class="label" for="corso_descrittori_dublino">Descrittori Dublino</label>
-                <textarea class="field" type"text" id="corso_descrittori_dublino" name="corso_descrittori_dublino">KNOWLEDGE: 
-APPLICATION: 
-EVALUATION: 
-COMUNICATION: 
-LIFELONG LEARNING SKILLS:           
-</textarea>
+                <textarea class="field" type"text" id="corso_descrittori_dublino" name="corso_descrittori_dublino" placeholder="KNOWLEDGE \ APPLICATION \ EVALUATION \ COMUNICATION \ LIFELONG LEARNING SKILLS"></textarea>
 
                 <label class="label" for="corso_sillabo">Sillabo</label>
                 <textarea class="field" type"text" id="corso_sillabo" name="corso_sillabo"> </textarea>

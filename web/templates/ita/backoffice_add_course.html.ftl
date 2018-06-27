@@ -2,12 +2,18 @@
     
     <div class="helpertext">
         
-        <p><b>TITOLO</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>AGGIUNTA NUOVO CORSO</b></p>
+        <p>Nella pagina corrente l'utente amministratore pu&ograve; eseguire le seguenti operazioni</p>
+        <ul>
+          <li>clicca sul bottone <b>AGGIUNGI</b> per aggiungere un nuovo corso</li>
+        </ul>
         <hr>
-        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-        
+        <p><b>INSERIMENTO DATI NELLA FORM DI AGGIUNTA</b></p>   
+        <ul>
+          <li>i campi <b>CODICE</b>, <b>NOME</b>, <b>SSD</b>, <b>SEMESTRE</b>, <b>LINGUA</b>, <b>DOCENTE</b> sono CAMPI OBBLIGATORI</li>
+          <li>i campo <b>ANNO</b> viene inserito automaticamente dal sistema, la data corrisponde sempre a quella dell'anno accademico corrente</li>
+          <li></li>
+        </ul>    
     </div>
 
 </div>
@@ -84,12 +90,7 @@
                 <textarea class="field" type"text" id="corso_mod_insegna    mento" name="corso_mod_insegnamento"> </textarea>
                 
                 <label class="label" for="corso_descrittori_dublino">Descrittori Dublino</label>
-                <textarea class="field" type"text" id="corso_descrittori_dublino" name="corso_descrittori_dublino">KNOWLEDGE: 
-APPLICATION: 
-EVALUATION: 
-COMUNICATION: 
-LIFELONG LEARNING SKILLS: 
-</textarea>
+                <textarea class="field" type"text" id="corso_descrittori_dublino" name="corso_descrittori_dublino" placeholder="KNOWLEDGE \ APPLICATION \ EVALUATION \ COMUNICATION \ LIFELONG LEARNING SKILLS"></textarea>
 
                 <label class="label" for="corso_sillabo">Sillabo</label>
                 <textarea class="field" type"text" id="corso_sillabo" name="corso_sillabo"> </textarea>

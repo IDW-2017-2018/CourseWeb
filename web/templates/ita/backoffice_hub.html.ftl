@@ -2,11 +2,13 @@
     
     <div class="helpertext">
         
-        <p><b>TITOLO</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-        <hr>
-        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>GESTIONE CORSI</b></p>
+        <p>Nella pagina corrente l'utente amministratore pu&ograve; eseguire le seguenti operazioni</p>
+        <p>(l'utente docente potrà invece modificare le informazioni relative ai soli suoi corsi dell'anno accademico corrente)</p>
+        <ul>
+          <li>clicca sul bottone <b>AGGIUNGI CORSO</b> per aggiungere un nuovo corso</li>
+          <li>clicca sul bottone <b>MODIFICA CORSO</b> per modificare le informazioni relative a un corso gi&agrave; esistente</li>
+        </ul>
         
     </div>
 
@@ -41,11 +43,12 @@
     
     <div class="helpertext">
         
-        <p><b>TITOLO</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-        <hr>
-        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>GESTIONE UTENTI</b></p>
+        <p>Nella pagina corrente l'utente amministratore pu&ograve; eseguire le seguenti operazioni</p>
+        <ul>
+          <li>clicca sul bottone <b>AGGIUNGI</b> per aggiungere un nuovo utente (docente o amministratore)</li>
+          <li>clicca sul bottone <b>MODIFICA</b> per modificare le informazioni relative a un utente gi&agrave; esistente</li>
+        </ul>
         
     </div>
 
