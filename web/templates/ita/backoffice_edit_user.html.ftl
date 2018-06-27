@@ -2,11 +2,18 @@
     
     <div class="helpertext">
         
-        <p><b>TITOLO</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>MODIFICA UTENTE</b></p>
+        <p>Nella pagina corrente l'utente amministratore pu&ograve; eseguire le seguenti operazioni</p>
+        <ul>
+          <li>clicca sul bottone <b>MODIFICA</b> per modificare le informazioni relative all'utente corrente</li>
+        </ul>
         <hr>
-        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>INSERIMENTO DATI NELLA FORM DI AGGIUNTA</b></p>   
+        <ul>
+          <li>nei campi <b>EMAIL</b>, <b>NOME</b>, <b>COGNOME</b>, <b>TIPO UTENTE</b> appariranno di default i valori relativi all'utente corrente</li>
+          <li>per effettuare una modifica l'utente dovr&agrave; cambiare il valore di almeno un campo inserendo l'informazione aggiornata relativa a quest'ultimo</li>
+          <li>NOTA : modificare il tipo utente relativo all'utente corrente &egrave; un'operazione da utilizzare con cautela (non pu&ograve; in nessun caso per&ograve; arrecare danni al sistema)</li>
+        </ul>
         
     </div>
 

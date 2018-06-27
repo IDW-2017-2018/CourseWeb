@@ -12,8 +12,17 @@
         <ul>
           <li>i campi <b>CODICE</b>, <b>NOME</b>, <b>SSD</b>, <b>SEMESTRE</b>, <b>LINGUA</b>, <b>DOCENTE</b> sono CAMPI OBBLIGATORI</li>
           <li>i campo <b>ANNO</b> viene inserito automaticamente dal sistema, la data corrisponde sempre a quella dell'anno accademico corrente</li>
-          <li></li>
-        </ul>    
+          <li>i campi <b>LINK HOMEPAGE</b>, <b>LINK RISORSE</b>, <b>LINK FORUM</b> possono essere inseriti in modo arbitrario</li>
+        </ul>  
+        <hr>  
+        <p><b>INSERIMENTO DATI NELLE FORM RELATIVE ALLE INFO IN ITALIANO E INGLESE ASSOCIATE AL CORSO</b></p>   
+        <p>i casi durante l'inserimento dei dati possono essere 3</p>
+        <ul>
+          <li>se l'utente lascia vuoti tutti i campi relativi ad entrambe le form (info corso in italiano e info corso in inglese) vengono caricate le info (in una lingua o entrambe) dello stesso corso, dell'anno accademico pi&ugrave; prossimo al corrente, se disponibili, altrimenti il corso viene caricato nel sistema senza info associate</li>
+          <li>se l'utente riempie in modo parziale o totale i campi relativi a entrambe le form (info corso in italiano e info corso in inglese), il corso viene caricato con le info associate specificate dall'utente al momento della creazione in entrambe le lingue</li>
+          <li>se l'utente riempie in modo parziale o totale i campi relativi a una sola form (info corso in italiano o info corsi in inglese), il corso viene caricato nel sistema con le info associate relative alla sola lingua specificata dall'utente in fase di creazione</li>
+        </ul>
+        
     </div>
 
 </div>

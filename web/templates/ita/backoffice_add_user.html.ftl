@@ -2,11 +2,16 @@
     
     <div class="helpertext">
         
-        <p><b>TITOLO</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>AGGIUNTA NUOVO UTENTE</b></p>
+        <p>Nella pagina corrente l'utente amministratore pu&ograve; eseguire le seguenti operazioni</p>
+        <ul>
+          <li>clicca sul bottone <b>AGGIUNGI</b> per aggiungere un nuovo utente</li>
+        </ul>
         <hr>
-        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>INSERIMENTO DATI NELLA FORM DI AGGIUNTA</b></p>   
+        <ul>
+          <li>i campi <b>EMAIL</b>, <b>PASSWORD</b>, <b>NOME</b>, <b>COGNOME</b>, <b>TIPO UTENTE</b> sono CAMPI OBBLIGATORI</li>
+        </ul>
         
     </div>
 
@@ -22,13 +27,13 @@
 
             <div class="fieldcontainerleft">
 
-                <label class="label" for="utente_email">Email</label>
+                <label class="label" for="utente_email">Email [campo richiesto]</label>
                 <input class="field" type="email" id="utente_email" name="utente_email" required="required"/>
 
-                <label class="label" for="utente_password">Password</label>
+                <label class="label" for="utente_password">Password [campo richiesto]</label>
                 <input class="field" type="password" id="utente_password" name="utente_password" required="required"/>
 
-                <label class="label" for="utente_ripeti_password">Ripeti Password</label>
+                <label class="label" for="utente_ripeti_password">Ripeti Password [campo richiesto]</label>
                 <input class="field" type="password" id="utente_ripeti_password" name="utente_ripeti_password" required="required"/>
 
             </div>
@@ -36,11 +41,11 @@
 
             <div class="fieldcontainerright">
                 
-                <label class="label" for="utente_nome">Nome</label>
+                <label class="label" for="utente_nome">Nome [campo richiesto]</label>
                 <input class="field" type="text" id="utente_nome" name="utente_nome" required="required"/>
 
 
-                <label class="label" for="utente_cognome">Cognome</label>
+                <label class="label" for="utente_cognome">Cognome [campo richiesto]</label>
                 <input class="field" type="text" id="utente_cognome" name="utente_cognome" required="required"/>
                 
                 <label class="label" for="utente_tipo_utente">Tipo Utente</label>
