@@ -48,19 +48,28 @@ Sempre a discrezione dell'utente è possibile inserire le informazioni in italia
 Da questa pagina è possibile aggiungere una relazione con un corso di laurea esistente. 
 
 ---- Elimina corso laurea: 
-Da questa pagina è possibile eliminare una relazione con un corso mutuato esistente a patto che esso abbia tra i propri corsi di laurea, uno dei corsi di laurea associati al corso modificato . 
+Da questa pagina è possibile eliminare una relazione con un corso laurea esistente.
 
 ---- Aggiungi corso mutuato: 
-Da questa pagina è possibile aggiungere una relazione con un corso mutuato esistente. 
+Da questa pagina è possibile aggiungere una relazione tra il corso modificato e un corso esistente che ha in comune almeno un corso di laurea. 
+Tale relazione aggiunge il corso esistente scelto nella lista dei corsi mutuati del corso modificato.
 
 ---- Elimina corso mutuato: 
-Da questa pagina è possibile eliminare una relazione con un corso mutuato esistente a patto che esso abbia tra i propri corsi di laurea, uno dei corsi di laurea associati al corso modificato . 
+Da questa pagina è possibile eliminare una relazione con un corso mutuato esistente.
 
 ---- Aggiungi modulo: 
-Da questa pagina è possibile aggiungere una relazione con un modulo esistente. 
+Da questa pagina è possibile aggiungere una relazione tra il corso modificato e un corso esistente che ha in comune almeno un corso di laurea. 
+Tale relazione aggiunge il corso esistente scelto nella lista dei moduli del corso modificato.
 
 ---- Elimina modulo: 
-Da questa pagina è possibile eliminare una relazione con un modulo esistente a patto che esso abbia tra i propri corsi di laurea, uno dei corsi di laurea associati al corso modificato . 
+Da questa pagina è possibile eliminare una relazione con un modulo esistente.
+
+---- Aggiungi corso propedeutico: 
+Da questa pagina è possibile aggiungere una relazione tra il corso modificato e un corso esistente che ha in comune almeno un corso di laurea. 
+Tale relazione aggiunge il corso esistente scelto nella lista dei corsi propedeutici del corso modificato.
+
+---- Elimina corso propedeutico: 
+Da questa pagina è possibile eliminare una relazione con un corso propedeutico esistente.
 
 ---- Aggiungi docenti: 
 Da questa pagina è possibile aggiungere un utente docente associato con al corso. 
@@ -90,3 +99,5 @@ Da questa pagina è possibile eliminare una relazione con un materiale esistente
 L'eliminazione cancellerà solo la relazione del materiale in questione con il corso, non eliminerà il materiale dal sistema (poichè esso potrebbe essere utile ad un altro corso che sta utilizzando lo stesso materiale). L'eliminazione della relazione cancellerà anche il materiale stesso se esso non è utilizzato da altri corsi.
 
 -- Utenti: L'amministratore è l'unico utente che può accedere alla sezione relativa agli utenti. Può aggiungere un nuovo utente oppure modificare utenti già esistenti.
+
+----- Aggiungi utente: 
