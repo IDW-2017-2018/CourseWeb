@@ -1202,12 +1202,14 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 res.sort(new Libro_TestoComparatorByTitolo());
                 request.setAttribute("items", res);                
                 request.setAttribute("corso", datalayer.getCorso(id,"ita"));
+                request.setAttribute("datalayer", datalayer);
                 result.activate("/eng/backoffice_add_textbook.html.ftl", request, response);                
             } else if(request.getAttribute("lang").equals("ita")){
                 request.setAttribute("navbar_tpl", "/ita/logged_navbar.html.ftl");
                 res.sort(new Libro_TestoComparatorByTitolo());
                 request.setAttribute("items", res);                
-                request.setAttribute("corso", datalayer.getCorso(id,"ita"));                
+                request.setAttribute("corso", datalayer.getCorso(id,"ita"));
+                request.setAttribute("datalayer", datalayer);
                 result.activate("/ita/backoffice_add_textbook.html.ftl", request, response);                
             } else {
                 request.setAttribute("message", "Illegal language");

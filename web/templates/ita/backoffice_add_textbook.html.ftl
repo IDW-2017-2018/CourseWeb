@@ -36,7 +36,7 @@
                 <select class="field" name="libro_testo_titolo">
                   <#list items>
                       <#items as item>
-                      <option value="${item.id}">${strip_slashes(item.titolo)}</option>
+                      <option value="${item.id}">${strip_slashes(datalayer.getLibroTesto(item.id).getAutore())}&nbsp;-&nbsp;${strip_slashes(item.titolo)}</option>
                       </#items>
                   <#else>
                   </#list>
