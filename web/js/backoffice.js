@@ -1,4 +1,6 @@
 //<![CDATA[
+var back = localStorage.getItem("back");
+
 window.onload = onLoadDocument();
 
 function onLoadDocument(){
@@ -7,6 +9,11 @@ function onLoadDocument(){
 }
 
 function createToast() {
+
+	if(back == "true"){
+		localStorage.setItem("back", "false");
+		return;
+	}
 
 	var query = window.location.search.substring(1);
 	var qs = parse_query_string(query);
@@ -17,11 +24,13 @@ function createToast() {
 		//toast success
 		var x = document.getElementById("snackbar");
 		x.innerHTML = "Success";
+		localStorage.setItem("back", "true");
 		showToast();
 	} else if(success == "false"){
 		//toast not success
 		var x = document.getElementById("snackbar");
 		x.innerHTML = "Error";
+		localStorage.setItem("back", "true");
 		showToast();
 	} else {
         //void
