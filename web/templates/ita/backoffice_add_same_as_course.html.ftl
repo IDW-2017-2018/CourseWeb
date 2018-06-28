@@ -4,11 +4,17 @@
     
     <div class="helpertext">
         
-        <p><b>TITOLO</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>AGGIUNTA NUOVA RELAZIONE CON CORSO MUTUATO</b></p>
+        <p>Nella pagina corrente l'utente amministratore pu&ograve; eseguire le seguenti operazioni</p>
+        <ul>
+        <li>clicca sul bottone <b>AGGIUNGI</b> per aggiungere una nuova relazione con un corso mutuato esistente</li>
+        </ul>
         <hr>
-        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>INSERIMENTO DATI NELLA FORM DI AGGIUNTA</b></p>   
+        <ul>
+        <li>il campo <b>CORSO</b> contiene il nome del corso corrente, non pu&ograve; essere modificato</li>
+        <li>il campo <b>CORSO MUTUATO</b> permette di scegliere il corso mutuato da relazionare con il corso corrente, nella select appariranno solo i corsi che non possiedono gi&agrave; una relazione con il corso corrente e che appartengono allo stesso corso di laurea del corso corrente</li>
+        </ul>
         
     </div>
 

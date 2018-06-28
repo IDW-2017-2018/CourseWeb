@@ -5,11 +5,26 @@
     
     <div class="helpertext">
         
-        <p><b>TITOLO</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-        <hr>
-        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>HUB DI MODIFICA DEL CORSO</b></p>
+        <p>Nella pagina corrente l'utente amministratore pu&ograve; eseguire le seguenti operazioni</p>
+        <P>(l'utente docente pu&ograve; eseguire le medesime operazioni dell'amministratore ma solo per i propri corsi)</P>
+        <ul>
+        <li>clicca sul bottone <b>MODIFICA</b> nella sezione <b>CORSO</b> per modificare le informazioni relative al corso selezionato</li>
+        <li>clicca sul bottone <b>AGGIUNGI</b> nella sezione <b>CORSO DI LAUREA</b> per aggiungere una relazione con un corso di laurea esistente per il corso corrente</li>
+        <li>clicca sul bottone <b>ELIMINA</b> nella sezione <b>CORSO DI LAUREA</b> per eliminare una relazione con un corso di laurea gi&agrave; presente per il corso corrente</li>
+        <li>clicca sul bottone <b>AGGIUNGI</b> nella sezione <b>CORSI MUTUATI</b> per aggiungere una relazione con un corso mutuato esistente per il corso corrente</li>
+        <li>clicca sul bottone <b>ELIMINA</b> nella sezione <b>CORSI MUTUATI</b> per eliminare una relazione con un corso mutuato gi&agrave; presente per il corso corrente</li>
+        <li>clicca sul bottone <b>AGGIUNGI</b> nella sezione <b>MODULO</b> per aggiungere una relazione con un modulo (corso) esistente per il corso corrente</li>
+        <li>clicca sul bottone <b>ELIMINA</b> nella sezione <b>MODULO</b> per eliminare una relazione con un modulo (corso) gi&agrave; presente per il corso corrente</li>
+        <li>clicca sul bottone <b>AGGIUNGI</b> nella sezione <b>CORSI PROPEDEUTICI</b> per aggiungere una relazione con un corso propedeutico esistente per il corso corrente</li>
+        <li>clicca sul bottone <b>ELIMINA</b> nella sezione <b>CORSI PROPEDEUTICI</b> per eliminare una relazione con un corso propedeutico gi&agrave; presente per il corso corrente</li>
+        <li>clicca sul bottone <b>AGGIUNGI</b> nella sezione <b>DOCENTI</b> per aggiungere una relazione con un docente esistente per il corso corrente</li>
+        <li>clicca sul bottone <b>ELIMINA</b> nella sezione <b>DOCENTI</b> per eliminare una relazione con un docente gi&agrave; presente per il corso corrente</li>
+        <li>clicca sul bottone <b>AGGIUNGI</b> nella sezione <b>LIBRI DI TESTO</b> per aggiungere una relazione con un libro di testo esistente per il corso corrente oppure per creare un nuovo libro di testo da associare al corso corrente</li>
+        <li>clicca sul bottone <b>ELIMINA</b> nella sezione <b>LIBRI DI TESTO</b> per eliminare una relazione con un libro di testo gi&agrave; presente per il corso corrente</li>
+        <li>clicca sul bottone <b>AGGIUNGI</b> nella sezione <b>MATEIRALI</b> per aggiungere una relazione con un materiale esistente per il corso corrente oppure per creare un nuovo materiale da associare al corso corrente</li>
+        <li>clicca sul bottone <b>ELIMINA</b> nella sezione <b>MATEIRALI</b> per eliminare una relazione con un materiale gi&agrave; presente per il corso corrente</li>
+        </ul>
         
     </div>
 
