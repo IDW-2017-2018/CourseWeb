@@ -31,7 +31,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     private PreparedStatement sUtente, sUtenteById, sUtenteByEmail, uUtenteById, uUtenteByEmail, iUtente, sUtenteByEmailLike;
     private PreparedStatement sCorsoLaurea, sCorsoLaureaById, sCorsoLaureaByNome;
     private PreparedStatement sLibriTesto, sLibroTestoById, iLibroTesto, uLibroTesto;
-    private PreparedStatement sMateriali, sMaterialeById, iMateriale, uMateriale;
+    private PreparedStatement sMateriali, sMaterialeById, iMateriale, uMateriale, dMateriale;
     
     private PreparedStatement sDocenti, sDocenteById, sDocenteByEmail, sDocentiCorso;
     private PreparedStatement sCorsiLaureaCorso;
@@ -99,7 +99,8 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sMateriali = connection.prepareStatement("SELECT * FROM materiali");
             iMateriale = connection.prepareStatement("INSERT INTO materiali (nome, descrizione, dimensione, percorso, id_utente) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             uMateriale = connection.prepareStatement("UPDATE materiali SET nome=?, descrizione=?, dimensione=?, percorso=?, id_utente=? WHERE id=?");
-            
+            dMateriale = connection.prepareStatement("DELETE FROM materiali WHERE id=?");
+                    
             //query complesse
             sDocenti = connection.prepareStatement("SELECT * FROM utenti WHERE tipo_utente='docente'");
             sDocenteById = connection.prepareStatement("SELECT * FROM utenti WHERE tipo_utente='docente' AND id=?");
@@ -1766,6 +1767,22 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
         
     }
     
+    @Override
+    public void deleteMateriale(int materiale_key) throws DataLayerException{
+        
+        try {
+            
+            //delete
+            dMateriale.setInt(1, materiale_key);
+
+            dMateriale.executeUpdate();
+            
+        } catch(SQLException e){
+            throw new DataLayerException("Unable to delete Materiale", e);
+        }
+        
+    }
+    
     
     
     @Override
@@ -1800,6 +1817,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sMateriali.close();   
             iMateriale.close();
             uMateriale.close();
+            dMateriale.close();
             sDocenti.close();
             sDocenteById.close();
             sDocenteByEmail.close();

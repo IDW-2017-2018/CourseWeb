@@ -86,6 +86,8 @@ public interface CourseWebDataLayer extends DataLayer {
     void deleteCorsiLibriTesto(int corso_key, int libro_testo_key) throws DataLayerException;
     void deleteCorsiMateriali(int corso_key, int materiale_key) throws DataLayerException;
     
+    void deleteMateriale(int materiale_key) throws DataLayerException;
+    
     List<Corso> filtraCorsi (List<Corso> corsi, String attributo, String filtro) throws DataLayerException;
     List<Map<String, Object>> getCorsiLaureaANDCFU(Corso corso) throws DataLayerException;
     

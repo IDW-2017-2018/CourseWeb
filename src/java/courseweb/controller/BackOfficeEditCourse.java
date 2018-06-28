@@ -188,6 +188,23 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
             else if(action.equals("elimina_materiale_action")){
                 if(request.getParameter("item") != null){
                     datalayer.deleteCorsiMateriali(id, Integer.parseInt(request.getParameter("item")));
+                    //se un materiale non ha più relazioni con nessun corso, viene eliminato dal database
+                    Materiale cancelable_materiale = datalayer.getMateriale(Integer.parseInt(request.getParameter("item")));
+                    boolean cancelable = true;
+                    for(Corso corso : datalayer.getCorsi()){
+                        for(Materiale materiale : datalayer.getMaterialiCorso(corso)){
+                            if(materiale.equals(cancelable_materiale)){
+                                cancelable = false;
+                                break;
+                            }                               
+                        }
+                        if(!cancelable){
+                            break;
+                        }  
+                    }
+                    if(cancelable){
+                        datalayer.deleteMateriale(Integer.parseInt(request.getParameter("item")));
+                    }
                     datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha eliminato un materiale dal corso " + datalayer.getCorso(id, "ita").getNome());                    
                 }
             }
