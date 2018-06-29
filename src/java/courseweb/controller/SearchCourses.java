@@ -49,9 +49,9 @@ public class SearchCourses extends CourseWebBaseController {
         
             String lang = (String) request.getAttribute("lang"); 
             List<Corso> corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiAggiornati(); 
-            System.out.println(corsi_non_filtrati); 
+            
             List<Corso> corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(lang, corsi_non_filtrati); 
-            System.out.println(corsi_filtrati); 
+            
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             if(request.getAttribute("lang").equals("eng")){
                 request.setAttribute("navbar_tpl", "/eng/logged_navbar.html.ftl");

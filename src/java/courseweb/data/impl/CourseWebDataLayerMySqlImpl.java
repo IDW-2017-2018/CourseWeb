@@ -655,6 +655,17 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
     }
     
     @Override
+    public List<Corso> retrieveCorsoLangs(int corso_key) throws DataLayerException {
+        
+        List<Corso> corsi = new ArrayList<Corso>();
+        
+        corsi.add(getCorso(corso_key, "ita"));
+        corsi.add(getCorso(corso_key, "eng"));
+        
+        return corsi;
+    }
+    
+    @Override
     public List<Corso> getCorsiByNomeAggiornatiNonLike(String corso_nome) throws DataLayerException {
         List<Corso> corsi = getCorsoByNomeNonLike(corso_nome);                      
         List<Corso> result = new ArrayList<Corso>(); 
