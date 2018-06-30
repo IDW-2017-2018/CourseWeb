@@ -142,7 +142,7 @@ public class BackOfficeCourse extends CourseWebBaseController {
             corso.setLingua(lingua);
             
             List<Corso> aggiornato = datalayer.getCorsiByNomeAggiornatiNonLike(nome);
-            aggiornato = datalayer.retrieveCorsoLangs(aggiornato.get(0).getId());
+            if(!aggiornato.isEmpty()) aggiornato = datalayer.retrieveCorsoLangs(aggiornato.get(0).getId());
            
             if(aggiornato.isEmpty()) primoanno = true;
             
