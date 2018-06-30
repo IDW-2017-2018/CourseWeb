@@ -36,11 +36,15 @@ function createToast() {
 function prepareMaterialeDescr(){
 	var materiali_select = document.getElementById("materiale_select");
 
-	if(materiali_select == null)
+	if(materiali_select == null){
 		return;
+	}
 
-	if(materiali_select.value == null)
+
+	if(!materiali_select.options.length){
+		document.getElementById("materiale_descrizione").innerHTML = "---";
 		return;
+	}
 
 
 	var id = materiali_select.value;
