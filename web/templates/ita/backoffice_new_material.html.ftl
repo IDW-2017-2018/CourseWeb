@@ -2,12 +2,17 @@
     
     <div class="helpertext">
         
-        <p><b>TITOLO</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>AGGIUNTA NUOVO MATERIALE</b></p>
+        <p>Nella pagina corrente l'utente amministratore pu&ograve; eseguire le seguenti operazioni</p>
+        <ul>
+        <li>clicca sul bottone <b>AGGIUNGI</b> per aggiungere un nuovo materiale e creare una relazione con il corso corrente</li>
+        </ul>
         <hr>
-        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-        
+        <p><b>INSERIMENTO DATI NELLA FORM DI AGGIUNTA</b></p>   
+        <ul>
+        <li>i campi <b>NOME</b>, <b>DESCRIZIONE</b> e <b>FILE</b> sono obbligatori</li>
+        <li>il campo <b>FILE</b> permette all'utente di selezionare il file da caricare, qualunque tipologia di formato è ammessa</li>
+        </ul>
     </div>
 
 </div>

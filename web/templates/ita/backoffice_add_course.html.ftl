@@ -87,25 +87,25 @@
                 <h1 class="title">INFO CORSO ITALIANO</h1>
                 
                 <label class="label" for="corso_prerequisiti">Prerequisiti</label>
-                <textarea class="field" type"text" id="corso_prerequisiti" name="corso_prerequisiti"></textarea>
+                <textarea class="field" type"text" id="corso_prerequisiti" name="corso_prerequisiti"> </textarea>
 
                 <label class="label" for="corso_obiettivi">Obiettivi</label>
-                <textarea class="field" type"text" id="corso_obiettivi" name="corso_obiettivi"></textarea>
+                <textarea class="field" type"text" id="corso_obiettivi" name="corso_obiettivi"> </textarea>
                 
                 <label class="label" for="corso_mod_esame">Modalit&agrave; Esame</label>
-                <textarea class="field" type"text" id="corso_mod_esame" name="corso_mod_esame"></textarea>
+                <textarea class="field" type"text" id="corso_mod_esame" name="corso_mod_esame"> </textarea>
 
                 <label class="label" for="corso_mod_insegnamento">Modalit&agrave; Insegnamento</label>
-                <textarea class="field" type"text" id="corso_mod_insegna    mento" name="corso_mod_insegnamento"></textarea>
+                <textarea class="field" type"text" id="corso_mod_insegna    mento" name="corso_mod_insegnamento"> </textarea>
                 
                 <label class="label" for="corso_descrittori_dublino">Descrittori Dublino</label>
                 <textarea class="field" type"text" id="corso_descrittori_dublino" name="corso_descrittori_dublino" placeholder="KNOWLEDGE \ APPLICATION \ EVALUATION \ COMUNICATION \ LIFELONG LEARNING SKILLS"></textarea>
 
                 <label class="label" for="corso_sillabo">Sillabo</label>
-                <textarea class="field" type"text" id="corso_sillabo" name="corso_sillabo"></textarea>
+                <textarea class="field" type"text" id="corso_sillabo" name="corso_sillabo"> </textarea>
 
                 <label class="label" for="corso_note">Note</label>
-                <textarea class="field" type"text" id="corso_note" name="corso_note"></textarea>
+                <textarea class="field" type"text" id="corso_note" name="corso_note"> </textarea>
                 
             </div>
 
@@ -115,25 +115,25 @@
                 <h1 class="title">INFO CORSO INGLESE</h1>
 
                 <label class="label" for="corso_prerequisiti_eng">Prerequisiti</label>
-                <textarea class="field" type"text" id="corso_prerequisiti_eng" name="corso_prerequisiti_eng"></textarea>
+                <textarea class="field" type"text" id="corso_prerequisiti_eng" name="corso_prerequisiti_eng"> </textarea>
 
                 <label class="label" for="corso_obiettivi_eng">Obiettivi</label>
-                <textarea class="field" type"text" id="corso_obiettivi_eng" name="corso_obiettivi_eng"></textarea>
+                <textarea class="field" type"text" id="corso_obiettivi_eng" name="corso_obiettivi_eng"> </textarea>
                 
                 <label class="label" for="corso_mod_esame_eng">Modalit&agrave; Esame</label>
-                <textarea class="field" type"text" id="corso_mod_esame_eng" name="corso_mod_esame_eng"></textarea>
+                <textarea class="field" type"text" id="corso_mod_esame_eng" name="corso_mod_esame_eng"> </textarea>
 
                 <label class="label" for="corso_mod_insegnamento_eng">Modalit&agrave; Insegnamento</label>
-                <textarea class="field" type"text" id="corso_mod_insegnamento_eng" name="corso_mod_insegnamento_eng"></textarea>
+                <textarea class="field" type"text" id="corso_mod_insegnamento_eng" name="corso_mod_insegnamento_eng"> </textarea>
                 
                 <label class="label" for="corso_descrittori_dublino_eng">Descrittori Dublino</label>
-                <textarea class="field" type"text" id="corso_descrittori_dublino_eng" name="corso_descrittori_dublino_eng"></textarea>
+                <textarea class="field" type"text" id="corso_descrittori_dublino_eng" name="corso_descrittori_dublino_eng" placeholder="KNOWLEDGE \ APPLICATION \ EVALUATION \ COMUNICATION \ LIFELONG LEARNING SKILLS"></textarea>
 
                 <label class="label" for="corso_sillabo_eng">Sillabo</label>
-                <textarea class="field" type"text" id="corso_sillabo_eng" name="corso_sillabo_eng"></textarea>
+                <textarea class="field" type"text" id="corso_sillabo_eng" name="corso_sillabo_eng"> </textarea>
 
                 <label class="label" for="corso_note_eng">Note</label>
-                <textarea class="field" type"text" id="corso_note_eng" name="corso_note_eng"></textarea>
+                <textarea class="field" type"text" id="corso_note_eng" name="corso_note_eng"> </textarea>
                 
             </div>
 

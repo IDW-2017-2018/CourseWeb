@@ -23,13 +23,13 @@
             <div class="fieldcontainerleft">
 
                 <label class="label" for="libro_testo_autore">Author</label>
-                <input class="field" type="text" id="libro_testo_autore" name="libro_testo_autore"/>
+                <input class="field" type="text" id="libro_testo_autore" name="libro_testo_autore" required="required"/>
 
                 <label class="label" for="libro_testo_titolo">Title</label>
-                <input class="field" type="text" id="libro_testo_titolo" name="libro_testo_titolo"/>
+                <input class="field" type="text" id="libro_testo_titolo" name="libro_testo_titolo" required="required"/>
 
                 <label class="label" for="libro_testo_volume">Volume</label>
-                <input class="field" type="text" id="libro_testo_volume" name="libro_testo_volume"/>
+                <input class="field" type="text" id="libro_testo_volume" name="libro_testo_volume" required="required"/>
 
             </div>
 
@@ -37,10 +37,10 @@
             <div class="fieldcontainerright">
 
                 <label class="label" for="libro_testo_anno">Year</label>
-                <input class="field" type="text" id="libro_testo_anno" name="libro_testo_anno"/>
+                <input class="field" type="text" id="libro_testo_anno" name="libro_testo_anno" required="required"/>
 
                 <label class="label" for="libro_testo_editore">Publisher</label>
-                <input class="field" type="text" id="libro_testo_editore" name="libro_testo_editore"/>
+                <input class="field" type="text" id="libro_testo_editore" name="libro_testo_editore" required="required"/>
 
                 <label class="label" for="libro_testo_link">Link</label>
                 <input class="field" type="text" id="libro_testo_link" name="libro_testo_link"/>

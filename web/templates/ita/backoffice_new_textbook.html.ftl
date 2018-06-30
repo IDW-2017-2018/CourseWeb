@@ -2,12 +2,16 @@
     
     <div class="helpertext">
         
-        <p><b>TITOLO</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>AGGIUNTA NUOVO LIBRO DI TESTO</b></p>
+        <p>Nella pagina corrente l'utente amministratore pu&ograve; eseguire le seguenti operazioni</p>
+        <ul>
+        <li>clicca sul bottone <b>AGGIUNGI</b> per aggiungere un nuovo libro di testo e creare una relazione con il corso corrente</li>
+        </ul>
         <hr>
-        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-        
+        <p><b>INSERIMENTO DATI NELLA FORM DI AGGIUNTA</b></p>   
+        <ul>
+        <li>i campi <b>AUTORE</b>, <b>TITOLO</b> e <b>VOLUME</b>, <b>ANNO</b>, <b>EDITORE</b> sono obbligatori</li>
+        </ul>
     </div>
 
 </div>
@@ -23,13 +27,13 @@
             <div class="fieldcontainerleft">
 
                 <label class="label" for="libro_testo_autore">Autore</label>
-                <input class="field" type="text" id="libro_testo_autore" name="libro_testo_autore"/>
+                <input class="field" type="text" id="libro_testo_autore" name="libro_testo_autore" required="required"/>
 
                 <label class="label" for="libro_testo_titolo">Titolo</label>
-                <input class="field" type="text" id="libro_testo_titolo" name="libro_testo_titolo"/>
+                <input class="field" type="text" id="libro_testo_titolo" name="libro_testo_titolo" required="required"/>
 
                 <label class="label" for="libro_testo_volume">Volume</label>
-                <input class="field" type="text" id="libro_testo_volume" name="libro_testo_volume"/>
+                <input class="field" type="text" id="libro_testo_volume" name="libro_testo_volume" required="required"/>
 
             </div>
 
@@ -37,10 +41,10 @@
             <div class="fieldcontainerright">
 
                 <label class="label" for="libro_testo_anno">Anno</label>
-                <input class="field" type="text" id="libro_testo_anno" name="libro_testo_anno"/>
+                <input class="field" type="text" id="libro_testo_anno" name="libro_testo_anno" required="required"/>
 
                 <label class="label" for="libro_testo_editore">Editore</label>
-                <input class="field" type="text" id="libro_testo_editore" name="libro_testo_editore"/>
+                <input class="field" type="text" id="libro_testo_editore" name="libro_testo_editore" required="required"/>
 
                 <label class="label" for="libro_testo_link">Link</label>
                 <input class="field" type="text" id="libro_testo_link" name="libro_testo_link"/>
