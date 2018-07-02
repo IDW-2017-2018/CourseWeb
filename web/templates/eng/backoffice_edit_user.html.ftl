@@ -2,11 +2,18 @@
     
     <div class="helpertext">
         
-        <p><b>TITOLO</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>EDIT USER</b></p>
+        <p>In the current page, the administrator can perform the following operations</p>
+        <ul>
+          <li>click on the <b>EDIT</b> button to editing the infos of the current user</li>
+        </ul>
         <hr>
-        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>INSERTING DATA IN ADDING FORM</b></p>   
+        <ul>
+          <li>fields <b>EMAIL</b>, <b>NAME</b>, <b>SURNAME</b>, <b>USER TYPE</b> on default are filled with values of current user</li>
+          <li>For editing, the user must change at least one field</li>
+          <li>NOTE: editing the user type might be a risky operation (but in no case the user can damage the system)</li>
+        </ul>
         
     </div>
 

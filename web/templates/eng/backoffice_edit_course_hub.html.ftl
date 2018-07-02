@@ -5,11 +5,26 @@
     
     <div class="helpertext">
         
-        <p><b>TITOLO</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-        <hr>
-        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>EDIT COURSE HUB</b></p>
+        <p>In the current page, the administrator can perform the following operations</p>
+        <p>(the teacher can perform the same operations than the administrator but only for him's courses)</p>
+        <ul>
+        <li>click on the button <b>EDIT</b> in section <b>COURSE</b> to editing the infos of the selected course</li>
+        <li>click on the button <b>ADD</b> in section <b>DEGREE COURSE</b> to add the relationship with an existing degree course</li>
+        <li>click on the button <b>DELETE</b> in section <b>DEGREE COURSE</b> to add the relationship with an existing degree course</li>
+        <li>click on the button <b>ADD</b> in section <b>SAME AS COURSE</b> to add the relationship with an existing same as course</li>
+        <li>click on the button <b>DELETE</b> in section <b>SAME AS COURSE</b> to add the relationship with an existing same as course</li>
+        <li>click on the button <b>ADD</b> in section <b>MODULE</b> to add the relationship with an existing module</li>
+        <li>click on the button <b>DELETE</b> in section <b>MODULE</b> to add the relationship with an existing module</li>
+        <li>click on the button <b>ADD</b> in section <b>PROPAEDEUTIC COURSE</b> to add the relationship with an existing propaedeutic course</li>
+        <li>click on the button <b>DELETE</b> in section <b>PROPAEDEUTIC COURSE</b> to add the relationship with an existing propaedeutic course</li>
+        <li>click on the button <b>ADD</b> in section <b>TEACHERS</b> to add the relationship with an existing teachers</li>
+        <li>click on the button <b>DELETE</b> in section <b>TEACHERS</b> to add the relationship with an existing teachers</li>
+        <li>click on the button <b>ADD</b> in section <b>TEXTBOOKS</b> to add the relationship with an existing textbooks</li>
+        <li>click on the button <b>DELETE</b> in section <b>TEXTBOOKS</b> to add the relationship with an existing textbooks</li>
+        <li>click on the button <b>ADD</b> in section <b>MATERIALS</b> to add the relationship with an existing materials</li>
+        <li>click on the button <b>DELETE</b> in section <b>MATERIALS</b>  to add the relationship with an existing materials</li>
+        </ul>
         
     </div>
 

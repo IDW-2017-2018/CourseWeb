@@ -2,12 +2,14 @@
     
     <div class="helpertext">
         
-        <p><b>TITLE</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-        <hr>
-        <p><b>TITLE</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-        
+        <p><b>COURSE ADMINISTRATION</b></p>
+        <p>In the current page, the administrator can perform the following operations</p>
+        <p>(the teacher instead can edit only the infos of his current year's courses)</p>
+        <ul>
+        <li>click on the button <b>ADD</b> to add a new course</li>
+        <li>click on the button <b>EDIT</b> to edit infos of an already existing course</li>
+        </ul>
+    
     </div>
 
 </div>
@@ -41,11 +43,13 @@
     
     <div class="helpertext">
         
-        <p><b>TITLE</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-        <hr>
-        <p><b>TITLE</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>USER ADMINISTRATION</b></p>
+        <p>In the current page, the administrator can perform the following operations</p>
+        <p>(the teacher instead can edit only the infos of his current year's courses)</p>
+        <ul>
+        <li>click on the button <b>ADD</b> to add a new user</li>
+        <li>click on the button <b>EDIT</b> to edit infos of an already existing user</li>
+        </ul>
         
     </div>
 

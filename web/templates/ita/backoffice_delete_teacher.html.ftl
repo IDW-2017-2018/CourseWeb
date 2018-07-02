@@ -7,7 +7,7 @@
         <p><b>ELIMINA RELAZIONE CON DOCENTE</b></p>
         <p>Nella pagina corrente l'utente amministratore pu&ograve; eseguire le seguenti operazioni</p>
         <ul>
-          <li>clicca sul link <b>ELIMINA</b> relativo ad una relazione con docente per selezionarla e passare alla pagina di conferma eliminazione relativa alla relazione con dcoente selezionata </li>
+          <li>clicca sul link <b>ELIMINA</b> relativo ad una relazione con docente per selezionarla e passare alla pagina di conferma eliminazione relativa alla relazione con docente selezionata </li>
         </ul>
         
     </div>

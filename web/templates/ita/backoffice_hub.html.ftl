@@ -6,8 +6,8 @@
         <p>Nella pagina corrente l'utente amministratore pu&ograve; eseguire le seguenti operazioni</p>
         <p>(l'utente docente potr&agrave; invece modificare le informazioni relative ai soli suoi corsi dell'anno accademico corrente)</p>
         <ul>
-          <li>clicca sul bottone <b>AGGIUNGI CORSO</b> per aggiungere un nuovo corso</li>
-          <li>clicca sul bottone <b>MODIFICA CORSO</b> per modificare le informazioni relative a un corso gi&agrave; esistente</li>
+        <li>clicca sul bottone <b>AGGIUNGI</b> per aggiungere un nuovo corso</li>
+        <li>clicca sul bottone <b>MODIFICA</b> per modificare le informazioni relative a un corso gi&agrave; esistente</li>
         </ul>
         
     </div>
@@ -46,8 +46,8 @@
         <p><b>GESTIONE UTENTI</b></p>
         <p>Nella pagina corrente l'utente amministratore pu&ograve; eseguire le seguenti operazioni</p>
         <ul>
-          <li>clicca sul bottone <b>AGGIUNGI</b> per aggiungere un nuovo utente (docente o amministratore)</li>
-          <li>clicca sul bottone <b>MODIFICA</b> per modificare le informazioni relative a un utente gi&agrave; esistente</li>
+        <li>clicca sul bottone <b>AGGIUNGI</b> per aggiungere un nuovo utente (docente o amministratore)</li>
+        <li>clicca sul bottone <b>MODIFICA</b> per modificare le informazioni relative a un utente gi&agrave; esistente</li>
         </ul>
         
     </div>

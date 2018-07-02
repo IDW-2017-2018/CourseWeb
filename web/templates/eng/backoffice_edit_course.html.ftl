@@ -2,11 +2,18 @@
     
     <div class="helpertext">
         
-        <p><b>TITOLO</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>EDIT COURSE</b></p>
+        <p>In the current page, the administrator can perform the following operations</p>
+        <ul>
+        <li>    click on the button <b>EDIT</b> to editing the infos of current course</li>
+        </ul>
         <hr>
-        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>INSERTING DATA IN ADDING FORM</b></p>   
+        <ul>
+        <li>fields <b>CODE</b>, <b>NAME</b>, <b>SSD</b>, <b>SEMESTER</b>, <b>LANGUAGE</b>, <b>HOMEPAGE LINK</b>, <b>RISORSE LINK</b>, <b>FORUM LINK</b> have current course's default values</li>
+        <li>fields alongside <b>ITALIAN INFO COURSE'S</b> and <b>ENGLISH INFO COURSE'S</b> have default current course's values</li>
+        <li>to perform an edit, the user shall change at least a field's value inserting the up to date info in the field</li>
+        </ul>
         
     </div>
 

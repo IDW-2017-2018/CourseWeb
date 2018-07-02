@@ -7,7 +7,7 @@
         
         <p><b>HUB DI MODIFICA DEL CORSO</b></p>
         <p>Nella pagina corrente l'utente amministratore pu&ograve; eseguire le seguenti operazioni</p>
-        <P>(l'utente docente pu&ograve; eseguire le medesime operazioni dell'amministratore ma solo per i propri corsi)</P>
+        <p>(l'utente docente pu&ograve; eseguire le medesime operazioni dell'amministratore ma solo per i propri corsi)</p>
         <ul>
         <li>clicca sul bottone <b>MODIFICA</b> nella sezione <b>CORSO</b> per modificare le informazioni relative al corso selezionato</li>
         <li>clicca sul bottone <b>AGGIUNGI</b> nella sezione <b>CORSO DI LAUREA</b> per aggiungere una relazione con un corso di laurea esistente per il corso corrente</li>

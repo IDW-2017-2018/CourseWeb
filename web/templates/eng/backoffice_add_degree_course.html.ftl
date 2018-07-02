@@ -4,11 +4,18 @@
     
     <div class="helpertext">
         
-        <p><b>TITOLO</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>ADDING A NEW RELATIONSHIP WITH A DEGREE COURSE</b></p>
+        <p>In the current page, the administrator can perform the following operations</p>
+        <ul>
+        <li>click on the button <b>ADD</b> to add the relationship with an existing degree course</li>
+        </ul>
         <hr>
-        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>INSERTING DATA IN ADDING FORM</b></p>   
+        <ul>
+        <li>the field <b>COURSE</b> contains the current course's name, it cannot be edited</li>
+        <li>the field <b>DEGREE COURSE</b> allow the selection of a degree course to relate with current course</li>
+        <li>the fields <b>CFU</b> and <b>CFU TYPE</b> can be edited as parameters of current relationship</li>
+        </ul>
         
     </div>
 
