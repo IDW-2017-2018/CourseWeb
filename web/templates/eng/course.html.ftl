@@ -203,7 +203,7 @@
         <th class="thresult">VOLUME</th>
         <th class="thresult">YEAR</th>
         <th class="thresult">EDITOR</th>
-        <th class="thresult">LINK ENG</th>
+        <th class="thresult">LINK</th>
 
     </tr>
 
@@ -308,7 +308,7 @@
 
         <th class="thresult" colspan="3">HOMEPAGE</th>
         <th class="thresult" colspan="2">EXTERNAL RESOURCES</th>
-        <th class="thresult" colspan="2">FORUM / eLEARNING ENG</th>
+        <th class="thresult" colspan="2">FORUM / eLEARNING</th>
 
     </tr>
 

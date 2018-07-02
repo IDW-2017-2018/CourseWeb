@@ -80,8 +80,8 @@ public class SearchCourses extends CourseWebBaseController {
                 List<Corso_Laurea> corsi_laurea = datalayer.getCorsiLaurea();
                 corsi_laurea.sort(new Corso_LaureaComparatorByNome());
                 
-                request.setAttribute("docenti", datalayer.getDocenti());
-                request.setAttribute("corsilaurea", datalayer.getCorsiLaurea());                
+                request.setAttribute("docenti", docenti);
+                request.setAttribute("corsilaurea", corsi_laurea);                
                 result.activate("/ita/search_courses.html.ftl", request, response); 
 
             } else {
@@ -164,8 +164,8 @@ public class SearchCourses extends CourseWebBaseController {
                 List<Corso_Laurea> corsi_laurea = datalayer.getCorsiLaurea();
                 corsi_laurea.sort(new Corso_LaureaComparatorByNome());
                 
-                request.setAttribute("docenti", datalayer.getDocenti());
-                request.setAttribute("corsilaurea", datalayer.getCorsiLaurea());                
+                request.setAttribute("docenti", docenti);
+                request.setAttribute("corsilaurea", corsi_laurea);                
                 result.activate("/eng/search_courses.html.ftl", request, response);  
 
             } else if(request.getAttribute("lang").equals("ita")){
@@ -179,8 +179,8 @@ public class SearchCourses extends CourseWebBaseController {
                 List<Corso_Laurea> corsi_laurea = datalayer.getCorsiLaurea();
                 corsi_laurea.sort(new Corso_LaureaComparatorByNome());
                 
-                request.setAttribute("docenti", datalayer.getDocenti());
-                request.setAttribute("corsilaurea", datalayer.getCorsiLaurea());                
+                request.setAttribute("docenti", docenti);
+                request.setAttribute("corsilaurea", corsi_laurea);                
                 result.activate("/ita/search_courses.html.ftl", request, response); 
 
             } else {
