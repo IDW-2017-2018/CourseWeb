@@ -65,7 +65,7 @@
 
             <div class="fieldcontainerleft">
 
-                <h1 class="title">ITALIAN COURSE INFO</h1>
+                <h1 class="title">ITALIAN COURSE DESCRIPTION</h1>
                 
                 <label class="label" for="corso_prerequisiti">Prerequisites</label>
                 <textarea class="field" type="text" id="corso_prerequisiti" name="corso_prerequisiti">${strip_slashes(corso_ita.prerequisiti)}</textarea>
@@ -93,7 +93,7 @@
 
             <div class="fieldcontainerright">
                 
-                <h1 class="title">ENGLISH COURSE INFO</h1>
+                <h1 class="title">ENGLISH COURSE DESCRIPTION</h1>
 
                 <label class="label" for="corso_prerequisiti">Prerequisites</label>
                 <textarea class="field" type="text" id="corso_prerequisiti" name="corso_prerequisiti_eng">${strip_slashes(corso_eng.prerequisiti)}</textarea>

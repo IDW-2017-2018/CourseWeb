@@ -5,7 +5,7 @@
         <p><b>MODIFICA CORSO</b></p>
         <p>Nella pagina corrente l'utente amministratore pu&ograve; eseguire le seguenti operazioni</p>
         <ul>
-          <li>clicca sul link <b>MODIFICA</b> relativo ad un corso per selezionarlo e passare alla pagina di modifica relativa al corso selezionato (l'utente verrà reindirizzato all'hub di modifica del corso)</li>
+          <li>clicca sul link <b>MODIFICA</b> relativo ad un corso per selezionarlo e passare alla pagina di modifica relativa al corso selezionato (l'utente verr&agrave; reindirizzato all'hub di modifica del corso)</li>
           <li>NOTA : utilizza i campi (anche in modo congiunto) della form "FILTRI" per filtrare la ricerca del corso desiderato</li>
         </ul>
         

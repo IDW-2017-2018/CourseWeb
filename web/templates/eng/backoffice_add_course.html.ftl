@@ -2,11 +2,27 @@
     
     <div class="helpertext">
         
-        <p><b>TITOLO</b></p>
-
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>NEW COURSE CREATION</b></p>
+        <p>In the current page, the administrator can perform the following operations</p>
+        <ul>
+        <li>click on the button <b>ADD</b> to add a new course</li>
+        </ul>
         <hr>
-        <p><b>TITOLO</b><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+        <p><b>INSERTING DATA IN ADDING FORM</b></p>   
+        <ul>
+        <li>fields <b>CODE</b>, <b>NAME</b>, <b>SSD</b>, <b>SEMESTER</b>, <b>LANGUAGE</b> <b>TEACHER</b> are REQUIRED</li>
+        <li><b>YEAR</b> field is automatically inserted by the sistem, date corrseponds to current academic year</li>
+        <li>fields <b>HOMEPAGE LINK</b>, <b>RESOURCE LINK</b>, <b>FORUM LINK</b> can be arbitrarily inserted</li>
+        </ul>
+        <hr>
+        <p><b>INSERTING DATA IN ITALIAN AND ENGLISH COURSE DESCRIPTION FORM</b></p>   
+        <p>there are three possible scenarios while inserting data:</p>
+        <ul>
+          <li>if every single field  is empty, description of the same course, but from the most recent year will be added. if this is the first year for the course, at least one field must be filled</li>
+          <li>if user partially or completely fills both italian and english fields, the course will be added with these descriptions.</li>
+          <li>if user partially or completely fills only the fields for one language, only these ones will be saved within the course. In the course page, anyway, for both language the same descriptions will be showed</li>
+        </ul>
+
         
     </div>
 
@@ -69,7 +85,7 @@
 
             <div class="fieldcontainerleft">
 
-                <h1 class="title">ITALIAN INFO COURSE </h1>
+                <h1 class="title">ITALIAN COURSE DESCRIPTION</h1>
                 
                 <label class="label" for="corso_prerequisiti">Prerequisiti</label>
                 <textarea class="field" type"text" id="corso_prerequisiti" name="corso_prerequisiti"> </textarea>
@@ -97,7 +113,7 @@
 
             <div class="fieldcontainerright">
                 
-                <h1 class="title">ENGLISH INFO COURSE</h1>
+                <h1 class="title">ENGLISH COURSE DESCRIPTION</h1>
 
                 <label class="label" for="corso_prerequisiti_eng">Prerequisiti</label>
                 <textarea class="field" type"text" id="corso_prerequisiti_eng" name="corso_prerequisiti_eng"> </textarea>

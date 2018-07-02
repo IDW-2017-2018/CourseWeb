@@ -11,7 +11,7 @@
         <p><b>INSERIMENTO DATI NELLA FORM DI AGGIUNTA</b></p>   
         <ul>
         <li>i campi <b>NOME</b>, <b>DESCRIZIONE</b> e <b>FILE</b> sono obbligatori</li>
-        <li>il campo <b>FILE</b> permette all'utente di selezionare il file da caricare, qualunque tipologia di formato è ammessa</li>
+        <li>il campo <b>FILE</b> permette all'utente di selezionare il file da caricare, qualunque tipologia di formato &egrave; ammessa</li>
         </ul>
     </div>
 
