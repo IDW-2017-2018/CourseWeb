@@ -110,6 +110,7 @@
 
         <#items as corso>
 
+        <#if (session.getAttribute('utente').tipoUtente == "docente") && ( (.now?string('yyyy')?number) == (corso.anno?keep_after("/")?number) ) >
         <tr class="trresult-list">
 
             <td class="tdresult-list" colspan="2">${strip_slashes(corso.codice)}</td>
@@ -120,6 +121,23 @@
             <td class="tdresult-list"><a href="backofficecourse?lang=${lang}&action=edit_course&id=${corso.id}" class="linkresultmod">MODIFICA</a></td>
             
         </tr>
+        <#else>
+        	<#if (session.getAttribute('utente').tipoUtente == "docente") >
+        	</#if>
+        </#if>
+
+        <#if (session.getAttribute('utente').tipoUtente == "amministratore") >
+        <tr class="trresult-list">
+
+            <td class="tdresult-list" colspan="2">${strip_slashes(corso.codice)}</td>
+            <td class="tdresult-list">${strip_slashes(corso.nome)}</td>
+            <td class="tdresult-list">${strip_slashes(corso.courseTeachers())}</td>
+            <td class="tdresult-list">${strip_slashes(corso.SSD)}</td>
+            <td class="tdresult-list">${strip_slashes(corso.anno)}</td>
+            <td class="tdresult-list"><a href="backofficecourse?lang=${lang}&action=edit_course&id=${corso.id}" class="linkresultmod">MODIFICA</a></td>
+            
+        </tr>
+        </#if>
 
         </#items>
 
