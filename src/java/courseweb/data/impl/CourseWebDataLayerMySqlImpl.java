@@ -70,7 +70,7 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
             sCorsoByCodiceAnnoLang = connection.prepareStatement("SELECT * FROM corsi INNER JOIN info_corsi ON (corsi.id = info_corsi.id_corso) WHERE corsi.codice=? AND corsi.anno=? AND info_corsi.lang=?");
             
             
-            uCorsoById = connection.prepareStatement("UPDATE corsi SET codice=?, ssd=?, semestre=?, lingua=?, link_homepage=?, link_risorse=?, link_forum=? WHERE id=?");
+            uCorsoById = connection.prepareStatement("UPDATE corsi SET nome=?, codice=?, ssd=?, semestre=?, lingua=?, link_homepage=?, link_risorse=?, link_forum=? WHERE id=?");
             uInfoCorsiById = connection.prepareStatement("UPDATE info_corsi SET prerequisiti=?, obiettivi=?, mod_esame=?, mod_insegnamento=?, descrittori_dublino=?, sillabo=?, note=? WHERE id=?");
             
             sInfoCorsiByIdCorsoLang = connection.prepareStatement("SELECT * FROM info_corsi WHERE id_corso=? AND lang=?");
@@ -1120,15 +1120,16 @@ public class CourseWebDataLayerMySqlImpl extends DataLayerMySqlImpl implements C
                 }
             
             //update su corsi
-            uCorsoById.setString(1, corso.getCodice().trim());                          
-            uCorsoById.setString(2, corso.getSSD().trim());
-            uCorsoById.setInt(3, corso.getSemestre());
-            uCorsoById.setString(4, corso.getLingua());
-            uCorsoById.setString(5, corso.getLinkHomepageCorso());
-            uCorsoById.setString(6, corso.getLinkRisorseEsterne());
-            uCorsoById.setString(7, corso.getLinkForum());
+            uCorsoById.setString(1, corso.getNome().trim());
+            uCorsoById.setString(2, corso.getCodice().trim());                          
+            uCorsoById.setString(3, corso.getSSD().trim());
+            uCorsoById.setInt(4, corso.getSemestre());
+            uCorsoById.setString(5, corso.getLingua());
+            uCorsoById.setString(6, corso.getLinkHomepageCorso());
+            uCorsoById.setString(7, corso.getLinkRisorseEsterne());
+            uCorsoById.setString(8, corso.getLinkForum());
             
-            uCorsoById.setInt(8, corso.getId());
+            uCorsoById.setInt(9, corso.getId());
             
             uCorsoById.executeUpdate();
             

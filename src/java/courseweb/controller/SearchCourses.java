@@ -47,10 +47,9 @@ public class SearchCourses extends CourseWebBaseController {
         
         try {
         
-            String lang = (String) request.getAttribute("lang"); 
             List<Corso> corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiAggiornati(); 
             
-            List<Corso> corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(lang, corsi_non_filtrati); 
+            List<Corso> corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang("ita", corsi_non_filtrati); 
             
             CourseWebDataLayer datalayer = (CourseWebDataLayer) request.getAttribute("datalayer");
             if(request.getAttribute("lang").equals("eng")){

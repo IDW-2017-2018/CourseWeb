@@ -204,6 +204,8 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                     }
                     if(cancelable){
                         datalayer.deleteMateriale(Integer.parseInt(request.getParameter("item")));
+                        File file = new File(getServletContext().getInitParameter("uploads.directory")+File.separatorChar+cancelable_materiale.getPercorso());
+                        file.delete();
                     }
                     datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha eliminato un materiale dal corso " + datalayer.getCorso(id, "ita").getNome());                    
                 }

@@ -297,17 +297,16 @@ public class BackOfficeCourse extends CourseWebBaseController {
             CourseWebDataLayer datalayer = (CourseWebDataLayer)request.getAttribute("datalayer");
             List<Corso> corsi_filtrati = null;
             List<Corso> corsi_non_filtrati = datalayer.getCorsi();      
-            String lang = (String) request.getAttribute("lang"); 
             HttpSession session = (HttpSession) request.getAttribute("session");
             if(request.getAttribute("session") != null){
                 if(((Utente)session.getAttribute("utente")).getTipoUtente().equals("docente")){
                 corsi_non_filtrati = datalayer.getCorsiAggiornati();    
                 String cognome = ((Utente)session.getAttribute("utente")).getCognome();
                 corsi_filtrati = datalayer.filtraCorsi(corsi_non_filtrati, "corso_docente", cognome);
-                corsi_filtrati = datalayer.filterCorsiByLang(lang, corsi_filtrati);
+                corsi_filtrati = datalayer.filterCorsiByLang("ita", corsi_filtrati);
                 }
             else{
-                corsi_filtrati = datalayer.filterCorsiByLang(lang, corsi_non_filtrati);
+                corsi_filtrati = datalayer.filterCorsiByLang("ita", corsi_non_filtrati);
                 }
             }    
             List<Corso_Laurea> corsilaurea = datalayer.getCorsiLaurea();
