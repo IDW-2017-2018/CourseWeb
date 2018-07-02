@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Lug 02, 2018 alle 08:41
--- Versione del server: 5.7.21
--- Versione PHP: 5.6.35
+-- Creato il: Lug 02, 2018 alle 15:28
+-- Versione del server: 5.7.19
+-- Versione PHP: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `corsi` (
   `link_risorse` text NOT NULL,
   `link_forum` text NOT NULL,
   PRIMARY KEY (`id`,`codice`,`anno`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `corsi`
@@ -57,7 +57,9 @@ INSERT INTO `corsi` (`id`, `codice`, `anno`, `nome`, `SSD`, `semestre`, `lingua`
 (20, 'F1I020', '2017/2018', 'SISTEMI OPERATIVI I', 'INF/01', 1, 'italiano', '', '', ''),
 (21, 'DT0009', '2017/2018', 'SISTEMI OPERATIVI CON LABORATORIO', 'INF/01', 1, 'italiano', '', '', ''),
 (22, 'F1I021', '2017/2018', 'SISTEMI OPERATIVI', 'INF/01', 1, 'italiano', 'www.sistemioperativi.it', 'http://www.di.univaq.it/cortelle/index.php?pageId=teaching', ''),
-(23, 'F1I022', '2017/2018', 'LABORATORIO DI SISTEMI OPERATIVI', 'INF/01', 2, 'inglese', 'www.sistemioperativi.it', '', '');
+(23, 'F1I022', '2017/2018', 'LABORATORIO DI SISTEMI OPERATIVI', 'INF/01', 2, 'inglese', 'www.sistemioperativi.it', '', ''),
+(24, 'DT0021', '2017/2018', 'ANALISI NUMERICA', 'MAT/08', 2, 'italiano', '', '', ''),
+(25, 'F0106', '2017/2018', 'ISTOLOGIA', 'BIO/06', 1, 'italiano', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -73,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `corsi_corsi_laurea` (
   `numero_cfu` int(11) NOT NULL,
   `tipo_cfu` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `corsi_corsi_laurea`
@@ -89,7 +91,9 @@ INSERT INTO `corsi_corsi_laurea` (`id`, `id_corso_laurea`, `id_corso`, `numero_c
 (7, 1, 22, 6, 'A'),
 (8, 1, 23, 6, 'A'),
 (9, 1, 21, 12, 'A'),
-(10, 1, 18, 9, 'A');
+(10, 1, 18, 9, 'A'),
+(11, 2, 24, 9, 'B'),
+(12, 4, 25, 3, 'B');
 
 -- --------------------------------------------------------
 
@@ -146,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `corsi_docenti` (
   `id_corso` int(11) NOT NULL,
   `id_docente` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `corsi_docenti`
@@ -177,7 +181,9 @@ INSERT INTO `corsi_docenti` (`id`, `id_corso`, `id_docente`) VALUES
 (22, 21, 13),
 (23, 22, 13),
 (24, 23, 14),
-(25, 21, 14);
+(25, 21, 14),
+(26, 24, 15),
+(27, 25, 16);
 
 -- --------------------------------------------------------
 
@@ -289,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `info_corsi` (
   `lang` text NOT NULL,
   `id_corso` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `info_corsi`
@@ -318,7 +324,11 @@ INSERT INTO `info_corsi` (`id`, `prerequisiti`, `obiettivi`, `mod_esame`, `mod_i
 (32, 'Le conoscenze acquisite al corso di Lab. Programmazione II sono fortemente consigliate al fine di sostenere tale esame. CONOSCENZE : fondamenti di programmazione, algoritmi e strutture dati, architetture degli elaboratori, lettura e comprensione in lingua inglese CAPACITA\\\' : capacita? di integrazione dello studio in aula con lo studio personale, capacita? di esprimere in aula perplessita? e dubbi in modo da originare momenti comuni di confronto.', 'CONOSCENZE : concetti di base comuni a tutti i sistemi operativi, meccanismi e strategie dei sistemi operativi, tradeoff tra overhead di sistema ed efficienza delle soluzioni CAPACITA\\\' : capacita? di mettere in relazione contenuti di argomenti differenti; capacita? di risoluzione di esercizi che propongono modelli mai affrontati in teoria, ma risolvibili mediante deduzioni logiche e conoscenze di base (i.e., analisi e sintesi di concetti); capacita? di lavorare durante lo svolgimento del corso, e di non rinviare il raffinamento ed il consolidamento della conoscenza; migliorata capacita? di esprimere in aula perplessita? e dubbi COMPORTAMENTI ATTESI : interesse per una conoscenza integrata dei differenti aspetti dell?informatica; consapevolezza delle inter-relazioni tra le diverse parti di un elaboratore, e quindi del fatto che il suo corretto funzionamento deriva dalla combinazione di fattori molto differenti, ed a volte inattesi.', 'Pre-Assessment There is no formal pre-assessment, but Course pre-requisites are clearly stated on the Module website. Fulfilment of such pre-requisites is verified by formative assessment. Formative Assessment The formative assessment is performed via interactive interaction beteween teacher and students during lectures. Students are aware since the beginning of the Course that they will be involved (in turns) in: - Questioning and discussion, by means of open oral questions to the class or to single students. Summative Assessment Written test followed by an optional oral exam. An optional mid-term written test is also be provided, which is meant to cover the first part of the course, in order to help the students to split the workload. The written test is aimed at: (1) verification of theoretical competences, and in particular of knowledge and comprehension of Course contents; (2) verification of skills in understanding and solving significant exercises, and in explaining the proposed solutions. This in order to verify the ability of application of techniques learnt during the Course, of analysis of problems and synthesis of suitable solutions, and of evaluation of alternative solutions. Criteria of evaluation will be: the level of knowledge and practical ability; the property of use of the technical/mathematical language; the clarity and completeness of explanations. The oral exam will occur within one week of the written test and will typically cover the areas of the written answers that need clarification plus additional subjects proposed by the teacher. The oral test can be required: (i) by the student, to improve final marks; (ii) by the teacher, in presence of significant mistakes/misunderstandings in the written test. Assessment breakdown: 100% mid-term plus end-of-semester summative assessment. The written test (2 hours) consists, in general, in: (a)	Three exercises to solve; (b)	A list of about 3-4 questions to answer. The oral test (max 1 hour) consists of questions on the written exam and extra ones. The final marks of the Operating Systems with Laboratory 12 CFU Module are obtained as the average among the marks of the Operating Systems and Operating Systems Laboratory 6 CFU Modules.', 'The module includes 54 hours of frontal lectures plus 30 hours of on-demand clarifications in the teacher\\\'s office. The frontal lectures are partitioned in theory and exercises.', 'Alla fine del corso, lo studente dovrebbe\r\n\r\n- Gli studenti dovranno conoscere i concetti di base che sono comuni a tutti i sistemi operativi general-purpose, in particolare quelli relativi alla gestione di CPU e memoria centrale. Gli studenti devono anche essere in grado di mettere in relazione questi concetti al fine di sintetizzare i tradeoffs intrinseci che sono alla base di una macchina virtuale (intesa come un computer più il suo sistema operativo).\r\n- Gli studenti dovranno sicuramente essere in grado di risolvere problemi complessi legati alla sincronizzazione tra processi concorrenti. Inoltre essi dovranno essere in grado di applicare le strategie di sistema operativo studiate nel corso (come scheduler della CPU, paginazione della memoria, ecc) a esempi specifici.\r\n- Gli studenti dovranno essere in grado di selezionare le soluzioni migliori (tra quelle studiate nel corso) per esempi specifici.\r\n- Gli studenti dovranno essere in grado di spiegare in modo critico perché i sistemi operativi esistenti funzionano nel modo attuale, basandosi anche sulle nozioni storiche che hanno ricevuto nel corso e che aiutano a capire lo stato dell\\\'arte nel settore.\r\n- Sulla base delle conoscenze e capacità acquisite in questo corso, gli studenti dovranno essere in grado in futuro di affrontare qualsiasi sistema operativo reale, semplicemente studiando il suo manuale. Questo in quanto la conoscenza acquisita in questo modulo del corso è indipendente da qualunque sistema esistente specifico, ed ha l\\\'obiettivo di fornire strumenti generali adatti per un apprendimento continuo in questo settore.', '- Concetti generali, strutture dei sistemi di calcolo e dei sistemi operativi\r\n- I processi e lo scheduling della CPU\r\n- Sincronizzazione tra processi e la gestione del deadlock\r\n- Gestione della memoria principale\r\n- La memoria virtuale\r\n- Il file system', 'informazioni aggiuntive', 'ita', 22),
 (33, 'KNOWLEDGE : fundamentals of programming, algorithms and data structures, computer architecture, reading and understanding english language SKILLS : ability to integrate classroom and homework study, ability to pose questions in the classroome to originate discussion.', 'KNOWLEDGE: basic concepts common to all the operating systems, mechanisms and policies of operating systems, system overhead vs solution efficiency tradeoff SKILLS : ability to relate different topics, ability to solve problems never faced in classroom, but solvable through logic deductions and reasoning (i.e., ability to analyze and synthesize concepts), ability to work during the course time and do not delaying the refinement of the knowledge, improved ability to pose questions in the classroome to originate discussion EXPECTED BEHAVIORS : interest for an integrated knowledge of different aspects of computer science, awareness of relationships among computer subsystems, hence awareness of the fact that a satisfactory behavior of a computer may derive from the combination of very different (sometimes unexpected) factors.', 'Pre-Assessment There is no formal pre-assessment, but Course pre-requisites are clearly stated on the Module website. Fulfilment of such pre-requisites is verified by formative assessment. Formative Assessment The formative assessment is performed via interactive interaction beteween teacher and students during lectures. Students are aware since the beginning of the Course that they will be involved (in turns) in: - Questioning and discussion, by means of open oral questions to the class or to single students. Summative Assessment Written test followed by an optional oral exam. An optional mid-term written test is also be provided, which is meant to cover the first part of the course, in order to help the students to split the workload. The written test is aimed at: (1) verification of theoretical competences, and in particular of knowledge and comprehension of Course contents; (2) verification of skills in understanding and solving significant exercises, and in explaining the proposed solutions. This in order to verify the ability of application of techniques learnt during the Course, of analysis of problems and synthesis of suitable solutions, and of evaluation of alternative solutions. Criteria of evaluation will be: the level of knowledge and practical ability; the property of use of the technical/mathematical language; the clarity and completeness of explanations. The oral exam will occur within one week of the written test and will typically cover the areas of the written answers that need clarification plus additional subjects proposed by the teacher. The oral test can be required: (i) by the student, to improve final marks; (ii) by the teacher, in presence of significant mistakes/misunderstandings in the written test. Assessment breakdown: 100% mid-term plus end-of-semester summative assessment. The written test (2 hours) consists, in general, in: (a)	Three exercises to solve; (b)	A list of about 3-4 questions to answer. The oral test (max 1 hour) consists of questions on the written exam and extra ones. The final marks of the Operating Systems with Laboratory 12 CFU Module are obtained as the average among the marks of the Operating Systems and Operating Systems Laboratory 6 CFU Modules.', 'The module includes 54 hours of frontal lectures plus 30 hours of on-demand clarifications in the teacher\\\\\\\'s office. The frontal lectures are partitioned in theory and exercises.', 'On successful completion of this course, the student should\r\n\r\n- Students shall know the basic concepts that are common to all general-purpose operating systems, in particular the ones related to the management of CPU and central memory. Students shall also be able to relate these concepts in order to synthesize the intrinsic tradeoffs that underlie a virtual machine (i.e. a computer plus its operating system).\r\n- Students shall definitely be able to solve complex problems related to the synchronization among concurrent processes. Beside, they shall also be able to apply the operating system policies studied in the course (such as CPU schedulers, pagers, etc.) to specific examples.\r\n- Students shall be able to select the best solutions (among those studied in the course) for specific examples.\r\n- Students shall be able to critically explain why the existing operating systems operate in their ways, basing also on the historical notions that they have received in the course and that help to understand the current state-of-art.\r\n- On the basis of the knowledge and capacities acquired in this course, the students shall be able in the future to tackle any actual operating system, by just studying its handbook. This is expected because their knowledge is independent on any specific existing system in this course module, with the goal of providing general instruments suitable for a continuous learning in this domain.', '- General concepts, computer system and operating system structures\r\n- Processes and CPU scheduling\r\n- Process synchronization and deadlock management\r\n- Memory management\r\n- The virtual memory\r\n- The file system', 'other info', 'eng', 22),
 (34, 'Argomenti trattati nel modulo di Sistemi Operativi, algoritmi e strutture dati, architetture degli elaboratori, progettazione e programmazione di semplici soluzioni software per problemi elementari, programmazione in linguaggio C. Capacità di integrazione dello studio di aula con lo studio di personale. Lettura e comprensione della lingua inglese.', 'L\\\'obiettivo di questo corso è quello di fornire un\\\'introduzione completa ai sistemi operativi Unix-like. I contenuti del corso sono organizzati come segue: PARTE I ? Architettura di Sistemi UNIX PARTE II - Linea di comando (shell Bash) PARTE III - Bash Scripting PARTE IV - Programmazione in ambienti Unix-like Il corso offre una conoscenza di base, ma comunque completa, dei seguenti aspetti pratici: architettura di sistemi Unix-like, interazione da riga di comando, scripting di shell, files and directories, chiamate di sistema, programmazione di sistema, gestione dei processi e programmazione concorrente.', 'Per la prima sessione, la prova di esame consiste in (1) una prova intermedia scritta (I Parziale) + una prova conclusiva scritta (II Parziale) oppure (2) una sola prova totale scritta. L\\\'esame è superato se il voto della prova totale scritta oppure il voto finale come media dei due parziali è maggiore o uguale a 18. Per le sessione seguenti, la prova di esame consiste di una sola prova totale scritta.', 'Lezioni e esercizi', 'Alla fine del corso, lo studente dovrebbe\r\n\r\n- aver acquisito le conoscenze teoriche necessarie per comprendere come i sistemi operativi possono offrire le loro principali funzionalità;\r\n- aver acquisto le capacità pratiche necessarie per sviluppare programmi di sistema e script bash in ambienti Unix-like;\r\n- essere in grado di sviluppare programmi concorrenti che utilizzano semafori, mutex e variabili condizionali per la sincronizzazione;\r\n- aver acquisito le metodologie per valutare i diversi sistemi operativi integrando tutte le nozioni acquisite durante il corso;\r\n- essere in grado di comunicare con competenza e correttezza linguistica le problematiche legate ai sistemi operativi e la programmazione di sistemi;\r\n\r\n\r\n', '- PARTE I - Architettura di Sistemi UNIX\r\n- PARTE II - Linea di comando (shell Bash)\r\n- PARTE III - Bash Scripting\r\n- PARTE IV - Programmazione in ambienti Unix-like', 'Orario di ricevimento: ogni giovedì dalle ore 11:30 alle ore 13:30', 'ita', 23),
-(35, 'Topics treated by the Operating Systems module, algorithms and data structures, computer architecture, design and programming of simple software solutions to elementary problems, programming in the C language. Ability to integrate classroom study room with personal study. Reading comprehension of English.\r\n\r\n', 'The objective of this course is to provide a complete introduction to Unix-like systems. Contents are organized as follow: PART I - UNIX System Architecture PART II - Command Line (Bash shell) PART III - Bash Scripting PART IV - Programming in UNIX-like Environment The course offers a basic, yet complete, knowledge of the following practical aspects: Unix-like systems architecture, command line interaction, shell scripting, files and directories, system calls, system-programming, process management, and concurrent programming.', 'For the 1st session, the exam consists of (1) a midterm written exam + a final written exam or (2) a total written exam. The exam is passed if the score of the total written exam or the final score as the average of the midterm written exam + the final written exam is greater or equal to 18. For later sessions, the exam consists of only a total written exam.\r\n\r\n', 'Lectures and exercises\r\n\r\n', 'On successful completion of this course, the student should\r\n\r\n-acquire the theoretical knowledge necessary to understand how operating systems can implement their main functionalities;\r\n- acquire the practical capabilities necessary to develop system programs and bash scripts in Unix-like environments;\r\n- will be able to develop concurrent programs using semaphores, mutex and condition variables for synchronization;\r\n- acquire methodologies to evaluate different operating systems bny integrating all the notions acquired during the course;\r\n- be able to communicate with competence and correctness of language the issues related with operating systems and systems programming;\r\n\r\n', '- PART I - UNIX System Architecture\r\n- PART II - Command Line (Bash shell)\r\n- PART III - Bash Scripting\r\n- PART IV - Programming in UNIX-like Environment', 'other info', 'eng', 23);
+(35, 'Topics treated by the Operating Systems module, algorithms and data structures, computer architecture, design and programming of simple software solutions to elementary problems, programming in the C language. Ability to integrate classroom study room with personal study. Reading comprehension of English.\r\n\r\n', 'The objective of this course is to provide a complete introduction to Unix-like systems. Contents are organized as follow: PART I - UNIX System Architecture PART II - Command Line (Bash shell) PART III - Bash Scripting PART IV - Programming in UNIX-like Environment The course offers a basic, yet complete, knowledge of the following practical aspects: Unix-like systems architecture, command line interaction, shell scripting, files and directories, system calls, system-programming, process management, and concurrent programming.', 'For the 1st session, the exam consists of (1) a midterm written exam + a final written exam or (2) a total written exam. The exam is passed if the score of the total written exam or the final score as the average of the midterm written exam + the final written exam is greater or equal to 18. For later sessions, the exam consists of only a total written exam.\r\n\r\n', 'Lectures and exercises\r\n\r\n', 'On successful completion of this course, the student should\r\n\r\n-acquire the theoretical knowledge necessary to understand how operating systems can implement their main functionalities;\r\n- acquire the practical capabilities necessary to develop system programs and bash scripts in Unix-like environments;\r\n- will be able to develop concurrent programs using semaphores, mutex and condition variables for synchronization;\r\n- acquire methodologies to evaluate different operating systems bny integrating all the notions acquired during the course;\r\n- be able to communicate with competence and correctness of language the issues related with operating systems and systems programming;\r\n\r\n', '- PART I - UNIX System Architecture\r\n- PART II - Command Line (Bash shell)\r\n- PART III - Bash Scripting\r\n- PART IV - Programming in UNIX-like Environment', 'other info', 'eng', 23),
+(36, '', '', '', '', '', '', 'Obbligatorio 2° anno Laurea in Matematica percorso Generale', 'ita', 24),
+(37, '', '', '', '', '', '', 'Mandatory 2° year Math degree General path', 'eng', 24),
+(38, '', '', '', '', '', '', 'Affine / Integrativa / Attività formative affini o integrative', 'ita', 25),
+(39, '', '', '', '', '', '', '', 'eng', 25);
 
 -- --------------------------------------------------------
 
@@ -360,7 +370,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `messaggio` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=128 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=138 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `log`
@@ -411,13 +421,11 @@ INSERT INTO `log` (`id`, `messaggio`, `timestamp`) VALUES
 (42, 'L\'utente flavio@admin.it ha aggiunto un docente al corso ALGORITMI E STRUTTURE DATI', '2018-06-24 15:49:48'),
 (43, 'L\'utente flavio@admin.it ha aggiunto il corso ALGORITMI E STRUTTURE DATI', '2018-06-24 15:51:11'),
 (44, 'L\'utente flavio@admin.it ha aggiunto un docente al corso ALGORITMI E STRUTTURE DATI', '2018-06-24 15:51:11'),
-(45, 'L\'utente flavio@admin.it ha aggiunto il corso ALGORITMI E STRUTTURE DATI NO LIKE NO', '2018-06-24 16:26:33'),
-(46, 'L\'utente flavio@admin.it ha aggiunto un docente al corso ALGORITMI E STRUTTURE DATI NO LIKE NO', '2018-06-24 16:26:33'),
 (47, 'L\'utente flavio@admin.it ha aggiunto il corso ALGORITMI E STRUTTURE DATI', '2018-06-24 17:21:40'),
 (48, 'L\'utente flavio@admin.it ha aggiunto un docente al corso ALGORITMI E STRUTTURE DATI', '2018-06-24 17:21:40'),
 (49, 'L\'utente flavio@admin.it ha aggiunto un nuovo materiale e lo ha associato al corso ALGORITMI E STRUTTURE DATI', '2018-06-26 14:58:57'),
 (50, 'L\'utente flavio@admin.it ha modificato le informazioni del corso ALGORITMI E STRUTTURE DATI', '2018-06-26 16:10:11'),
-(51, 'L\'utente flavio@admin.it ha modificato l\'utente ', '2018-06-26 16:10:41'),
+(137, 'L\'utente riccardo@admin.it ha modificato l\'utente massimi@docente.it', '2018-07-02 15:24:04'),
 (52, 'L\'utente flavio@admin.it ha modificato le informazioni del corso ALGORITMI E STRUTTURE DATI', '2018-06-26 16:21:35'),
 (53, 'L\'utente flavio@admin.it ha aggiunto un corso di laurea al corso ALGORITMI E STRUTTURE DATI', '2018-06-26 16:22:03'),
 (54, 'L\'utente flavio@admin.it ha aggiunto un libro di testo al corso ALGORITMI E STRUTTURE DATI', '2018-06-26 16:23:23'),
@@ -454,7 +462,6 @@ INSERT INTO `log` (`id`, `messaggio`, `timestamp`) VALUES
 (85, 'L\'utente flavio@admin.it ha aggiunto un docente al corso ANALISI MATEMATICA', '2018-06-30 15:44:19'),
 (86, 'L\'utente flavio@admin.it ha aggiunto il corso ANALISI MATEMATICA', '2018-06-30 15:45:22'),
 (87, 'L\'utente flavio@admin.it ha aggiunto un docente al corso ANALISI MATEMATICA', '2018-06-30 15:45:22'),
-(88, 'L\'utente flavio@admin.it ha modificato l\'utente ', '2018-06-30 16:06:04'),
 (89, 'L\'utente riccardo@admin.it ha aggiunto il corso FISICA', '2018-06-30 16:23:51'),
 (90, 'L\'utente riccardo@admin.it ha aggiunto un docente al corso FISICA', '2018-06-30 16:23:52'),
 (91, 'L\'utente riccardo@admin.it ha aggiunto un corso di laurea al corso FISICA', '2018-06-30 16:28:02'),
@@ -471,7 +478,7 @@ INSERT INTO `log` (`id`, `messaggio`, `timestamp`) VALUES
 (102, 'L\'utente flavio@admin.it ha aggiunto il corso LABORATORIO DI SISTEMI OPERATIVI', '2018-07-01 16:16:57'),
 (103, 'L\'utente flavio@admin.it ha aggiunto un docente al corso LABORATORIO DI SISTEMI OPERATIVI', '2018-07-01 16:16:57'),
 (104, 'L\'utente autili@docente.it ha modificato le informazioni del corso LABORATORIO DI SISTEMI OPERATIVI', '2018-07-01 16:20:26'),
-(105, 'L\'utente flavio@admin.it ha modificato le informazioni del corso SISTEMI OPERATIVI CON LABORATORIO FORSE', '2018-07-01 16:26:17'),
+(136, 'L\'utente riccardo@admin.it ha modificato l\'utente massimi@docente.it', '2018-07-02 15:19:40'),
 (106, 'L\'utente flavio@admin.it ha modificato le informazioni del corso SISTEMI OPERATIVI CON LABORATORIO', '2018-07-01 16:26:38'),
 (107, 'L\'utente flavio@admin.it ha aggiunto un corso di laurea al corso SISTEMI OPERATIVI I', '2018-07-01 16:28:07'),
 (108, 'L\'utente flavio@admin.it ha aggiunto un corso di laurea al corso SISTEMI OPERATIVI', '2018-07-01 16:29:48'),
@@ -493,7 +500,15 @@ INSERT INTO `log` (`id`, `messaggio`, `timestamp`) VALUES
 (124, 'L\'utente flavio@admin.it ha aggiunto un corso mutuato al corso SISTEMI OPERATIVI', '2018-07-01 17:51:27'),
 (125, 'L\'utente flavio@admin.it ha aggiunto un corso di laurea al corso ANALISI MATEMATICA', '2018-07-01 17:53:05'),
 (126, 'L\'utente flavio@admin.it ha aggiunto un libro di testo al corso ANALISI MATEMATICA', '2018-07-01 17:53:21'),
-(127, 'L\'utente flavio@admin.it ha aggiunto un libro di testo al corso ANALISI MATEMATICA', '2018-07-01 17:53:27');
+(127, 'L\'utente flavio@admin.it ha aggiunto un libro di testo al corso ANALISI MATEMATICA', '2018-07-01 17:53:27'),
+(128, 'L\'utente riccardo@admin.it ha aggiunto il docente guglielmi@docente.it', '2018-07-02 14:45:00'),
+(129, 'L\'utente riccardo@admin.it ha aggiunto il corso ANALISI NUMERICA', '2018-07-02 14:50:11'),
+(130, 'L\'utente riccardo@admin.it ha aggiunto un docente al corso ANALISI NUMERICA', '2018-07-02 14:50:11'),
+(131, 'L\'utente guglielmi@docente.it ha aggiunto un corso di laurea al corso ANALISI NUMERICA', '2018-07-02 14:51:08'),
+(132, 'L\'utente riccardo@admin.it ha aggiunto il docente Massimi@docente.it', '2018-07-02 14:58:23'),
+(133, 'L\'utente riccardo@admin.it ha aggiunto il corso ISTOLOGIA', '2018-07-02 15:00:00'),
+(134, 'L\'utente riccardo@admin.it ha aggiunto un docente al corso ISTOLOGIA', '2018-07-02 15:00:00'),
+(135, 'L\'utente massimi@docente.it ha aggiunto un corso di laurea al corso ISTOLOGIA', '2018-07-02 15:01:25');
 
 -- --------------------------------------------------------
 
@@ -527,7 +542,7 @@ CREATE TABLE IF NOT EXISTS `utenti` (
   `nome` text NOT NULL,
   `cognome` text NOT NULL,
   PRIMARY KEY (`id`,`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `utenti`
@@ -541,12 +556,14 @@ INSERT INTO `utenti` (`id`, `email`, `password`, `tipo_utente`, `nome`, `cognome
 (5, 'dellapenna@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Giuseppe', 'Della Penna'),
 (6, 'engel@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Klaus', 'Engel'),
 (7, 'proietti@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Guido', 'Proietti'),
-(8, 'vellante@docente.com', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Massimo', 'Vellante'),
+(8, 'vellante@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Massimo', 'Vellante'),
 (9, 'pierantonio@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Alfonso', 'Pierantonio'),
 (10, 'scoppola@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Carlo Maria', 'Scoppola'),
 (11, 'tozzi@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Anna', 'Tozzi'),
 (13, 'cortellessa@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Vittorio', 'Cortellessa'),
-(14, 'autili@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Marco', 'Autili');
+(14, 'autili@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Marco', 'Autili'),
+(15, 'guglielmi@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Maria Gabriella', 'Cimoroni'),
+(16, 'massimi@docente.it', 'ac99fecf6fcb8c25d18788d14a5384ee', 'docente', 'Mara', 'Massimi');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
