@@ -216,7 +216,7 @@
         <td class="tdresult-list">${strip_slashes(libro.volume)}</td>
         <td class="tdresult-list">${libro.anno}</td>
         <td class="tdresult-list">${strip_slashes(libro.editore)}</td>
-        <td class="tdresult-list"><a class="linkresult" href="">${strip_slashes(libro.link)}</a></td>
+        <td class="tdresult-list"><a class="linkresult" href="${strip_slashes(libro.link)}">${strip_slashes(libro.link)}</a></td>
 
     </tr>
 
@@ -314,9 +314,9 @@
 
      <tr class="trresult">
 
-        <td class="tdresult" colspan="3"><a class="linkresult" href="">${strip_slashes(corso.linkHomepageCorso)}</a></td>
-        <td class="tdresult" colspan="2"><a class="linkresult" href="">${strip_slashes(corso.linkRisorseEsterne)}</a></td>
-        <td class="tdresult" colspan="2"><a class="linkresult" href="">${strip_slashes(corso.linkForum)}</a></td>
+        <td class="tdresult" colspan="3"><a class="linkresult" href="${strip_slashes(corso.linkHomepageCorso)}">${strip_slashes(corso.linkHomepageCorso)}</a></td>
+        <td class="tdresult" colspan="2"><a class="linkresult" href="${strip_slashes(corso.linkRisorseEsterne)}">${strip_slashes(corso.linkRisorseEsterne)}</a></td>
+        <td class="tdresult" colspan="2"><a class="linkresult" href="${strip_slashes(corso.linkForum)}">${strip_slashes(corso.linkForum)}</a></td>
 
     </tr>
 
