@@ -147,7 +147,7 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="7"><h1 class="title">CORSI DI LAUREA PER I QUALI E' DISPONIBILE</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">CORSI DI LAUREA PER I QUALI &Egrave; DISPONIBILE</h1></th>
 
     </tr>
 

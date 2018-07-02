@@ -28,8 +28,10 @@
         
         <div class="about-text">
             <p>
-            english text english text english text <br><br>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+            CourseWeb is a collection of online college courses, semplified but responding to primary trasparency and completeness requirements. <br><br>
+            To guarantee the best consulting and navigating experience in the portal, we invite you to look at the "Help" section. <br><br>
+            To contact the developers (for any problem, recommendation or anything else) visit the "Contact" section. <br><br>
+            The website allows bilingual (english and italian) content publication. in lack of a particulare language content, the other one will be displayed.
             </p>    
         </div>
 

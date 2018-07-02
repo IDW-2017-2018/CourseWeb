@@ -37,7 +37,7 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="7"><h1 class="title">PAGE VERSIONS</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">COURSE PAGE VERSIONS</h1></th>
 
     </tr>
 
@@ -59,7 +59,7 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="7"><h1 class="title">PROFESSORS</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">LIST OF TEACHERS</h1></th>
 
     </tr>
 
@@ -79,7 +79,7 @@
     
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="7"><h1 class="title">INFO COURSE</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">COURSE DESCRIPTION</h1></th>
 
     </tr>
 
@@ -97,7 +97,7 @@
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="7">ACHIVES</th>
+        <th class="thresult" colspan="7">COURSE OBJECTIVES</th>
 
     </tr>
 
@@ -109,7 +109,7 @@
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="7">MOD EXAM</th>
+        <th class="thresult" colspan="7">ASSESSMENT METHODS</th>
 
     </tr>
 
@@ -121,7 +121,7 @@
 
      <tr class="trresult">
 
-        <th class="thresult" colspan="7">MOD TEACH</th>
+        <th class="thresult" colspan="7">TEACHING METHODS</th>
 
     </tr>
 
@@ -133,7 +133,7 @@
 
      <tr class="trresult">
 
-        <th class="thresult" colspan="7">SILLABO ENG</th>
+        <th class="thresult" colspan="7">SILLABUS</th>
 
     </tr>
 
@@ -192,7 +192,7 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="7"><h1 class="title">BOOKS</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">TEXTBOOKS</h1></th>
 
     </tr>
 
@@ -228,7 +228,7 @@
 
     <tr class="trresult">
 
-        <th class="thresultfront" colspan="7"><h1 class="title">RELATIONSHIPS</h1></th>
+        <th class="thresultfront" colspan="7"><h1 class="title">RELATIONSHIPS WITH OTHER COURSES</h1></th>
 
     </tr>
 
@@ -236,7 +236,7 @@
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="7">PROPEDEUTICS COURSES</th>
+        <th class="thresult" colspan="7">PROPAEDEUTIC COURSES</th>
 
     </tr>
     
@@ -258,7 +258,7 @@
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="7">MUTUATS COURSES</th>
+        <th class="thresult" colspan="7">SAME AS COURSES</th>
 
     </tr>
     
@@ -280,7 +280,7 @@
 
     <tr class="trresult">
 
-        <th class="thresult" colspan="7">MODULS</th>
+        <th class="thresult" colspan="7">MODULES</th>
 
     </tr>
     

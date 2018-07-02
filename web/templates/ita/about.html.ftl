@@ -28,8 +28,10 @@
         
         <div class="about-text">
             <p>
-            testo italiano testo italiano testo italiano <br><br>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+            Il sito CourseWeb &egrave; un catalogo di corsi universitari online, semplificato ma rispondente ai principali requisiti di trasparenza e completezza. <br><br>
+            Per garantire la migliore esperienza di consultazione e navigazione all'interno del portale, invitiamo l'utente a consultare la sezione "Aiuto". <br><br>
+            Per contattare il team di sviluppo (per eventuali problemi, segnalazioni di bug o altro) consultare la sezione "Contatti". <br><br>
+            Il sito supporta la pubblicazione bilingue (italiano e inglese) dei contenuti, in assenza del contenuto in una lingua, verr&agrave; utilizzata l'altra a disposizione.
             </p>    
         </div>
 
