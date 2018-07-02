@@ -1,0 +1,14 @@
+- creazione tomcatkeystore con comando: 
+
+keytool -genkeypair -keystore tomcat -dname "CN=localhost, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown" -keypass courseweb -storepass courseweb -keyalg RSA -alias tomcat -ext SAN=dns:localhost,ip:1.1.1.1
+
+- rinominare chiave in tomcatkeystore 
+
+- spostare tomcatkeystore in sottocartella del progetto /RSA e in C://
+
+- creazione tomcatkeystore.pem con comando:
+
+keytool -exportcert -alias tomcat -keystore tomcatkeystore  -rfc -file tomcatkeystore.pem
+
+- importare in google chrome tomcatkeystore.pem
+

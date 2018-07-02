@@ -113,7 +113,6 @@ public class SearchCourses extends CourseWebBaseController {
         //ricaricare la pagina con la nuova List di corsi
                   
         try {
-            String lang = (String) request.getAttribute("lang");
                                 
             if(!corso_nome.equals("")){
                 corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiByNomeAggiornati(corso_nome); 
@@ -122,7 +121,7 @@ public class SearchCourses extends CourseWebBaseController {
                 corsi_non_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).getCorsiAggiornati();
             }
                                              
-            corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang(lang, corsi_non_filtrati); 
+            corsi_filtrati = ((CourseWebDataLayer) request.getAttribute("datalayer")).filterCorsiByLang("ita", corsi_non_filtrati); 
             // abbiamo lista dei corsi aggiornati e filtrati in base alla lingua e al nome, se è stato inserito
             
             // codice , SSD , semestre , docente , lingua , corsi di laurea

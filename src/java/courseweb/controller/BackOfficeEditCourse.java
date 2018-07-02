@@ -381,85 +381,87 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 edited_ita = true;
             }
             
-            if(!prerequisiti.equals("")){
+            
+            
+            if(!prerequisiti.equals(corso_ita.getPrerequisiti())){
                 corso_ita.setPrerequisiti(prerequisiti);
                
                 edited_ita = true;
             }
             
-            if(!obiettivi.equals("")){
+            if(!obiettivi.equals(corso_ita.getObiettivi())){
                 corso_ita.setObiettivi(obiettivi);
                 
                 edited_ita = true;
             }
             
-            if(!modEsame.equals("")){
+            if(!modEsame.equals(corso_ita.getModEsame())){
                 corso_ita.setModEsame(modEsame);
                 
                 edited_ita = true;
             }
             
-            if(!modInsegnamento.equals("")){
+            if(!modInsegnamento.equals(corso_ita.getModInsegnamento())){
                 corso_ita.setModInsegnamento(modInsegnamento);
                 
                 edited_ita = true;
             }
             
-            if(!descrittoriDublino.equals("")){
+            if(!descrittoriDublino.equals(corso_ita.getDescrittoriDublino())){
                 corso_ita.setDescrittoriDublino(descrittoriDublino);
                 
                 edited_ita = true;
             }
             
-            if(!sillabo.equals("")){
+            if(!sillabo.equals(corso_ita.getSillabo())){
                 corso_ita.setSillabo(sillabo);
                 
                 edited_ita = true;
             }
             
-            if(!note.equals("")){
+            if(!note.equals(corso_ita.getNote())){
                 corso_ita.setNote(note);
                 
                 edited_ita = true;
             }
             
-            if(!prerequisitiEng.equals("")){
+            if(!prerequisitiEng.equals(corso_eng.getPrerequisiti())){
                 
                 corso_eng.setPrerequisiti(prerequisitiEng);
                 edited_eng = true;
             }
             
-            if(!obiettiviEng.equals("")){
+            if(!obiettiviEng.equals(corso_eng.getObiettivi())){
                 
                 corso_eng.setObiettivi(obiettiviEng);
                 edited_eng = true;
             }
             
-            if(!modEsameEng.equals("")){
+            if(!modEsameEng.equals(corso_eng.getModEsame())){
                 
                 corso_eng.setModEsame(modEsameEng);
                 edited_eng = true;
             }
             
-            if(!modInsegnamentoEng.equals("")){
+            if(!modInsegnamentoEng.equals(corso_eng.getModInsegnamento())){
                 
                 corso_eng.setModInsegnamento(modInsegnamentoEng);
                 edited_eng = true;
             }
             
-            if(!descrittoriDublinoEng.equals("")){
+            if(!descrittoriDublinoEng.equals(corso_eng.getDescrittoriDublino())){
                 
                 corso_eng.setDescrittoriDublino(descrittoriDublinoEng);
                 edited_eng = true;
             }
             
-            if(!sillaboEng.equals("")){
+            if(!sillaboEng.equals(corso_eng.getSillabo())){
                 
                 corso_eng.setSillabo(sillaboEng);
                 edited_eng = true;
             }
             
-            if(!noteEng.equals("")){
+            if(!noteEng.equals(corso_eng.getNote())){
                 
                 corso_eng.setNote(noteEng);
                 edited_eng = true;
@@ -472,10 +474,12 @@ public class BackOfficeEditCourse extends CourseWebBaseController {
                 datalayer.storeCorso(corso_eng);
             
             if(edited_ita || edited_eng){
-                    datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha modificato le informazioni del corso " + datalayer.getCorso(id, "ita").getNome());                
-            }            
-            response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"  + "&querysuccess=true"));
-                       
+                datalayer.storeLogMessage("L'utente " + ((Utente)((HttpSession) request.getAttribute("session")).getAttribute("utente")).getEmail() + " ha modificato le informazioni del corso " + datalayer.getCorso(id, "ita").getNome());                
+                response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"  + "&querysuccess=true"));
+            } else {
+                response.sendRedirect(response.encodeURL(request.getContextPath() + "/backofficeeditcourse?lang=" + request.getAttribute("lang") + "&id=" + id + "&action=hub"));
+            }         
+            
         }
         catch(DataLayerException|NumberFormatException|IOException e){
             request.setAttribute("exception", e);
